@@ -7,15 +7,15 @@
 
 ## Membres
 
-| Nom              | Rôle(s)                   |
-|:-----------------|:-------------------------:|
-| Nicolas V.       | Scrum Master              |
-| Alexandre C.     | MOe (Chef Dev)            |
-| Elouann D.       | Dev                       |
-| Martin M.        | Dev                       |
-| Alain D.         | Dev                       |
-| Raida O.         | Dev                       |
-| Ash M.           | Dev + Spé. GitLab Issues  |
+| Nom              | Rôle(s)                     |
+|:-----------------|:---------------------------:|
+| Nicolas V.       | Scrum Master                |
+| Alexandre C.     | MOe (Chef Dev)              |
+| Elouann D.       | Dev                         |
+| Martin M.        | Dev + Son                   |
+| Alain D.         | Dev + Blender               |
+| Raida O.         | Dev                         |
+| Ash M.           | Dev + GitLab Issues Manager |
 
 ## Overview
 
