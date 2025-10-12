@@ -55,27 +55,48 @@ Nous utilisons Git LFS pour les fichiers volumineux (modèles 3D, textures, audi
 
 ### Hooks Git
 
-#### Commitizen
+#### Installation
 
-> Aide à produire des messages [Conventional Commits](#commits).
+Nous utilisons [Husky.NET](https://alirezanet.github.io/Husky.Net/) pour gérer les hooks Git.
 
-Commit interactif:
+```powershell
+dotnet tool install Husky
+dotnet tool install dotnet-format
+dotnet tool install Versionize
 
-```bash
-cz commit
+dotnet husky install
 ```
 
-Changelog + bump de version sémantique:
+#### Versionize
+
+> Aide à produire des releases et changelogs selon nos [Conventional Commits](#commits).
+
+**Utilisation:**
 
 ```bash
-cz changelog
-cz bump
+dotnet husky run --name dotnet-versionize
 ```
 
-Bump applique un tag Git (ex: v1.2.0). Pousser ensuite:
+Cette commande génère automatiquement un nouveau tag et met à jour le changelog.
+
+> [!CAUTION]
+>
+> Toujours exécuter cette commande **après** avoir fait un commit (ou plusieurs) et **avant** de pousser _**SUR LA BRANCHE MAIN OU BETA**_.
+>
+> On ne veut pas créer de tag sur une branche de développement.
+>
+> C'est-à-dire, **après** avoir mergé dans `beta` ou `main`.
 
 ```bash
-git push && git push --tags
+dotnet husky run --name dotnet-changelog
+```
+
+Cette commade permet de vérifier le changelog avant de push.
+
+Après avoir créé un nouveau tag, il faut le pousser:
+
+```bash
+git push --tags
 ```
 
 #### dotnet format
@@ -117,11 +138,8 @@ Utiliser [Unity Cloud](https://cloud.unity.com/) pour la gestion des projets ann
 >
 > ```bash
 > git pull --rebase  # pour récupérer les dernières modifications
-> dotnet format      # pour assurer le style du code
-> # verifier les changements de la commande dotnet format
-> # si des fichiers autres que ceux que vous avez modifiés ont été changés,
-> # il faut les stasher et les commiter avant/après
-> cz commit          # pour créer un commit conforme
+> dotnet husky run   # run hooks
+> git commit
 > git push --tags    # si vous avez créé un nouveau tag
 > ```
 >
