@@ -67,27 +67,36 @@ dotnet tool install Versionize
 dotnet husky install
 ```
 
-#### Commitizen
+#### Versionize
 
-> Aide à produire des messages [Conventional Commits](#commits).
+> Aide à produire des releases et changelogs selon nos [Conventional Commits](#commits).
 
-Commit interactif:
+**Utilisation:**
 
 ```bash
-cz commit
+dotnet husky run --name dotnet-versionize
 ```
 
-Changelog + bump de version sémantique:
+Cette commande génère automatiquement un nouveau tag et met à jour le changelog.
+
+> [!CAUTION]
+>
+> Toujours exécuter cette commande **après** avoir fait un commit (ou plusieurs) et **avant** de pousser _**SUR LA BRANCHE MAIN OU BETA**_.
+>
+> On ne veut pas créer de tag sur une branche de développement.
+>
+> C'est-à-dire, **après** avoir mergé dans `beta` ou `main`.
 
 ```bash
-cz changelog
-cz bump
+dotnet husky run --name dotnet-changelog
 ```
 
-Bump applique un tag Git (ex: v1.2.0). Pousser ensuite:
+Cette commade permet de vérifier le changelog avant de push.
+
+Après avoir créé un nouveau tag, il faut le pousser:
 
 ```bash
-git push && git push --tags
+git push --tags
 ```
 
 #### dotnet format
