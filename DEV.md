@@ -81,11 +81,11 @@ Cette commande génère automatiquement un nouveau tag et met à jour le changel
 
 > [!CAUTION]
 >
-> Toujours exécuter cette commande **après** avoir fait un commit (ou plusieurs) et **avant** de pousser _**SUR LA BRANCHE MAIN OU BETA**_.
+> Toujours exécuter cette commande **après** avoir fait un commit (ou plusieurs) et **avant** de pousser _**SUR LA BRANCHE BETA**_.
 >
-> On ne veut pas créer de tag sur une branche de développement.
+> On ne veut pas créer de tag sur une branche de développement, et on ne *peut* pas créer de tag sur `main` directement (branche protégée).
 >
-> C'est-à-dire, **après** avoir mergé dans `beta` ou `main`.
+> C'est-à-dire, **après** avoir mergé dans `beta`, on exécute la commande, puis on pousse.
 
 ```bash
 dotnet husky run --name dotnet-changelog
