@@ -55,6 +55,18 @@ Nous utilisons Git LFS pour les fichiers volumineux (modèles 3D, textures, audi
 
 ### Hooks Git
 
+#### Installation
+
+Nous utilisons [Husky.NET](https://alirezanet.github.io/Husky.Net/) pour gérer les hooks Git.
+
+```powershell
+dotnet tool install Husky
+dotnet tool install dotnet-format
+dotnet tool install Versionize
+
+dotnet husky install
+```
+
 #### Commitizen
 
 > Aide à produire des messages [Conventional Commits](#commits).
@@ -117,11 +129,8 @@ Utiliser [Unity Cloud](https://cloud.unity.com/) pour la gestion des projets ann
 >
 > ```bash
 > git pull --rebase  # pour récupérer les dernières modifications
-> dotnet format      # pour assurer le style du code
-> # verifier les changements de la commande dotnet format
-> # si des fichiers autres que ceux que vous avez modifiés ont été changés,
-> # il faut les stasher et les commiter avant/après
-> cz commit          # pour créer un commit conforme
+> dotnet husky run   # run hooks
+> git commit
 > git push --tags    # si vous avez créé un nouveau tag
 > ```
 >
