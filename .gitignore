@@ -100,7 +100,12 @@ InitTestScene*.unity*
 
 ############### ADDED BY USER ##################
 
+# IDEs and editors
 .vscode/
 .idea/
 .DS_Store
 .vsconfig
+
+# Python
+__pycache__/
+env/

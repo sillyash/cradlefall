@@ -1,0 +1,33 @@
+{
+   "$schema": "https://alirezanet.github.io/Husky.Net/schema.json",
+   "tasks": [
+      {
+         "name": "dotnet-format-staged-files",
+         "group": "pre-commit-operations",
+         "command": "dotnet",
+         "args": ["format", "--include", "${staged}"],
+         "include": ["**/*.cs"]
+      },
+      {
+         "name": "dotnet-release-info",
+         "group": "pre-commit-operations",
+         "command": "dotnet",
+         "args": ["versionize", "inspect"],
+         "include": ["**/*.cs"]
+      },
+      {
+         "name": "dotnet-changelog",
+         "group": "post-commit-operations",
+         "command": "dotnet",
+         "args": ["versionize", "changelog"],
+         "include": ["**/*.cs"]
+      },
+      {
+         "name": "dotnet-versionize",
+         "group": "post-commit-operations",
+         "command": "dotnet",
+         "args": ["versionize"],
+         "include": ["**/*.cs"]
+      }
+   ]
+}
