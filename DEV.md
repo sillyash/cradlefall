@@ -60,10 +60,25 @@ Nous utilisons Git LFS pour les fichiers volumineux (modèles 3D, textures, audi
 Nous utilisons [Husky.NET](https://alirezanet.github.io/Husky.Net/) pour gérer les hooks Git.
 
 ```powershell
-dotnet tool install Husky
-dotnet tool install dotnet-format
-dotnet tool install Versionize
+# from repository root
+.\setup.ps1
+```
 
+If your PowerShell execution policy blocks running the script, run it with an explicit bypass:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\setup.ps1
+```
+
+What the script does:
+- Restores dotnet local tools using `.config/dotnet-tools.json` (runs `dotnet tool restore`).
+- Installs Husky hooks (`dotnet husky install`) so the hook scripts in `.husky/` are activated locally.
+
+Manual steps (equivalent):
+
+```powershell
+dotnet --info
+dotnet tool restore
 dotnet husky install
 ```
 
