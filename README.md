@@ -1,9 +1,9 @@
 # S501 - ScrumBags
 
-| Nom du jeu                  | Feur : 2    |
-|:----------------------------|:------------|
-| Version du document         | 0.1         |
-| Date de la version courante | 2023-10-01  |
+| Nom du jeu                  | CRADLEFALL      |
+|:----------------------------|:----------------|
+| Version du document         | 0.2             |
+| Date de la version courante | 2023-10-01      |
 
 ## Sommaire
 
@@ -31,7 +31,7 @@ Une escouade de 3–5 joueurs, dans le cadre d'une expédition spatiale, défend
 
 > Présentez l’univers et le ton général du jeu.
 
-Robots, espace, mission spatiale, humains cryogénisés, aliens, survie, tension, coopération.
+Robots, espace, mission spatiale, aliens, survie, tension, coopération.
 
 ### Histoire
 
@@ -41,13 +41,13 @@ Des aliens infiltrent un vaisseau spatial.
 
 Des robots à bord (les joueurs) sont réveillés afin de défendre l'expédition.
 
-Ils s'arment afin de défendre en priorité les humains membres de l'équipage, cryogénisés.
+Ils s'arment afin de défendre en priorité les humains membres de l'équipage, qui sont cryogénisés.
 
 ### Fonctionnalités clés
 
 > Listez les fonctionnalités clés du jeu.
 
-- Coopératif PvE asymétrique (3-5 joueurs).
+- PvE Coopératif asymétrique (3-5 joueurs).
 - Défense d’objectifs (caissons de cryogénisation).
 - Vagues d’ennemis avec difficulté croissante.
 - Environnement interactif : réparations, events, modules du vaisseau.
@@ -56,8 +56,25 @@ Ils s'arment afin de défendre en priorité les humains membres de l'équipage, 
 
 > Expliquez le côté multijoueur asymétrique de votre jeu.
 
-- Rôles différents (DPS, Tank, Soutien, Support) avec des capacités et objectifs variés.
-- Coordination nécessaire pour gérer les menaces et protéger les objectifs.
+#### Rôles
+
+Rôles différents (DPS, Tank, Soutien, Support) avec des capacités et objectifs variés.
+
+La coordination est nécessaire pour gérer les menaces et protéger les objectifs.
+
+| Rôle       | Capacité                       | Passif(s)                                |
+|:----------:|:-------------------------------|:-----------------------------------------|
+| DPS        | Dégats autour + Knockback      | Vitesse de déplacement                   |
+| Tank       | Bouclier                       | Plus de HP                               |
+| Technicien | Tourelle                       | Répare les modules du vaisseau plus vite |
+| Support    | Grenade de heal                | Heal de zone (rayon)                     |
+
+| Rôle       | Arme               | Type de projectile  | Débit            | Taille de projectile  | Vitesse du projectile | Dégâts par projectile | 
+|:----------:|:-------------------|:--------------------|:----------------:|:----------------------|:---------------------:|:---------------------:|
+| DPS        | Railgun            | Faisceau fin        | Haute fréquence  | Petit, visée précise  | ++                    | ++                    |
+| Tank       | Shotgun            | Plusieurs faisceaux | Basse fréquance  | Petit, visée large    | -                     | +                     |
+| Soutien    | Plasma gun         | Plasma orb          | Basse fréquence  | Grand, visée moyenne  | --                    | -                     |
+| Support    | SMG                | Petites orbes       | Haute fréquence  | Petit, visée précise  | +                     | --                    |
 
 ### Boucle de gameplay
 
@@ -69,6 +86,7 @@ Ils s'arment afin de défendre en priorité les humains membres de l'équipage, 
 > 
 > Expérience voulue pour les joueurs : quelles expériences voulez-vous offrir aux joueurs ?
 
+- Boucle de base : vagues
 - L'objectif central est de protéger les caissons de cryogénisation du vaisseau.
 - En découle la protection et réparation de modules du vaisseau affectant les joueurs (énergie, soin, lumière...).
 - Pour cela on a une complémentarité des rôles (DPS, Tank, Soutien, Support), afin de survivre le plus longtemps possible.
@@ -92,6 +110,14 @@ Ils s'arment afin de défendre en priorité les humains membres de l'équipage, 
 ## Contrôles
 
 > Expliquez le schéma des entrées (commandes clavier, souris).
+
+| Action                     | Entrée (AZERTY) | Entrée (QWERTY) |
+|:---------------------------|:---------------:|:---------------:|
+| Déplacement                | `ZQSD`          | `WASD`          |
+| Caméra                     | Souris          | Souris          |
+| Capacité                   | `A`             | `Q`             |
+| Interagir                  | `E`             | `E`             |
+| Recharger l'arme           | `R`             | `R`             |
 
 ## Ressources artistique et sonore
 
