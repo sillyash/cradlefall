@@ -157,7 +157,7 @@ Utiliser [Unity Cloud](https://cloud.unity.com/) pour la gestion des projets ann
 >
 > Nous utilisons la **dernière version LTS** (Long Term Support) de Unity.
 >
-> [**Unity 6.0 LTS**](https://unity3d.com/unity/whats-new/6000.0.59f2)
+> [**Unity 6.0 LTS**](https://unity3d.com/unity/whats-new/6000.0.51f1)
 
 ### Nommage
 
