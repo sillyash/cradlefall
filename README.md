@@ -2,8 +2,8 @@
 
 | Nom du jeu                  | CRADLEFALL      |
 |:----------------------------|:----------------|
-| Version du document         | 0.3             |
-| Date de la version courante | 2023-10-01      |
+| Version du document         | 0.4             |
+| Date de la version courante | 2023-10-19      |
 
 ## Sommaire
 
@@ -20,6 +20,13 @@
       - [Rôles](#rôles)
     - [Boucle de gameplay](#boucle-de-gameplay)
   - [Gameplay](#gameplay)
+    - [Déplacement](#déplacement)
+    - [Physique](#physique)
+    - [Combat](#combat)
+      - [Armes](#armes)
+    - [Ennemis](#ennemis)
+      - [Types](#types)
+      - [Déclinaisons](#déclinaisons)
   - [Niveaux](#niveaux)
     - [Modules vaisseau](#modules-vaisseau)
       - [Modules génériques](#modules-génériques)
@@ -34,6 +41,8 @@
   - [Ressources artistique et sonore](#ressources-artistique-et-sonore)
     - [Style visuel](#style-visuel)
     - [Design sonore](#design-sonore)
+      - [Actif](#actif)
+      - [Passif](#passif)
   - [Roadmap](#roadmap)
   - [Annexes (si nécessaire)](#annexes-si-nécessaire)
 
@@ -97,10 +106,10 @@ La coordination est nécessaire pour gérer les menaces et protéger les objecti
 
 | Rôle       | Capacité                       | Passif(s)                                | Arme               | 
 |:----------:|:-------------------------------|:-----------------------------------------|:-------------------|
-| DPS        | Dégâts autour + Knockback      | Vitesse de déplacement                   | Railgun            |
+| DPS        | Dégâts de zone + Knockback     | Vitesse de déplacement                   | Railgun            |
 | Tank       | Bouclier                       | Plus de HP                               | Shotgun            |
 | Technicien | Tourelle                       | Répare les modules du vaisseau plus vite | Plasma gun         |
-| Support    | Grenade de heal                | Heal de zone (rayon)                     | SMG                |
+| Support    | Revive de coéquipier           | Heal de zone (rayon)                     | SMG                |
 
 ### Boucle de gameplay
 
@@ -118,6 +127,7 @@ La coordination est nécessaire pour gérer les menaces et protéger les objecti
 - En découle la protection et réparation de modules du vaisseau affectant les joueurs (énergie, soin, lumière...).
 - Pour cela on a une complémentarité des rôles (DPS, Tank, Soutien, Support), afin de survivre le plus longtemps possible.
 - Atmosphère tendue : on veut faire sentir la fragilité de la position tout en valorisant la coordination.
+- Entre les vagues, les joueurs pourront se soigner, se provisioner et les joueurs précédemment décédés se verront respawn.
 - Inspirations :
   - Halo Firefight / Destiny 2 modes Horde (défense d’objectifs),
   - Helldivers (pression cumulative et priorisation des menaces).
@@ -127,24 +137,146 @@ La coordination est nécessaire pour gérer les menaces et protéger les objecti
 
 > Décrivez les mécaniques principales : déplacement, combat, objets, IA, physique, etc.
 
+### Déplacement
+
+On veut éviter un déplacement trop rapide / libre (Apex Legends, The Finals):
+- Pas de sauts trop hauts
+- Pas beaucoup de conservation ou gain de vitesse
+- Pas de mécaniques style 'bunny hop' ou 'jetpack', etc.
+- Pas de 'crouch'
+
+On propose cependant des déplacements assez dynamiques mais en accentuant la notion de fragilité d'une position:
+- Il est difficile de fuir facilement les ennemis (sauf éventuellement DPS plus rapide)
+- On pourra cependant se déplacer à une vitesse plutôt rapide, pour assurer un dynamisme des déplacements dans le vaisseau
+- Déplacement 'normal'
+- Sprint → plus rapide mais limité (stamina)
+- Saut → utile pour échapper à de petits ennemis
+
+### Physique
+
+Les robots, donc les joueurs, sont assez lourds, surtout pour le tank.
+
+Il y a des colissions avec les autres joueurs ainsi qu'avec les ennemis et l'environnement : on
+ne pourra pas passez au travers d'objets.
+
+Il y a donc un système de pesanteur, aussi bien pour les joueurs que pour les ennemis.
+
+Les joueurs et ennemis ont une vitesse dite 'fixe' : leur vitesse maximale est déterminée par leur état
+et la vitesse ne se cumule pas : (i.e. pas de mécanique de saut en boucle pour gagner en vitesse).
+
+Les projectiles des armes ne sont pas soumis à la gravité, puique à base d'énergie électrique,
+mais les grenades et explosifs le sont.
+
+### Combat
+
+Le combat s'articule en gramde majorité autour des armes des joueurs et leurs capacité:
+
+On s'inspire du FPS classique avec une arme seulement par joueur.
+
+Chaque joueur dispose d'une arme différente, en fonction de son [rôle](#rôles),
+ainsi que d'une capacité.
+
+Les capacités se rechargent avec le temps et lors d'une action spécifique à chaque rôle:
+- DPS → faire des kills
+- Tank → absorber des dégâts
+- Technicien → réparer un module
+- Support → soigner un allié jusqu'à ses PV max
+
+#### Armes
+
 | Arme               | Projectile          | Débit            | Taille de projectile  | Vitesse du proj. | Dégâts du proj. | 
 |:-------------------|:--------------------|:----------------:|:----------------------|:----------------:|:---------------:|
 | Railgun            | Faisceau fin        | Haute fréquence  | Petit, visée précise  | ++               | ++              |
 | Shotgun            | Plusieurs faisceaux | Basse fréquance  | Petit, visée large    | -                | +               |
-| Plasma gun         | Plasma orb          | Basse fréquence  | Grand, visée moyenne  | --               | -               |
+| Plasma gun         | Orbe de plasma      | Basse fréquence  | Grand, visée moyenne  | --               | -               |
 | SMG                | Petites orbes       | Haute fréquence  | Petit, visée précise  | +                | --              |
+
+### Ennemis
+
+Les ennemis sont tous des aliens.
+
+Pour un gameplay intéressant et évolutif, on propose plusieurs types d'ennemis:
+
+#### Types
+
+**Maxilliarus inferiarus**
+
+Alien à grande bouche humanoide
+
+- PV bas
+- Vitesse normale
+- DPS via corps a corps
+
+**Maxilliarus superiarus**
+
+Alien ???
+
+- PV normaux
+- Vitesse lente
+- DPS via projectiles
+
+**Petitus rapidus**
+
+Alien ???
+
+- PV bas
+- Vitesse rapide
+- DPS via corps à corps
+
+**Bigus bouclidus**
+
+Alien ???
+
+- PV hauts
+- Vitesse lente
+- DPS via corps à corps
+
+#### Déclinaisons
+
+Avec l'augmentation de la difficulté, les ennemis apparaîtront dans de nouvelles déclinaisons:
+
+- Couleur représentant un niveau de déclinaison (le même pour tous les types d'ennemis)
+- Statistiques augmentées à chaque niveau (vitesse, dégâts, défense)
+
+Couleurs:
+- Vert
+- Violet
+- Rouge
+- Bleu
 
 ## Niveaux
 
 > Présentez la structure du/des niveau(x) de jeu : layout, spawn points, dangers, éléments dynamiques, etc.
 
-Le niveau est un vaisseau spatial divisé en plusieurs zones (pont, hangar, quartiers, infirmerie, salle des machines).
+Le niveau (la 'map') est unique.
+
+C'est un vaisseau spatial divisé en plusieurs zones:
+- pont
+  - Zone de spawn / départ
+  - Taille moyenne
+  - Connectée aux quartiers
+- quartiers / cafétériat
+  - Zone centrale
+  - Grande taille
+  - Plusieurs sorties / connexions à des pièces annexes
+- salle cryotechnique
+  - Connectée aux quartiers
+  - Taille moyenne
+  - Objectif de défense (les caissons de cryogénisation)
+- armurerie
+  - Module de munitions (DPS)
+  - Petite taille
+- infirmerie
+  - Module de soin (Support)
+- salle des machines
+  - Module d'oxygène
+  - Module électrique
 
 ### Modules vaisseau
 
 - Chaque zone contient des modules (ex : générateur d’énergie, infirmerie, tourelle de défense).
 - Les modules ont des fonctions (ex : recharger énergie, soigner, défense automatique).
-- Les modules peuvent être endommagés par les ennemis et doivent être réparés par les joueurs (technicien).
+- Les modules peuvent être endommagés par les ennemis et doivent être réparés par les joueurs (notamment le technicien).
 - La gestion des modules est cruciale pour la survie de l’équipe.
 
 > [!IMPORTANT]
@@ -154,22 +286,23 @@ Le niveau est un vaisseau spatial divisé en plusieurs zones (pont, hangar, quar
 > - Les modules spécifiques à un rôle, offrant des buffs/debuffs particuliers.
 >
 > Les modules spécifiques à un rôle sont réparables uniquement par le joueur ayant ce rôle.
-> Sinon, le module peut être réparé par n’importe quel joueur, mais le technicien le répare plus vite.
+> Sinon, le module peut être réparé par n’importe quel joueur, mais le technicien le répare le plus vite.
 
 #### Modules génériques
 
-| Module                | Fonction                             | Impact sur les joueurs              |
-|:----------------------|:-------------------------------------|:------------------------------------|
-| Générateur d’énergie  | Recharge l’énergie des joueurs       | Permet l’utilisation des capacités  |
-| Infirmerie            | Soigne les joueurs                   | Régénération de santé               |
-| Électricité           | Alimente les lumières                | Améliore la visibilité              |
+| Module                | Fonction                             | Impact sur les joueurs                   |
+|:----------------------|:-------------------------------------|:-----------------------------------------|
+| Générateur d’énergie  | Recharge l’énergie des joueurs       | Permet l’utilisation des capacités       |
+| Électricité           | Alimente les lumières                | Améliore la visibilité                   |
+| Oxygène               | Alimente les humains en oxygène      | S'il n'est pas réparé a temps, Game Over |
+| Azote liquide         | Refroidit les caissons de cryo.      | S'il n'est pas réparé a temps, Game Over |
 
 #### Modules de rôle
 
 | Module                 | Rôle         | Fonction                             | Impact sur les joueurs              |
 |:-----------------------|:-------------|:-------------------------------------|:------------------------------------|
 | Station de soin        | Soutien      | Soigne les alliés                    | Régénération de santé accrue        |
-| Station de munitions   | Technicien   | Recharge les munitions               | Améliore la capacité de tir         |
+| Station réseau         | Technicien   | Donne la minimap et les PV alliés    | Permet la coordination d'équipe     |
 | Station de défense     | Tank         | Renforce les défenses                | Réduit les dégâts subis             |
 | Station de combat      | DPS          | Augmente les dégâts infligés         | Améliore les dégâts des armes       |
 
@@ -245,21 +378,22 @@ d'une majorité de joueurs.
 
 ### Style visuel
 
-Le style visuel sera low-poly, de style cartoon et plutôt coloré, afin de créer 
-une ambiance accessible (couleurs donnant une information).
+Le style visuel sera low-poly, dans une ambiance assez sombre, afin de créer 
+une ambiance immersive et pour éviter la fatigue visuelle.
 
 Les robots joueurs auront un design légèrement différent en fonction du rôle,
-avec des formes géométriques simples et des couleurs vives pour faciliter leur identification.
+avec des formes géométriques simples et des couleurs différentes pour faciliter
+leur identification.
 
 Le vaisseau spatial adoptera également un aspect low-poly, avec des [modules](#modules-vaisseau)
-se distincts et des éléments interactifs facilement repérables.
+distincts et des éléments interactifs facilement repérables.
 
 On cherche à faire en sorte que des formes et couleurs soient associées à de l'information
 utile en jeu:
 
 - <span style="color: #d15c5cff">rouge = danger</span>
 - <span style="color: #58b058ff">vert = soin</span>
-- <span style="color: #5f5fc9ff">bleu = énergie</span>
+- <span style="color: #5b5bd7ff">bleu = énergie & bouclier</span>
 - <span style="color: #c6c65bff">bouton = interaction</span>
 
 On partira sur des couleurs pas trop saturées pour éviter la fatigue visuelle, surtout
@@ -267,7 +401,64 @@ sur les textures du vaisseau.
 
 ### Design sonore
 
-TODO : Design sonore
+Le son est spatialisé, et olus ou moins intense en fonction de la distance.
+
+#### Actif
+
+> HUD, objets, armes, ennemis...
+
+- Menus
+  - Clicks
+- Ennemis
+  - Cris (attaques, dégâts...)
+- Armes
+  - Laser → "Zap"
+  - Blaster → "Piou piou"
+  - Explosions → ???
+  - Rechargement → bruits mécaniques & électriques
+- Capacités
+  - Bruit du HUD quand la capacité est disponible
+  - Son de la capacité
+  - Voicelines
+- Déplacements
+  - "Clank clonk"
+- Interactions
+  - Modules
+    - Réparation → ???
+  - Soin
+  - Dégâts
+
+#### Passif
+
+> Musique, environnement...
+
+La musique doit refléter l'intensité du gameplay : des moments intenses, et des moments de repos
+(menus, entre-deux vagues).
+
+Nous aurons donc deux musiques:
+- La musique des menus et entre les vagues:
+  - Planante, reposante
+  - Synthwave
+  - Inspirations SF et Risk of Rain
+- La musique pendant les vagues
+  - Tension
+  - Rapide
+  - Épique
+  - Synthwave
+  - Rythmée
+
+Et des bruits d'ambiance:
+- Vaisseau
+  - Bruit de ventilation et de courant électrique faible
+- Modules
+  - Fonctionnels → bruit de moteur A/C, voiture électrique
+  - Endommagés → "bzzt"
+- Début de vague → bruit sombre, stressant
+- Fin de vague → bruit 'clair', récompense, reposant
+
+Inspirations:
+- [Risk of Rain 2](https://open.spotify.com/album/3eFWXLdogrCHW11f8ZQLoa?si=qcOLxpROQHWQiAe3Er4ocw)
+- [Furi](https://open.spotify.com/album/1NCt4W6d8fNGkBQAjXDVrA?si=QWs6100-QWqb-LQ3UCWhDA)
 
 ## Roadmap
 
