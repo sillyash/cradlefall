@@ -1,15 +1,15 @@
-# S501 - ScrumBags
+# CRADLEFALL
 
-| Nom du jeu                  | CRADLEFALL      |
-|:----------------------------|:----------------|
-| Version du document         | 0.4             |
-| Date de la version courante | 2023-10-19      |
+| Nom du jeu                  | CRADLEFALL            |
+|:----------------------------|:----------------------|
+| Version du document         | 0.4                   |
+| Date de la version courante | 2023-10-19            |
 
 ## Sommaire
 
 <!-- TOC -->
 
-- [S501 - ScrumBags](#s501---scrumbags)
+- [CRADLEFALL](#cradlefall)
   - [Sommaire](#sommaire)
   - [Concept principal](#concept-principal)
   - [Présentation du jeu](#présentation-du-jeu)
