@@ -25,12 +25,11 @@ Instructions et informations pour les développeurs.
 ├─ ProjectSettings/
 ├─ .gitattributes
 ├─ .gitignore
-├─ .gitlab-ci.yml (CI/CD configuration)
+├─ .gitlab-ci.yml (CI/CD configuration, game-ci)
 ├─ CHANGELOG.md
 ├─ DEV.md         (This file, Development instructions)
-├─ GAME.md        (Game Design Document)
 ├─ LICENSE
-└─ README.md      (Overview of the project)
+└─ README.md      (Overview of the project, Game Design Document)
 ```
 
 ---
