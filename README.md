@@ -250,27 +250,41 @@ Couleurs:
 
 Le niveau (la 'map') est unique.
 
-C'est un vaisseau spatial divisé en plusieurs zones:
-- pont
-  - Zone de spawn / départ
-  - Taille moyenne
-  - Connectée aux quartiers
-- quartiers / cafétériat
-  - Zone centrale
-  - Grande taille
-  - Plusieurs sorties / connexions à des pièces annexes
-- salle cryotechnique
-  - Connectée aux quartiers
-  - Taille moyenne
-  - Objectif de défense (les caissons de cryogénisation)
-- armurerie
-  - Module de munitions (DPS)
-  - Petite taille
-- infirmerie
-  - Module de soin (Support)
-- salle des machines
-  - Module d'oxygène
-  - Module électrique
+C'est un vaisseau spatial divisé en plusieurs zones.
+
+### Zones
+
+#### Pont
+
+- Zone de spawn / départ
+- Taille moyenne
+- Connectée aux quartiers
+
+#### Quartiers
+
+- Zone centrale
+- Grande taille
+- Plusieurs sorties / connexions à des pièces annexes
+
+#### Salle cryotechnique
+
+- Connectée aux quartiers
+- Taille moyenne
+- Objectif de défense (les caissons de cryogénisation)
+
+#### Armurerie
+
+- Station de combat (cf. [modules](#modules-de-rôle))
+- Petite taille
+
+#### Infirmerie
+
+- Station de soin (cf. [modules](#modules-de-rôle))
+
+#### Salle de communications
+
+- Module d'oxygène
+- Module électrique
 
 ### Modules vaisseau
 
