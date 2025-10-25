@@ -3,7 +3,7 @@
 | Nom du jeu                  | CRADLEFALL            |
 |:----------------------------|:----------------------|
 | Version du document         | 0.4                   |
-| Date de la version courante | 2023-10-19            |
+| Date de la version courante | 2025-10-19            |
 
 ## Sommaire
 
