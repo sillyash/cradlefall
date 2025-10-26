@@ -202,41 +202,55 @@ Les capacités se rechargent avec le temps et lors d'une action spécifique à c
 
 Les ennemis sont tous des aliens.
 
-Pour un gameplay intéressant et évolutif, on propose plusieurs types d'ennemis:
+Pour un gameplay intéressant et évolutif, on propose plusieurs types d'ennemis,
+chacun avec des caractéristiques et comportements distincts.
+
+On propose aussi pour chaque type d'ennemi plusieurs déclinaisons, avec des statistiques
+augmentées (vitesse, dégâts, défense) et une couleur différente pour chaque niveau.
+
+![Ennemis](./Mediatheque/enemies_blue.png)
 
 #### Types
 
-**Maxilliarus inferiarus**
-
-Alien à grande bouche humanoide
-
-- PV bas
-- Vitesse normale
-- DPS via corps a corps
-
 **Maxilliarus superiarus**
 
-Alien ???
+Alien humanoide
 
 - PV normaux
 - Vitesse lente
 - DPS via projectiles
 
+**Maxilliarus inferiarus**
+
+Alien humanoide
+
+- PV bas
+- Vitesse normale
+- DPS via corps a corps
+
 **Petitus rapidus**
 
-Alien ???
+Alien insectoide
 
 - PV bas
 - Vitesse rapide
 - DPS via corps à corps
 
-**Bigus bouclidus**
+**Petitus explodus**
 
-Alien ???
+Alien insectoide
 
-- PV hauts
+- PV bas
 - Vitesse lente
-- DPS via corps à corps
+- DPS via corps à corps, explosion à la mort
+
+**Maxilus Colossus**
+
+Alien elephantoide
+
+- PV élevés
+- Vitesse lente
+- DPS via projectiles (bouche)
 
 #### Déclinaisons
 
@@ -246,18 +260,20 @@ Avec l'augmentation de la difficulté, les ennemis apparaîtront dans de nouvell
 - Statistiques augmentées à chaque niveau (vitesse, dégâts, défense)
 
 Couleurs:
+- Bleu
 - Vert
 - Violet
 - Rouge
-- Bleu
+
+![Ennemis verts](./Mediatheque/enemies_green.png)
+![Ennemis violets](./Mediatheque/enemies_purple.png)
+![Ennemis rouges](./Mediatheque/enemies_red.png)
 
 ## Niveaux
 
 > Présentez la structure du/des niveau(x) de jeu : layout, spawn points, dangers, éléments dynamiques, etc.
 
-Le niveau (la 'map') est unique.
-
-C'est un vaisseau spatial divisé en plusieurs zones.
+Le niveau est unique : un vaisseau spatial subdivisé en plusieurs zones interconnectées.
 
 ### Zones
 
