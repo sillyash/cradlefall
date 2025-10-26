@@ -14,20 +14,6 @@
          "command": "dotnet",
          "args": ["versionize", "inspect"],
          "include": ["**/*.cs"]
-      },
-      {
-         "name": "dotnet-changelog",
-         "group": "post-commit-operations",
-         "command": "dotnet",
-         "args": ["versionize", "changelog"],
-         "include": ["**/*.cs"]
-      },
-      {
-         "name": "dotnet-versionize",
-         "group": "post-commit-operations",
-         "command": "dotnet",
-         "args": ["versionize"],
-         "include": ["**/*.cs"]
       }
    ]
 }
