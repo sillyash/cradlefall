@@ -54,6 +54,10 @@
       - [Actif](#actif)
       - [Passif](#passif)
   - [Roadmap](#roadmap)
+    - [Sprint 1 - Prototype](#sprint-1---prototype)
+    - [Sprint 2 - Gameplay central](#sprint-2---gameplay-central)
+    - [Sprint 3 - Gameplay extensif](#sprint-3---gameplay-extensif)
+    - [Sprint 4 - Integration & équilibrage](#sprint-4---integration--équilibrage)
   - [Annexes (si nécessaire)](#annexes-si-nécessaire)
 
 <!-- /TOC -->
@@ -90,7 +94,7 @@ Les humains, arrivés sur une première planète de _Solaris_, repartent avec de
 Ils repartent alors bredouilles et doivent aller jusqu'à la prochaine planète, à 8 mois de distance, et sont 
 donc replongés en _cryostasis_.
 
-Cependant, lors de leur précédent atterrissage, des formes de vie extraterrestres hostiles se sont infiltrées à bord.
+Cependant, lors de leur précédent atterrissage, des formes de vie extraterrestres hostiles se sont infiltrées à bord: un organisme semble pondre des œufs dans la ventilation du vaisseau, libérant des créatures agressives.
 
 Les systèmes du vaisseau déclenchent alors le protocole **A.E.G.I.S** des robots, leur donnant accès 
 à la force létale pour protéger le vaisseau et son précieux équipage.
@@ -149,6 +153,13 @@ Boucle de base : système de vagues
   - Halo Firefight / Destiny 2 modes Horde (défense d’objectifs),
   - Helldivers (pression cumulative et priorisation des menaces).
   - Among Us (coopération, modules vaisseau).
+
+Au bout de 20-30 vagues, on peut affronter une vague finale plus difficile, avec un boss alien,
+l'organisme pondant les œufs dans le vaisseau.
+
+À l'issue de la partie, on peut afficher des statistiques de performance (kills, assistances, dégâts subis, objectifs réparés...).
+
+**Bonus :** Système de progression entre les vagues (amélioration d'armes, capacités, modules vaisseau...).
 
 ## Gameplay
 
@@ -542,7 +553,58 @@ Inspirations:
 > Décrivez sommairement un découpage en 4 Sprints. Les livrables attendus à 
 > la fin de chaque Sprint ainsi que les risques anticipés.
 
+### Sprint 1 - Prototype
 
+**Livrables:**
+- Mouvement de base (déplacement, sprint, saut)
+- Structure du vaisseau (layout principal, 3-4 zones)
+- Système de vagues d'ennemis
+- Système de tir basique
+- 1 type d'ennemi fonctionnel
+- 1 module vaisseau (générateur électrique)
+- Objectif de défense (caissons cryogéniques)
+- Début de l'interface (HUD basique)
+- 3-4 vagues d'ennemis et fin de partie
+
+**Risques:** Mécaniques de déplacement, IA ennemis
+
+### Sprint 2 - Gameplay central
+
+**Livrables:**
+- Multijoueur fonctionnel (lobby, connexion)
+- 2 rôles jouables avec armes spécifiques
+- HUD amélioré
+- Respawn des joueurs
+
+**Risques:** Équilibrage des rôles, IA ennemis
+
+### Sprint 3 - Gameplay extensif
+
+**Livrables:**
+- 4 rôles jouables
+- Capacités des rôles
+- 3 types d'ennemis supplémentaires
+- Modules du vaisseau (électricité, oxygène, azote)
+- Stations de rôle
+- HUD complet
+- Musique
+- Début d'audio (armes, ennemis, interactions)
+- 10-15 vagues d'ennemis
+- Boss final
+
+**Risques:** Complexité des interactions modules, temps de développement
+
+### Sprint 4 - Integration & équilibrage
+
+**Livrables:**
+- Déclinaisons d'ennemis
+- Système de difficulté
+- Équilibrage gameplay
+- 20-30 vagues d'ennemis
+- Menus (principal, lobby, pause)
+- Audio & polish final
+
+**Risques:** Bugs multijoueur, équilibrage gameplay
 
 ## Annexes (si nécessaire)
 
