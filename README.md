@@ -2,8 +2,8 @@
 
 | Nom du jeu                  | CRADLEFALL            |
 |:----------------------------|:----------------------|
-| Version du document         | 0.4                   |
-| Date de la version courante | 2025-10-19            |
+| Version du document         | 0.5                   |
+| Date de la version courante | 2025-10-26            |
 
 ## Sommaire
 
@@ -28,6 +28,16 @@
       - [Types](#types)
       - [Déclinaisons](#déclinaisons)
   - [Niveaux](#niveaux)
+    - [Zones](#zones)
+      - [Pont](#pont)
+      - [Salle cryotechnique](#salle-cryotechnique)
+      - [Salle des machines](#salle-des-machines)
+      - [Cantine](#cantine)
+      - [Armurerie](#armurerie)
+      - [Infirmerie](#infirmerie)
+      - [Salle de communications](#salle-de-communications)
+      - [Salle des commandes](#salle-des-commandes)
+      - [Générateur](#générateur)
     - [Modules vaisseau](#modules-vaisseau)
       - [Modules génériques](#modules-génériques)
       - [Modules de rôle](#modules-de-rôle)
@@ -44,6 +54,10 @@
       - [Actif](#actif)
       - [Passif](#passif)
   - [Roadmap](#roadmap)
+    - [Sprint 1 - Prototype](#sprint-1---prototype)
+    - [Sprint 2 - Gameplay central](#sprint-2---gameplay-central)
+    - [Sprint 3 - Gameplay extensif](#sprint-3---gameplay-extensif)
+    - [Sprint 4 - Integration & équilibrage](#sprint-4---integration--équilibrage)
   - [Annexes (si nécessaire)](#annexes-si-nécessaire)
 
 <!-- /TOC -->
@@ -59,30 +73,36 @@ contre des aliens, dans un FPS en Coop de type PvE.
 
 > Présentez l’univers et le ton général du jeu.
 
-Robots, espace, mission spatiale, aliens, survie, tension, coopération.
+Keywords: Robots, mission spatiale, aliens, survie, tension, coopération.
 
-Nous sommes dans un univers de science-fiction, à bord d'un vaisseau spatial.
+Jeu de science‑fiction se déroulant à bord d’un vaisseau spatial fermé.
 
-Le jeu se déroule dans le futur, dans un environnement fermé (vaisseau spatial).
-
-Les joueurs incarnent des robots, avec des rôles et capacités différentes.
-
-Leur but est de défendre des objectifs contre des aliens.
+Les joueurs incarnent des robots aux rôles et capacités distincts,
+dont l’objectif est de défendre des objectifs contre des créatures extraterrestres.
 
 ### Histoire
 
 > Décrivez le contexte et les personnages clés du jeu.
 
-Une expédition humaine traverse l’espace à bord du vaisseau **CRADLE IV**, en route vers une colonie lointaine.
+Une expédition humaine traverse l’espace à bord du vaisseau **CRADLE IV**, en route vers un système planétaire,
+_Solaris_ récemment découvert avec des candidats prometteurs pour une planète habitable.
 
-L’équipage humain, placé en cryogénisation pour le long voyage, est surveillé par une équipe de robots 
+L’équipage humain, placé en cryogénisation, (_cryostasis_) pour le long voyage, est surveillé par une équipe de robots 
 spécialisés, chargés de la maintenance et de la sécurité du vaisseau.
 
-Au cours du trajet, un astéroïde percute le vaisseau, endommageant plusieurs modules critiques et
-ouvrant une brèche dans la coque. Profitant de la confusion, des formes de vie extraterrestres
-hostiles s’infiltrent à bord. Les systèmes d’alerte déclenchent alors le protocole **A.E.G.I.S** des robots.
+Les humains, arrivés sur une première planète de _Solaris_, repartent avec des échantillons peu prometteurs.
+Ils repartent alors bredouilles et doivent aller jusqu'à la prochaine planète, à 8 mois de distance, et sont 
+donc replongés en _cryostasis_.
 
-Les joueurs incarnent ces robots, chacun doté de capacités uniques, qui doivent s’organiser pour repousser les vagues d’aliens, réparer les systèmes endommagés et surtout protéger les caissons de cryogénisation contenant les humains. Leur mission : assurer la survie de l’expédition jusqu’à l’arrivée des secours ou la restauration complète du vaisseau.
+Cependant, lors de leur précédent atterrissage, des formes de vie extraterrestres hostiles se sont infiltrées à bord: un organisme semble pondre des œufs dans la ventilation du vaisseau, libérant des créatures agressives.
+
+Les systèmes du vaisseau déclenchent alors le protocole **A.E.G.I.S** des robots, leur donnant accès 
+à la force létale pour protéger le vaisseau et son précieux équipage.
+
+Les joueurs incarnent ces robots, chacun doté de capacités uniques, qui doivent s’organiser pour repousser les vagues d’aliens,
+réparer les systèmes endommagés et surtout protéger les caissons de cryogénisation contenant l'équipage.
+
+Leur mission : assurer la survie de l’expédition jusqu’à l’arrivée des secours ou l'élimination totale des menaces.
 
 ### Fonctionnalités clés
 
@@ -100,7 +120,7 @@ Les joueurs incarnent ces robots, chacun doté de capacités uniques, qui doiven
 
 #### Rôles
 
-Rôles différents (DPS, Tank, Soutien, Support) avec des capacités et objectifs variés.
+Rôles distincts (DPS, Tank, Soutien, Support) — chacun disposant de capacités et d’objectifs propres.
 
 La coordination est nécessaire pour gérer les menaces et protéger les objectifs.
 
@@ -122,9 +142,10 @@ La coordination est nécessaire pour gérer les menaces et protéger les objecti
 > 
 > Expérience voulue pour les joueurs : quelles expériences voulez-vous offrir aux joueurs ?
 
-- Boucle de base : vagues
+Boucle de base : système de vagues
+
 - L'objectif central est de protéger les caissons de cryogénisation du vaisseau.
-- En découle la protection et réparation de modules du vaisseau affectant les joueurs (énergie, soin, lumière...).
+- En découle les objectifs secondaires: la protection et réparation de modules du vaisseau affectant les joueurs (énergie, soin, lumière...).
 - Pour cela on a une complémentarité des rôles (DPS, Tank, Soutien, Support), afin de survivre le plus longtemps possible.
 - Atmosphère tendue : on veut faire sentir la fragilité de la position tout en valorisant la coordination.
 - Entre les vagues, les joueurs pourront se soigner, se provisioner et les joueurs précédemment décédés se verront respawn.
@@ -132,6 +153,13 @@ La coordination est nécessaire pour gérer les menaces et protéger les objecti
   - Halo Firefight / Destiny 2 modes Horde (défense d’objectifs),
   - Helldivers (pression cumulative et priorisation des menaces).
   - Among Us (coopération, modules vaisseau).
+
+Au bout de 20-30 vagues, on peut affronter une vague finale plus difficile, avec un boss alien,
+l'organisme pondant les œufs dans le vaisseau.
+
+À l'issue de la partie, on peut afficher des statistiques de performance (kills, assistances, dégâts subis, objectifs réparés...).
+
+**Bonus :** Système de progression entre les vagues (amélioration d'armes, capacités, modules vaisseau...).
 
 ## Gameplay
 
@@ -165,7 +193,8 @@ Les joueurs et ennemis ont une vitesse dite 'fixe' : leur vitesse maximale est d
 et la vitesse ne se cumule pas : (i.e. pas de mécanique de saut en boucle pour gagner en vitesse).
 
 Les projectiles des armes ne sont pas soumis à la gravité, puique à base d'énergie électrique,
-mais les grenades et explosifs le sont.
+mais les grenades et explosifs le sont. Ils cumulent cependant leur vitesse a la vitesse du 
+joueur et sa direction.
 
 ### Combat
 
@@ -195,41 +224,55 @@ Les capacités se rechargent avec le temps et lors d'une action spécifique à c
 
 Les ennemis sont tous des aliens.
 
-Pour un gameplay intéressant et évolutif, on propose plusieurs types d'ennemis:
+Pour un gameplay intéressant et évolutif, on propose plusieurs types d'ennemis,
+chacun avec des caractéristiques et comportements distincts.
+
+On propose aussi pour chaque type d'ennemi plusieurs déclinaisons, avec des statistiques
+augmentées (vitesse, dégâts, défense) et une couleur différente pour chaque niveau.
+
+![Ennemis](./Mediatheque/enemies_blue.png)
 
 #### Types
 
-**Maxilliarus inferiarus**
-
-Alien à grande bouche humanoide
-
-- PV bas
-- Vitesse normale
-- DPS via corps a corps
-
 **Maxilliarus superiarus**
 
-Alien ???
+Alien humanoide
 
 - PV normaux
 - Vitesse lente
 - DPS via projectiles
 
+**Maxilliarus inferiarus**
+
+Alien humanoide
+
+- PV bas
+- Vitesse normale
+- DPS via corps a corps
+
 **Petitus rapidus**
 
-Alien ???
+Alien insectoide
 
 - PV bas
 - Vitesse rapide
 - DPS via corps à corps
 
-**Bigus bouclidus**
+**Petitus explodus**
 
-Alien ???
+Alien insectoide
 
-- PV hauts
+- PV bas
 - Vitesse lente
-- DPS via corps à corps
+- DPS via corps à corps, explosion à la mort
+
+**Maxilus Colossus**
+
+Alien elephantoide
+
+- PV élevés
+- Vitesse lente
+- DPS via projectiles (bouche)
 
 #### Déclinaisons
 
@@ -239,56 +282,77 @@ Avec l'augmentation de la difficulté, les ennemis apparaîtront dans de nouvell
 - Statistiques augmentées à chaque niveau (vitesse, dégâts, défense)
 
 Couleurs:
+- Bleu
 - Vert
 - Violet
 - Rouge
-- Bleu
+
+![Ennemis verts](./Mediatheque/enemies_green.png)
+![Ennemis violets](./Mediatheque/enemies_purple.png)
+![Ennemis rouges](./Mediatheque/enemies_red.png)
 
 ## Niveaux
 
 > Présentez la structure du/des niveau(x) de jeu : layout, spawn points, dangers, éléments dynamiques, etc.
 
-Le niveau (la 'map') est unique.
+Le niveau est unique : un vaisseau spatial subdivisé en plusieurs zones interconnectées.
 
-C'est un vaisseau spatial divisé en plusieurs zones.
+![Layout vaisseau](./Mediatheque/ship_layout.png)
 
 ### Zones
 
 #### Pont
 
-- Zone de spawn / départ
-- Taille moyenne
-- Connectée aux quartiers
-
-#### Quartiers
-
-- Zone centrale
 - Grande taille
+- Zone de spawn / départ
 - Plusieurs sorties / connexions à des pièces annexes
+- Contient la salle cryotechnique (cf. [salle cryotechnique](#salle-cryotechnique))
 
 #### Salle cryotechnique
 
-- Connectée aux quartiers
+- Connectée au pont
 - Taille moyenne
 - Objectif de défense (les caissons de cryogénisation)
 
+#### Salle des machines
+
+- Grande taille
+- Contient le module d'azote liquide (cf. [modules génériques](#modules-génériques))
+- Contient le module d'oxygène (cf. [modules génériques](#modules-génériques))
+
+#### Cantine
+
+- Grande taille
+- Zone de repos entre les vagues
+
 #### Armurerie
 
-- Station de combat (cf. [modules](#modules-de-rôle))
 - Petite taille
+- Contient la station de combat (cf. [modules](#modules-de-rôle))
 
 #### Infirmerie
 
-- Station de soin (cf. [modules](#modules-de-rôle))
+- Petite taille
+- Contient la station de soin (cf. [modules](#modules-de-rôle))
 
 #### Salle de communications
 
-- Module d'oxygène
-- Module électrique
+- Moyenne taille
+- Contient la station réseau (cf. [modules](#modules-de-rôle))
+
+#### Salle des commandes
+
+- Moyenne taille
+- Contient la station de défense (cf. [modules](#modules-de-rôle))
+
+#### Générateur
+
+- Moyenne taille
+- Contient le générateur électrique (cf. [modules génériques](#modules-génériques))
 
 ### Modules vaisseau
 
-- Chaque zone contient des modules (ex : générateur d’énergie, infirmerie, tourelle de défense).
+- Chaque zone contient des modules (ex : générateur électrique, infirmerie).
 - Les modules ont des fonctions (ex : recharger énergie, soigner, défense automatique).
 - Les modules peuvent être endommagés par les ennemis et doivent être réparés par les joueurs (notamment le technicien).
 - La gestion des modules est cruciale pour la survie de l’équipe.
@@ -306,7 +370,6 @@ C'est un vaisseau spatial divisé en plusieurs zones.
 
 | Module                | Fonction                             | Impact sur les joueurs                   |
 |:----------------------|:-------------------------------------|:-----------------------------------------|
-| Générateur d’énergie  | Recharge l’énergie des joueurs       | Permet l’utilisation des capacités       |
 | Électricité           | Alimente les lumières                | Améliore la visibilité                   |
 | Oxygène               | Alimente les humains en oxygène      | S'il n'est pas réparé a temps, Game Over |
 | Azote liquide         | Refroidit les caissons de cryo.      | S'il n'est pas réparé a temps, Game Over |
@@ -340,6 +403,8 @@ C'est un vaisseau spatial divisé en plusieurs zones.
 
 - Liste des joueurs connectés
 - Choisir son rôle (DPS, Tank, Soutien, Support)
+- Choisir la difficulté (Facile, Normal, Difficile)
+- Afficher les règles du jeu
 - Prêt / Non prêt
 - Démarrer la partie (hôte uniquement)
 
@@ -380,7 +445,10 @@ d'une majorité de joueurs.
 | Action                     | Entrée (AZERTY) | Entrée (QWERTY) |
 |:---------------------------|:---------------:|:---------------:|
 | Déplacement                | `ZQSD`          | `WASD`          |
+| Saut                       | `Espace`        | `Espace`        |
 | Caméra                     | Souris          | Souris          |
+| Tir                        | Clic gauche     | Clic gauche     |
+| Viser                      | Clic droit      | Clic droit      |
 | Capacité                   | `A`             | `Q`             |
 | Interagir                  | `E`             | `E`             |
 | Recharger l'arme           | `R`             | `R`             |
@@ -408,14 +476,13 @@ utile en jeu:
 - <span style="color: #d15c5cff">rouge = danger</span>
 - <span style="color: #58b058ff">vert = soin</span>
 - <span style="color: #5b5bd7ff">bleu = énergie & bouclier</span>
-- <span style="color: #c6c65bff">bouton = interaction</span>
 
 On partira sur des couleurs pas trop saturées pour éviter la fatigue visuelle, surtout
 sur les textures du vaisseau.
 
 ### Design sonore
 
-Le son est spatialisé, et olus ou moins intense en fonction de la distance.
+Le son est spatialisé, et plus ou moins intense en fonction de la distance.
 
 #### Actif
 
@@ -424,23 +491,39 @@ Le son est spatialisé, et olus ou moins intense en fonction de la distance.
 - Menus
   - Clicks
 - Ennemis
-  - Cris (attaques, dégâts...)
+  - Bruits de pas → son biologique
+  - Attaque → son de cri / grondement
+  - Cri d'alerte → son strident
+  - Mort → son d'explosion / fracture
 - Armes
-  - Laser → "Zap"
-  - Blaster → "Piou piou"
-  - Explosions → ???
-  - Rechargement → bruits mécaniques & électriques
+  - Tir → son d'énergie électrique
+  - Rechargement → son mécanique
+  - Impact → son d'explosion
 - Capacités
   - Bruit du HUD quand la capacité est disponible
-  - Son de la capacité
-  - Voicelines
+  - Son de la capacité → spécifique à chaque rôle
+  - Voicelines → spécifique à chaque rôle
 - Déplacements
-  - "Clank clonk"
+  - Saut → son mécanique
+  - Sprint → son de moteur
+  - Pas → son métallique
 - Interactions
   - Modules
-    - Réparation → ???
+    - Réparation → son mécanique
+    - Activation → son d'énergie
+    - Endommagés → son électrique défaillant
   - Soin
+    - Son de soin → son apaisant
   - Dégâts
+    - Son de dégâts → son d'impact métallique
+    - Alerte faible santé → son d'alerte
+- Vaisseau
+  - Bruit de ventilation et électricité de fond
+- Gameplay
+  - Bruit de pas des alliés et ennemis
+  - Bruit de tir des armes des alliés et ennemis
+  - Début de vague → bruit sombre, stressant
+  - Fin de vague → bruit 'clair', reposant
 
 #### Passif
 
@@ -453,22 +536,13 @@ Nous aurons donc deux musiques:
 - La musique des menus et entre les vagues:
   - Planante, reposante
   - Synthwave
-  - Inspirations SF et Risk of Rain
+  - Inspirations SF
 - La musique pendant les vagues
   - Tension
   - Rapide
   - Épique
   - Synthwave
   - Rythmée
-
-Et des bruits d'ambiance:
-- Vaisseau
-  - Bruit de ventilation et de courant électrique faible
-- Modules
-  - Fonctionnels → bruit de moteur A/C, voiture électrique
-  - Endommagés → "bzzt"
-- Début de vague → bruit sombre, stressant
-- Fin de vague → bruit 'clair', récompense, reposant
 
 Inspirations:
 - [Risk of Rain 2](https://open.spotify.com/album/3eFWXLdogrCHW11f8ZQLoa?si=qcOLxpROQHWQiAe3Er4ocw)
@@ -479,9 +553,58 @@ Inspirations:
 > Décrivez sommairement un découpage en 4 Sprints. Les livrables attendus à 
 > la fin de chaque Sprint ainsi que les risques anticipés.
 
-TODO : Roadmap
+### Sprint 1 - Prototype
 
-TODO : Link roadmap to GitLab Milestones Description
+**Livrables:**
+- Mouvement de base (déplacement, sprint, saut)
+- Structure du vaisseau (layout principal, 3-4 zones)
+- Système de vagues d'ennemis
+- Système de tir basique
+- 1 type d'ennemi fonctionnel
+- 1 module vaisseau (générateur électrique)
+- Objectif de défense (caissons cryogéniques)
+- Début de l'interface (HUD basique)
+- 3-4 vagues d'ennemis et fin de partie
+
+**Risques:** Mécaniques de déplacement, IA ennemis
+
+### Sprint 2 - Gameplay central
+
+**Livrables:**
+- Multijoueur fonctionnel (lobby, connexion)
+- 2 rôles jouables avec armes spécifiques
+- HUD amélioré
+- Respawn des joueurs
+
+**Risques:** Équilibrage des rôles, IA ennemis
+
+### Sprint 3 - Gameplay extensif
+
+**Livrables:**
+- 4 rôles jouables
+- Capacités des rôles
+- 3 types d'ennemis supplémentaires
+- Modules du vaisseau (électricité, oxygène, azote)
+- Stations de rôle
+- HUD complet
+- Musique
+- Début d'audio (armes, ennemis, interactions)
+- 10-15 vagues d'ennemis
+- Boss final
+
+**Risques:** Complexité des interactions modules, temps de développement
+
+### Sprint 4 - Integration & équilibrage
+
+**Livrables:**
+- Déclinaisons d'ennemis
+- Système de difficulté
+- Équilibrage gameplay
+- 20-30 vagues d'ennemis
+- Menus (principal, lobby, pause)
+- Audio & polish final
+
+**Risques:** Bugs multijoueur, équilibrage gameplay
 
 ## Annexes (si nécessaire)
 
