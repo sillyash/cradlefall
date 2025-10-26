@@ -25,12 +25,11 @@ Instructions et informations pour les développeurs.
 ├─ ProjectSettings/
 ├─ .gitattributes
 ├─ .gitignore
-├─ .gitlab-ci.yml (CI/CD configuration)
+├─ .gitlab-ci.yml (CI/CD configuration, game-ci)
 ├─ CHANGELOG.md
 ├─ DEV.md         (This file, Development instructions)
-├─ GAME.md        (Game Design Document)
 ├─ LICENSE
-└─ README.md      (Overview of the project)
+└─ README.md      (Overview of the project, Game Design Document)
 ```
 
 ---
@@ -60,10 +59,25 @@ Nous utilisons Git LFS pour les fichiers volumineux (modèles 3D, textures, audi
 Nous utilisons [Husky.NET](https://alirezanet.github.io/Husky.Net/) pour gérer les hooks Git.
 
 ```powershell
-dotnet tool install Husky
-dotnet tool install dotnet-format
-dotnet tool install Versionize
+# from repository root
+.\setup.ps1
+```
 
+If your PowerShell execution policy blocks running the script, run it with an explicit bypass:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\setup.ps1
+```
+
+What the script does:
+- Restores dotnet local tools using `.config/dotnet-tools.json` (runs `dotnet tool restore`).
+- Installs Husky hooks (`dotnet husky install`) so the hook scripts in `.husky/` are activated locally.
+
+Manual steps (equivalent):
+
+```powershell
+dotnet --info
+dotnet tool restore
 dotnet husky install
 ```
 
@@ -81,11 +95,11 @@ Cette commande génère automatiquement un nouveau tag et met à jour le changel
 
 > [!CAUTION]
 >
-> Toujours exécuter cette commande **après** avoir fait un commit (ou plusieurs) et **avant** de pousser _**SUR LA BRANCHE MAIN OU BETA**_.
+> Toujours exécuter cette commande **après** avoir fait un commit (ou plusieurs) et **avant** de pousser _**SUR LA BRANCHE BETA**_.
 >
-> On ne veut pas créer de tag sur une branche de développement.
+> On ne veut pas créer de tag sur une branche de développement, et on ne *peut* pas créer de tag sur `main` directement (branche protégée).
 >
-> C'est-à-dire, **après** avoir mergé dans `beta` ou `main`.
+> C'est-à-dire, **après** avoir mergé dans `beta`, on exécute la commande, puis on pousse.
 
 ```bash
 dotnet husky run --name dotnet-changelog
@@ -157,7 +171,7 @@ Utiliser [Unity Cloud](https://cloud.unity.com/) pour la gestion des projets ann
 >
 > Nous utilisons la **dernière version LTS** (Long Term Support) de Unity.
 >
-> [**Unity 6.0 LTS**](https://unity3d.com/unity/whats-new/6000.0.59f2)
+> [**Unity 6.0 LTS**](https://unity3d.com/unity/whats-new/6000.0.51f1)
 
 ### Nommage
 
