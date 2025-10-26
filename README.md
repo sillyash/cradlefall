@@ -66,30 +66,36 @@ contre des aliens, dans un FPS en Coop de type PvE.
 
 > Présentez l’univers et le ton général du jeu.
 
-Robots, espace, mission spatiale, aliens, survie, tension, coopération.
+Keywords: Robots, mission spatiale, aliens, survie, tension, coopération.
 
-Nous sommes dans un univers de science-fiction, à bord d'un vaisseau spatial.
+Jeu de science‑fiction se déroulant à bord d’un vaisseau spatial fermé.
 
-Le jeu se déroule dans le futur, dans un environnement fermé (vaisseau spatial).
-
-Les joueurs incarnent des robots, avec des rôles et capacités différentes.
-
-Leur but est de défendre des objectifs contre des aliens.
+Les joueurs incarnent des robots aux rôles et capacités distincts,
+dont l’objectif est de défendre des objectifs contre des créatures extraterrestres.
 
 ### Histoire
 
 > Décrivez le contexte et les personnages clés du jeu.
 
-Une expédition humaine traverse l’espace à bord du vaisseau **CRADLE IV**, en route vers une colonie lointaine.
+Une expédition humaine traverse l’espace à bord du vaisseau **CRADLE IV**, en route vers un système planétaire,
+_Solaris_ récemment découvert avec des candidats prometteurs pour une planète habitable.
 
-L’équipage humain, placé en cryogénisation pour le long voyage, est surveillé par une équipe de robots 
+L’équipage humain, placé en cryogénisation, (_cryostasis_) pour le long voyage, est surveillé par une équipe de robots 
 spécialisés, chargés de la maintenance et de la sécurité du vaisseau.
 
-Au cours du trajet, un astéroïde percute le vaisseau, endommageant plusieurs modules critiques et
-ouvrant une brèche dans la coque. Profitant de la confusion, des formes de vie extraterrestres
-hostiles s’infiltrent à bord. Les systèmes d’alerte déclenchent alors le protocole **A.E.G.I.S** des robots.
+Les humains, arrivés sur une première planète de _Solaris_, repartent avec des échantillons peu prometteurs.
+Ils repartent alors bredouilles et doivent aller jusqu'à la prochaine planète, à 8 mois de distance, et sont 
+donc replongés en _cryostasis_.
 
-Les joueurs incarnent ces robots, chacun doté de capacités uniques, qui doivent s’organiser pour repousser les vagues d’aliens, réparer les systèmes endommagés et surtout protéger les caissons de cryogénisation contenant les humains. Leur mission : assurer la survie de l’expédition jusqu’à l’arrivée des secours ou la restauration complète du vaisseau.
+Cependant, lors de leur précédent atterrissage, des formes de vie extraterrestres hostiles se sont infiltrées à bord.
+
+Les systèmes du vaisseau déclenchent alors le protocole **A.E.G.I.S** des robots, leur donnant accès 
+à la force létale pour protéger le vaisseau et son précieux équipage.
+
+Les joueurs incarnent ces robots, chacun doté de capacités uniques, qui doivent s’organiser pour repousser les vagues d’aliens,
+réparer les systèmes endommagés et surtout protéger les caissons de cryogénisation contenant l'équipage.
+
+Leur mission : assurer la survie de l’expédition jusqu’à l’arrivée des secours ou l'élimination totale des menaces.
 
 ### Fonctionnalités clés
 
@@ -107,7 +113,7 @@ Les joueurs incarnent ces robots, chacun doté de capacités uniques, qui doiven
 
 #### Rôles
 
-Rôles différents (DPS, Tank, Soutien, Support) avec des capacités et objectifs variés.
+Rôles distincts (DPS, Tank, Soutien, Support) — chacun disposant de capacités et d’objectifs propres.
 
 La coordination est nécessaire pour gérer les menaces et protéger les objectifs.
 
@@ -129,9 +135,10 @@ La coordination est nécessaire pour gérer les menaces et protéger les objecti
 > 
 > Expérience voulue pour les joueurs : quelles expériences voulez-vous offrir aux joueurs ?
 
-- Boucle de base : vagues
+Boucle de base : système de vagues
+
 - L'objectif central est de protéger les caissons de cryogénisation du vaisseau.
-- En découle la protection et réparation de modules du vaisseau affectant les joueurs (énergie, soin, lumière...).
+- En découle les objectifs secondaires: la protection et réparation de modules du vaisseau affectant les joueurs (énergie, soin, lumière...).
 - Pour cela on a une complémentarité des rôles (DPS, Tank, Soutien, Support), afin de survivre le plus longtemps possible.
 - Atmosphère tendue : on veut faire sentir la fragilité de la position tout en valorisant la coordination.
 - Entre les vagues, les joueurs pourront se soigner, se provisioner et les joueurs précédemment décédés se verront respawn.
@@ -172,7 +179,8 @@ Les joueurs et ennemis ont une vitesse dite 'fixe' : leur vitesse maximale est d
 et la vitesse ne se cumule pas : (i.e. pas de mécanique de saut en boucle pour gagner en vitesse).
 
 Les projectiles des armes ne sont pas soumis à la gravité, puique à base d'énergie électrique,
-mais les grenades et explosifs le sont.
+mais les grenades et explosifs le sont. Ils cumulent cependant leur vitesse a la vitesse du 
+joueur et sa direction.
 
 ### Combat
 
@@ -363,6 +371,8 @@ Le niveau est unique : un vaisseau spatial subdivisé en plusieurs zones interco
 
 - Liste des joueurs connectés
 - Choisir son rôle (DPS, Tank, Soutien, Support)
+- Choisir la difficulté (Facile, Normal, Difficile)
+- Afficher les règles du jeu
 - Prêt / Non prêt
 - Démarrer la partie (hôte uniquement)
 
@@ -403,7 +413,10 @@ d'une majorité de joueurs.
 | Action                     | Entrée (AZERTY) | Entrée (QWERTY) |
 |:---------------------------|:---------------:|:---------------:|
 | Déplacement                | `ZQSD`          | `WASD`          |
+| Saut                       | `Espace`        | `Espace`        |
 | Caméra                     | Souris          | Souris          |
+| Tir                        | Clic gauche     | Clic gauche     |
+| Viser                      | Clic droit      | Clic droit      |
 | Capacité                   | `A`             | `Q`             |
 | Interagir                  | `E`             | `E`             |
 | Recharger l'arme           | `R`             | `R`             |
@@ -431,14 +444,13 @@ utile en jeu:
 - <span style="color: #d15c5cff">rouge = danger</span>
 - <span style="color: #58b058ff">vert = soin</span>
 - <span style="color: #5b5bd7ff">bleu = énergie & bouclier</span>
-- <span style="color: #c6c65bff">bouton = interaction</span>
 
 On partira sur des couleurs pas trop saturées pour éviter la fatigue visuelle, surtout
 sur les textures du vaisseau.
 
 ### Design sonore
 
-Le son est spatialisé, et olus ou moins intense en fonction de la distance.
+Le son est spatialisé, et plus ou moins intense en fonction de la distance.
 
 #### Actif
 
@@ -447,23 +459,39 @@ Le son est spatialisé, et olus ou moins intense en fonction de la distance.
 - Menus
   - Clicks
 - Ennemis
-  - Cris (attaques, dégâts...)
+  - Bruits de pas → son biologique
+  - Attaque → son de cri / grondement
+  - Cri d'alerte → son strident
+  - Mort → son d'explosion / fracture
 - Armes
-  - Laser → "Zap"
-  - Blaster → "Piou piou"
-  - Explosions → ???
-  - Rechargement → bruits mécaniques & électriques
+  - Tir → son d'énergie électrique
+  - Rechargement → son mécanique
+  - Impact → son d'explosion
 - Capacités
   - Bruit du HUD quand la capacité est disponible
-  - Son de la capacité
-  - Voicelines
+  - Son de la capacité → spécifique à chaque rôle
+  - Voicelines → spécifique à chaque rôle
 - Déplacements
-  - "Clank clonk"
+  - Saut → son mécanique
+  - Sprint → son de moteur
+  - Pas → son métallique
 - Interactions
   - Modules
-    - Réparation → ???
+    - Réparation → son mécanique
+    - Activation → son d'énergie
+    - Endommagés → son électrique défaillant
   - Soin
+    - Son de soin → son apaisant
   - Dégâts
+    - Son de dégâts → son d'impact métallique
+    - Alerte faible santé → son d'alerte
+- Vaisseau
+  - Bruit de ventilation et électricité de fond
+- Gameplay
+  - Bruit de pas des alliés et ennemis
+  - Bruit de tir des armes des alliés et ennemis
+  - Début de vague → bruit sombre, stressant
+  - Fin de vague → bruit 'clair', reposant
 
 #### Passif
 
@@ -476,22 +504,13 @@ Nous aurons donc deux musiques:
 - La musique des menus et entre les vagues:
   - Planante, reposante
   - Synthwave
-  - Inspirations SF et Risk of Rain
+  - Inspirations SF
 - La musique pendant les vagues
   - Tension
   - Rapide
   - Épique
   - Synthwave
   - Rythmée
-
-Et des bruits d'ambiance:
-- Vaisseau
-  - Bruit de ventilation et de courant électrique faible
-- Modules
-  - Fonctionnels → bruit de moteur A/C, voiture électrique
-  - Endommagés → "bzzt"
-- Début de vague → bruit sombre, stressant
-- Fin de vague → bruit 'clair', récompense, reposant
 
 Inspirations:
 - [Risk of Rain 2](https://open.spotify.com/album/3eFWXLdogrCHW11f8ZQLoa?si=qcOLxpROQHWQiAe3Er4ocw)
