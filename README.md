@@ -2,8 +2,8 @@
 
 | Nom du jeu                  | CRADLEFALL            |
 |:----------------------------|:----------------------|
-| Version du document         | 0.4                   |
-| Date de la version courante | 2025-10-19            |
+| Version du document         | 0.5                   |
+| Date de la version courante | 2025-10-26            |
 
 ## Sommaire
 
@@ -28,6 +28,13 @@
       - [Types](#types)
       - [Déclinaisons](#déclinaisons)
   - [Niveaux](#niveaux)
+    - [Zones](#zones)
+      - [Pont](#pont)
+      - [Quartiers](#quartiers)
+      - [Salle cryotechnique](#salle-cryotechnique)
+      - [Armurerie](#armurerie)
+      - [Infirmerie](#infirmerie)
+      - [Salle de communications](#salle-de-communications)
     - [Modules vaisseau](#modules-vaisseau)
       - [Modules génériques](#modules-génériques)
       - [Modules de rôle](#modules-de-rôle)
