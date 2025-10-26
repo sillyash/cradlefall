@@ -30,11 +30,14 @@
   - [Niveaux](#niveaux)
     - [Zones](#zones)
       - [Pont](#pont)
-      - [Quartiers](#quartiers)
       - [Salle cryotechnique](#salle-cryotechnique)
+      - [Salle des machines](#salle-des-machines)
+      - [Cantine](#cantine)
       - [Armurerie](#armurerie)
       - [Infirmerie](#infirmerie)
       - [Salle de communications](#salle-de-communications)
+      - [Salle des commandes](#salle-des-commandes)
+      - [Générateur](#générateur)
     - [Modules vaisseau](#modules-vaisseau)
       - [Modules génériques](#modules-génériques)
       - [Modules de rôle](#modules-de-rôle)
@@ -283,43 +286,62 @@ Couleurs:
 
 Le niveau est unique : un vaisseau spatial subdivisé en plusieurs zones interconnectées.
 
+![Layout vaisseau](./Mediatheque/ship_layout.png)
+
 ### Zones
 
 #### Pont
 
-- Zone de spawn / départ
-- Taille moyenne
-- Connectée aux quartiers
-
-#### Quartiers
-
-- Zone centrale
 - Grande taille
+- Zone de spawn / départ
 - Plusieurs sorties / connexions à des pièces annexes
+- Contient la salle cryotechnique (cf. [salle cryotechnique](#salle-cryotechnique))
 
 #### Salle cryotechnique
 
-- Connectée aux quartiers
+- Connectée au pont
 - Taille moyenne
 - Objectif de défense (les caissons de cryogénisation)
 
+#### Salle des machines
+
+- Grande taille
+- Contient le module d'azote liquide (cf. [modules génériques](#modules-génériques))
+- Contient le module d'oxygène (cf. [modules génériques](#modules-génériques))
+
+#### Cantine
+
+- Grande taille
+- Zone de repos entre les vagues
+
 #### Armurerie
 
-- Station de combat (cf. [modules](#modules-de-rôle))
 - Petite taille
+- Contient la station de combat (cf. [modules](#modules-de-rôle))
 
 #### Infirmerie
 
-- Station de soin (cf. [modules](#modules-de-rôle))
+- Petite taille
+- Contient la station de soin (cf. [modules](#modules-de-rôle))
 
 #### Salle de communications
 
-- Module d'oxygène
-- Module électrique
+- Moyenne taille
+- Contient la station réseau (cf. [modules](#modules-de-rôle))
+
+#### Salle des commandes
+
+- Moyenne taille
+- Contient la station de défense (cf. [modules](#modules-de-rôle))
+
+#### Générateur
+
+- Moyenne taille
+- Contient le générateur électrique (cf. [modules génériques](#modules-génériques))
 
 ### Modules vaisseau
 
-- Chaque zone contient des modules (ex : générateur d’énergie, infirmerie, tourelle de défense).
+- Chaque zone contient des modules (ex : générateur électrique, infirmerie).
 - Les modules ont des fonctions (ex : recharger énergie, soigner, défense automatique).
 - Les modules peuvent être endommagés par les ennemis et doivent être réparés par les joueurs (notamment le technicien).
 - La gestion des modules est cruciale pour la survie de l’équipe.
@@ -337,7 +359,6 @@ Le niveau est unique : un vaisseau spatial subdivisé en plusieurs zones interco
 
 | Module                | Fonction                             | Impact sur les joueurs                   |
 |:----------------------|:-------------------------------------|:-----------------------------------------|
-| Générateur d’énergie  | Recharge l’énergie des joueurs       | Permet l’utilisation des capacités       |
 | Électricité           | Alimente les lumières                | Améliore la visibilité                   |
 | Oxygène               | Alimente les humains en oxygène      | S'il n'est pas réparé a temps, Game Over |
 | Azote liquide         | Refroidit les caissons de cryo.      | S'il n'est pas réparé a temps, Game Over |
@@ -521,9 +542,7 @@ Inspirations:
 > Décrivez sommairement un découpage en 4 Sprints. Les livrables attendus à 
 > la fin de chaque Sprint ainsi que les risques anticipés.
 
-TODO : Roadmap
 
-TODO : Link roadmap to GitLab Milestones Description
 
 ## Annexes (si nécessaire)
 
