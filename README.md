@@ -2,8 +2,17 @@
 
 | Nom du jeu                  | CRADLEFALL            |
 |:----------------------------|:----------------------|
-| Version du document         | 0.5                   |
+| Version du document         | 1.0                   |
 | Date de la version courante | 2025-10-26            |
+
+Auteur.e.s:
+- Ash M.
+- Elouann D.
+- Alexandre C.
+- Nicolas V.
+- Martin M.
+- Alain S.
+- Raida O.
 
 ## Sommaire
 
@@ -72,8 +81,6 @@ contre des aliens, dans un FPS en Coop de type PvE.
 
 ### Genre, univers, thème
 
-> Présentez l’univers et le ton général du jeu.
-
 Keywords: Robots, mission spatiale, aliens, survie, tension, coopération.
 
 Jeu de science‑fiction se déroulant à bord d’un vaisseau spatial fermé.
@@ -82,8 +89,6 @@ Les joueurs incarnent des robots aux rôles et capacités distincts,
 dont l’objectif est de défendre des objectifs contre des créatures extraterrestres.
 
 ### Histoire
-
-> Décrivez le contexte et les personnages clés du jeu.
 
 Une expédition humaine traverse l’espace à bord du vaisseau **CRADLE IV**, en route vers un système planétaire,
 _Solaris_ récemment découvert avec des candidats prometteurs pour une planète habitable.
@@ -106,8 +111,6 @@ réparer les systèmes endommagés et surtout protéger les caissons de cryogén
 Leur mission : assurer la survie de l’expédition jusqu’à l’arrivée des secours ou l'élimination totale des menaces.
 
 ### Fonctionnalités clés
-
-> Listez les fonctionnalités clés du jeu.
 
 - PvE Coopératif asymétrique (3-5 joueurs).
 - Défense d’objectifs (caissons de cryogénisation).
@@ -133,15 +136,6 @@ La coordination est nécessaire pour gérer les menaces et protéger les objecti
 | Support    | Revive de coéquipier           | Heal de zone (rayon)                     | SMG                |
 
 ### Boucle de gameplay
-
-> Objectifs : quels sont les objectifs à court/long terme des joueurs ?
->
-> Boucle de base : que font les différents joueurs en permanence ?
->
-> Progression : est-ce qu’un joueur peut s’améliorer ? Si oui, comment peut-il
-> s’améliorer et comment cette progression affecte la boucle de base ?
-> 
-> Expérience voulue pour les joueurs : quelles expériences voulez-vous offrir aux joueurs ?
 
 Boucle de base : système de vagues
 
@@ -292,8 +286,6 @@ Voir [Annexes](#annexes).
 
 ## Niveaux
 
-> Présentez la structure du/des niveau(x) de jeu : layout, spawn points, dangers, éléments dynamiques, etc.
-
 Le niveau est unique : un vaisseau spatial subdivisé en plusieurs zones interconnectées.
 
 ![Layout vaisseau](./Mediatheque/ship_layout.png)
@@ -434,8 +426,6 @@ On veut un HUD minimaliste, pour ne pas trop obstruer la vue.
 
 ## Contrôles
 
-> Expliquez le schéma des entrées (commandes clavier, souris).
-
 On veut garder un schéma classique de FPS, pour rerster intuitif.
 
 On utilisera plusieurs mappings clavier (AZERTY et QWERTY) afin
@@ -453,9 +443,6 @@ d'une majorité de joueurs.
 | Recharger l'arme           | `R`             | `R`             |
 
 ## Ressources artistique et sonore
-
-> Définissez le style visuel et le design sonore. Vous devez avoir les droits aux assets
-> (gratuits, payants ou créés par vous). Donnez des liens vers les assets utilisés si possible.
 
 ### Style visuel
 
@@ -484,8 +471,6 @@ sur les textures du vaisseau.
 Le son est spatialisé, et plus ou moins intense en fonction de la distance.
 
 #### Actif
-
-> HUD, objets, armes, ennemis...
 
 - Menus
   - Clicks
@@ -549,9 +534,6 @@ Inspirations:
 
 ## Roadmap
 
-> Décrivez sommairement un découpage en 4 Sprints. Les livrables attendus à 
-> la fin de chaque Sprint ainsi que les risques anticipés.
-
 ### Sprint 1 - Prototype
 
 **Livrables:**
@@ -606,9 +588,6 @@ Inspirations:
 **Risques:** Bugs multijoueur, équilibrage gameplay
 
 ## Annexes
-
-> Tout élément intéressant pour le design du jeu qui ne rentre pas 
-> dans les catégories ci-dessus.
 
 ### Ennemis
 
