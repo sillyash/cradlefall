@@ -58,7 +58,8 @@
     - [Sprint 2 - Gameplay central](#sprint-2---gameplay-central)
     - [Sprint 3 - Gameplay extensif](#sprint-3---gameplay-extensif)
     - [Sprint 4 - Integration & équilibrage](#sprint-4---integration--équilibrage)
-  - [Annexes (si nécessaire)](#annexes-si-nécessaire)
+  - [Annexes](#annexes)
+    - [Ennemis](#ennemis-1)
 
 <!-- /TOC -->
 
@@ -287,9 +288,7 @@ Couleurs:
 - Violet
 - Rouge
 
-![Ennemis verts](./Mediatheque/enemies_green.png)
-![Ennemis violets](./Mediatheque/enemies_purple.png)
-![Ennemis rouges](./Mediatheque/enemies_red.png)
+Voir [Annexes](#annexes).
 
 ## Niveaux
 
@@ -606,7 +605,14 @@ Inspirations:
 
 **Risques:** Bugs multijoueur, équilibrage gameplay
 
-## Annexes (si nécessaire)
+## Annexes
 
 > Tout élément intéressant pour le design du jeu qui ne rentre pas 
 > dans les catégories ci-dessus.
+
+### Ennemis
+
+![Ennemis bleus](./Mediatheque/enemies_blue.png)
+![Ennemis verts](./Mediatheque/enemies_green.png)
+![Ennemis violets](./Mediatheque/enemies_purple.png)
+![Ennemis rouges](./Mediatheque/enemies_red.png)
