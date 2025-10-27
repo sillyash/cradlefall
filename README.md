@@ -149,6 +149,16 @@ Boucle de base : système de vagues
   - Helldivers (pression cumulative et priorisation des menaces).
   - Among Us (coopération, modules vaisseau).
 
+Un motif prédéterminé d'environ 5-6 vagues serviront de bases sur laquelle on boucle.
+Pour éviter la répétition et améliorer la réjouabilité, toutes les vagues contiennent une part
+importante d'aléatoire (placement et nombre d'ennemis, dysfonctionnement des [modules](#modules-vaisseau), durée, etc.).
+
+Ainsi, même si les vagues sont basées sur le même schéma, elles ne se ressemblent pas.
+
+Plus le nombre de vagues augmente, plus la part d'évenements aléatoires augmente et plus les alien
+arrivent en nombre. De plus, les aliens pourront avoir différentes déclinaisons selon leur puissance
+afin d'ajouter de la variété et de la difficulté entre les vagues. 
+
 Au bout de 20-30 vagues, on peut affronter une vague finale plus difficile, avec un boss alien,
 l'organisme pondant les œufs dans le vaisseau.
 
@@ -595,3 +605,11 @@ Inspirations:
 ![Ennemis verts](./Mediatheque/enemies_green.png)
 ![Ennemis violets](./Mediatheque/enemies_purple.png)
 ![Ennemis rouges](./Mediatheque/enemies_red.png)
+
+### Joueurs
+
+![Joueurs](./Mediatheque/player.png)
+
+### Map
+
+![Niveau](./Mediatheque/ship_layout.png)
