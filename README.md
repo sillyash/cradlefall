@@ -149,11 +149,15 @@ Boucle de base : système de vagues
   - Helldivers (pression cumulative et priorisation des menaces).
   - Among Us (coopération, modules vaisseau).
 
-Un motif prédéterminé d'environ 5-6 vagues serviront de bases sur laquelle on boucle. Pour éviter la répétition et améliorer la réjouabilité. Toutes les vagues contiennent une part importante d'aléatoire (Placement et nombre des montres, dysfonctionnement des modules, durée etc...).  Ainsi, même si les vagues sont basées sur le même schéma, elles ne se ressemblent pas.
+Un motif prédéterminé d'environ 5-6 vagues serviront de bases sur laquelle on boucle.
+Pour éviter la répétition et améliorer la réjouabilité, toutes les vagues contiennent une part
+importante d'aléatoire (placement et nombre d'ennemis, dysfonctionnement des [modules](#modules-vaisseau), durée, etc.).
 
-Plus le nombre de vagues augmente, plus la part d'évenements aléatoires augmente et plus les alien arrivent en nombre. De plus, les aliens pourront prendre différentes couleurs selon leur puissance pour ajouter de la variété et de la difficulté entre les vagues. 
+Ainsi, même si les vagues sont basées sur le même schéma, elles ne se ressemblent pas.
 
-Si un module de rôle dysfonctionne, les joueurs ne bénéficierons plus de ses effets. Leur réparation est conseillée mais pas obligatoire. Pour les modules génériques en revanche (ex: panne des générateur d'oxygène), un minuteur se lance, contraignant les joueurs à le réparer dans le temps impartie, sous peine de perdre.
+Plus le nombre de vagues augmente, plus la part d'évenements aléatoires augmente et plus les alien
+arrivent en nombre. De plus, les aliens pourront avoir différentes déclinaisons selon leur puissance
+afin d'ajouter de la variété et de la difficulté entre les vagues. 
 
 Au bout de 20-30 vagues, on peut affronter une vague finale plus difficile, avec un boss alien,
 l'organisme pondant les œufs dans le vaisseau.
