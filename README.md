@@ -542,20 +542,58 @@ Inspirations:
 - [Risk of Rain 2](https://open.spotify.com/album/3eFWXLdogrCHW11f8ZQLoa?si=qcOLxpROQHWQiAe3Er4ocw)
 - [Furi](https://open.spotify.com/album/1NCt4W6d8fNGkBQAjXDVrA?si=QWs6100-QWqb-LQ3UCWhDA)
 
+## Minimum Viable Product
+
+### Mouvement de base
+
+- Déplacement
+- Sprint
+- Saut
+- Gravité
+
+### Structure du vaisseau
+
+- Layout principal
+- 2 à 3 pièces reliées entre elles
+
+### Système de tir basique
+
+- 1 arme
+- Prefab "projectile" pour réutilisation ultérieure
+- Visée, tir, dégâts
+
+### Ennemis
+
+- 1 type d'ennemi
+- Maxilliarus inferiarus
+- Fonctionnel avec IA pour le déplacement
+- Dégâts
+- Spawn et décès
+
+### Modules vaisseau
+
+- 1 module vaisseau
+- Générateur électrique
+
+### Interface
+
+- Menu principal et de pause sans les options / paramètres
+- HUD basique
+  - PV du joueur
+  - PV de l'objectif de défense
+
+### Boucle de gameplay
+
+- Système de vagues d'ennemis
+- 3-4 vagues d'ennemis et fin de partie
+- Objectif de défense (caissons cryogéniques)
+
 ## Roadmap
 
 ### Sprint 1 - Prototype
 
 **Livrables:**
-- Mouvement de base (déplacement, sprint, saut)
-- Structure du vaisseau (layout principal, 3-4 zones)
-- Système de vagues d'ennemis
-- Système de tir basique
-- 1 type d'ennemi fonctionnel
-- 1 module vaisseau (générateur électrique)
-- Objectif de défense (caissons cryogéniques)
-- Début de l'interface (HUD basique)
-- 3-4 vagues d'ennemis et fin de partie
+- [MVP](#minimum-viable-product)
 
 **Risques:** Mécaniques de déplacement, IA ennemis
 
