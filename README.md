@@ -19,56 +19,66 @@ Auteur.e.s:
 <!-- TOC -->
 
 - [CRADLEFALL](#cradlefall)
-  - [Sommaire](#sommaire)
-  - [Concept principal](#concept-principal)
-  - [Présentation du jeu](#présentation-du-jeu)
-    - [Genre, univers, thème](#genre-univers-thème)
-    - [Histoire](#histoire)
-    - [Fonctionnalités clés](#fonctionnalités-clés)
-    - [Conception multijoueur](#conception-multijoueur)
-      - [Rôles](#rôles)
-    - [Boucle de gameplay](#boucle-de-gameplay)
-  - [Gameplay](#gameplay)
-    - [Déplacement](#déplacement)
-    - [Physique](#physique)
-    - [Combat](#combat)
-      - [Armes](#armes)
-    - [Ennemis](#ennemis)
-      - [Types](#types)
-      - [Déclinaisons](#déclinaisons)
-  - [Niveaux](#niveaux)
-    - [Zones](#zones)
-      - [Pont](#pont)
-      - [Salle cryotechnique](#salle-cryotechnique)
-      - [Salle des machines](#salle-des-machines)
-      - [Cantine](#cantine)
-      - [Armurerie](#armurerie)
-      - [Infirmerie](#infirmerie)
-      - [Salle de communications](#salle-de-communications)
-      - [Salle des commandes](#salle-des-commandes)
-      - [Générateur](#générateur)
-    - [Modules vaisseau](#modules-vaisseau)
-      - [Modules génériques](#modules-génériques)
-      - [Modules de rôle](#modules-de-rôle)
-  - [Interface](#interface)
-    - [Menu principal](#menu-principal)
-    - [Lobby](#lobby)
-    - [En jeu](#en-jeu)
-      - [HUD](#hud)
-      - [Menu pause](#menu-pause)
-  - [Contrôles](#contrôles)
-  - [Ressources artistique et sonore](#ressources-artistique-et-sonore)
-    - [Style visuel](#style-visuel)
-    - [Design sonore](#design-sonore)
-      - [Actif](#actif)
-      - [Passif](#passif)
-  - [Roadmap](#roadmap)
-    - [Sprint 1 - Prototype](#sprint-1---prototype)
-    - [Sprint 2 - Gameplay central](#sprint-2---gameplay-central)
-    - [Sprint 3 - Gameplay extensif](#sprint-3---gameplay-extensif)
-    - [Sprint 4 - Integration & équilibrage](#sprint-4---integration--équilibrage)
-  - [Annexes](#annexes)
-    - [Ennemis](#ennemis-1)
+   * [Sommaire](#sommaire)
+   * [Concept principal](#concept-principal)
+   * [Présentation du jeu](#présentation-du-jeu)
+      + [Genre, univers, thème](#genre-univers-thème)
+      + [Histoire](#histoire)
+      + [Fonctionnalités clés](#fonctionnalités-clés)
+      + [Conception multijoueur](#conception-multijoueur)
+         - [Rôles](#rôles)
+      + [Boucle de gameplay](#boucle-de-gameplay)
+   * [Gameplay](#gameplay)
+      + [Déplacement](#déplacement)
+      + [Physique](#physique)
+      + [Combat](#combat)
+         - [Armes](#armes)
+      + [Ennemis](#ennemis)
+         - [Types](#types)
+         - [Déclinaisons](#déclinaisons)
+   * [Niveaux](#niveaux)
+      + [Zones](#zones)
+         - [Pont](#pont)
+         - [Salle cryotechnique](#salle-cryotechnique)
+         - [Salle des machines](#salle-des-machines)
+         - [Cantine](#cantine)
+         - [Armurerie](#armurerie)
+         - [Infirmerie](#infirmerie)
+         - [Salle de communications](#salle-de-communications)
+         - [Salle des commandes](#salle-des-commandes)
+         - [Générateur](#générateur)
+      + [Modules vaisseau](#modules-vaisseau)
+         - [Modules génériques](#modules-génériques)
+         - [Modules de rôle](#modules-de-rôle)
+   * [Interface](#interface)
+      + [Menu principal](#menu-principal)
+      + [Lobby](#lobby)
+      + [En jeu](#en-jeu)
+         - [HUD](#hud)
+         - [Menu pause](#menu-pause)
+   * [Contrôles](#contrôles)
+   * [Ressources artistique et sonore](#ressources-artistique-et-sonore)
+      + [Style visuel](#style-visuel)
+      + [Design sonore](#design-sonore)
+         - [Actif](#actif)
+         - [Passif](#passif)
+   * [Minimum Viable Product](#minimum-viable-product)
+      + [Mouvement de base](#mouvement-de-base)
+      + [Structure du vaisseau](#structure-du-vaisseau)
+      + [Système de tir basique](#système-de-tir-basique)
+      + [Ennemis](#ennemis-1)
+      + [Modules vaisseau](#modules-vaisseau-1)
+      + [Interface](#interface-1)
+      + [Boucle de gameplay](#boucle-de-gameplay-1)
+   * [Roadmap](#roadmap)
+      + [Sprint 1 - Prototype](#sprint-1-prototype)
+      + [Sprint 2 - Gameplay central](#sprint-2-gameplay-central)
+      + [Sprint 3 - Gameplay extensif](#sprint-3-gameplay-extensif)
+      + [Sprint 4 - Integration & équilibrage](#sprint-4-integration-équilibrage)
+   * [Annexes](#annexes)
+      + [Ennemis](#ennemis-2)
+      + [Joueurs](#joueurs)
+      + [Map](#map)
 
 <!-- /TOC -->
 
@@ -93,12 +103,12 @@ dont l’objectif est de défendre des objectifs contre des créatures extraterr
 Une expédition humaine traverse l’espace à bord du vaisseau **CRADLE IV**, en route vers un système planétaire,
 _Solaris_ récemment découvert avec des candidats prometteurs pour une planète habitable.
 
-L’équipage humain, placé en cryogénisation, (_cryostasis_) pour le long voyage, est surveillé par une équipe de robots 
+L’équipage humain, placé en cryogénisation, pour le long voyage, est surveillé par une équipe de robots 
 spécialisés, chargés de la maintenance et de la sécurité du vaisseau.
 
 Les humains, arrivés sur une première planète de _Solaris_, repartent avec des échantillons peu prometteurs.
 Ils repartent alors bredouilles et doivent aller jusqu'à la prochaine planète, à 8 mois de distance, et sont 
-donc replongés en _cryostasis_.
+donc replongés en cryogénisation.
 
 Cependant, lors de leur précédent atterrissage, des formes de vie extraterrestres hostiles se sont infiltrées à bord: un organisme semble pondre des œufs dans la ventilation du vaisseau, libérant des créatures agressives.
 
@@ -124,16 +134,16 @@ Leur mission : assurer la survie de l’expédition jusqu’à l’arrivée des 
 
 #### Rôles
 
-Rôles distincts (DPS, Tank, Soutien, Support) — chacun disposant de capacités et d’objectifs propres.
+Rôles distincts (DPS, Tank, Technicien, Soutien) — chacun disposant de capacités et d’objectifs propres.
 
 La coordination est nécessaire pour gérer les menaces et protéger les objectifs.
 
-| Rôle       | Capacité                       | Passif(s)                                | Arme               | 
-|:----------:|:-------------------------------|:-----------------------------------------|:-------------------|
-| DPS        | Dégâts de zone + Knockback     | Vitesse de déplacement                   | Railgun            |
-| Tank       | Bouclier                       | Plus de HP                               | Shotgun            |
-| Technicien | Tourelle                       | Répare les modules du vaisseau plus vite | Plasma gun         |
-| Support    | Revive de coéquipier           | Heal de zone (rayon)                     | SMG                |
+| Rôle       | Capacité                       | Passif(s)                                | Arme                       | 
+|:----------:|:-------------------------------|:-----------------------------------------|:---------------------------|
+| DPS        | Dégâts de zone + Repoussement  | Vitesse de déplacement                   | Canon laser                |
+| Tank       | Bouclier                       | Plus de PV                               | Fusil à Pompe              |
+| Technicien | Tourelle                       | Répare les modules du vaisseau plus vite | Canon à Plasma             |
+| Soutien    | Réanimation de coéquipier      | Soin de zone (rayon)                     | PM (Pistolet-Mitrailleur)  |
 
 ### Boucle de gameplay
 
@@ -141,7 +151,7 @@ Boucle de base : système de vagues
 
 - L'objectif central est de protéger les caissons de cryogénisation du vaisseau.
 - En découle les objectifs secondaires: la protection et réparation de modules du vaisseau affectant les joueurs (énergie, soin, lumière...).
-- Pour cela on a une complémentarité des rôles (DPS, Tank, Soutien, Support), afin de survivre le plus longtemps possible.
+- Pour cela on a une complémentarité des rôles (DPS, Tank, Technicien, Soutien), afin de survivre le plus longtemps possible.
 - Atmosphère tendue : on veut faire sentir la fragilité de la position tout en valorisant la coordination.
 - Entre les vagues, les joueurs pourront se soigner, se provisioner et les joueurs précédemment décédés se verront respawn.
 - Inspirations :
@@ -214,16 +224,16 @@ Les capacités se rechargent avec le temps et lors d'une action spécifique à c
 - DPS → faire des kills
 - Tank → absorber des dégâts
 - Technicien → réparer un module
-- Support → soigner un allié jusqu'à ses PV max
+- Soutien → soigner un allié jusqu'à ses PV max
 
 #### Armes
 
-| Arme               | Projectile          | Débit            | Taille de projectile  | Vitesse du proj. | Dégâts du proj. | 
-|:-------------------|:--------------------|:----------------:|:----------------------|:----------------:|:---------------:|
-| Railgun            | Faisceau fin        | Haute fréquence  | Petit, visée précise  | ++               | ++              |
-| Shotgun            | Plusieurs faisceaux | Basse fréquance  | Petit, visée large    | -                | +               |
-| Plasma gun         | Orbe de plasma      | Basse fréquence  | Grand, visée moyenne  | --               | -               |
-| SMG                | Petites orbes       | Haute fréquence  | Petit, visée précise  | +                | --              |
+| Arme                      | Projectile          | Débit            | Taille de projectile  | Vitesse du proj. | Dégâts du proj. | 
+|:--------------------------|:--------------------|:----------------:|:----------------------|:----------------:|:---------------:|
+| Canon laser               | Faisceau fin        | Haute fréquence  | Petit, visée précise  | ++               | ++              |
+| Fusil à Pompe             | Plusieurs faisceaux | Basse fréquance  | Petit, visée large    | -                | +               |
+| Canon à Plasma            | Orbe de plasma      | Basse fréquence  | Grand, visée moyenne  | --               | -               |
+| PM (Pistolet-Mitrailleur) | Petites orbes       | Haute fréquence  | Petit, visée précise  | +                | --              |
 
 ### Ennemis
 
@@ -403,7 +413,7 @@ Le niveau est unique : un vaisseau spatial subdivisé en plusieurs zones interco
 ### Lobby
 
 - Liste des joueurs connectés
-- Choisir son rôle (DPS, Tank, Soutien, Support)
+- Choisir son rôle (DPS, Tank, Technicien, Soutien)
 - Choisir la difficulté (Facile, Normal, Difficile)
 - Afficher les règles du jeu
 - Prêt / Non prêt
@@ -423,8 +433,8 @@ On veut un HUD minimaliste, pour ne pas trop obstruer la vue.
 - En haut
   - Indicateur de vague (No. de vague, nombre d'ennemis restants, temps avant la prochaine vague)
   - Score / statistiques (nombre de kills, assistances, etc.)
-  - HP des objectifs (caissons de cryogénisation, modules du vaisseau)
-  - HP des alliés
+  - PV des objectifs (caissons de cryogénisation, modules du vaisseau)
+  - PV des alliés
 - Autres
   - Notifications contextuelles (ex : "Appuyez sur E pour interagir")
 
@@ -542,20 +552,58 @@ Inspirations:
 - [Risk of Rain 2](https://open.spotify.com/album/3eFWXLdogrCHW11f8ZQLoa?si=qcOLxpROQHWQiAe3Er4ocw)
 - [Furi](https://open.spotify.com/album/1NCt4W6d8fNGkBQAjXDVrA?si=QWs6100-QWqb-LQ3UCWhDA)
 
+## Minimum Viable Product
+
+### Mouvement de base
+
+- Déplacement
+- Sprint
+- Saut
+- Gravité
+
+### Structure du vaisseau
+
+- Layout principal
+- 2 à 3 pièces reliées entre elles
+
+### Système de tir basique
+
+- 1 arme
+- Prefab "projectile" pour réutilisation ultérieure
+- Visée, tir, dégâts
+
+### Ennemis
+
+- 1 type d'ennemi
+- Maxilliarus inferiarus
+- Fonctionnel avec IA pour le déplacement
+- Dégâts
+- Spawn et décès
+
+### Modules vaisseau
+
+- 1 module vaisseau
+- Générateur électrique
+
+### Interface
+
+- Menu principal et de pause sans les options / paramètres
+- HUD basique
+  - PV du joueur
+  - PV de l'objectif de défense
+
+### Boucle de gameplay
+
+- Système de vagues d'ennemis
+- 3-4 vagues d'ennemis et fin de partie
+- Objectif de défense (caissons cryogéniques)
+
 ## Roadmap
 
 ### Sprint 1 - Prototype
 
 **Livrables:**
-- Mouvement de base (déplacement, sprint, saut)
-- Structure du vaisseau (layout principal, 3-4 zones)
-- Système de vagues d'ennemis
-- Système de tir basique
-- 1 type d'ennemi fonctionnel
-- 1 module vaisseau (générateur électrique)
-- Objectif de défense (caissons cryogéniques)
-- Début de l'interface (HUD basique)
-- 3-4 vagues d'ennemis et fin de partie
+- [MVP](#minimum-viable-product)
 
 **Risques:** Mécaniques de déplacement, IA ennemis
 
