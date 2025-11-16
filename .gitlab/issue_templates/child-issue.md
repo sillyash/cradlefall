@@ -1,6 +1,4 @@
-# Titre
-
-Description détaillée de l'issue enfant ou issue normale.
+Description détaillée et concise de l'issue enfant ou issue normale.
 
 ## Critères d'acceptation
 
