@@ -5,6 +5,13 @@ public class BaseModule : MonoBehaviour
     [SerializeField] private ModuleBehavior behaviour;
     private bool broken = false;
 
+    public void Start()
+    {
+        // TODO Debug TO REMOVE
+        // Implémenter ici (ou dans une meilleure func) la logique de casse des modules (petites chances chaque sec par exemple)
+        Invoke(nameof(Break), 3f);
+    }
+
     public void Break()
     {
         if (broken) return;
