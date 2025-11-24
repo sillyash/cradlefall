@@ -12,6 +12,12 @@ public class PlayerController : PlayerMovement
     void Start()
     {
         characterController = GetComponent<CharacterController>();
+        if (!movementSettings)
+        {
+            Debug.LogError("Le script CharacterController du prefab Joueur n’a pas de ScriptableObject de mouvement assigné.");
+            enabled = false;
+            return;
+        }
     }
 
     void Update()
