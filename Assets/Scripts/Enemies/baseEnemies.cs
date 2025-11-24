@@ -5,19 +5,11 @@ public class baseEnemies : MonoBehaviour
     // [SerializeField] private EnemiesBehavior behaviour;
     [SerializeField] private EnemiesStats stats;
 
-    [SerializeField] private float health;
-    [SerializeField] private float attackRange;
-    [SerializeField] private float moveSpeed;
-    [SerializeField] private float damage;
-    [SerializeField] private float attackCooldown;
+    private float health;
 
     void Start()
     {
         health = stats.health;
-        attackRange = stats.attackRange;
-        moveSpeed = stats.moveSpeed;
-        damage = stats.damage;
-        attackCooldown = stats.attackCooldown;
     }
 
     void Update()
