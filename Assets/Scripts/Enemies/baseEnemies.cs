@@ -9,6 +9,19 @@ public class baseEnemies : MonoBehaviour
 
     void Start()
     {
+        if (!stats)
+        {
+            Debug.LogError("Le script baseEnemies du prefab Enemy n’a pas de ScriptableObject de statistiques assigné.");
+            enabled = false;
+            return;
+        }
+/*        if (!behaviour)
+        {
+            Debug.LogError("Le script baseEnemies du prefab Enemy n’a pas de ScriptableObject de behaviour assigné.");
+            enabled = false;
+            return;
+        }*/
+
         health = stats.health;
     }
 
