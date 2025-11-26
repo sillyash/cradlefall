@@ -33,9 +33,9 @@ public class baseEnemies : MonoBehaviour
         }
     }
 
-    public void TakeDammage(float dammage)
+    public void TakeDamage(float damage)
     {
-        health -= dammage;
+        health -= damage;
     }
 
     public void Die()
