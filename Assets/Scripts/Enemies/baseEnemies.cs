@@ -10,8 +10,7 @@ public class baseEnemies : MonoBehaviour
     public Transform Target;
     public float AttackDistance;
 
-    private UnityEngine.AI.NavMeshAgent m_Agent;
-    private float m_Distance;
+    private NavMeshAgent m_Agent;
 
     private float health;
 
@@ -40,6 +39,9 @@ public class baseEnemies : MonoBehaviour
         if ( health <= 0 )
         {
             Die();
+        } else
+        {
+            TrackPlayer();
         }
     }
 
@@ -51,5 +53,22 @@ public class baseEnemies : MonoBehaviour
     public void Die()
     {
         Destroy(gameObject);
+    }
+
+    public void TrackPlayer()
+    {
+        if (Target != null)
+        {
+            float distance = Vector3.Distance(transform.position, Target.position);
+
+            if (distance > AttackDistance)
+            {
+                m_Agent.SetDestination(Target.position);
+            }
+            else
+            {
+                m_Agent.ResetPath();
+            }
+        }
     }
 }
