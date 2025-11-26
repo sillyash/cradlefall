@@ -1,9 +1,18 @@
 using UnityEngine;
+using UnityEngine.AI;
 
-public class baseEnemies : MonoBehaviour
+[RequireComponent(typeof(NavMeshAgent))]
+    public class baseEnemies : MonoBehaviour
 {
     // [SerializeField] private EnemiesBehavior behaviour;
     [SerializeField] private EnemiesStats stats;
+
+    public Transform Target;
+    public float AttackDistance;
+
+    private NavMeshAgent m_Agent;
+    private Animator m_Animator;
+    private float m_Distance;
 
     private float health;
 
