@@ -74,6 +74,7 @@ public class baseEnemies : MonoBehaviour
             else
             {
                 m_Agent.isStopped = true;
+                // behaviour.Attack();
             }
         }
     }
