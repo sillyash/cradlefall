@@ -69,10 +69,11 @@ public class baseEnemies : MonoBehaviour
             if (distance > stats.attackRange)
             {
                 m_Agent.SetDestination(Target.position);
+                m_Agent.isStopped = false;
             }
             else
             {
-                m_Agent.ResetPath();
+                m_Agent.isStopped = true;
             }
         }
     }
