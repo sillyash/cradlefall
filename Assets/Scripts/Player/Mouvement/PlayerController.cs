@@ -28,7 +28,7 @@ public class PlayerController : PlayerMovement
         ApplyFinalMovement();
 
         // --- TODO Debug TO REMOVE ---
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetMouseButtonDown(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
