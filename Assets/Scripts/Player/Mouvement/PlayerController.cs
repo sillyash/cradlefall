@@ -26,6 +26,29 @@ public class PlayerController : PlayerMovement
         HandleJump();
         ApplyGravity();
         ApplyFinalMovement();
+
+        // --- TODO Debug TO REMOVE ---
+        if (Input.GetMouseButtonDown(0))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            // Dessine le raycast en vert pendant 1 seconde
+            Debug.DrawRay(ray.origin, ray.direction * 100f, Color.green, 1f);
+
+            if (Physics.Raycast(ray, out hit))
+            {
+                Debug.Log("Found " + hit.collider.gameObject + " at distance: " + hit.distance);
+
+                baseEnemies enemy = hit.collider.GetComponent<baseEnemies>();
+                if (enemy != null)
+                    enemy.TakeDamage(5);
+            }
+            else
+            {
+                Debug.Log("Nothing found");
+            }
+        }
     }
 
 

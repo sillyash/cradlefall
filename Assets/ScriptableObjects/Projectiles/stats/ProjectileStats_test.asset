@@ -16,25 +16,7 @@ MonoBehaviour:
   damage: 25
   launchCurve:
     serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: -0.0071411133
-      value: 0
-      inSlope: 1.0103235
-      outSlope: 1.0103235
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.06711823
-    - serializedVersion: 3
-      time: 7.013305
-      value: 6.9545093
-      inSlope: 2.8194222
-      outSlope: 2.8194222
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.040116217
-      outWeight: 0
+    m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
