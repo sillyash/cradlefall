@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
-    public class baseEnemies : MonoBehaviour
+public class baseEnemies : MonoBehaviour
 {
     // [SerializeField] private EnemiesBehavior behaviour;
     [SerializeField] private EnemiesStats stats;
@@ -10,23 +10,24 @@ using UnityEngine.AI;
     public Transform Target;
     public float AttackDistance;
 
-    private NavMeshAgent m_Agent;
-    private Animator m_Animator;
+    private UnityEngine.AI.NavMeshAgent m_Agent;
     private float m_Distance;
 
     private float health;
 
     void Start()
     {
+        m_Agent = GetComponent<NavMeshAgent>();
+
         if (!stats)
         {
-            Debug.LogError("Le script baseEnemies du prefab Enemy n’a pas de ScriptableObject de statistiques assigné.");
+            Debug.LogError("Le script baseEnemies du prefab Enemy nï¿½a pas de ScriptableObject de statistiques assignï¿½.");
             enabled = false;
             return;
         }
 /*        if (!behaviour)
         {
-            Debug.LogError("Le script baseEnemies du prefab Enemy n’a pas de ScriptableObject de behaviour assigné.");
+            Debug.LogError("Le script baseEnemies du prefab Enemy nï¿½a pas de ScriptableObject de behaviour assignï¿½.");
             enabled = false;
             return;
         }*/
