@@ -30,6 +30,12 @@ public class baseEnemies : MonoBehaviour
             enabled = false;
             return;
         }*/
+        if (!Target)
+        {
+            Debug.LogError("Le script baseEnemies du prefab Enemy n'a pas de Target assigné.");
+            enabled = false;
+            return;
+        }
 
         health = stats.health;
     }
