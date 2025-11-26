@@ -28,5 +28,27 @@ public class ProjectileBase : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         behavior.HandleCollision(other, stats.damage);
+        Destroy(gameObject);
+    }
+
+
+    // Fixed update is basically update with delta time
+    void FixedUpdate()
+    {
+        UpdateRotation();
+    }
+    void UpdateRotation()
+    {
+        // Ignore rotation if velocity is too small
+        if (rb.linearVelocity.sqrMagnitude > 0.0001f)
+        {
+            Quaternion targetRot = Quaternion.LookRotation(rb.linearVelocity);
+            rb.MoveRotation(targetRot);
+        }
+    }
+
+    public void setDirection(Vector3 dir)
+    {
+        direction = dir;
     }
 }
