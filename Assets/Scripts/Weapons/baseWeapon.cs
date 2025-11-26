@@ -5,9 +5,11 @@ public class BaseWeapon : MonoBehaviour
 {
     [SerializeField] private WeaponBehavior behavior;
     [SerializeField] private WeaponStats stats;
+    [SerializeField] private ProjectileBase projectile;
+    
+    private int ammoCount;
+    private bool isReadyToShoot = true;
 
-    public int ammoCount;
-    public bool isReadyToShoot = true;
 
     void Start()
     {
@@ -24,11 +26,11 @@ public class BaseWeapon : MonoBehaviour
 
     public void Fire()
     {
-        behavior.OnFire();
+        behavior.OnFire(projectile, transform.position);
         ammoCount--;
         isReadyToShoot = false;
         StartCoroutine(Cooldown(stats.shootingCooldown));
-        isReadyToShoot = true;
+        isReadyToShoot = (ammoCount > 0);
     }
 
     IEnumerator Cooldown(float time)

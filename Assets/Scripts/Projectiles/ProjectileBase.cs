@@ -44,7 +44,6 @@ public class ProjectileBase : MonoBehaviour
     {
         UpdateRotation();
     }
-
     void UpdateRotation()
     {
         // Ignore rotation if velocity is too small
@@ -53,5 +52,10 @@ public class ProjectileBase : MonoBehaviour
             Quaternion targetRot = Quaternion.LookRotation(rb.linearVelocity);
             rb.MoveRotation(targetRot);
         }
+    }
+
+    public void setDirection(Vector3 dir)
+    {
+        direction = dir;
     }
 }
