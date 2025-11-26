@@ -8,7 +8,6 @@ public class baseEnemies : MonoBehaviour
     [SerializeField] private EnemiesStats stats;
 
     public Transform Target;
-    public float AttackDistance;
 
     private NavMeshAgent m_Agent;
 
@@ -67,7 +66,7 @@ public class baseEnemies : MonoBehaviour
         {
             float distance = Vector3.Distance(transform.position, Target.position);
 
-            if (distance > AttackDistance)
+            if (distance > stats.attackRange)
             {
                 m_Agent.SetDestination(Target.position);
             }
