@@ -1,5 +1,6 @@
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
+using static UnityEngine.Rendering.DebugUI.Table;
 
 
 public class ProjectileBase : MonoBehaviour
@@ -20,7 +21,13 @@ public class ProjectileBase : MonoBehaviour
             Debug.Log("No behavior assigned");
         }
 
+        if (stats == null)
+        {
+            Debug.Log("No stats assigned");
+        }
+
         rb = GetComponent<Rigidbody>();
+
         rb.linearVelocity = direction.normalized * stats.speed;
         //rb.AddForce(direction.normalized * speed, ForceMode.Impulse);
     }
@@ -28,5 +35,23 @@ public class ProjectileBase : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         behavior.HandleCollision(other, stats.damage);
+        Destroy(gameObject);
+    }
+
+
+    // Fixed update is basically update with delta time
+    void FixedUpdate()
+    {
+        UpdateRotation();
+    }
+
+    void UpdateRotation()
+    {
+        // Ignore rotation if velocity is too small
+        if (rb.linearVelocity.sqrMagnitude > 0.0001f)
+        {
+            Quaternion targetRot = Quaternion.LookRotation(rb.linearVelocity);
+            rb.MoveRotation(targetRot);
+        }
     }
 }
