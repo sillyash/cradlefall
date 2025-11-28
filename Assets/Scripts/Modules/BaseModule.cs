@@ -3,7 +3,7 @@ using UnityEngine;
 public class BaseModule : MonoBehaviour
 {
     [SerializeField] private ModuleBehavior behaviour;
-    [SerializeField] private ModuleStats stats;
+    public ModuleStats stats;
 
     private bool broken = false;
 
