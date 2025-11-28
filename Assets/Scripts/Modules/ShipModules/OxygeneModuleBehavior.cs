@@ -1,12 +1,12 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Modules/Behaviours/Oxygene")]
-public class OxygeneModuleBehavior : ModuleBehavior
+[CreateAssetMenu(menuName = "Modules/Behaviours/Timer")]
+public class TimerModuleBehavior : ModuleBehavior
 {
     public override void OnBreak(BaseModule module)
     {
         // TODO
-        Debug.Log("Module Électricité cassé !");
+        Debug.Log("Module ï¿½lectricitï¿½ cassï¿½ !");
     }
 
     public override void OnRepair(BaseModule module)
