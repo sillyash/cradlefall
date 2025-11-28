@@ -33,6 +33,7 @@ public class BaseModule : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        if (broken) return;
         health -= damage;
         if ( health <= 0 )
         {
