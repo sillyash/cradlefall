@@ -52,6 +52,7 @@ public class BaseModule : MonoBehaviour
     {
         if (!broken) return;
         broken = false;
+        health = stats.health;
         behaviour.OnRepair(this);
     }
 }
