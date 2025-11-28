@@ -34,9 +34,16 @@ public class TimerModuleBehavior : ModuleBehavior
                 yield return null;
             }
 
-            isTimerRunning = false;
-            Debug.Log("Game Over");
-            // TODO implémenter un gameOver
+            if (isTimerRunning)
+            {
+                isTimerRunning = false;
+                Debug.Log("Game Over");
+                // TODO implémenter un gameOver
+            } 
+            else
+            {
+                yield break;
+            }
         }
         else
         {
