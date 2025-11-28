@@ -17,4 +17,19 @@ public class InteractionManager : MonoBehaviour
             Instance = this;
         }
     }
+
+    private void Update()
+    {
+        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit))
+        {
+            GameObject objectHitByRaycast = hit.transform.gameObject;
+
+            if (objectHitByRaycast.GetComponent<BaseModule>())
+            {
+            }
+        }
+    }
 }
