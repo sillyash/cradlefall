@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class basePlayer : MonoBehaviour
 {
-    [SerializeField] private EnemiesStats stats;
+    [SerializeField] private PlayerStats stats;
 
     void Start()
     {
