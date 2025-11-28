@@ -38,6 +38,7 @@ public class InteractionManager : MonoBehaviour
             {
                 BaseModule module = objectHitByRaycast.GetComponent<BaseModule>();
 
+                if (!module.broken) return;
                 if (Input.GetKey(KeyCode.E))
                 {
                     holdTimer += Time.deltaTime;
