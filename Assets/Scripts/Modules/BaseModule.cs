@@ -29,9 +29,8 @@ public class BaseModule : MonoBehaviour
     public void Update()
     {
         float chancePerFrame = Time.deltaTime / stats.breakChance;
-        if (Random.value < chancePerFrame)
+        if (!broken && Random.value < chancePerFrame)
         {
-            Debug.Log("Broken");
             Break();
         }
     }
