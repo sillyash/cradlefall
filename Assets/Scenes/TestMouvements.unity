@@ -336,8 +336,12 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4177113870566407933, guid: b28ade62450434b4baa4b884128bbc86, type: 3}
       propertyPath: m_Name
-      value: "ModuleElectricit\xE9"
+      value: "ModuleOxyg\xE8ne"
       objectReference: {fileID: 0}
+    - target: {fileID: 4343781063284117564, guid: b28ade62450434b4baa4b884128bbc86, type: 3}
+      propertyPath: stats
+      value: 
+      objectReference: {fileID: 11400000, guid: 91976936405fb9649be5712338d3551e, type: 2}
     - target: {fileID: 4343781063284117564, guid: b28ade62450434b4baa4b884128bbc86, type: 3}
       propertyPath: behaviour
       value: 
