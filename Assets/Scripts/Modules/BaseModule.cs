@@ -13,12 +13,14 @@ public class BaseModule : MonoBehaviour
         if (!stats)
         {
             enabled = false;
-            Debug.Log($"module = {this.name} n'a pas de stats");
+            Debug.LogError($"module = {this.name} n'a pas de stats");
+            return;
         }
         if (!behaviour)
         {
             enabled = false;
-            Debug.Log($"module = {this.name} n'a pas de behaviour");
+            Debug.LogError($"module = {this.name} n'a pas de behaviour");
+            return;
         }
 
         health = stats.health;
