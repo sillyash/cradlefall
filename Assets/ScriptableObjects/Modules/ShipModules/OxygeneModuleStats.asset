@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   breakChance: 0
-  repairTime: 0
-  timerDuration: 5
+  repairTime: 5
+  timerDuration: 30
