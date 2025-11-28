@@ -1,10 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class InteractionManager : MonoBehaviour
 {
     public static InteractionManager Instance { get; set; }
+    private basePlayer player;
 
     private void Awake()
     {
@@ -18,12 +17,17 @@ public class InteractionManager : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        player = GetComponent<basePlayer>();
+    }
+
     private void Update()
     {
         Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit))
+        if (Physics.Raycast(ray, out hit, player.stats.InteractionRange))
         {
             GameObject objectHitByRaycast = hit.transform.gameObject;
 
