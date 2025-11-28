@@ -5,8 +5,8 @@ public class BaseModule : MonoBehaviour
     [SerializeField] private ModuleBehavior behaviour;
     public ModuleStats stats;
 
-    private bool broken = false;
-    private float health;
+    public bool broken = false;
+    [SerializeField] private float health;
 
     public void Start()
     {
