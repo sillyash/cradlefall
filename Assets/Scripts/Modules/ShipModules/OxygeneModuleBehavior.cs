@@ -1,7 +1,7 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Modules/Behaviours/Electricity")]
-public class ElectricityModuleBehavior : ModuleBehavior
+[CreateAssetMenu(menuName = "Modules/Behaviours/Oxygene")]
+public class OxygeneModuleBehavior : ModuleBehavior
 {
     public override void OnBreak(BaseModule module)
     {
