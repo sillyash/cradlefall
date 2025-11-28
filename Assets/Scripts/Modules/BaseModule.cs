@@ -6,12 +6,36 @@ public class BaseModule : MonoBehaviour
     public ModuleStats stats;
 
     private bool broken = false;
+    private float health;
 
     public void Start()
     {
-        // TODO Debug TO REMOVE
-        // Implémenter ici (ou dans une meilleure func) la logique de casse des modules (petites chances chaque sec par exemple)
-        //Invoke(nameof(Break), 3f);
+        if (!stats)
+        {
+            enabled = false;
+            Debug.Log($"module = {this.name} n'a pas de stats");
+        }
+        if (!behaviour)
+        {
+            enabled = false;
+            Debug.Log($"module = {this.name} n'a pas de behaviour");
+        }
+
+        health = stats.health;
+    }
+
+    public void Update()
+    {
+        
+    }
+
+    public void TakeDamage(float damage)
+    {
+        health -= damage;
+        if ( health <= 0 )
+        {
+            Break();
+        }
     }
 
     public void Break()
