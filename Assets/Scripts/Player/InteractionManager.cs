@@ -5,6 +5,8 @@ public class InteractionManager : MonoBehaviour
     public static InteractionManager Instance { get; set; }
     private basePlayer player;
 
+    private float holdTimer = 0f;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -31,8 +33,25 @@ public class InteractionManager : MonoBehaviour
         {
             GameObject objectHitByRaycast = hit.transform.gameObject;
 
-            if (objectHitByRaycast.GetComponent<BaseModule>())
+            if (objectHitByRaycast.GetComponent<BaseModule>() != null)
+            // interaction avec un module
             {
+                BaseModule module = objectHitByRaycast.GetComponent<BaseModule>();
+
+                if (Input.GetKey(KeyCode.E))
+                {
+                    holdTimer += Time.deltaTime;
+
+                    if (holdTimer >= module.stats.repairTime)
+                    {
+                        module.Repair();
+                        holdTimer = 0f;
+                    }
+                }
+                else
+                {
+                    holdTimer = 0f;
+                }
             }
         }
     }
