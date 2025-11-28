@@ -42,7 +42,7 @@ public class PlayerController : PlayerMovement
 
                 baseEnemies enemy = hit.collider.GetComponent<baseEnemies>();
                 if (enemy != null)
-                    enemy.TakeDammage(5);
+                    enemy.TakeDamage(5);
             }
             else
             {
