@@ -8,14 +8,18 @@ public class baseEnemies : MonoBehaviour
     [SerializeField] private EnemiesStats stats;
 
     public Transform Target;
+    public bool isDead = false;
 
     private NavMeshAgent m_Agent;
 
     private float health;
 
+    private Animator m_Animator;
+
     void Start()
     {
         m_Agent = GetComponent<NavMeshAgent>();
+        m_Animator = GetComponent<Animator>();
 
         if (!stats)
         {
@@ -57,7 +61,7 @@ public class baseEnemies : MonoBehaviour
 
     public void Die()
     {
-        Destroy(gameObject);
+        m_Animator.SetTrigger("Die");
     }
 
     public void TrackPlayer()
