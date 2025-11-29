@@ -43,6 +43,15 @@ public class baseEnemies : MonoBehaviour, IDamageable
 
     void Update()
     {
+        if (m_Agent.velocity.magnitude >= 0.1f)
+        {
+            m_Animator.SetBool("Running", true);
+        }
+        else
+        {
+            m_Animator.SetBool("Running", false);
+        }
+
         if ( health <= 0 )
         {
             Die();
