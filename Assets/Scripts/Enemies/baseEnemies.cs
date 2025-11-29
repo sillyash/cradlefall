@@ -2,18 +2,16 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
-public class baseEnemies : MonoBehaviour
+public class baseEnemies : MonoBehaviour, IDamageable
 {
     // [SerializeField] private EnemiesBehavior behaviour;
     [SerializeField] private EnemiesStats stats;
 
+    public bool isDead { get; set; } = false;
+    public float health { get; set; }
+
     public Transform Target;
-    public bool isDead = false;
-
     private NavMeshAgent m_Agent;
-
-    private float health;
-
     private Animator m_Animator;
 
     void Start()
