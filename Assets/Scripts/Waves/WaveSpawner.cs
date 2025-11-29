@@ -7,41 +7,97 @@ public class WaveSpawner : MonoBehaviour
     public WaveBehavior[] waves;
     private int waveIndex = 0;
 
+    private float countdownTimer;
+    private bool isSpawning = false;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        if (waves.Length == 0)
+        if (waves == null || waves.Length == 0)
         {
             Debug.LogError("No waves assigned to WaveSpawner.");
             this.enabled = false;
             return;
         }
+
+        countdownTimer = countdown;
     }
 
     // Update is called once per frame
     void Update()
     {
-        countdown -= Time.deltaTime;
-        if (countdown <= 0f)
+        if (isSpawning)
         {
-            Debug.Log("Wave Started!");
-            StartCoroutine(SpawnWave());
+            return;
         }
 
+        if (waveIndex >= waves.Length)
+        {
+            return;
+        }
+
+        countdownTimer -= Time.deltaTime;
+        if (countdownTimer <= 0f)
+        {
+            Debug.Log("Wave Started!");
+            isSpawning = true;
+            StartCoroutine(SpawnCurrentWave());
+        }
     }
 
-    private IEnumerator SpawnWave()
+    private IEnumerator SpawnCurrentWave()
     {
-        while (waveIndex < waves.Length)
+        if (waveIndex >= waves.Length)
         {
-            WaveBehavior wave = waves[waveIndex];
-            Transform spawnPoint = wave.GetRandomSpawnPoint();
-            GameObject enemyToSpawn = wave.GetNextEnemyToSpawn();
+            isSpawning = false;
+            yield break;
+        }
 
-            Instantiate(enemyToSpawn, spawnPoint);
+        WaveBehavior wave = waves[waveIndex];
+
+        for (;;)
+        {
+            GameObject enemyToSpawn = wave.GetNextEnemyToSpawn();
+            if (enemyToSpawn == null)
+            {
+                break;
+            }
+
+            Transform spawnPoint = wave.GetRandomSpawnPoint();
+            if (spawnPoint != null)
+            {
+                Instantiate(enemyToSpawn, spawnPoint.position, spawnPoint.rotation);
+            }
+            else
+            {
+                Instantiate(enemyToSpawn, Vector3.zero, Quaternion.identity);
+            }
 
             float spawnInterval = wave.GetRandomSpawnInterval();
-            yield return new WaitForSeconds(spawnInterval);
+            if (spawnInterval > 0f)
+            {
+                yield return new WaitForSeconds(spawnInterval);
+            }
+            else
+            {
+                // Prevent tight infinite loops if a wave returns zero/negative interval
+                yield return null;
+            }
+        }
+
+        // Wave finished
+        waveIndex += 1;
+        isSpawning = false;
+
+        if (waveIndex < waves.Length)
+        {
+            countdownTimer = countdown;
+            Debug.Log("Wave finished. Next wave in " + countdownTimer + " seconds.");
+        }
+        else
+        {
+            Debug.Log("All waves completed.");
+            this.enabled = false;
         }
     }
 }
