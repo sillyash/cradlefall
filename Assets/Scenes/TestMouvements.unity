@@ -695,6 +695,14 @@ PrefabInstance:
       propertyPath: m_AngularSpeed
       value: 1000
       objectReference: {fileID: 0}
+    - target: {fileID: -2389785813196203807, guid: ef8d7be0a902fdb47bac48010424cf2f, type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 9000000, guid: 032520ca0fe95364997ea20f4786e1b7, type: 3}
+    - target: {fileID: -2389785813196203807, guid: ef8d7be0a902fdb47bac48010424cf2f, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 23d0549294b8c384185c63165938cc8e, type: 2}
     - target: {fileID: 697030691757937891, guid: ef8d7be0a902fdb47bac48010424cf2f, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -790,6 +798,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats: {fileID: 11400000, guid: 41ccfa7cd379515499abb2582c3819d4, type: 2}
+  health: 0
 --- !u!1 &1013439166
 GameObject:
   m_ObjectHideFlags: 0
@@ -1025,6 +1034,14 @@ PrefabInstance:
       propertyPath: m_AngularSpeed
       value: 1000
       objectReference: {fileID: 0}
+    - target: {fileID: -2389785813196203807, guid: ef8d7be0a902fdb47bac48010424cf2f, type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 9000000, guid: 032520ca0fe95364997ea20f4786e1b7, type: 3}
+    - target: {fileID: -2389785813196203807, guid: ef8d7be0a902fdb47bac48010424cf2f, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 23d0549294b8c384185c63165938cc8e, type: 2}
     - target: {fileID: 697030691757937891, guid: ef8d7be0a902fdb47bac48010424cf2f, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -1110,6 +1127,14 @@ PrefabInstance:
       propertyPath: m_AngularSpeed
       value: 1000
       objectReference: {fileID: 0}
+    - target: {fileID: -2389785813196203807, guid: ef8d7be0a902fdb47bac48010424cf2f, type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 9000000, guid: 032520ca0fe95364997ea20f4786e1b7, type: 3}
+    - target: {fileID: -2389785813196203807, guid: ef8d7be0a902fdb47bac48010424cf2f, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 23d0549294b8c384185c63165938cc8e, type: 2}
     - target: {fileID: 697030691757937891, guid: ef8d7be0a902fdb47bac48010424cf2f, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -1195,6 +1220,14 @@ PrefabInstance:
       propertyPath: m_AngularSpeed
       value: 1000
       objectReference: {fileID: 0}
+    - target: {fileID: -2389785813196203807, guid: ef8d7be0a902fdb47bac48010424cf2f, type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 9000000, guid: 032520ca0fe95364997ea20f4786e1b7, type: 3}
+    - target: {fileID: -2389785813196203807, guid: ef8d7be0a902fdb47bac48010424cf2f, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 23d0549294b8c384185c63165938cc8e, type: 2}
     - target: {fileID: 697030691757937891, guid: ef8d7be0a902fdb47bac48010424cf2f, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
