@@ -45,11 +45,11 @@ public class baseEnemies : MonoBehaviour, IDamageable
     {
         if (m_Agent.velocity.magnitude >= 0.1f)
         {
-            m_Animator.SetBool("Running", true);
+            m_Animator.SetBool("isRunning", true);
         }
         else
         {
-            m_Animator.SetBool("Running", false);
+            m_Animator.SetBool("isRunning", false);
         }
 
         if ( health <= 0 )
