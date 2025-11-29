@@ -3,6 +3,7 @@ using UnityEngine;
 public class basePlayer : MonoBehaviour
 {
     public PlayerStats stats;
+    [SerializeField] private float health;
 
     void Start()
     {
@@ -12,6 +13,8 @@ public class basePlayer : MonoBehaviour
             enabled = false;
             return;
         }
+
+        health = stats.health;
     }
 
     // Update is called once per frame
