@@ -17,12 +17,6 @@ public class basePlayer : MonoBehaviour
         health = stats.health;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void TakeDamage(float damage)
     {
         health -= damage;
