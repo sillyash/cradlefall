@@ -11,7 +11,7 @@ public class baseEnemies : MonoBehaviour, ICanDie
     public bool isDead { get; set; } = false;
     public float health;
 
-    public Transform Target;
+    public GameObject Target;
     private NavMeshAgent m_Agent;
     private Animator m_Animator;
 
@@ -79,11 +79,11 @@ public class baseEnemies : MonoBehaviour, ICanDie
     {
         if (Target != null)
         {
-            float distance = Vector3.Distance(transform.position, Target.position);
+            float distance = Vector3.Distance(transform.position, Target.transform.position);
 
             if (distance > stats.attackRange)
             {
-                m_Agent.SetDestination(Target.position);
+                m_Agent.SetDestination(Target.transform.position);
                 m_Agent.isStopped = false;
             }
             else
