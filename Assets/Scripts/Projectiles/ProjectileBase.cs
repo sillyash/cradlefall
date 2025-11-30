@@ -35,8 +35,11 @@ public class ProjectileBase : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        behavior.HandleCollision(other, stats.damage);
-        // Destroy(gameObject);
+        if (!other.TryGetComponent<ProjectileBase>(out ProjectileBase var))
+        {
+            behavior.HandleCollision(other, stats.damage);
+            Destroy(gameObject);
+        }
     }
 
 
