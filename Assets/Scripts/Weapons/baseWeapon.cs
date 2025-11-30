@@ -7,6 +7,7 @@ public class BaseWeapon : MonoBehaviour
     [SerializeField] private WeaponStats stats;
     [SerializeField] private ProjectileBase projectile;
     [SerializeField] private GameObject projectileSpawn;
+    [SerializeField] private float spread;
     
     private int ammoCount;
     private bool isReadyToShoot = true;
@@ -27,7 +28,9 @@ public class BaseWeapon : MonoBehaviour
     public void Fire()
     {
         if (isReadyToShoot && ammoCount > 0) {
-            behavior.OnFire(projectile, projectileSpawn.transform);
+            Quaternion projRot = projectileSpawn.transform.rotation;
+
+            behavior.OnFire(projectile, projectileSpawn.transform.transform, stats.spread);
             ammoCount--;
 
             isReadyToShoot = false;
