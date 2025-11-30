@@ -5,9 +5,13 @@ public class TestBehavior : WeaponBehavior
 {
     public override void OnFire(ProjectileBase projectile, Transform transform, float spread)
     {
-        spreadValue(transform.rotation, spread);
 
-        ProjectileBase proj = Instantiate(projectile, transform.position, transform.rotation);
+        Vector3 spreadedAngles = spreadValue(transform.localEulerAngles, spread);
+
+        // Convert from euler angles to quaternion and from local to global space
+        Quaternion spreadedRotation = Quaternion.Euler(spreadedAngles) * transform.rotation;
+
+        ProjectileBase proj = Instantiate(projectile, transform.position, spreadedRotation);
     }
 
 }
