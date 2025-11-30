@@ -6,8 +6,8 @@ public class basePlayer : MonoBehaviour
 
     [SerializeField] private BaseWeapon weapon;
 
+    public GameObject debugObject;
     public PlayerStats stats;
-    [SerializeField] private float health;
 
     private Vector3 targetPoint;
 
@@ -54,8 +54,41 @@ public class basePlayer : MonoBehaviour
 
     void raycast()
     {
+        raycast();
+        debugObject.transform.position = targetPoint;
+        weapon.transform.LookAt(targetPoint);
+
+
+        weaponInput();
+    }
+
+    void weaponInput()
+    {
+        if (Input.GetButtonDown("Reload"))
+        {
+            weapon.Reload();
+        }
+
+        else
+
+        if (Input.GetButton("Fire1"))
+        {
+            weapon.Fire();
+        }
+    }
+
+    Vector3 calcTargetPoint()
+    {
+        return Camera.main.transform.position + Camera.main.transform.forward * TARGET_DISTANCE;
+    }
+
+    void raycast()
+    {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
+
+        // Dessine le raycast en vert pendant 1 seconde
+        Debug.DrawRay(ray.origin, ray.direction * 100f, Color.green, 1f);
 
         if (Physics.Raycast(ray, out hit))
         {
