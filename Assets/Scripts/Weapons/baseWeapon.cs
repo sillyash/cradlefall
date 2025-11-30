@@ -9,6 +9,7 @@ public class BaseWeapon : MonoBehaviour
     
     private int ammoCount;
     private bool isReadyToShoot = true;
+    private bool isOnCooldown = false;
 
 
     void Start()
@@ -16,31 +17,36 @@ public class BaseWeapon : MonoBehaviour
         ammoCount = stats.magSize;
     }
 
-    void Update()
-    {
-        if (isReadyToShoot)
-        {
-            Fire();
-        }
-    }
+
+    // Testing purpose
+    ///*void Update()
+    //{
+    //    Fire();
+    //}*/
 
     public void Fire()
     {
-        behavior.OnFire(projectile, transform.position);
+        if (isReadyToShoot) {
+        behavior.OnFire(projectile, transform);
         ammoCount--;
+
         isReadyToShoot = false;
-        StartCoroutine(Cooldown(stats.shootingCooldown));
+        StartCoroutine(FireCooldown());
+        }  
+    }
+
+    IEnumerator FireCooldown()
+    {
+        yield return new WaitForSeconds(stats.shootingCooldown);
         isReadyToShoot = (ammoCount > 0);
     }
 
-    IEnumerator Cooldown(float time)
-    {
-        yield return new WaitForSeconds(time);
-    }
 
-    public void Reload()
+
+
+    public IEnumerator ReloadCooldown()
     {
-        StartCoroutine(Cooldown(stats.reloadTime));
+        yield return new WaitForSeconds(stats.reloadTime);
         ammoCount = stats.magSize;
     }
 }
