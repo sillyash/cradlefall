@@ -8,7 +8,7 @@ public class baseEnemies : MonoBehaviour, IDamageable
     [SerializeField] private EnemiesStats stats;
 
     public bool isDead { get; set; } = false;
-    public float health { get; set; }
+    public float health;
 
     public Transform Target;
     private NavMeshAgent m_Agent;
@@ -39,6 +39,12 @@ public class baseEnemies : MonoBehaviour, IDamageable
         }
 
         health = stats.health;
+        InvokeRepeating("DEBUG", 1f, 1f);
+    }
+
+    void DEBUG()
+    {
+        TakeDamage(3);
     }
 
     void Update()
