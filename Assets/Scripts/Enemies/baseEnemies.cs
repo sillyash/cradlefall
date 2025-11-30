@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -13,6 +14,8 @@ public class baseEnemies : MonoBehaviour, ICanDie
     public Transform Target;
     private NavMeshAgent m_Agent;
     private Animator m_Animator;
+
+    public bool isAttacking = false;
 
     void Start()
     {
@@ -39,12 +42,7 @@ public class baseEnemies : MonoBehaviour, ICanDie
         }
 
         health = stats.health;
-        InvokeRepeating("DEBUG", 1f, 1f);
-    }
-
-    void DEBUG()
-    {
-        TakeDamage(3);
+        
     }
 
     void Update()
@@ -61,7 +59,7 @@ public class baseEnemies : MonoBehaviour, ICanDie
         if ( health <= 0 )
         {
             Die();
-        } else
+        } else if (!isAttacking ) 
         {
             TrackPlayer();
         }
@@ -91,7 +89,8 @@ public class baseEnemies : MonoBehaviour, ICanDie
             else
             {
                 m_Agent.isStopped = true;
-                // behaviour.Attack();
+                isAttacking = true;
+                m_Animator.SetTrigger("Attack");
             }
         }
     }
