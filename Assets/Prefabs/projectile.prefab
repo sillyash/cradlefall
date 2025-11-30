@@ -124,7 +124,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   behavior: {fileID: 11400000, guid: bba7ce6a41430964a980b7ffb50e657b, type: 2}
   stats: {fileID: 11400000, guid: 129abd57edc932747b64ba8a08df7370, type: 2}
-  direction: {x: 1, y: 0, z: 0}
 --- !u!54 &5749042267261086274
 Rigidbody:
   m_ObjectHideFlags: 0

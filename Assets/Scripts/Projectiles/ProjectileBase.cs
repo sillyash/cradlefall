@@ -73,9 +73,4 @@ public class ProjectileBase : MonoBehaviour
             rb.MoveRotation(targetRot);
         }
     }
-
-    public void setDirection(Vector3 dir)
-    {
-        direction = dir;
-    }
 }
