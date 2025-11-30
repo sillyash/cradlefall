@@ -12,8 +12,6 @@ public abstract class WeaponBehavior : ScriptableObject
         angles.x += Random.Range(-val, val);
         angles.y += Random.Range(-val, val);
 
-        Debug.Log("random :" + angles);
-
         return angles;
     }
 }

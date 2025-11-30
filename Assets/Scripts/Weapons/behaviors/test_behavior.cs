@@ -11,7 +11,7 @@ public class TestBehavior : WeaponBehavior
         // Convert from euler angles to quaternion and from local to global space
         Quaternion spreadedRotation = Quaternion.Euler(spreadedAngles) * transform.rotation;
 
-        ProjectileBase proj = Instantiate(projectile, transform.position, spreadedRotation);
+        Instantiate(projectile, transform.position, spreadedRotation);
     }
 
 }
