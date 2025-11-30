@@ -6,7 +6,6 @@ public class basePlayer : MonoBehaviour
 
     [SerializeField] private BaseWeapon weapon;
 
-    public GameObject debugObject;
     public PlayerStats stats;
 
     private Vector3 targetPoint;
@@ -55,7 +54,6 @@ public class basePlayer : MonoBehaviour
     void raycast()
     {
         raycast();
-        debugObject.transform.position = targetPoint;
         weapon.transform.LookAt(targetPoint);
 
 
@@ -86,9 +84,6 @@ public class basePlayer : MonoBehaviour
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-
-        // Dessine le raycast en vert pendant 1 seconde
-        Debug.DrawRay(ray.origin, ray.direction * 100f, Color.green, 1f);
 
         if (Physics.Raycast(ray, out hit))
         {
