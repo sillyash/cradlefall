@@ -4,7 +4,7 @@ public class DestroyAfterDeath : StateMachineBehaviour
 {
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        IDamageable entity = animator.gameObject.GetComponent<IDamageable>();
+        ICanDie entity = animator.gameObject.GetComponent<ICanDie>();
         if (entity != null)
         {
             entity.isDead = true;
