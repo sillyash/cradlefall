@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class MouseControl : MonoBehaviour
 {
-    [SerializeField] private BaseWeapon weapon;
-
     public Transform cameraTransform;
     public float sensibility = 200f;
 
@@ -31,17 +29,5 @@ public class MouseControl : MonoBehaviour
 
         // appliquer rotation caméra (X seulement)
         cameraTransform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-
-        if (Input.GetButtonDown("Reload"))
-        {
-            weapon.Reload();
-        }
-
-        else
-
-        if (Input.GetButton("Fire1"))
-        {
-            weapon.Fire();
-        }
     }
 }
