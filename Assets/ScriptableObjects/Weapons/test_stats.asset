@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: test_stats
   m_EditorClassIdentifier: 
   magSize: 10
-  reloadTime: 1
-  shootingCooldown: 1
+  reloadTime: 0
+  shootingCooldown: 0.1
