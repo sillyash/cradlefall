@@ -173,4 +173,9 @@ public class baseEnemies : MonoBehaviour, ICanDie
             }
         }
     }
+        
+    public int GetCost()
+    {
+        return stats.cost;
+    }
 }

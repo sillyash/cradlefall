@@ -5,40 +5,53 @@ public class BaseWeapon : MonoBehaviour
 {
     [SerializeField] private WeaponBehavior behavior;
     [SerializeField] private WeaponStats stats;
+    [SerializeField] private ProjectileBase projectile;
+    [SerializeField] private GameObject projectileSpawn;
+    
+    private int ammoCount;
+    private bool isReadyToShoot = true;
 
-    public int ammoCount;
-    public bool isReadyToShoot = true;
 
     void Start()
     {
         ammoCount = stats.magSize;
     }
 
-    void Update()
-    {
-        if (isReadyToShoot)
-        {
-            Fire();
-        }
-    }
+
+    // Testing purpose
+    //void Update()
+    //{
+    //    Fire();
+    //}
 
     public void Fire()
     {
-        behavior.OnFire();
-        ammoCount--;
-        isReadyToShoot = false;
-        StartCoroutine(Cooldown(stats.shootingCooldown));
-        isReadyToShoot = true;
+        if (isReadyToShoot && ammoCount > 0) {
+            behavior.OnFire(projectile, projectileSpawn.transform.transform, stats.spread);
+            ammoCount--;
+
+            isReadyToShoot = false;
+            StartCoroutine(FireCooldown());
+        }  
     }
 
-    IEnumerator Cooldown(float time)
+    IEnumerator FireCooldown()
     {
-        yield return new WaitForSeconds(time);
+        yield return new WaitForSeconds(stats.shootingCooldown);
+        isReadyToShoot = true;
     }
 
     public void Reload()
     {
-        StartCoroutine(Cooldown(stats.reloadTime));
+        Debug.Log("reloading...");
+        StartCoroutine(ReloadCooldown());
+    }
+
+
+    public IEnumerator ReloadCooldown()
+    {
+        yield return new WaitForSeconds(stats.reloadTime);
         ammoCount = stats.magSize;
+        Debug.Log("Done");
     }
 }

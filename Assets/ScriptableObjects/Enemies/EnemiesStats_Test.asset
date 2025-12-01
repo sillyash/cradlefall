@@ -18,3 +18,4 @@ MonoBehaviour:
   damage: 0
   attackCooldown: 0
   detectionRange: 15
+  cost: 10
