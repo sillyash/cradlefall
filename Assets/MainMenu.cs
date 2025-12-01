@@ -8,12 +8,15 @@ public class MainMenu : MonoBehaviour {
 
     public void OnPlayButtonClicked ()
     {
+        Debug.Log("Playing game");
+        GameManager.instance.StartGame();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
     }
 
     public void OnQuitButtonClicked()
     {
         Debug.Log("Quitting now.");
+        GameManager.instance.GameOver();
         Application.Quit();
     }
 
