@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -34,12 +35,7 @@ public class baseEnemies : MonoBehaviour, ICanDie
             enabled = false;
             return;
         }*/
-        if (!m_Target)
-        {
-            Debug.LogError("Le script baseEnemies du prefab Enemy n'a pas de Target assigné.");
-            enabled = false;
-            return;
-        }
+        
 
         health = stats.health;
         
@@ -61,6 +57,7 @@ public class baseEnemies : MonoBehaviour, ICanDie
             Die();
         } else if (!isAttacking ) 
         {
+            AcquireTarget();
             TrackTarget();
         }
     }
@@ -73,6 +70,34 @@ public class baseEnemies : MonoBehaviour, ICanDie
     public void Die()
     {
         m_Animator.SetTrigger("Die");
+    }
+
+    public void AcquireTarget()
+    {
+        // recup caisson
+        // test distance caisson player
+        // set target caisson/player
+
+        GameObject[] capsules = GameObject.FindGameObjectsWithTag("Capsule");
+
+        float distance;
+        float shorterDistance;
+        GameObject target;
+        if (capsules != null) 
+        {
+            target = capsules[0];
+            shorterDistance = Vector3.Distance(transform.position, target.transform.position);
+            for (int i = 0; i < capsules.Length; i++)
+            {
+                distance = Vector3.Distance(transform.position, capsules[i].transform.position);
+                if (distance < shorterDistance)
+                {
+                    target = capsules[i];
+                    shorterDistance = distance;
+                }
+            }
+            m_Target = target;
+        } 
     }
 
     public void TrackTarget()
