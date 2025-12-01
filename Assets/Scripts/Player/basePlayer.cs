@@ -43,7 +43,6 @@ public class basePlayer : MonoBehaviour
 
         if (Input.GetButton("Fire1"))
         {
-            Debug.Log("testtttt");
             weapon.Fire();
         }
     }
