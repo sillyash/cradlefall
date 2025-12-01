@@ -27,7 +27,7 @@ public class BaseWeapon : MonoBehaviour
     public void Fire()
     {
         if (isReadyToShoot && ammoCount > 0) {
-            behavior.OnFire(projectile, projectileSpawn.transform);
+            behavior.OnFire(projectile, projectileSpawn.transform.transform, stats.spread);
             ammoCount--;
 
             isReadyToShoot = false;

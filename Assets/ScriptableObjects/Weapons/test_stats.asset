@@ -15,3 +15,4 @@ MonoBehaviour:
   magSize: 10
   reloadTime: 0
   shootingCooldown: 0.1
+  spread: 10
