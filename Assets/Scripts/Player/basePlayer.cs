@@ -23,7 +23,7 @@ public class basePlayer : MonoBehaviour
         health = stats.health;
     }
 
-    public void TakeDamage(float damage)
+    void Update()
     {
         raycast();
         weapon.transform.LookAt(targetPoint);
@@ -43,6 +43,7 @@ public class basePlayer : MonoBehaviour
 
         if (Input.GetButton("Fire1"))
         {
+            Debug.Log("testtttt");
             weapon.Fire();
         }
     }
