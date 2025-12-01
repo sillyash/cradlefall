@@ -21,7 +21,8 @@ public class MainMenu : MonoBehaviour {
 
     public void OnOptionsButtonClicked()
     {
-        SceneManager.LoadScene("Options");
+        Debug.Log("Loading Options Menu...");
+        // TODO: Load Options Menu
     }
 
 }

@@ -5,12 +5,12 @@ using System.Collections.Generic;
 using System;
 using NUnit.Framework.Internal;
 
-public class ButtonsScripts : MonoBehaviour
+public class LoseMenu : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public void onButtonReturnToMenuClicked()
     {
-        Debug.Log("Fonctionne!");
+        Debug.Log("Returning to Main Menu...");
         GameManager.instance.ReturnToMainMenu();
     }
 }
