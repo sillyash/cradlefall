@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1e8544aaaecbf24ea979ed3f660625c, type: 3}
   m_Name: Wave1
   m_EditorClassIdentifier: 
-  availableEnemies:
-  - {fileID: 7528874186601670305, guid: abb16319171903c47ae24f622811ee4b, type: 3}
+  availableEnemies: []
   spendablePoints: 30
   minSpawnInterval: 1
   maxSpawnInterval: 4
