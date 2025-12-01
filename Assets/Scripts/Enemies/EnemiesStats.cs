@@ -8,4 +8,7 @@ public class EnemiesStats : ScriptableObject
     public float moveSpeed;
     public float damage;
     public float attackCooldown;
+
+    // For wave spawner, we need a cost value
+    public int cost;
 }
