@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
 using System;
+using NUnit.Framework.Internal;
 
 public class MainMenu : MonoBehaviour {
 
@@ -10,18 +11,17 @@ public class MainMenu : MonoBehaviour {
     {
         Debug.Log("Playing game");
         GameManager.instance.StartGame();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
     }
 
     public void OnQuitButtonClicked()
     {
         Debug.Log("Quitting now.");
-        GameManager.instance.GameOver();
         Application.Quit();
     }
 
     public void OnOptionsButtonClicked()
     {
-        Debug.Log("Options not implemented yet");
+        SceneManager.LoadScene("Options");
     }
+
 }
