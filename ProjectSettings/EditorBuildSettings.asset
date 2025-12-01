@@ -4,19 +4,6 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes:
-  - enabled: 1
-    path: Assets/Scenes/Menus/MainMenu.unity
-    guid: 5d6175960aa3fee429bcf1090fe5c5d1
-  - enabled: 1
-    path: Assets/Scenes/Menus/JeuScene.unity
-    guid: 8d63f740ae65733499278563cd7d5aec
-  - enabled: 1
-    path: Assets/Scenes/Menus/VictoryMenu.unity
-    guid: 4ebe439a3ec3afe4aba0d65a7c008350
-  - enabled: 1
-    path: Assets/Scenes/Menus/LoseMenu.unity
-    guid: b8cac7c53ba402942b09cc290d86f366
-  m_configObjects:
-    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  m_Scenes: []
+  m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

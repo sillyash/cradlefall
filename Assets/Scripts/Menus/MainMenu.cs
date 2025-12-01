@@ -16,7 +16,6 @@ public class MainMenu : MonoBehaviour {
     public void OnQuitButtonClicked()
     {
         Debug.Log("Quitting now.");
-        GameManager.instance.GameOver();
         Application.Quit();
     }
 
