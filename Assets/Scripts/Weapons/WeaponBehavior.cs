@@ -5,13 +5,9 @@ public abstract class WeaponBehavior : ScriptableObject
 {
     public abstract void OnFire(ProjectileBase projectile, Transform transform, float spread);
 
-    public Vector3 spreadValue(Vector3 angles, float val)
+    public void spreadValue(Quaternion rotation, float val)
     {
-        val /= 2;
-
-        angles.x += Random.Range(-val, val);
-        angles.y += Random.Range(-val, val);
-
-        return angles;
+        rotation.x += Random.Range(-30, 30);
+        rotation.y += Random.Range(-30, 30);
     }
 }
