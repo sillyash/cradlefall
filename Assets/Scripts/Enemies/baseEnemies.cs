@@ -78,4 +78,9 @@ public class baseEnemies : MonoBehaviour
             }
         }
     }
+        
+    public int GetCost()
+    {
+        return stats.cost;
+    }
 }
