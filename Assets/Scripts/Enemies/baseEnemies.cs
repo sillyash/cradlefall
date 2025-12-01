@@ -134,7 +134,7 @@ public class baseEnemies : MonoBehaviour, ICanDie
                 else playerHits.Add(h);
             }
             if (closest != null) hasFoundCapsule = true;
-            else if (playerHits != null)
+            else if (playerHits.Count > 0)
             {
                 foreach (var h in playerHits)
                 {
