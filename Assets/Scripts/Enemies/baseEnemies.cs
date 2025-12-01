@@ -11,7 +11,7 @@ public class baseEnemies : MonoBehaviour, ICanDie
     public bool isDead { get; set; } = false;
     public float health;
 
-    public GameObject Target;
+    private GameObject m_Target;
     private NavMeshAgent m_Agent;
     private Animator m_Animator;
 
@@ -34,7 +34,7 @@ public class baseEnemies : MonoBehaviour, ICanDie
             enabled = false;
             return;
         }*/
-        if (!Target)
+        if (!m_Target)
         {
             Debug.LogError("Le script baseEnemies du prefab Enemy n'a pas de Target assigné.");
             enabled = false;
@@ -61,7 +61,7 @@ public class baseEnemies : MonoBehaviour, ICanDie
             Die();
         } else if (!isAttacking ) 
         {
-            TrackPlayer();
+            TrackTarget();
         }
     }
 
@@ -75,15 +75,15 @@ public class baseEnemies : MonoBehaviour, ICanDie
         m_Animator.SetTrigger("Die");
     }
 
-    public void TrackPlayer()
+    public void TrackTarget()
     {
-        if (Target != null)
+        if (m_Target != null)
         {
-            float distance = Vector3.Distance(transform.position, Target.transform.position);
+            float distance = Vector3.Distance(transform.position, m_Target.transform.position);
 
             if (distance > stats.attackRange)
             {
-                m_Agent.SetDestination(Target.transform.position);
+                m_Agent.SetDestination(m_Target.transform.position);
                 m_Agent.isStopped = false;
             }
             else
