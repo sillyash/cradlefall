@@ -1,5 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -17,12 +20,14 @@ public class baseEnemies : MonoBehaviour, ICanDie
     private Animator m_Animator;
 
     public bool isAttacking = false;
-
+    private bool hasFoundCapsule = false;
+    public LayerMask targetMask;
+    
     void Start()
     {
         m_Agent = GetComponent<NavMeshAgent>();
         m_Animator = GetComponent<Animator>();
-
+        
         if (!stats)
         {
             Debug.LogError("Le script baseEnemies du prefab Enemy n�a pas de ScriptableObject de statistiques assign�.");
@@ -38,7 +43,9 @@ public class baseEnemies : MonoBehaviour, ICanDie
         
 
         health = stats.health;
-        
+        m_Agent.stoppingDistance = stats.attackRange;
+        m_Agent.speed = stats.moveSpeed;
+
     }
 
     void Update()
@@ -57,7 +64,10 @@ public class baseEnemies : MonoBehaviour, ICanDie
             Die();
         } else if (!isAttacking ) 
         {
-            AcquireTarget();
+            if (!hasFoundCapsule) 
+            {
+                m_Target = UpdateTarget();
+            }
             TrackTarget();
         }
     }
@@ -72,7 +82,7 @@ public class baseEnemies : MonoBehaviour, ICanDie
         m_Animator.SetTrigger("Die");
     }
 
-    public void AcquireTarget()
+    public GameObject AcquireClosestCapsule()
     {
         // recup caisson
         // test distance caisson player
@@ -96,8 +106,52 @@ public class baseEnemies : MonoBehaviour, ICanDie
                     shorterDistance = distance;
                 }
             }
-            m_Target = target;
+            return target;
+        }
+        return null;
+    }
+
+    public GameObject UpdateTarget()
+    {
+        List<Collider> hits = Physics.OverlapSphere(transform.position, stats.detectionRange, targetMask).ToList();
+        
+        float closestDist = Mathf.Infinity;
+        GameObject closest = null;
+        List<Collider> playerHits = new List<Collider>();
+        if (hits != null)
+        {
+            foreach (var h in hits)
+            {
+                if (h.gameObject.layer == LayerMask.NameToLayer("Capsule"))
+                {
+                    float dist = Vector3.Distance(transform.position, h.transform.position);
+                    if (dist < closestDist)
+                    {
+                        closestDist = dist;
+                        closest = h.gameObject;
+                    }
+                }
+                else playerHits.Add(h);
+            }
+            if (closest != null) hasFoundCapsule = true;
+            else if (playerHits != null)
+            {
+                foreach (var h in playerHits)
+                {
+                    if (h.gameObject.layer == LayerMask.NameToLayer("Player"))
+                    {
+                        float dist = Vector3.Distance(transform.position, h.transform.position);
+                        if (dist < closestDist)
+                        {
+                            closestDist = dist;
+                            closest = h.gameObject;
+                        }
+                    }
+                }
+            }
         } 
+        if (closest == null) closest = AcquireClosestCapsule();
+        return closest;
     }
 
     public void TrackTarget()
