@@ -5,9 +5,9 @@ public class basePlayer : MonoBehaviour
     public static float TARGET_DISTANCE = 5;
 
     [SerializeField] private BaseWeapon weapon;
+    [SerializeField] private float health;
 
     public PlayerStats stats;
-    [SerializeField] private float health;
 
     private Vector3 targetPoint;
 
@@ -23,7 +23,7 @@ public class basePlayer : MonoBehaviour
         health = stats.health;
     }
 
-    public void TakeDamage(float damage)
+    void Update()
     {
         raycast();
         weapon.transform.LookAt(targetPoint);

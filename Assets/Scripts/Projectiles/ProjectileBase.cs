@@ -2,7 +2,6 @@ using TreeEditor;
 using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
-using static UnityEngine.Rendering.DebugUI.Table;
 
 
 public class ProjectileBase : MonoBehaviour
@@ -26,11 +25,6 @@ public class ProjectileBase : MonoBehaviour
         if (behavior == null)
         {
             Debug.Log("No behavior assigned");
-        }
-
-        if (stats == null)
-        {
-            Debug.Log("No stats assigned");
         }
 
         rb = GetComponent<Rigidbody>();

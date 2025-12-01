@@ -3,12 +3,14 @@ using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
 using System;
+using NUnit.Framework.Internal;
 
 public class MainMenu : MonoBehaviour {
 
     public void OnPlayButtonClicked ()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
+        Debug.Log("Playing game");
+        GameManager.instance.StartGame();
     }
 
     public void OnQuitButtonClicked()
@@ -19,6 +21,8 @@ public class MainMenu : MonoBehaviour {
 
     public void OnOptionsButtonClicked()
     {
-        Debug.Log("Options not implemented yet");
+        Debug.Log("Loading Options Menu...");
+        // TODO: Load Options Menu
     }
+
 }
