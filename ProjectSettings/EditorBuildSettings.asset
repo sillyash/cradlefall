@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Menus/MenuScene.unity
     guid: 5d6175960aa3fee429bcf1090fe5c5d1
   - enabled: 1
-    path: Assets/Scenes/Menus/Jeu.unity
+    path: Assets/Scenes/Menus/JeuScene.unity
     guid: 8d63f740ae65733499278563cd7d5aec
   - enabled: 1
     path: Assets/Scenes/Menus/VictoryScene.unity
