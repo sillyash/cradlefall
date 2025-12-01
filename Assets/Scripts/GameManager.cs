@@ -15,9 +15,9 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
-        Debug.Log("in StartGame");
+        Debug.Log("StartGame");
         ChangeState(GameState.Initialising);
-        SceneManager.LoadScene("VictoryScene");
+        SceneManager.LoadScene("VictoryMenu");
 
     }
 
@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("in ReturnToMainMenu");
         ChangeState(GameState.MainMenu);
-        SceneManager.LoadScene("MenuScene");
+        SceneManager.LoadScene("MainMenu");
     }
 
     private void Awake()
@@ -64,4 +64,3 @@ public class GameManager : MonoBehaviour
         }
     }       
 }
-
