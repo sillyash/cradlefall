@@ -678,6 +678,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8494366236163984958, guid: ef8d7be0a902fdb47bac48010424cf2f, type: 3}
+      propertyPath: m_Speed
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: -8494366236163984958, guid: ef8d7be0a902fdb47bac48010424cf2f, type: 3}
+      propertyPath: m_Acceleration
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: -8494366236163984958, guid: ef8d7be0a902fdb47bac48010424cf2f, type: 3}
+      propertyPath: m_AngularSpeed
+      value: 50000
+      objectReference: {fileID: 0}
+    - target: {fileID: -2389785813196203807, guid: ef8d7be0a902fdb47bac48010424cf2f, type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 9000000, guid: 032520ca0fe95364997ea20f4786e1b7, type: 3}
+    - target: {fileID: -2389785813196203807, guid: ef8d7be0a902fdb47bac48010424cf2f, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 23d0549294b8c384185c63165938cc8e, type: 2}
     - target: {fileID: 697030691757937891, guid: ef8d7be0a902fdb47bac48010424cf2f, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -729,20 +749,46 @@ PrefabInstance:
     - target: {fileID: 5953013627183295782, guid: ef8d7be0a902fdb47bac48010424cf2f, type: 3}
       propertyPath: Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 505671199}
     - target: {fileID: 7528874186601670305, guid: ef8d7be0a902fdb47bac48010424cf2f, type: 3}
       propertyPath: m_Name
       value: Enemy (1)
       objectReference: {fileID: 0}
     - target: {fileID: 7528874186601670305, guid: ef8d7be0a902fdb47bac48010424cf2f, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef8d7be0a902fdb47bac48010424cf2f, type: 3}
+--- !u!114 &993051246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 505671199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1879b148b54f34e4eb9330c4eb95cb61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &993051247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 505671199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfa9f854f3610824a94ad0e86389b392, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats: {fileID: 11400000, guid: 41ccfa7cd379515499abb2582c3819d4, type: 2}
+  health: 0
 --- !u!1 &1013439166
 GameObject:
   m_ObjectHideFlags: 0
@@ -1021,6 +1067,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8494366236163984958, guid: ef8d7be0a902fdb47bac48010424cf2f, type: 3}
+      propertyPath: m_Speed
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: -8494366236163984958, guid: ef8d7be0a902fdb47bac48010424cf2f, type: 3}
+      propertyPath: m_Acceleration
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: -8494366236163984958, guid: ef8d7be0a902fdb47bac48010424cf2f, type: 3}
+      propertyPath: m_AngularSpeed
+      value: 50000
+      objectReference: {fileID: 0}
+    - target: {fileID: -2389785813196203807, guid: ef8d7be0a902fdb47bac48010424cf2f, type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 9000000, guid: 032520ca0fe95364997ea20f4786e1b7, type: 3}
+    - target: {fileID: -2389785813196203807, guid: ef8d7be0a902fdb47bac48010424cf2f, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 23d0549294b8c384185c63165938cc8e, type: 2}
     - target: {fileID: 697030691757937891, guid: ef8d7be0a902fdb47bac48010424cf2f, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -1072,14 +1138,14 @@ PrefabInstance:
     - target: {fileID: 5953013627183295782, guid: ef8d7be0a902fdb47bac48010424cf2f, type: 3}
       propertyPath: Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 505671199}
     - target: {fileID: 7528874186601670305, guid: ef8d7be0a902fdb47bac48010424cf2f, type: 3}
       propertyPath: m_Name
       value: Enemy (3)
       objectReference: {fileID: 0}
     - target: {fileID: 7528874186601670305, guid: ef8d7be0a902fdb47bac48010424cf2f, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1094,6 +1160,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8494366236163984958, guid: ef8d7be0a902fdb47bac48010424cf2f, type: 3}
+      propertyPath: m_Speed
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: -8494366236163984958, guid: ef8d7be0a902fdb47bac48010424cf2f, type: 3}
+      propertyPath: m_Acceleration
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: -8494366236163984958, guid: ef8d7be0a902fdb47bac48010424cf2f, type: 3}
+      propertyPath: m_AngularSpeed
+      value: 50000
+      objectReference: {fileID: 0}
+    - target: {fileID: -2389785813196203807, guid: ef8d7be0a902fdb47bac48010424cf2f, type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 9000000, guid: 032520ca0fe95364997ea20f4786e1b7, type: 3}
+    - target: {fileID: -2389785813196203807, guid: ef8d7be0a902fdb47bac48010424cf2f, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 23d0549294b8c384185c63165938cc8e, type: 2}
     - target: {fileID: 697030691757937891, guid: ef8d7be0a902fdb47bac48010424cf2f, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -1145,14 +1231,14 @@ PrefabInstance:
     - target: {fileID: 5953013627183295782, guid: ef8d7be0a902fdb47bac48010424cf2f, type: 3}
       propertyPath: Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 505671199}
     - target: {fileID: 7528874186601670305, guid: ef8d7be0a902fdb47bac48010424cf2f, type: 3}
       propertyPath: m_Name
       value: Enemy (2)
       objectReference: {fileID: 0}
     - target: {fileID: 7528874186601670305, guid: ef8d7be0a902fdb47bac48010424cf2f, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1167,6 +1253,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8494366236163984958, guid: ef8d7be0a902fdb47bac48010424cf2f, type: 3}
+      propertyPath: m_Speed
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: -8494366236163984958, guid: ef8d7be0a902fdb47bac48010424cf2f, type: 3}
+      propertyPath: m_Acceleration
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: -8494366236163984958, guid: ef8d7be0a902fdb47bac48010424cf2f, type: 3}
+      propertyPath: m_AngularSpeed
+      value: 50000
+      objectReference: {fileID: 0}
+    - target: {fileID: -2389785813196203807, guid: ef8d7be0a902fdb47bac48010424cf2f, type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 9000000, guid: 032520ca0fe95364997ea20f4786e1b7, type: 3}
+    - target: {fileID: -2389785813196203807, guid: ef8d7be0a902fdb47bac48010424cf2f, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 23d0549294b8c384185c63165938cc8e, type: 2}
     - target: {fileID: 697030691757937891, guid: ef8d7be0a902fdb47bac48010424cf2f, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -1218,14 +1324,18 @@ PrefabInstance:
     - target: {fileID: 5953013627183295782, guid: ef8d7be0a902fdb47bac48010424cf2f, type: 3}
       propertyPath: Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 505671199}
     - target: {fileID: 7528874186601670305, guid: ef8d7be0a902fdb47bac48010424cf2f, type: 3}
       propertyPath: m_Name
       value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 7528874186601670305, guid: ef8d7be0a902fdb47bac48010424cf2f, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8688343065684415777, guid: ef8d7be0a902fdb47bac48010424cf2f, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

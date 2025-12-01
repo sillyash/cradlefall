@@ -1,21 +1,26 @@
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
-public class baseEnemies : MonoBehaviour
+public class baseEnemies : MonoBehaviour, ICanDie
 {
     // [SerializeField] private EnemiesBehavior behaviour;
     [SerializeField] private EnemiesStats stats;
 
-    public Transform Target;
+    public bool isDead { get; set; } = false;
+    public float health;
 
+    public GameObject Target;
     private NavMeshAgent m_Agent;
+    private Animator m_Animator;
 
-    private float health;
+    public bool isAttacking = false;
 
     void Start()
     {
         m_Agent = GetComponent<NavMeshAgent>();
+        m_Animator = GetComponent<Animator>();
 
         if (!stats)
         {
@@ -37,14 +42,24 @@ public class baseEnemies : MonoBehaviour
         }
 
         health = stats.health;
+        
     }
 
     void Update()
     {
+        if (m_Agent.velocity.magnitude >= 0.1f)
+        {
+            m_Animator.SetBool("isRunning", true);
+        }
+        else
+        {
+            m_Animator.SetBool("isRunning", false);
+        }
+
         if ( health <= 0 )
         {
             Die();
-        } else
+        } else if (!isAttacking ) 
         {
             TrackPlayer();
         }
@@ -57,24 +72,25 @@ public class baseEnemies : MonoBehaviour
 
     public void Die()
     {
-        Destroy(gameObject);
+        m_Animator.SetTrigger("Die");
     }
 
     public void TrackPlayer()
     {
         if (Target != null)
         {
-            float distance = Vector3.Distance(transform.position, Target.position);
+            float distance = Vector3.Distance(transform.position, Target.transform.position);
 
             if (distance > stats.attackRange)
             {
-                m_Agent.SetDestination(Target.position);
+                m_Agent.SetDestination(Target.transform.position);
                 m_Agent.isStopped = false;
             }
             else
             {
                 m_Agent.isStopped = true;
-                // behaviour.Attack();
+                isAttacking = true;
+                m_Animator.SetTrigger("Attack");
             }
         }
     }

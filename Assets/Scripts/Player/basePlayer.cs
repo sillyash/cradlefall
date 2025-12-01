@@ -7,6 +7,7 @@ public class basePlayer : MonoBehaviour
     [SerializeField] private BaseWeapon weapon;
 
     public PlayerStats stats;
+    [SerializeField] private float health;
 
     private Vector3 targetPoint;
 
@@ -18,10 +19,11 @@ public class basePlayer : MonoBehaviour
             enabled = false;
             return;
         }
+
+        health = stats.health;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void TakeDamage(float damage)
     {
         raycast();
         weapon.transform.LookAt(targetPoint);
