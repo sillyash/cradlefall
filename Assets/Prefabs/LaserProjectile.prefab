@@ -17,6 +17,10 @@ PrefabInstance:
       value: LaserProjectile
       objectReference: {fileID: 0}
     - target: {fileID: 5749042267261086274, guid: f1fbc6e08dfc79b4baac54479805ef17, type: 3}
+      propertyPath: m_Interpolate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5749042267261086274, guid: f1fbc6e08dfc79b4baac54479805ef17, type: 3}
       propertyPath: m_CollisionDetection
       value: 2
       objectReference: {fileID: 0}
