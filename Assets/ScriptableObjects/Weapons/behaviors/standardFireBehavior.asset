@@ -10,5 +10,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 82b6eba596567f14d916964fdf3e8772, type: 3}
-  m_Name: test_behavior
+  m_Name: standardFireBehavior
   m_EditorClassIdentifier: 
