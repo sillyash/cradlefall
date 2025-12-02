@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("StartGame");
         ChangeState(GameState.Initialising);
-        SceneManager.LoadScene("VictoryMenu");
+        SceneManager.LoadScene("TestWave");
 
     }
 
