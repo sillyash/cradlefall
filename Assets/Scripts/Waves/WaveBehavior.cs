@@ -27,13 +27,13 @@ public class WaveBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        foreach (GameObject enemy in spawnedEnemies)
+        // Iterate backwards and remove null entries safely
+        for (int i = spawnedEnemies.Count - 1; i >= 0; i--)
         {
-            if (enemy == null)
+            if (spawnedEnemies[i] == null)
             {
-                enemiesLeft--;
-                spawnedEnemies.Remove(enemy);
-                break;
+                spawnedEnemies.RemoveAt(i);
+                enemiesLeft = Mathf.Max(0, enemiesLeft - 1);
             }
         }
     }
