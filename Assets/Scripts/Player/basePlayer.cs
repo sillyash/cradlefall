@@ -73,9 +73,9 @@ public class basePlayer : MonoBehaviour, IDammageable, ICanDie
         }
     }
 
-    public void TakeDammage(float dammage)
+    public void TakeDamage(float damage)
     {
-        health -= dammage;
+        health -= damage;
     }
 
     public void Die()
