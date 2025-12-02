@@ -158,7 +158,8 @@ public class baseEnemies : MonoBehaviour, ICanDie
     {
         if (m_Target != null)
         {
-            float distance = Vector3.Distance(transform.position, m_Target.transform.position);
+            Vector3 closestPointOnTarget = m_Target.GetComponent<Collider>().ClosestPoint(transform.position);
+            float distance = Vector3.Distance(transform.position, closestPointOnTarget);
 
             if (distance > stats.attackRange)
             {
