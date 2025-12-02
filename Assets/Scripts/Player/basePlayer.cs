@@ -76,10 +76,16 @@ public class basePlayer : MonoBehaviour, IDamageable, ICanDie
     public void TakeDamage(float damage)
     {
         health -= damage;
+        if (health < 0)
+        {
+            isDead = true;
+            Die();
+        }
     }
 
     public void Die()
     {
         Debug.Log("Joueur Mort");
+        GameManager.instance.GameOver();
     }
 }
