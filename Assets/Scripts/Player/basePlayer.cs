@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class basePlayer : MonoBehaviour, IDammageable, ICanDie
+public class basePlayer : MonoBehaviour, IDamageable, ICanDie
 {
     public static float TARGET_DISTANCE = 5;
 
