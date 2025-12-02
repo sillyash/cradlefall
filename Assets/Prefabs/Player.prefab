@@ -153,10 +153,8 @@ GameObject:
   - component: {fileID: 3504256820337604735}
   - component: {fileID: 5886810650419684464}
   - component: {fileID: 8225159773639805063}
-  m_Layer: 8
-  m_Name: Joueur
   - component: {fileID: 2115452035298164465}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -321,7 +319,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: {fileID: 6118720023615190171}
-  debugObject: {fileID: 0}
+  health: 0
   stats: {fileID: 11400000, guid: 41ccfa7cd379515499abb2582c3819d4, type: 2}
 --- !u!1 &5298723177770993289
 GameObject:
@@ -552,6 +550,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8464794624840630467, guid: 6948f843119639b4e8e079c6f1d79201, type: 3}
+      propertyPath: projectile
+      value: 
+      objectReference: {fileID: 1529648288036035587, guid: f1fbc6e08dfc79b4baac54479805ef17, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
