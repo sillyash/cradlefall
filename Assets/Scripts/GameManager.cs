@@ -31,18 +31,23 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("in ResumeGame");
         ChangeState(GameState.Playing);
+
     }
 
     public void GameOver()
     {
         Debug.Log("in GameOver");
         ChangeState(GameState.GameOver);
+        SceneManager.LoadScene("LoseMenu");
+        Cursor.lockState = CursorLockMode.None;
     }
 
     public void Victory()
     {
         Debug.Log("in GameVictory");
         ChangeState(GameState.Victory);
+        SceneManager.LoadScene("VictoryMenu");
+        Cursor.lockState = CursorLockMode.None;
     }
 
     public void ReturnToMainMenu()
@@ -50,6 +55,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("in ReturnToMainMenu");
         ChangeState(GameState.MainMenu);
         SceneManager.LoadScene("MainMenu");
+        Cursor.lockState = CursorLockMode.None;
     }
 
     private void Awake()
