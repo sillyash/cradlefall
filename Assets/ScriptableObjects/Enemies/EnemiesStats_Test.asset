@@ -15,7 +15,7 @@ MonoBehaviour:
   health: 20
   attackRange: 1.5
   moveSpeed: 5
-  damage: 0
+  damage: 20
   attackCooldown: 0
   detectionRange: 15
   cost: 10
