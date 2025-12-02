@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
-public class baseEnemies : MonoBehaviour, ICanDie
+public class baseEnemies : MonoBehaviour, ICanDie, IDammageable
 {
     // [SerializeField] private EnemiesBehavior behaviour;
     [SerializeField] private EnemiesStats stats;
