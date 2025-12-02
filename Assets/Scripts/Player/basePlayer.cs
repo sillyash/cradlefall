@@ -1,11 +1,13 @@
 using UnityEngine;
 
-public class basePlayer : MonoBehaviour
+public class basePlayer : MonoBehaviour, IDammageable, ICanDie
 {
     public static float TARGET_DISTANCE = 5;
 
     [SerializeField] private BaseWeapon weapon;
     [SerializeField] private float health;
+
+    public bool isDead { get; set; } = false;
 
     public PlayerStats stats;
 
@@ -69,5 +71,15 @@ public class basePlayer : MonoBehaviour
         {
             targetPoint = calcTargetPoint();
         }
+    }
+
+    public void TakeDammage(float dammage)
+    {
+        health -= dammage;
+    }
+
+    public void Die()
+    {
+        Debug.Log("Joueur Mort");
     }
 }
