@@ -379,7 +379,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1745988921145066993, guid: abb16319171903c47ae24f622811ee4b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -12.272114
+      value: -3.7
       objectReference: {fileID: 0}
     - target: {fileID: 1745988921145066993, guid: abb16319171903c47ae24f622811ee4b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -387,7 +387,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1745988921145066993, guid: abb16319171903c47ae24f622811ee4b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -29.639942
+      value: -10.5
       objectReference: {fileID: 0}
     - target: {fileID: 1745988921145066993, guid: abb16319171903c47ae24f622811ee4b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -415,6 +415,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1745988921145066993, guid: abb16319171903c47ae24f622811ee4b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2794579176011445315, guid: abb16319171903c47ae24f622811ee4b, type: 3}
+      propertyPath: m_Height
+      value: 2.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2794579176011445315, guid: abb16319171903c47ae24f622811ee4b, type: 3}
+      propertyPath: m_Radius
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 2794579176011445315, guid: abb16319171903c47ae24f622811ee4b, type: 3}
+      propertyPath: m_Center.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2794579176011445315, guid: abb16319171903c47ae24f622811ee4b, type: 3}
+      propertyPath: m_Center.y
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2794579176011445315, guid: abb16319171903c47ae24f622811ee4b, type: 3}
+      propertyPath: m_Center.z
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8801305798296366074, guid: abb16319171903c47ae24f622811ee4b, type: 3}
