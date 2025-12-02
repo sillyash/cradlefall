@@ -55,22 +55,25 @@ public class WaveSpawner : MonoBehaviour
 
         WaveBehavior wave = waves[waveIndex];
 
-        for (;;)
+        GameObject enemyToSpawn;
+        
+        while ((enemyToSpawn = wave.GetNextEnemyToSpawn()) != null)
         {
-            GameObject enemyToSpawn = wave.GetNextEnemyToSpawn();
-            if (enemyToSpawn == null)
-            {
-                break;
-            }
-
             Transform spawnPoint = wave.GetRandomSpawnPoint();
+            GameObject instance;
             if (spawnPoint != null)
             {
-                Instantiate(enemyToSpawn, spawnPoint.position, spawnPoint.rotation);
+                instance = Instantiate(enemyToSpawn, spawnPoint.position, spawnPoint.rotation);
             }
             else
             {
-                Instantiate(enemyToSpawn, Vector3.zero, Quaternion.identity);
+                instance = Instantiate(enemyToSpawn, Vector3.zero, Quaternion.identity);
+            }
+
+            // Track spawned instance so we can wait for it to be destroyed
+            if (instance != null)
+            {
+                wave.spawnedEnemies.Add(instance);
             }
 
             float spawnInterval = wave.GetRandomSpawnInterval();
@@ -83,6 +86,26 @@ public class WaveSpawner : MonoBehaviour
                 // Prevent tight infinite loops if a wave returns zero/negative interval
                 yield return null;
             }
+        }
+
+        // Wait until all spawned enemies are destroyed before finishing the wave
+        while (true)
+        {
+            // Clean up any null references left in the list
+            for (int i = wave.spawnedEnemies.Count - 1; i >= 0; i--)
+            {
+                if (wave.spawnedEnemies[i] == null)
+                {
+                    wave.spawnedEnemies.RemoveAt(i);
+                }
+            }
+
+            if (wave.spawnedEnemies.Count == 0)
+            {
+                break;
+            }
+
+            yield return null;
         }
 
         // Wave finished
