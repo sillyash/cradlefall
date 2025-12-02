@@ -6,7 +6,7 @@ public class EnemySphereBehavior : MonoBehaviour
     public GameObject me;
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent<IDamageable>(out var damageable) && damageable.GetType() != typeof(baseEnemies))
+        if (other.TryGetComponent<IDamageable>(out var damageable) && !(damageable is baseEnemies))
         {
             baseEnemies myBase = me.GetComponent<baseEnemies>();
             Debug.Log(myBase.stats.damage);
