@@ -15,6 +15,6 @@ MonoBehaviour:
   availableEnemies:
   - {fileID: 8801305798296366074, guid: abb16319171903c47ae24f622811ee4b, type: 3}
   spendablePoints: 30
-  minSpawnInterval: 1
-  maxSpawnInterval: 4
+  minSpawnInterval: 3
+  maxSpawnInterval: 5
   timeToNextWave: 10
