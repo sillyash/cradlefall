@@ -3,25 +3,27 @@ using UnityEngine;
 
 public class EnemyAttackLogic : StateMachineBehaviour
 {
+    private baseEnemies enemy;
+    private SphereCollider main;
+
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        SphereCollider main = animator.gameObject.GetComponentInChildren<SphereCollider>(true);
+        enemy = animator.gameObject.GetComponent<baseEnemies>();
+        main = animator.gameObject.GetComponentInChildren<SphereCollider>(true);
         main.gameObject.SetActive(true);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
-    /*override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        
-    }*/
+        enemy.LookAtTarget();
+    }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        baseEnemies enemy = animator.gameObject.GetComponent<baseEnemies>();
         enemy.isAttacking = false;
-        SphereCollider main = animator.gameObject.GetComponentInChildren<SphereCollider>();
         main.gameObject.SetActive(false);
     }
 

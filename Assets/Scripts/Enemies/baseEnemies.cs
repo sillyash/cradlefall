@@ -175,7 +175,15 @@ public class baseEnemies : MonoBehaviour, ICanDie, IDamageable
             }
         }
     }
-        
+    public void LookAtTarget()
+    {
+        Vector3 direction = m_Target.transform.position - gameObject.transform.position;
+        gameObject.transform.rotation = Quaternion.LookRotation(direction);
+
+        var yRotation = gameObject.transform.eulerAngles.y;
+        gameObject.transform.rotation = Quaternion.Euler(0, yRotation, 0);
+    }
+
     public int GetCost()
     {
         return stats.cost;
