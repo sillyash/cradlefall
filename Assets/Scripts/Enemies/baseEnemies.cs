@@ -50,26 +50,30 @@ public class baseEnemies : MonoBehaviour, ICanDie, IDamageable
 
     void Update()
     {
-        if (m_Agent.velocity.magnitude >= 0.1f)
+        if (!isDead)
         {
-            m_Animator.SetBool("isRunning", true);
-        }
-        else
-        {
-            m_Animator.SetBool("isRunning", false);
-        }
-
-        if ( health <= 0 && !isDead)
-        {
-            isDead = true;
-            Die();
-        } else if (!isAttacking ) 
-        {
-            if (!hasFoundCapsule) 
+            if (m_Agent.velocity.magnitude >= 0.1f)
             {
-                m_Target = UpdateTarget();
+                m_Animator.SetBool("isRunning", true);
             }
-            TrackTarget();
+            else
+            {
+                m_Animator.SetBool("isRunning", false);
+            }
+
+            if (health <= 0)
+            {
+                isDead = true;
+                Die();
+            }
+            else if (!isAttacking)
+            {
+                if (!hasFoundCapsule)
+                {
+                    m_Target = UpdateTarget();
+                }
+                TrackTarget();
+            }
         }
     }
 
@@ -80,6 +84,7 @@ public class baseEnemies : MonoBehaviour, ICanDie, IDamageable
 
     public void Die()
     {
+        m_Agent.isStopped = true;
         m_Animator.SetTrigger("Die");
     }
 
