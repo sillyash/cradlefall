@@ -59,8 +59,9 @@ public class baseEnemies : MonoBehaviour, ICanDie
             m_Animator.SetBool("isRunning", false);
         }
 
-        if ( health <= 0 )
+        if ( health <= 0 && !isDead)
         {
+            isDead = true;
             Die();
         } else if (!isAttacking ) 
         {
