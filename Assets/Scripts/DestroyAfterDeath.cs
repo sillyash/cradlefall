@@ -13,7 +13,6 @@ public class DestroyAfterDeath : StateMachineBehaviour
 
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        Debug.Log("MORT");
         Destroy(animator.gameObject);
     }
 }
