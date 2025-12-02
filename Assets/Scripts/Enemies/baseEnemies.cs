@@ -10,7 +10,7 @@ using UnityEngine.AI;
 public class baseEnemies : MonoBehaviour, ICanDie, IDamageable
 {
     // [SerializeField] private EnemiesBehavior behaviour;
-    [SerializeField] private EnemiesStats stats;
+    public EnemiesStats stats;
 
     public bool isDead { get; set; } = false;
     public float health;
