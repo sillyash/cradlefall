@@ -155,6 +155,7 @@ GameObject:
   - component: {fileID: 8225159773639805063}
   - component: {fileID: 2115452035298164465}
   m_Layer: 8
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -318,7 +319,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfa9f854f3610824a94ad0e86389b392, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapon: {fileID: 1820306909706261277}
+  weapon: {fileID: 6118720023615190171}
   health: 0
   stats: {fileID: 11400000, guid: 41ccfa7cd379515499abb2582c3819d4, type: 2}
 --- !u!1 &5298723177770993289
@@ -546,10 +547,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6906893552160893867, guid: a16e6e5ac2ae29b439bddc0f7893b702, type: 3}
-      propertyPath: m_Name
-      value: LaserCanon
-      objectReference: {fileID: 0}
+    - target: {fileID: 8464794624840630467, guid: 6948f843119639b4e8e079c6f1d79201, type: 3}
+      propertyPath: projectile
+      value: 
+      objectReference: {fileID: 1529648288036035587, guid: f1fbc6e08dfc79b4baac54479805ef17, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
