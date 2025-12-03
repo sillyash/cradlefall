@@ -25,4 +25,9 @@ public class MainMenu : MonoBehaviour {
         // TODO: Load Options Menu
     }
 
+    public void onCreditsButtonClicked()
+    {
+        Debug.Log("Loading Credits Menu...");
+        // TODO: Load Credits Menu
+    }
 }
