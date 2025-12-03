@@ -11,7 +11,6 @@ public class EnemyAttackLogic : StateMachineBehaviour
     {
         enemy = animator.gameObject.GetComponent<baseEnemies>();
         main = animator.gameObject.GetComponentInChildren<SphereCollider>(true);
-        main.gameObject.SetActive(true);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -24,7 +23,6 @@ public class EnemyAttackLogic : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         enemy.isAttacking = false;
-        main.gameObject.SetActive(false);
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
