@@ -121,6 +121,7 @@ public class WaveSpawner : MonoBehaviour
         {
             Debug.Log("All waves completed.");
             this.enabled = false;
+            GameManager.instance.Victory();
         }
     }
 }
