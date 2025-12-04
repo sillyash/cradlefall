@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CryogenicBox : MonoBehaviour
+public class CryogenicBox : MonoBehaviour, IDamageable
 {
     [SerializeField] private float maxPV = 500;
     [SerializeField] private float currentPV;

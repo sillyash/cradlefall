@@ -108,13 +108,13 @@ CapsuleCollider:
     m_Bits: 0
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
-  m_ProvidesContacts: 1
+  m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.6
+  m_Radius: 0.7
   m_Height: 2.5
   m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+  m_Center: {x: 0.07603626, y: 0, z: -0.00000006301868}
 --- !u!114 &3057926565930562090
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,7 +163,7 @@ Light:
   m_Type: 2
   m_Color: {r: 0, g: 0.48235294, b: 1, a: 1}
   m_Intensity: 5
-  m_Range: 10
+  m_Range: 5.54165
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
