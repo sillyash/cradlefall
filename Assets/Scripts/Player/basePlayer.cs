@@ -5,7 +5,8 @@ public class basePlayer : MonoBehaviour, IDamageable, ICanDie
     public static float TARGET_DISTANCE = 5;
 
     [SerializeField] private BaseWeapon weapon;
-    [SerializeField] private float health;
+    public float health;
+    [SerializeField] private HealthBarScript healthBar;
 
     public bool isDead { get; set; } = false;
 
