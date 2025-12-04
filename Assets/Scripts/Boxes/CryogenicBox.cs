@@ -3,7 +3,7 @@ using UnityEngine;
 public class CryogenicBox : MonoBehaviour
 {
     [SerializeField] private float maxPV = 500;
-    private float currentPV;
+    [SerializeField] private float currentPV;
     private bool broken = false;
 
     void Start()

@@ -15,9 +15,9 @@ GameObject:
   - component: {fileID: 8407480881653082954}
   - component: {fileID: 2688523341522691716}
   - component: {fileID: 830884150946682170}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: CryoBox
-  m_TagString: Untagged
+  m_TagString: Capsule
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

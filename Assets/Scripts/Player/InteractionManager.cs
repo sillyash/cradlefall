@@ -27,8 +27,10 @@ public class InteractionManager : MonoBehaviour
 
     private void Update()
     {
+
         if (Input.GetKey(KeyCode.E))
         {
+
             Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
             RaycastHit hit;
 
@@ -56,7 +58,6 @@ public class InteractionManager : MonoBehaviour
                 // interaction avec une capsule
                 {
                     CryogenicBox capsule = objectHitByRaycast.GetComponent<CryogenicBox>();
-                    
                     
                     capsule.Heal(Time.deltaTime*healPerSeconde);
                     
