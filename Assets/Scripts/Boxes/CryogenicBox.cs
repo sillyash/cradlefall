@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CryogenicBox : MonoBehaviour
 {
-    [SerializeField] private int maxPV = 100;
+    [SerializeField] private int maxPV = 500;
     private int currentPV;
     private bool broken = false;
 
@@ -29,11 +29,12 @@ public class CryogenicBox : MonoBehaviour
         broken = true;
     }
 
-    public void Repair()
+    public void Heal(int ammount)
     {
-        if (!broken) return;
-        broken = false;
-        currentPV = maxPV;
+        if (currentPV < (0.75*maxPV))
+        {
+            currentPV += ammount;
+        }
     }
 
     public bool IsBroken()
