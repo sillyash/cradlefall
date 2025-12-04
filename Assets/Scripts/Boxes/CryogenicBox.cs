@@ -27,6 +27,7 @@ public class CryogenicBox : MonoBehaviour, IDamageable
     {
         if (broken) return;
         broken = true;
+        GameManager.instance.GameOver();
     }
 
     public void Heal(float ammount)
