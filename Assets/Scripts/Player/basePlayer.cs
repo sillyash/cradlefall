@@ -5,7 +5,8 @@ public class basePlayer : MonoBehaviour
     public static float TARGET_DISTANCE = 5;
 
     [SerializeField] private BaseWeapon weapon;
-    [SerializeField] private float health;
+    public float health;
+    [SerializeField] private HealthBarScript healthBar;
 
     public PlayerStats stats;
 
@@ -70,4 +71,8 @@ public class basePlayer : MonoBehaviour
             targetPoint = calcTargetPoint();
         }
     }
+
+
+
+
 }
