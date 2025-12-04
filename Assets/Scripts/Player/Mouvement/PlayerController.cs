@@ -28,6 +28,7 @@ public class PlayerController : PlayerMovement
         ApplyFinalMovement();
     }
 
+
     protected override void HandleMovement()
     {
         float axisX = Input.GetAxis("Horizontal");
