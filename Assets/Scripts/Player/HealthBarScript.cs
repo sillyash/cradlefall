@@ -23,7 +23,7 @@ public class HealthBarScript : MonoBehaviour
     {
         if (player == null) return;
 
-        Debug.Log("Vie du joueur : " + player.health);
+        //Debug.Log("Vie du joueur : " + player.health);
 
         if (smooth)
         {
