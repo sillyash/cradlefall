@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class CryogenicBox : MonoBehaviour
 {
-    [SerializeField] private int maxPV = 500;
-    private int currentPV;
+    [SerializeField] private float maxPV = 500;
+    private float currentPV;
     private bool broken = false;
 
     void Start()
@@ -11,7 +11,7 @@ public class CryogenicBox : MonoBehaviour
         currentPV = maxPV;
     }
 
-    public void TakeDamage(int amount)
+    public void TakeDamage(float amount)
     {
         if (broken) return;
 
@@ -29,7 +29,7 @@ public class CryogenicBox : MonoBehaviour
         broken = true;
     }
 
-    public void Heal(int ammount)
+    public void Heal(float ammount)
     {
         if (currentPV < (0.75*maxPV))
         {
@@ -42,7 +42,7 @@ public class CryogenicBox : MonoBehaviour
         return broken;
     }
 
-    public int GetCurrentPV()
+    public float GetCurrentPV()
     {
         return currentPV;
     }
