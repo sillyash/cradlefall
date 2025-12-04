@@ -727,7 +727,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1733672681743997420
 Transform:
   m_ObjectHideFlags: 0
@@ -758,7 +758,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4193846992884959853}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -815,7 +815,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
+  m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1777538828606788025
 MonoBehaviour:
@@ -1902,6 +1902,7 @@ GameObject:
   - component: {fileID: 1427153286164245215}
   - component: {fileID: 2794579176011445315}
   - component: {fileID: 3157240863070178657}
+  - component: {fileID: 4270301962239238977}
   m_Layer: 0
   m_Name: MaxiliarusInferiarus
   m_TagString: MainEnemy
@@ -2010,6 +2011,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4270301962239238977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8801305798296366074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffb7d0d545fda5248ac8f07aa4bdb410, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9076397549264288699
 GameObject:
   m_ObjectHideFlags: 0
