@@ -26,32 +26,35 @@ public class InteractionManager : MonoBehaviour
 
     private void Update()
     {
-        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
-        RaycastHit hit;
-
-        if (Physics.Raycast(ray, out hit, player.stats.InteractionRange))
+        if (Input.GetKey(KeyCode.E))
         {
-            GameObject objectHitByRaycast = hit.transform.gameObject;
+            Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+            RaycastHit hit;
 
-            if (objectHitByRaycast.GetComponent<BaseModule>() != null)
-            // interaction avec un module
+            if (Physics.Raycast(ray, out hit, player.stats.InteractionRange))
             {
-                BaseModule module = objectHitByRaycast.GetComponent<BaseModule>();
+                GameObject objectHitByRaycast = hit.transform.gameObject;
 
-                if (!module.broken) return;
-                if (Input.GetKey(KeyCode.E))
+                if (objectHitByRaycast.GetComponent<BaseModule>() != null)
+                // interaction avec un module
                 {
-                    holdTimer += Time.deltaTime;
+                    BaseModule module = objectHitByRaycast.GetComponent<BaseModule>();
 
-                    if (holdTimer >= module.stats.repairTime)
+                    if (!module.broken) return;
                     {
-                        module.Repair();
-                        holdTimer = 0f;
+                        holdTimer += Time.deltaTime;
+
+                        if (holdTimer >= module.stats.repairTime)
+                        {
+                            module.Repair();
+                            holdTimer = 0f;
+                        }
+
+                        else
+                        {
+                            holdTimer = 0f;
+                        }
                     }
-                }
-                else
-                {
-                    holdTimer = 0f;
                 }
             }
         }
