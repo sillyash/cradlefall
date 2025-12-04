@@ -155,7 +155,6 @@ GameObject:
   - component: {fileID: 8225159773639805063}
   - component: {fileID: 2115452035298164465}
   m_Layer: 8
-  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -319,7 +318,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfa9f854f3610824a94ad0e86389b392, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapon: {fileID: 6118720023615190171}
+  weapon: {fileID: 1820306909706261277}
   health: 0
   stats: {fileID: 11400000, guid: 41ccfa7cd379515499abb2582c3819d4, type: 2}
 --- !u!1 &5298723177770993289
