@@ -319,9 +319,29 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8858550002897436763, guid: 3991fbccf7fc2a946bbf6907ff7a5bc8, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7316028299326141947, guid: 3991fbccf7fc2a946bbf6907ff7a5bc8, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -6003659272898951660, guid: 3991fbccf7fc2a946bbf6907ff7a5bc8, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 630439958057962408, guid: 3991fbccf7fc2a946bbf6907ff7a5bc8, type: 3}
       propertyPath: m_Name
       value: Capsule
+      objectReference: {fileID: 0}
+    - target: {fileID: 630439958057962408, guid: 3991fbccf7fc2a946bbf6907ff7a5bc8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1395503885307066833, guid: 3991fbccf7fc2a946bbf6907ff7a5bc8, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3057926565930562090, guid: 3991fbccf7fc2a946bbf6907ff7a5bc8, type: 3}
       propertyPath: m_Area
@@ -333,6 +353,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3057926565930562090, guid: 3991fbccf7fc2a946bbf6907ff7a5bc8, type: 3}
       propertyPath: m_OverrideArea
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3871001753717916939, guid: 3991fbccf7fc2a946bbf6907ff7a5bc8, type: 3}
+      propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7110353594434823002, guid: 3991fbccf7fc2a946bbf6907ff7a5bc8, type: 3}
@@ -373,6 +397,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7110353594434823002, guid: 3991fbccf7fc2a946bbf6907ff7a5bc8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8794665647897154149, guid: 3991fbccf7fc2a946bbf6907ff7a5bc8, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8794665647897154149, guid: 3991fbccf7fc2a946bbf6907ff7a5bc8, type: 3}
+      propertyPath: m_ProvidesContacts
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
