@@ -1,12 +1,14 @@
 using UnityEngine;
 
-public class basePlayer : MonoBehaviour
+public class basePlayer : MonoBehaviour, IDamageable, ICanDie
 {
     public static float TARGET_DISTANCE = 5;
 
     [SerializeField] private BaseWeapon weapon;
     public float health;
     [SerializeField] private HealthBarScript healthBar;
+
+    public bool isDead { get; set; } = false;
 
     public PlayerStats stats;
 
@@ -72,7 +74,19 @@ public class basePlayer : MonoBehaviour
         }
     }
 
+    public void TakeDamage(float damage)
+    {
+        health -= damage;
+        if (health < 0)
+        {
+            isDead = true;
+            Die();
+        }
+    }
 
-
-
+    public void Die()
+    {
+        Debug.Log("Joueur Mort");
+        GameManager.instance.GameOver();
+    }
 }

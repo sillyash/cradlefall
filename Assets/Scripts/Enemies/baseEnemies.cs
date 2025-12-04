@@ -7,10 +7,10 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
-public class baseEnemies : MonoBehaviour, ICanDie
+public class baseEnemies : MonoBehaviour, ICanDie, IDamageable
 {
     // [SerializeField] private EnemiesBehavior behaviour;
-    [SerializeField] private EnemiesStats stats;
+    public EnemiesStats stats;
 
     public bool isDead { get; set; } = false;
     public float health;
@@ -50,25 +50,30 @@ public class baseEnemies : MonoBehaviour, ICanDie
 
     void Update()
     {
-        if (m_Agent.velocity.magnitude >= 0.1f)
+        if (!isDead)
         {
-            m_Animator.SetBool("isRunning", true);
-        }
-        else
-        {
-            m_Animator.SetBool("isRunning", false);
-        }
-
-        if ( health <= 0 )
-        {
-            Die();
-        } else if (!isAttacking ) 
-        {
-            if (!hasFoundCapsule) 
+            if (m_Agent.velocity.magnitude >= 0.1f)
             {
-                m_Target = UpdateTarget();
+                m_Animator.SetBool("isRunning", true);
             }
-            TrackTarget();
+            else
+            {
+                m_Animator.SetBool("isRunning", false);
+            }
+
+            if (health <= 0)
+            {
+                isDead = true;
+                Die();
+            }
+            else if (!isAttacking)
+            {
+                if (!hasFoundCapsule)
+                {
+                    m_Target = UpdateTarget();
+                }
+                TrackTarget();
+            }
         }
     }
 
@@ -79,6 +84,7 @@ public class baseEnemies : MonoBehaviour, ICanDie
 
     public void Die()
     {
+        m_Agent.isStopped = true;
         m_Animator.SetTrigger("Die");
     }
 
@@ -174,7 +180,15 @@ public class baseEnemies : MonoBehaviour, ICanDie
             }
         }
     }
-        
+    public void LookAtTarget()
+    {
+        Vector3 direction = m_Target.transform.position - gameObject.transform.position;
+        gameObject.transform.rotation = Quaternion.LookRotation(direction);
+
+        var yRotation = gameObject.transform.eulerAngles.y;
+        gameObject.transform.rotation = Quaternion.Euler(0, yRotation, 0);
+    }
+
     public int GetCost()
     {
         return stats.cost;

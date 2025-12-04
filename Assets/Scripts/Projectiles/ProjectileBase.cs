@@ -8,6 +8,7 @@ public class ProjectileBase : MonoBehaviour
 {
     public static float CURVE_AMP = 100;
     public static float CURVE_LENGTH_DIV = 2;
+    public static float LIFESPAN = 2; // in seconds
     [SerializeField] private ProjectileBehavior behavior;
     [SerializeField] private ProjectileStats stats;
 
@@ -15,6 +16,7 @@ public class ProjectileBase : MonoBehaviour
 
     // To calculate curve tangent
     private Vector3 initPos;
+    private float startTime;
     private float prevCurvVal = 0;
     private float curveVal;
 
@@ -30,7 +32,9 @@ public class ProjectileBase : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         rb.linearVelocity = transform.forward * stats.speed;
+        
         initPos = transform.position;
+        startTime = Time.time;
     }
 
     void OnTriggerEnter(Collider other)
@@ -42,6 +46,14 @@ public class ProjectileBase : MonoBehaviour
         }
     }
 
+
+    void Update()
+    {
+        if (Time.time - startTime > LIFESPAN)
+        {
+            Destroy(gameObject);
+        }
+    }
 
     // Fixed update is basically update with delta time
     void FixedUpdate()
