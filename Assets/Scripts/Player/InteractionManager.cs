@@ -7,6 +7,7 @@ public class InteractionManager : MonoBehaviour
 
     private float holdTimer = 0f;
 
+    [SerializeField]private float healPerSeconde = 4;
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -49,14 +50,22 @@ public class InteractionManager : MonoBehaviour
                             module.Repair();
                             holdTimer = 0f;
                         }
-
-                        else
-                        {
-                            holdTimer = 0f;
-                        }
                     }
                 }
+                if (objectHitByRaycast.GetComponent<CryogenicBox>() != null)
+                // interaction avec une capsule
+                {
+                    CryogenicBox capsule = objectHitByRaycast.GetComponent<CryogenicBox>();
+                    
+                    
+                    capsule.Heal(Time.deltaTime*healPerSeconde);
+                    
+                }
             }
+        }
+        else
+        {
+            holdTimer = 0f;
         }
     }
 }
