@@ -23,6 +23,7 @@ public class EnemyAttackLogic : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         enemy.isAttacking = false;
+        main.gameObject.GetComponent<EnemySphereBehavior>().hasTouched = false; // reset if we touched something
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

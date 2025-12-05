@@ -26,8 +26,6 @@ public class HealthBarScript : MonoBehaviour
     {
         if (thing == null) return;
 
-        Debug.Log("Vie du joueur : " + thing.health);
-
         if (smooth)
         {
             slider.value = Mathf.Lerp(slider.value, thing.health, Time.deltaTime * smoothSpeed);
