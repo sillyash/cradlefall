@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06252fce17936094a99d9e9b0b7bd1fe, type: 3}
   m_Name: LaserCanonstats
   m_EditorClassIdentifier: 
-  magSize: 0
+  magSize: 100
   reloadTime: 0
   shootingCooldown: 0
   spread: 0

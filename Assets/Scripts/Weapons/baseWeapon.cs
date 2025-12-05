@@ -13,9 +13,17 @@ public class BaseWeapon : MonoBehaviour
     private bool isReadyToShoot = true;
 
 
+    // Variables partager a l'HUD munitions
+    public int AmmoCount => ammoCount;
+    public int MagSize => stats.magSize;
+
+    public event System.Action OnAmmoChanged;
+
+
     void Start()
     {
         ammoCount = stats.magSize;
+        OnAmmoChanged?.Invoke();
     }
 
 
@@ -32,6 +40,7 @@ public class BaseWeapon : MonoBehaviour
 
             behavior.OnFire(projectile, projectileSpawn.transform.transform, stats.spread);
             ammoCount--;
+            OnAmmoChanged?.Invoke();
 
             isReadyToShoot = false;
             StartCoroutine(FireCooldown());
@@ -55,6 +64,7 @@ public class BaseWeapon : MonoBehaviour
     {
         yield return new WaitForSeconds(stats.reloadTime);
         ammoCount = stats.magSize;
+        OnAmmoChanged?.Invoke();
         Debug.Log("Done");
     }
 }
