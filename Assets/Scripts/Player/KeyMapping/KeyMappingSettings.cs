@@ -14,6 +14,8 @@ public static class KeyMappingSettings
     public static KeyCode Right;
     public static KeyCode Jump;
     public static KeyCode Shoot;
+    public static KeyCode Reload;
+    public static KeyCode Interact;
 
     private const string PREFS_KEY = "CurrentPreset";
 
@@ -26,6 +28,8 @@ public static class KeyMappingSettings
         Right = KeyCode.D;
         Jump = KeyCode.Space;
         Shoot = KeyCode.Mouse0;
+        Reload = KeyCode.R;
+        Interact = KeyCode.E;
 
         PlayerPrefs.SetString(PREFS_KEY, PresetType.ZQSD.ToString());
         PlayerPrefs.Save();
@@ -40,6 +44,8 @@ public static class KeyMappingSettings
         Right = KeyCode.D;
         Jump = KeyCode.Space;
         Shoot = KeyCode.Mouse0;
+        Reload = KeyCode.R;
+        Interact = KeyCode.E;
 
         PlayerPrefs.SetString(PREFS_KEY, PresetType.WASD.ToString());
         PlayerPrefs.Save();
