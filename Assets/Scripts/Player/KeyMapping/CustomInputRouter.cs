@@ -35,4 +35,14 @@ public static class CustomInputRouter
     {
         return Input.GetKey(KeyMappingSettings.Shoot);
     }
+
+    public static bool GetButtonReload()
+    {
+        return Input.GetKeyDown(KeyMappingSettings.Reload);
+    }
+
+    public static bool GetButtonInteract()
+    {
+        return Input.GetKey(KeyMappingSettings.Interact);
+    }
 }

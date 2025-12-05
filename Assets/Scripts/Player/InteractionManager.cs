@@ -28,7 +28,7 @@ public class InteractionManager : MonoBehaviour
     private void Update()
     {
 
-        if (Input.GetKey(KeyCode.E))
+        if (CustomInputRouter.GetButtonInteract())
         {
 
             Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));

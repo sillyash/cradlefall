@@ -37,14 +37,15 @@ public class basePlayer : MonoBehaviour, IDamageable, ICanDie
 
     void weaponInput()
     {
-        if (Input.GetButtonDown("Reload"))
+        if (CustomInputRouter.GetButtonReload())
+            
         {
             weapon.Reload();
         }
 
         else
 
-        if (Input.GetButton("Fire1"))
+        if (CustomInputRouter.GetButtonShoot())
         {
             weapon.Fire();
         }
