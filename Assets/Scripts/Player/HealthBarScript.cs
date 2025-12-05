@@ -4,7 +4,8 @@ using UnityEngine.UI;
 public class HealthBarScript : MonoBehaviour
 {
     public Slider slider;          
-    public basePlayer player;      
+    public GameObject damageable;
+    private IDamageable thing;
 
     [Header("Smooth settings")]
     public bool smooth = true;    
@@ -12,26 +13,28 @@ public class HealthBarScript : MonoBehaviour
 
     private void Start()
     {
-        if (player != null)
+        damageable.TryGetComponent(out thing);
+
+        if (thing != null)
         {
-            slider.maxValue = (int)player.stats.health;
-            slider.value = (int)player.health;
+            slider.maxValue = (int)thing.maxHealth;
+            slider.value = (int)thing.health;
         }
     }
 
     private void Update()
     {
-        if (player == null) return;
+        if (thing == null) return;
 
-        //Debug.Log("Vie du joueur : " + player.health);
+        Debug.Log("Vie du joueur : " + thing.health);
 
         if (smooth)
         {
-            slider.value = Mathf.Lerp(slider.value, player.health, Time.deltaTime * smoothSpeed);
+            slider.value = Mathf.Lerp(slider.value, thing.health, Time.deltaTime * smoothSpeed);
         }
         else
         {
-            slider.value = player.health;
+            slider.value = thing.health;
         }
     }
 }
