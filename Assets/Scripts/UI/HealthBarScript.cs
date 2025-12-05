@@ -8,7 +8,7 @@ public class HealthBarScript : MonoBehaviour
     private IDamageable thing;
 
     [Header("Smooth settings")]
-    public bool smooth = true;    
+    public bool smooth = false;    
     public float smoothSpeed = 10f;
 
     private void Start()
