@@ -1210,6 +1210,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &2018646838 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4263663073151763242, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
+  m_PrefabInstance: {fileID: 2124052927}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2124052927
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1246,6 +1251,10 @@ PrefabInstance:
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 2124052928}
+    - target: {fileID: 2400725616754398652, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
+      propertyPath: damageable
+      value: 
+      objectReference: {fileID: 2018646838}
     - target: {fileID: 3525602671863827654, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
       propertyPath: m_Sprite
       value: 
