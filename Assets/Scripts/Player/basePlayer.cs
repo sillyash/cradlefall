@@ -5,7 +5,9 @@ public class basePlayer : MonoBehaviour, IDamageable, ICanDie
     public static float TARGET_DISTANCE = 5;
 
     [SerializeField] private BaseWeapon weapon;
-    public float health;
+    public float health { get; set; }
+    public float maxHealth { get; set; }
+
     [SerializeField] private HealthBarScript healthBar;
 
     public bool isDead { get; set; } = false;
@@ -24,6 +26,7 @@ public class basePlayer : MonoBehaviour, IDamageable, ICanDie
         }
 
         health = stats.health;
+        maxHealth = stats.health;
     }
 
     void Update()

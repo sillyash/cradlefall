@@ -13,7 +13,8 @@ public class baseEnemies : MonoBehaviour, ICanDie, IDamageable
     public EnemiesStats stats;
 
     public bool isDead { get; set; } = false;
-    public float health;
+    public float health { get; set; }
+    public float maxHealth { get; set; }
 
     private GameObject m_Target;
     private NavMeshAgent m_Agent;
@@ -43,6 +44,7 @@ public class baseEnemies : MonoBehaviour, ICanDie, IDamageable
         
 
         health = stats.health;
+        maxHealth = stats.health;
         m_Agent.stoppingDistance = stats.attackRange;
         m_Agent.speed = stats.moveSpeed;
 
