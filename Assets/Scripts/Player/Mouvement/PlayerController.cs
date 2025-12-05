@@ -11,6 +11,8 @@ public class PlayerController : PlayerMovement
 
     void Start()
     {
+        KeyMappingSettings.LoadPreset();
+
         characterController = GetComponent<CharacterController>();
         if (!movementSettings)
         {
@@ -31,8 +33,8 @@ public class PlayerController : PlayerMovement
 
     protected override void HandleMovement()
     {
-        float axisX = Input.GetAxis("Horizontal");
-        float axisY = Input.GetAxis("Vertical");
+        float axisX = CustomInputRouter.GetAxisHorizontal();
+        float axisY = CustomInputRouter.GetAxisVertical();
 
         speed = Input.GetKey(KeyCode.LeftShift) ? movementSettings.runningSpeed : movementSettings.walkingSpeed;
 
@@ -50,7 +52,7 @@ public class PlayerController : PlayerMovement
 
     protected override void HandleJump()
     {
-        if (characterController.isGrounded && Input.GetButtonDown("Jump"))
+        if (characterController.isGrounded && CustomInputRouter.GetButtonJump())
         {
             velocity.y = Mathf.Sqrt(movementSettings.jumpHeight * -2f * PlayerMovementSettings.GRAVITY);
         }
