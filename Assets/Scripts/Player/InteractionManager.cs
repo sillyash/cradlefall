@@ -7,6 +7,7 @@ public class InteractionManager : MonoBehaviour
 
     private float holdTimer = 0f;
 
+    [SerializeField]private float healPerSeconde = 4;
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -26,34 +27,46 @@ public class InteractionManager : MonoBehaviour
 
     private void Update()
     {
-        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
-        RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, player.stats.InteractionRange))
+        if (Input.GetKey(KeyCode.E))
         {
-            GameObject objectHitByRaycast = hit.transform.gameObject;
 
-            if (objectHitByRaycast.GetComponent<BaseModule>() != null)
-            // interaction avec un module
+            Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit, player.stats.InteractionRange))
             {
-                BaseModule module = objectHitByRaycast.GetComponent<BaseModule>();
+                GameObject objectHitByRaycast = hit.transform.gameObject;
 
-                if (!module.broken) return;
-                if (Input.GetKey(KeyCode.E))
+                if (objectHitByRaycast.GetComponent<BaseModule>() != null)
+                // interaction avec un module
                 {
-                    holdTimer += Time.deltaTime;
+                    BaseModule module = objectHitByRaycast.GetComponent<BaseModule>();
 
-                    if (holdTimer >= module.stats.repairTime)
+                    if (!module.broken) return;
                     {
-                        module.Repair();
-                        holdTimer = 0f;
+                        holdTimer += Time.deltaTime;
+
+                        if (holdTimer >= module.stats.repairTime)
+                        {
+                            module.Repair();
+                            holdTimer = 0f;
+                        }
                     }
                 }
-                else
+                if (objectHitByRaycast.GetComponent<CryogenicBox>() != null)
+                // interaction avec une capsule
                 {
-                    holdTimer = 0f;
+                    CryogenicBox capsule = objectHitByRaycast.GetComponent<CryogenicBox>();
+                    
+                    capsule.Heal(Time.deltaTime*healPerSeconde);
+                    
                 }
             }
+        }
+        else
+        {
+            holdTimer = 0f;
         }
     }
 }

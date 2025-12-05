@@ -1,8 +1,18 @@
 using UnityEngine;
 
-public class basePlayer : MonoBehaviour
+public class basePlayer : MonoBehaviour, IDamageable, ICanDie
 {
+    public static float TARGET_DISTANCE = 5;
+
+    [SerializeField] private BaseWeapon weapon;
+    public float health;
+    [SerializeField] private HealthBarScript healthBar;
+
+    public bool isDead { get; set; } = false;
+
     public PlayerStats stats;
+
+    private Vector3 targetPoint;
 
     void Start()
     {
@@ -12,11 +22,71 @@ public class basePlayer : MonoBehaviour
             enabled = false;
             return;
         }
+
+        health = stats.health;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        raycast();
+        weapon.transform.LookAt(targetPoint);
+
+
+        weaponInput();
+    }
+
+    void weaponInput()
+    {
+        if (Input.GetButtonDown("Reload"))
+        {
+            weapon.Reload();
+        }
+
+        else
+
+        if (Input.GetButton("Fire1"))
+        {
+            weapon.Fire();
+        }
+    }
+
+    Vector3 calcTargetPoint()
+    {
+        return Camera.main.transform.position + Camera.main.transform.forward * TARGET_DISTANCE;
+    }
+
+    void raycast()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit))
+        {
+            // Ignore projectile
+            if(!hit.collider.TryGetComponent(out ProjectileBase var))
+            {
+                targetPoint = hit.point;
+                weapon.transform.LookAt(targetPoint);
+            }
+        } else
+        {
+            targetPoint = calcTargetPoint();
+        }
+    }
+
+    public void TakeDamage(float damage)
+    {
+        health -= damage;
+        if (health < 0)
+        {
+            isDead = true;
+            Die();
+        }
+    }
+
+    public void Die()
+    {
+        Debug.Log("Joueur Mort");
+        GameManager.instance.GameOver();
     }
 }

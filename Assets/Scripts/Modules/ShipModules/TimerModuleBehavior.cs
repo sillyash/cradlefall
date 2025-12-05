@@ -37,8 +37,7 @@ public class TimerModuleBehavior : ModuleBehavior
             if (isTimerRunning)
             {
                 isTimerRunning = false;
-                Debug.Log("Game Over");
-                // TODO implémenter un gameOver
+                GameManager.instance.GameOver();
             } 
             else
             {

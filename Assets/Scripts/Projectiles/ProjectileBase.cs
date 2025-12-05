@@ -1,48 +1,82 @@
+using TreeEditor;
+using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
-using static UnityEngine.Rendering.DebugUI.Table;
 
 
 public class ProjectileBase : MonoBehaviour
 {
+    public static float CURVE_AMP = 100;
+    public static float CURVE_LENGTH_DIV = 2;
+    public static float LIFESPAN = 2; // in seconds
     [SerializeField] private ProjectileBehavior behavior;
     [SerializeField] private ProjectileStats stats;
 
-    // Will not stay serialized, but it's useful when testing
-    [SerializeField] private Vector3 direction;
     private Rigidbody rb;
+
+    // To calculate curve tangent
+    private Vector3 initPos;
+    private float startTime;
+    private float prevCurvVal = 0;
+    private float curveVal;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        if(behavior == null)
+        if (behavior == null)
         {
             Debug.Log("No behavior assigned");
         }
 
-        if (stats == null)
-        {
-            Debug.Log("No stats assigned");
-        }
-
         rb = GetComponent<Rigidbody>();
 
-        rb.linearVelocity = direction.normalized * stats.speed;
-        //rb.AddForce(direction.normalized * speed, ForceMode.Impulse);
+        rb.linearVelocity = transform.forward * stats.speed;
+        
+        initPos = transform.position;
+        startTime = Time.time;
     }
 
     void OnTriggerEnter(Collider other)
     {
-        behavior.HandleCollision(other, stats.damage);
-        Destroy(gameObject);
+        if (!other.TryGetComponent<ProjectileBase>(out ProjectileBase var))
+        {
+            behavior.HandleCollision(other, stats.damage);
+            Destroy(gameObject);
+        }
     }
 
+
+    void Update()
+    {
+        if (Time.time - startTime > LIFESPAN)
+        {
+            Destroy(gameObject);
+        }
+    }
 
     // Fixed update is basically update with delta time
     void FixedUpdate()
     {
+        
+        Vector3 vel = rb.linearVelocity;
+
+        float point = Vector3.Distance(transform.position, initPos) / CURVE_LENGTH_DIV;
+
+        //vel.y = getCurveOrientation(point);
+
+        prevCurvVal = curveVal;
+
+        //rb.linearVelocity = vel;
         UpdateRotation();
+    }
+
+    // Return the tangent on the curve in stat at given point
+    float getCurveOrientation(float point)
+    {
+        curveVal = stats.launchCurve.Evaluate(point);
+
+        return (curveVal - prevCurvVal) * CURVE_AMP;
     }
 
     void UpdateRotation()

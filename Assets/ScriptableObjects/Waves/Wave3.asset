@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1e8544aaaecbf24ea979ed3f660625c, type: 3}
+  m_Name: Wave3
+  m_EditorClassIdentifier: 
+  availableEnemies:
+  - {fileID: 1293473754200674575, guid: 253b7a0e6bbe1024bb265687a60e654f, type: 3}
+  spendablePoints: 80
+  minSpawnInterval: 2
+  maxSpawnInterval: 3
+  timeToNextWave: 10
