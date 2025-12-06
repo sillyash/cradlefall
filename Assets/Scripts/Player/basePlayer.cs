@@ -5,6 +5,7 @@ public class basePlayer : MonoBehaviour, IDamageable, ICanDie
     public static float TARGET_DISTANCE = 5;
 
     [SerializeField] private BaseWeapon weapon;
+    public BaseWeapon CurrentWeapon => weapon; // Pour affichage HUD
     public float health { get; set; }
     public float maxHealth { get; set; }
 
