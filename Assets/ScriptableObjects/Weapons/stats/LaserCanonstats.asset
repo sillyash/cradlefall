@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: LaserCanonstats
   m_EditorClassIdentifier: 
   magSize: 100
-  reloadTime: 0
-  shootingCooldown: 0
-  spread: 0
+  reloadTime: 1
+  shootingCooldown: 0.2
+  spread: 5
