@@ -1247,6 +1247,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Joueur
       objectReference: {fileID: 0}
+    - target: {fileID: 4506216934731246766, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
+      propertyPath: spawner
+      value: 
+      objectReference: {fileID: 1201000899}
     - target: {fileID: 5377126007560446820, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
       propertyPath: m_CullTransparentMesh
       value: 1

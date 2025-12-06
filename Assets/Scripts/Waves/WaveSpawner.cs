@@ -6,6 +6,7 @@ public class WaveSpawner : MonoBehaviour
     [SerializeField] private float countdown;
     public WaveBehavior[] waves;
     private int waveIndex = 0;
+    public int CurrentWaveNumber => waveIndex + 1; // Pour affichage HUD
 
     private float countdownTimer;
     private bool isSpawning = false;
@@ -37,6 +38,7 @@ public class WaveSpawner : MonoBehaviour
         }
 
         countdownTimer -= Time.deltaTime;
+
         if (countdownTimer <= 0f)
         {
             Debug.Log("Wave Started!");
@@ -115,7 +117,6 @@ public class WaveSpawner : MonoBehaviour
         if (waveIndex < waves.Length)
         {
             countdownTimer = countdown;
-            Debug.Log("Wave finished. Next wave in " + countdownTimer + " seconds.");
         }
         else
         {
