@@ -920,6 +920,7 @@ GameObject:
   - component: {fileID: 1013439169}
   - component: {fileID: 1013439168}
   - component: {fileID: 1013439167}
+  - component: {fileID: 1013439171}
   m_Layer: 0
   m_Name: Structure de test
   m_TagString: Untagged
@@ -1017,6 +1018,26 @@ Transform:
   - {fileID: 70325734}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1013439171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1013439166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SerializedVersion: 0
+  m_OverrideArea: 1
+  m_Area: 1
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 0
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
 --- !u!1001 &1075364418
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1336,17 +1357,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
---- !u!114 &1774317268 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1820306909706261277, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
-  m_PrefabInstance: {fileID: 1439414662}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c8a7fcadb7b26449bba31a0dd1ea7ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1855574979
 GameObject:
   m_ObjectHideFlags: 0
