@@ -2464,11 +2464,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 491223236184320609, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -420
+      value: 512
       objectReference: {fileID: 0}
     - target: {fileID: 491223236184320609, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -230
+      value: 118
       objectReference: {fileID: 0}
     - target: {fileID: 2115452035298164465, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
       propertyPath: weapon
