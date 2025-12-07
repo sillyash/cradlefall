@@ -17,6 +17,7 @@ public class BaseModule : MonoBehaviour
 
     public void Break()
     {
+        Debug.Log("The module has BROKEN !");
         if (broken) return;
         broken = true;
         behaviour.OnBreak(this);
@@ -24,6 +25,7 @@ public class BaseModule : MonoBehaviour
 
     public void Repair()
     {
+        Debug.Log("Module REPAIRED");
         if (!broken) return;
         broken = false;
         health = stats.health;
