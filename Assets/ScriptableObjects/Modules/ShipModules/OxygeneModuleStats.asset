@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: OxygeneModuleStats
   m_EditorClassIdentifier: 
   health: 100
-  breakChance: 3
+  breakChance: 180
   repairTime: 3
   timerDuration: 90

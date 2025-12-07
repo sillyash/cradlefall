@@ -1194,7 +1194,7 @@ MonoBehaviour:
   stats: {fileID: 11400000, guid: e91374b1788863a08b8ec8cd1eea8e09, type: 2}
   spawnPoints:
   - {fileID: 1724069777}
-  - {fileID: 263318630}
+  - {fileID: 382439114}
   - {fileID: 551822909}
   enemiesToSpawn: []
   spawnedEnemies: []
