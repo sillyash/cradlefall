@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   magSize: 45
   reloadTime: 1.5
-  shootingCooldown: 0.15
-  spread: 3
+  shootingCooldown: 0.12
+  spread: 2
