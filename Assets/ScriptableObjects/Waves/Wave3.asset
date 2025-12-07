@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   availableEnemies:
   - {fileID: 1293473754200674575, guid: 253b7a0e6bbe1024bb265687a60e654f, type: 3}
-  spendablePoints: 80
-  minSpawnInterval: 2
+  spendablePoints: 220
+  minSpawnInterval: 0.5
   maxSpawnInterval: 3
   timeToNextWave: 10
