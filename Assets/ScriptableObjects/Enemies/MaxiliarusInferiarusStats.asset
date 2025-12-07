@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 57bdf80bd33739a46b3888e3040bcbb2, type: 3}
-  m_Name: EnemiesStats_Test
+  m_Name: MaxiliarusInferiarusStats
   m_EditorClassIdentifier: 
-  health: 20
+  health: 60
   attackRange: 1.5
   moveSpeed: 5
-  damage: 20
+  damage: 15
   attackCooldown: 0
   detectionRange: 15
   cost: 10
