@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: PlayerTestStats
   m_EditorClassIdentifier: 
   health: 100
-  InteractionRange: 2
+  InteractionRange: 3

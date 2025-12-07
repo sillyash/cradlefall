@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1d270e83677dfd4f98fe9d8143630bf, type: 3}
   m_Name: DPS_MouvementSettings
   m_EditorClassIdentifier: 
-  walkingSpeed: 10
-  runningSpeed: 15
-  jumpHeight: 2
+  walkingSpeed: 9
+  runningSpeed: 13
+  jumpHeight: 1.5
