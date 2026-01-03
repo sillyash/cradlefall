@@ -7,7 +7,7 @@ public class PlayerProjectile : ProjectileBehavior
 
     public override void HandleCollision(Collider target, float damage)
     {
-        baseEnemies enemy = target.GetComponent<baseEnemies>();
+        BaseEnemy enemy = target.GetComponent<BaseEnemy>();
 
         if (enemy != null)
         {

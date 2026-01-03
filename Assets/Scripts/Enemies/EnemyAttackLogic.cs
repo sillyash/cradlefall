@@ -3,13 +3,13 @@ using UnityEngine;
 
 public class EnemyAttackLogic : StateMachineBehaviour
 {
-    private baseEnemies enemy;
+    private BaseEnemy enemy;
     private SphereCollider main;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        enemy = animator.gameObject.GetComponent<baseEnemies>();
+        enemy = animator.gameObject.GetComponent<BaseEnemy>();
         main = animator.gameObject.GetComponentInChildren<SphereCollider>(true);
     }
 

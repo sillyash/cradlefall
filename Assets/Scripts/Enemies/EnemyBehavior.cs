@@ -1,7 +1,7 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "EnemiesBehavior", menuName = "Enemies/behavior")]
-public abstract class EnemiesBehavior : ScriptableObject
+[CreateAssetMenu(fileName = "EnemyBehavior", menuName = "Enemy/Behavior")]
+public abstract class EnemyBehavior : ScriptableObject
 {
     public abstract void Attack();
 }

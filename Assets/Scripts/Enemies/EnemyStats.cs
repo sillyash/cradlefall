@@ -1,7 +1,7 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "EnemiesStats", menuName = "Enemies/Stats")]
-public class EnemiesStats : ScriptableObject
+[CreateAssetMenu(fileName = "EnemyStats", menuName = "Enemy/Stats")]
+public class EnemyStats : ScriptableObject
 {
     public float health;
     public float attackRange;
