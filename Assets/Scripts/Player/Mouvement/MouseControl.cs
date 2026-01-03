@@ -2,32 +2,38 @@ using UnityEngine;
 
 public class MouseControl : MonoBehaviour
 {
-    public Transform cameraTransform;
-    public float sensibility = 200f;
+    [SerializeField] private Camera mainCamera;
+    [SerializeField] private float sensibility = 200f;
 
-    float xRotation = 0f; // vertical
-    float yRotation = 0f; // horizontal
+    private float xRotation = 0f; // vertical
+    private float yRotation = 0f; // horizontal
 
     void Start()
     {
+        mainCamera = Camera.main;
         Cursor.lockState = CursorLockMode.Locked;
     }
 
     void Update()
     {
+        HandleMouseLook();
+    }
+
+    void HandleMouseLook()
+    {
+        // Get mouse input delta (movement, not cursor position)
         float mouseX = Input.GetAxis("Mouse X") * sensibility * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * sensibility * Time.deltaTime;
 
+        // Accumulate rotations
         yRotation += mouseX;
         xRotation -= mouseY;         
-        xRotation = Mathf.Clamp(xRotation, -90f, 90f); // Limite pour empéche de faire des tours verticalement
+        xRotation = Mathf.Clamp(xRotation, -90f, 90f); // Prevent vertical over-rotation
 
-        // On sépare la rotation X (verticale) et Y (Horizontal) pour éviter que le perso se penche en avant ou arrière
-
-        // appliquer rotation player (Y seulement)
+        // Apply horizontal rotation to player
         transform.rotation = Quaternion.Euler(0f, yRotation, 0f);
 
-        // appliquer rotation caméra (X seulement)
-        cameraTransform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+        // Apply vertical rotation to camera
+        mainCamera.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
     }
 }
