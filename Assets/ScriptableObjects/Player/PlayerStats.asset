@@ -9,6 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82b6eba596567f14d916964fdf3e8772, type: 3}
-  m_Name: standardFireBehavior
+  m_Script: {fileID: 11500000, guid: 54fd67bedc5dd1c44bcbc6e50dbb3fd2, type: 3}
+  m_Name: PlayerStats
   m_EditorClassIdentifier: 
+  health: 100
+  InteractionRange: 3
