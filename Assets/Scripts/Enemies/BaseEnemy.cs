@@ -7,10 +7,10 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
-public class baseEnemies : MonoBehaviour, ICanDie, IDamageable
+public class BaseEnemy : MonoBehaviour, ICanDie, IDamageable
 {
-    // [SerializeField] private EnemiesBehavior behaviour;
-    public EnemiesStats stats;
+    // [SerializeField] private EnemyBehavior behaviour;
+    public EnemyStats stats;
 
     public bool isDead { get; set; } = false;
     public float health { get; set; }
@@ -31,13 +31,13 @@ public class baseEnemies : MonoBehaviour, ICanDie, IDamageable
         
         if (!stats)
         {
-            Debug.LogError("Le script baseEnemies du prefab Enemy n�a pas de ScriptableObject de statistiques assign�.");
+            Debug.LogError("Le script BaseEnemy du prefab Enemy n�a pas de ScriptableObject de statistiques assign�.");
             enabled = false;
             return;
         }
 /*        if (!behaviour)
         {
-            Debug.LogError("Le script baseEnemies du prefab Enemy n�a pas de ScriptableObject de behaviour assign�.");
+            Debug.LogError("Le script BaseEnemy du prefab Enemy n�a pas de ScriptableObject de behaviour assign�.");
             enabled = false;
             return;
         }*/

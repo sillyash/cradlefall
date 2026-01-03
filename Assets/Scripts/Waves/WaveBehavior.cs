@@ -58,7 +58,7 @@ public class WaveBehavior : MonoBehaviour
         {
             // Select a random enemy from the available enemies
             GameObject randomEnemy = stats.availableEnemies[Random.Range(0, stats.availableEnemies.Length)];
-            int enemyCost = randomEnemy.GetComponent<baseEnemies>().GetCost();
+            int enemyCost = randomEnemy.GetComponent<BaseEnemy>().GetCost();
 
             if (remainingPoints >= enemyCost)
             {
@@ -78,7 +78,7 @@ public class WaveBehavior : MonoBehaviour
         int minCost = int.MaxValue;
         foreach (GameObject enemy in stats.availableEnemies)
         {
-            int cost = enemy.GetComponent<baseEnemies>().GetCost();
+            int cost = enemy.GetComponent<BaseEnemy>().GetCost();
             if (cost < minCost)
             {
                 minCost = cost;

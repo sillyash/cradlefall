@@ -8,9 +8,9 @@ public class EnemySphereBehavior : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (hasTouched) return;
-        if (other.TryGetComponent<IDamageable>(out var damageable) && !(damageable is baseEnemies))
+        if (other.TryGetComponent<IDamageable>(out var damageable) && !(damageable is BaseEnemy))
         {
-            baseEnemies myBase = me.GetComponent<baseEnemies>();
+            BaseEnemy myBase = me.GetComponent<BaseEnemy>();
             hasTouched = true;
             damageable.TakeDamage(myBase.stats.damage);
         }
