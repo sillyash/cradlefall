@@ -30,4 +30,10 @@ public class MainMenu : MonoBehaviour {
         Debug.Log("Loading Credits Menu...");
         // TODO: Load Credits Menu
     }
+
+    public void OnMultiButtonClicked()
+    {
+        Debug.Log("Playing game");
+        GameManager.instance.GoToMultiScreen();
+    }
 }
