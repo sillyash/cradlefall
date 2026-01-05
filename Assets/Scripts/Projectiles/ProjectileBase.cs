@@ -1,8 +1,4 @@
-using TreeEditor;
-using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
-
 
 public class ProjectileBase : MonoBehaviour
 {
