@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    public enum GameState { MainMenu, Initialising, Playing, Paused, GameOver, Victory}
+    public enum GameState { MainMenu, Initialising, Playing, Paused, GameOver, Victory, MultiScreen}
     public GameState currentState;
 
     public void ChangeState( GameState newState)
@@ -55,6 +55,13 @@ public class GameManager : MonoBehaviour
         Debug.Log("in ReturnToMainMenu");
         ChangeState(GameState.MainMenu);
         SceneManager.LoadScene("MainMenu");
+        Cursor.lockState = CursorLockMode.None;
+    }
+
+    public void GoToMultiScreen()
+    {
+        ChangeState(GameState.MultiScreen);
+        SceneManager.LoadScene("MultiScreen");
         Cursor.lockState = CursorLockMode.None;
     }
 
