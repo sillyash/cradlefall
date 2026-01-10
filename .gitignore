@@ -115,3 +115,9 @@ env/
 .erp
 /[Aa]ssets/ERP/
 /[Aa]ssets/ERP.meta
+
+# Build outputs
+/CRADLEFALL_Data/
+/CRADLEFALL_BurstDebugInformation_DoNotShip/
+/CRADLEFALL.x86_64
+/CRADLEFALL.exe
