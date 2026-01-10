@@ -121,3 +121,5 @@ env/
 /CRADLEFALL_BurstDebugInformation_DoNotShip/
 /CRADLEFALL.x86_64
 /CRADLEFALL.exe
+/*.so
+/*.so.*
