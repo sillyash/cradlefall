@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 71cfa09a0507e5240b32e7dff32bb95c
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 165353
+  packageName: Lr Sci-Fi Station
+  packageVersion: 2.5
+  assetPath: Assets/ZerinLabs_lowpolyPack_SciFi/ScriptsEditor/scrEdit_objectSnap.cs
+  uploadId: 756116
