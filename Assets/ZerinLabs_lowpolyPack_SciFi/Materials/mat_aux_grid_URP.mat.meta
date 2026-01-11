@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b85646a6c4204124eb103562a9fd1500
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 165353
+  packageName: Lr Sci-Fi Station
+  packageVersion: 2.5
+  assetPath: Assets/ZerinLabs_lowpolyPack_SciFi/Materials/mat_aux_grid_URP.mat
+  uploadId: 756116
