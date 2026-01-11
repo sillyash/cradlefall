@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 4273ffd8dc9e2ef43a4af2ab54f86ab5
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 165353
+  packageName: Lr Sci-Fi Station
+  packageVersion: 2.5
+  assetPath: Assets/ZerinLabs_lowpolyPack_SciFi/Shaders/sh_SOLID_standardWithVC_URP.shadergraph
+  uploadId: 756116
