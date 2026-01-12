@@ -4,50 +4,63 @@ Auteur: Alain Sandoz
 ## Récap
 
 objectif :
-- multi
-- fix les trous : map hud bug gameplay
+- implémentation multijoueur
+- combler les trous : map, HUD et bugs liés au gameplay
 
 
 ## tour de table
 
 - Martin
-    - bruitages sonores
+    - travail sur les bruitages sonores
     - finir pour se mettre sur networking
 
 - Raida
-    - HUD rechargement (des armes)
-    - après HUD des stats
+    - a fait le HUD rechargement (des armes)
+    - va faire le HUD des stats
 
 - Elouann
     - Remplace les salles par l'asset pack
-    - Est-ce qu'on garde la même echelle ?
+    - question : Est-ce qu'on garde la même echelle ? -> pas nécessairement
     - HUD sur l'écran de démarrage incruté sur un écran dans une scène
 
 - Alain
-    - shader
-    - modèle du joueur
+    - a fait les shaders
+    - modèle du joueur fini à 80%
     - va s'occuper du modèle d'arme
     - Moins de tâches que prévu
     - Peut récupérer des tâches ou apporter de l'aide
 
 - Ash
     - networking
-    - documentation (tutos)
-    - pas facile (casse-tête x2)
-    - S'inspire d'Alexandre
-    - pas commencé
+    - documentation network for game object (tutos + Alexandre)
+    - n'a pas commencé ses tâches
 
 - Alexandre
-    - documentation (tutos)
-    - installer network for game object
-    - connexion réseau
-    - brainstorming
-    - planification
+    - documentation network for game object (tutos)
+    - a installé network for game object
+    - a fait la connexion en réseau des joueurs
+    - brainstorming sur le networking du code
+    - planification du networking du code
     - besoin de changer le fonctionnement du sprint : faire chaque tâche networking à 2 (créateur du code original + spécialiste du networking)
     - faire gaffe aux fixs : Tout ce q'on va ajouter va devoir être synchronisé au niveau du multi -> terminer ça plus tôt + faire une liste des issues de fix du sprint 1
 
 - Nicolas
-    - 
+    - documentation (tutos)
+    - planification
+
+## Problèmes
+
+Passage en multijoueur plus compliqué que prévu.
+
+## Solutions
+
+Réorganiser le fonctionnement pour ce script : pour les tâches de networking d'objet, 
+avoir le concepteur de l'objet pas à côté pour aider, car il sait comment fonctionne son code. 
+
+Le but est d'avoir 2 spécialistes en netcode (Ash et Alexandre), et de les mettre en binôme 
+avec la bonne personne en fonction du contexte.
+
+La partie graphique avançant plus vite que prévue, les membres assignés à ces tâches pourront libérer du temps pour apporter de l'aide.
 
 ## Divers
 
