@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 0832df2d840eec9428636bcf9d1e95b1
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 165353
+  packageName: Lr Sci-Fi Station
+  packageVersion: 2.5
+  assetPath: Assets/ZerinLabs_lowpolyPack_SciFi/Materials/mat_glass_URP.mat
+  uploadId: 756116
