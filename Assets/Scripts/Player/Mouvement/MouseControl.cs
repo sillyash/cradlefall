@@ -1,6 +1,7 @@
 using UnityEngine;
+using Unity.Netcode;
 
-public class MouseControl : MonoBehaviour
+public class MouseControl : NetworkBehaviour
 {
     [SerializeField] private Camera mainCamera;
     [SerializeField] private float sensibility = 200f;
@@ -8,14 +9,17 @@ public class MouseControl : MonoBehaviour
     private float xRotation = 0f; // vertical
     private float yRotation = 0f; // horizontal
 
-    void Start()
+    public override void OnNetworkSpawn()
     {
-        mainCamera = Camera.main;
+        if (!IsOwner) return;
+
         Cursor.lockState = CursorLockMode.Locked;
     }
 
     void Update()
     {
+        if (!IsOwner) return;
+
         HandleMouseLook();
     }
 
