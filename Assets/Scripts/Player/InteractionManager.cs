@@ -1,6 +1,7 @@
 using UnityEngine;
+using Unity.Netcode;
 
-public class InteractionManager : MonoBehaviour
+public class InteractionManager : NetworkBehaviour
 {
     public static InteractionManager Instance { get; set; }
     private basePlayer player;
@@ -8,8 +9,11 @@ public class InteractionManager : MonoBehaviour
     private float holdTimer = 0f;
 
     [SerializeField]private float healPerSeconde = 4;
-    private void Awake()
+
+    public override void OnNetworkSpawn()
     {
+        if (!IsOwner) return;
+
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -18,10 +22,7 @@ public class InteractionManager : MonoBehaviour
         {
             Instance = this;
         }
-    }
 
-    void Start()
-    {
         player = GetComponent<basePlayer>();
     }
 
