@@ -11,6 +11,8 @@ public class basePlayer : MonoBehaviour, IDamageable, ICanDie
 
     [SerializeField] private HealthBarScript healthBar;
 
+    [SerializeField] private Camera mainCamera;
+
     public bool isDead { get; set; } = false;
 
     public PlayerStats stats;
@@ -57,7 +59,7 @@ public class basePlayer : MonoBehaviour, IDamageable, ICanDie
 
     Vector3 calcTargetPoint()
     {
-        return Camera.main.transform.position + Camera.main.transform.forward * TARGET_DISTANCE;
+        return mainCamera.transform.position + mainCamera.transform.forward * TARGET_DISTANCE;
     }
 
     void raycast()
@@ -69,7 +71,7 @@ public class basePlayer : MonoBehaviour, IDamageable, ICanDie
         if (Cursor.lockState == CursorLockMode.Locked)
         {
             // In gameplay: raycast from center of screen
-            ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+            ray = new Ray(mainCamera.transform.position, mainCamera.transform.forward);
         }
         else
         {
