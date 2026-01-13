@@ -1,6 +1,7 @@
+using Unity.Netcode;
 using UnityEngine;
 
-public class basePlayer : MonoBehaviour, IDamageable, ICanDie
+public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
 {
     public static float TARGET_DISTANCE = 5;
 
@@ -19,8 +20,10 @@ public class basePlayer : MonoBehaviour, IDamageable, ICanDie
 
     private Vector3 targetPoint;
 
-    void Start()
+    public override void OnNetworkSpawn()
     {
+        if (!IsOwner) return;
+
         if (!stats)
         {
             Debug.LogError($"Le Joueur {this.name} n'a pas SO stats");
@@ -34,6 +37,7 @@ public class basePlayer : MonoBehaviour, IDamageable, ICanDie
 
     void Update()
     {
+        if (!IsOwner) return;
         raycast();
         weapon.transform.LookAt(targetPoint);
 
