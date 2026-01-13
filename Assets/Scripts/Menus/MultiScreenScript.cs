@@ -15,7 +15,7 @@ public class MultiScreenScript : MonoBehaviour
             Debug.Log("HOST");
             NetworkManager.Singleton.StartHost();
             NetworkManager.Singleton.SceneManager.LoadScene(
-                "MainGame",
+                "MainGame (MULTI)",
                 LoadSceneMode.Single
             );
         });
