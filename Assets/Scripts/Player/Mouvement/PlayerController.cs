@@ -9,8 +9,10 @@ public class PlayerController : PlayerMovement
     private Vector3 velocity;
     private Vector3 move;
 
-    void Start()
+    public override void OnNetworkSpawn()
     {
+        if (!IsOwner) return;
+
         KeyMappingSettings.LoadPreset();
 
         characterController = GetComponent<CharacterController>();
@@ -24,6 +26,8 @@ public class PlayerController : PlayerMovement
 
     void Update()
     {
+        if (!IsOwner) return;
+
         HandleMovement();
         HandleJump();
         ApplyGravity();
