@@ -1,12 +1,15 @@
 using UnityEngine;
+using Unity.Netcode;
 
-public abstract class PlayerMovement : MonoBehaviour
+public abstract class PlayerMovement : NetworkBehaviour
 {
     [SerializeField]
     protected PlayerMovementSettings movementSettings; // ScriptableObject à assigner dans l’inspecteur
 
-    protected virtual void Awake()
+    public override void OnNetworkSpawn()
     {
+        if (!IsOwner) return;
+
         if (movementSettings == null)
             Debug.LogError($"{GetType().Name} requires a PlayerDataMovement ScriptableObject!");
     }
