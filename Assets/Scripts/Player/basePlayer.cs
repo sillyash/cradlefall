@@ -3,6 +3,7 @@ using UnityEngine;
 public class basePlayer : MonoBehaviour, IDamageable, ICanDie
 {
     public static float TARGET_DISTANCE = 5;
+    public static float MIN_RAY_DISTANCE = 3;
 
     [SerializeField] private BaseWeapon weapon;
     public BaseWeapon CurrentWeapon => weapon; // Pour affichage HUD
@@ -16,6 +17,7 @@ public class basePlayer : MonoBehaviour, IDamageable, ICanDie
     public PlayerStats stats;
 
     private Vector3 targetPoint;
+    
 
     void Start()
     {
@@ -82,7 +84,7 @@ public class basePlayer : MonoBehaviour, IDamageable, ICanDie
         if (Physics.Raycast(ray, out hit))
         {
             // Ignore projectile
-            if(!hit.collider.TryGetComponent(out ProjectileBase var))
+            if(!hit.collider.TryGetComponent(out ProjectileBase var) && isNotDamageable(hit))
             {
                 targetPoint = hit.point;
             }
@@ -97,6 +99,11 @@ public class basePlayer : MonoBehaviour, IDamageable, ICanDie
         }
     }
 
+
+    public bool isNotDamageable(RaycastHit hit) 
+    {
+        return !(hit.collider.TryGetComponent(out IDamageable hitObject) && hit.distance < MIN_RAY_DISTANCE);
+    }
     public void TakeDamage(float damage)
     {
         health -= damage;
