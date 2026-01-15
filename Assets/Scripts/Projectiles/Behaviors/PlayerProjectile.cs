@@ -11,6 +11,7 @@ public class PlayerProjectile : ProjectileBehavior
 
         if (enemy != null)
         {
+            Debug.Log("hit");
             enemy.TakeDamage(damage);
         }
     }
