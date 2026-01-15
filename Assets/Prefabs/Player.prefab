@@ -549,7 +549,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6ed72511bf12c64682450dda6c4b644, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MouseControl
-  cameraTransform: {fileID: 1343634213472258257}
+  mainCamera: {fileID: 0}
   sensibility: 300
 --- !u!114 &8225159773639805063
 MonoBehaviour:
@@ -995,6 +995,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waveText: {fileID: 3989475377333504922}
+  spawner: {fileID: 0}
   appearScale: 1.5
   appearDuration: 0.5
   bounceScale: 1.2
@@ -1006,10 +1007,10 @@ MonoBehaviour:
   startFontSize: 30
   maxFontSize: 45
   fontStepWaves: 3
+  useBoldInsteadOfOutline: 1
+  outlineStepWaves: 10
   startOutline: 0.1
   maxOutline: 0.5
-  outlineStepWaves: 10
-  useBoldInsteadOfOutline: 1
 --- !u!1 &8543215128402727803
 GameObject:
   m_ObjectHideFlags: 0
@@ -1247,7 +1248,7 @@ PrefabInstance:
     - target: {fileID: 2258223209890197420, guid: a16e6e5ac2ae29b439bddc0f7893b702, type: 3}
       propertyPath: stats
       value: 
-      objectReference: {fileID: 11400000, guid: 2da0e9c85f3b34448976ded88a280e8c, type: 2}
+      objectReference: {fileID: 11400000, guid: 2790786f3e98e8a44b3589d9d0872fb7, type: 2}
     - target: {fileID: 4015589250229557229, guid: a16e6e5ac2ae29b439bddc0f7893b702, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.68
