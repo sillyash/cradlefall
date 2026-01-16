@@ -14,6 +14,9 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
 
     [SerializeField] public Camera mainCamera;
 
+    [SerializeField] private Transform TPSWeaponAnchorPoint;
+    [SerializeField] private Transform FPSWeaponAnchorPoint;
+
     public bool isDead { get; set; } = false;
 
     public PlayerStats stats;

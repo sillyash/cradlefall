@@ -719,6 +719,8 @@ MonoBehaviour:
   weapon: {fileID: 0}
   healthBar: {fileID: 0}
   mainCamera: {fileID: 95665150144060911}
+  TPSWeaponAnchorPoint: {fileID: 425534251396596048}
+  FPSWeaponAnchorPoint: {fileID: 316491725339577519}
   stats: {fileID: 11400000, guid: 41ccfa7cd379515499abb2582c3819d4, type: 2}
 --- !u!114 &6504421229519761709
 MonoBehaviour:

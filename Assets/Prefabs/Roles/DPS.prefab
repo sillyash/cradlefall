@@ -8,9 +8,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8291380409112545964, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3558826447
+      objectReference: {fileID: 0}
     - target: {fileID: 4263663073151763242, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
       propertyPath: m_Name
-      value: Player
+      value: DPS
       objectReference: {fileID: 0}
     - target: {fileID: 8444947561549270069, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
       propertyPath: m_LocalPosition.x
