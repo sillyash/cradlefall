@@ -5,8 +5,9 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
 {
     public static float TARGET_DISTANCE = 5;
 
-    [SerializeField] private BaseWeapon weapon;
-    public BaseWeapon CurrentWeapon => weapon; // Pour affichage HUD
+    [SerializeField] private GameObject weaponPrefab;
+
+    private BaseWeapon weapon;
     public float health { get; set; }
     public float maxHealth { get; set; }
 
@@ -121,4 +122,6 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
         Debug.Log("Joueur Mort");
         GameManager.instance.GameOver();
     }
+
+    public BaseWeapon CurrentWeapon => weapon; // Pour affichage HUD
 }
