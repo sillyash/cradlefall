@@ -5,6 +5,7 @@ public class InteractionManager : NetworkBehaviour
 {
     public static InteractionManager Instance { get; set; }
     private basePlayer player;
+    private Camera playerCamera;
 
     private float holdTimer = 0f;
 
@@ -24,6 +25,7 @@ public class InteractionManager : NetworkBehaviour
         }
 
         player = GetComponent<basePlayer>();
+        playerCamera = player.mainCamera;
     }
 
     private void Update()
@@ -32,7 +34,7 @@ public class InteractionManager : NetworkBehaviour
         if (CustomInputRouter.GetButtonInteract())
         {
 
-            Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+            Ray ray = playerCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
             RaycastHit hit;
 
             if (Physics.Raycast(ray, out hit, player.stats.InteractionRange))

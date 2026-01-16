@@ -16,5 +16,10 @@ public class NetworkBootstrap : MonoBehaviour
         {
             Debug.Log("Server started !");
         };
+
+        NetworkManager.Singleton.OnClientDisconnectCallback += (clientId) =>
+        {
+            Debug.LogWarning("Client disconnected: " + clientId);
+        };
     }
 }

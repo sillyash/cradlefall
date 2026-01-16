@@ -12,7 +12,7 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
 
     [SerializeField] private HealthBarScript healthBar;
 
-    [SerializeField] private Camera mainCamera;
+    [SerializeField] public Camera mainCamera;
 
     public bool isDead { get; set; } = false;
 
