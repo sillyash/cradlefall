@@ -44,13 +44,13 @@ public class InteractionManager : NetworkBehaviour
                 {
                     BaseModule module = objectHitByRaycast.GetComponent<BaseModule>();
 
-                    if (!module.broken) return;
+                    if (!module.broken.Value) return;
                     {
                         holdTimer += Time.deltaTime;
 
                         if (holdTimer >= module.stats.repairTime)
                         {
-                            module.Repair();
+                            module.RepairServerRpc();
                             holdTimer = 0f;
                         }
                     }
