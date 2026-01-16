@@ -30,6 +30,7 @@ public class InteractionManager : NetworkBehaviour
 
     private void Update()
     {
+        if (!IsOwner) return;
 
         if (CustomInputRouter.GetButtonInteract())
         {
