@@ -38,17 +38,14 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
         {
             var weaponObj = Instantiate(weaponPrefab, TPSWeaponAnchorPoint);
             var weaponNetObj = weaponObj.GetComponent<NetworkObject>();
+
             weaponNetObj.SpawnWithOwnership(OwnerClientId);
-
             weaponNetObj.TrySetParent(GetComponent<NetworkObject>());
-
-            DispawnTPSWeaponOnOwnerRpc(weaponNetObj);
         }
 
         if (IsOwner)
         {
             Debug.Log($"Owner instanciate {OwnerClientId}");
-
             var weaponObjOwner = Instantiate(weaponPrefab, FPSWeaponAnchorPoint);
             weapon = weaponObjOwner.GetComponent<BaseWeapon>();
             weaponObjOwner.transform.SetParent(FPSWeaponAnchorPoint);
@@ -87,32 +84,6 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
         {
             weapon.Fire();
         }
-    }
-
-    [Rpc(SendTo.Owner)]
-    void DispawnTPSWeaponOnOwnerRpc(NetworkObjectReference weaponRef)
-    {
-        StartCoroutine(TryDisableTPSWeapon(weaponRef));
-    }
-
-    private IEnumerator TryDisableTPSWeapon(NetworkObjectReference weaponRef)
-    {
-        int attempts = 0;
-        const int maxAttempts = 10;
-
-        while (attempts < maxAttempts)
-        {
-            if (weaponRef.TryGet(out NetworkObject weaponNetObj))
-            {
-                weaponNetObj.gameObject.SetActive(false);
-                yield break; // Succès, on sort
-            }
-
-            attempts++;
-            yield return new WaitForSeconds(0.1f);
-        }
-
-        Debug.LogWarning("Impossible de désactiver l'arme TPS après plusieurs tentatives");
     }
 
     Vector3 calcTargetPoint()
