@@ -7,7 +7,9 @@ public class WaveSpawner : MonoBehaviour
     public WaveBehavior[] waves;
     private int waveIndex = 0;
     public int CurrentWaveNumber => waveIndex + 1; // Pour affichage HUD
-
+    public float WaveTimer => countdownTimer; // Pour affichage HUD
+    public event System.Action WaveFinished; // Pour affichage HUD
+    public event System.Action WaveStarted; // Pour affichage HUD
     private float countdownTimer;
     private bool isSpawning = false;
 
@@ -42,6 +44,7 @@ public class WaveSpawner : MonoBehaviour
         if (countdownTimer <= 0f)
         {
             Debug.Log("Wave Started!");
+            WaveStarted?.Invoke();
             isSpawning = true;
             StartCoroutine(SpawnCurrentWave());
         }
@@ -111,6 +114,7 @@ public class WaveSpawner : MonoBehaviour
         }
 
         // Wave finished
+        WaveFinished?.Invoke();
         waveIndex += 1;
         isSpawning = false;
 
