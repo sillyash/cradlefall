@@ -55,7 +55,7 @@ public class WaveDisplay : MonoBehaviour
     void Update()
     {
         if (spawner == null) return;
-        int currentWave = spawner.CurrentWaveNumber;
+        int currentWave = spawner.CurrentWaveNumber +1 ;
 
         ShowWave(currentWave);
     }

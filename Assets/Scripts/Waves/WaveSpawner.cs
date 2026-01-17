@@ -6,12 +6,14 @@ public class WaveSpawner : MonoBehaviour
     [SerializeField] private float countdown;
     public WaveBehavior[] waves;
     private int waveIndex = 0;
-    public int CurrentWaveNumber => waveIndex + 1; // Pour affichage HUD
+    public int CurrentWaveNumber => waveIndex; // Pour affichage HUD
     public float WaveTimer => countdownTimer; // Pour affichage HUD
     public event System.Action WaveFinished; // Pour affichage HUD
     public event System.Action WaveStarted; // Pour affichage HUD
     private float countdownTimer;
     private bool isSpawning = false;
+
+    
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -44,7 +46,7 @@ public class WaveSpawner : MonoBehaviour
         if (countdownTimer <= 0f)
         {
             Debug.Log("Wave Started!");
-            WaveStarted?.Invoke();
+            WaveStarted?.Invoke(); // Pour affichage HUD
             isSpawning = true;
             StartCoroutine(SpawnCurrentWave());
         }
@@ -96,7 +98,7 @@ public class WaveSpawner : MonoBehaviour
         // Wait until all spawned enemies are destroyed before finishing the wave
         while (true)
         {
-            // Clean up any null references left in the list
+            
             for (int i = wave.spawnedEnemies.Count - 1; i >= 0; i--)
             {
                 if (wave.spawnedEnemies[i] == null)
@@ -114,7 +116,7 @@ public class WaveSpawner : MonoBehaviour
         }
 
         // Wave finished
-        WaveFinished?.Invoke();
+        WaveFinished?.Invoke(); // Pour affichage HUD
         waveIndex += 1;
         isSpawning = false;
 
