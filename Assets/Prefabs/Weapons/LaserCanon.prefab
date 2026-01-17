@@ -174,7 +174,7 @@ PrefabInstance:
       addedObject: {fileID: 2385526196228066197}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3887759595446420676, guid: cd95e20d816642547b148417fdebd2c0, type: 3}
-      insertIndex: -1
+      insertIndex: 2
       addedObject: {fileID: 1308712730900378889}
   m_SourcePrefab: {fileID: 100100000, guid: cd95e20d816642547b148417fdebd2c0, type: 3}
 --- !u!4 &4015589250229557229 stripped
@@ -199,7 +199,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 0
+  GlobalObjectIdHash: 3334109809
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
