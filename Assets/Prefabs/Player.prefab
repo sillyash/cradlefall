@@ -716,7 +716,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  weapon: {fileID: 0}
+  weaponPrefab: {fileID: 0}
   healthBar: {fileID: 0}
   mainCamera: {fileID: 95665150144060911}
   TPSWeaponAnchorPoint: {fileID: 425534251396596048}
