@@ -292,6 +292,17 @@ MonoBehaviour:
   m_IgnoreFromBuild: 0
   m_ApplyToChildren: 1
   m_AffectedAgents: ffffffff
+--- !u!114 &65908664 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5066964923994949558, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
+  m_PrefabInstance: {fileID: 2124052927}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &103471972
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1611,6 +1622,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1249439888 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1481845672184965146, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
+  m_PrefabInstance: {fileID: 2124052927}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1379043495
 GameObject:
   m_ObjectHideFlags: 0
@@ -2508,10 +2530,38 @@ PrefabInstance:
       propertyPath: m_Name
       value: Joueur
       objectReference: {fileID: 0}
-    - target: {fileID: 5886810650419684464, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
-      propertyPath: mainCamera
+    - target: {fileID: 6896338367370617179, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
+      propertyPath: enemyIcon
       value: 
-      objectReference: {fileID: 2124052928}
+      objectReference: {fileID: 65908664}
+    - target: {fileID: 6896338367370617179, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
+      propertyPath: scalePunch
+      value: 1.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6896338367370617179, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
+      propertyPath: enemiesText
+      value: 
+      objectReference: {fileID: 1249439888}
+    - target: {fileID: 6896338367370617179, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
+      propertyPath: flashColor.a
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6896338367370617179, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
+      propertyPath: flashColor.b
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 6896338367370617179, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
+      propertyPath: flashColor.g
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 6896338367370617179, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
+      propertyPath: flashColor.r
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6896338367370617179, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
+      propertyPath: flashDuration
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 8444947561549270069, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
       propertyPath: m_LocalPosition.x
       value: -20.1
