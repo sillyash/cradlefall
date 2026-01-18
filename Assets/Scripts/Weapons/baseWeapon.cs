@@ -7,7 +7,6 @@ public class BaseWeapon : MonoBehaviour
     [SerializeField] private WeaponStats stats;
     [SerializeField] private ProjectileBase projectile;
     [SerializeField] private GameObject projectileSpawn;
-    [SerializeField] private float spread;
     
     private int ammoCount;
     private bool isReadyToShoot = true;

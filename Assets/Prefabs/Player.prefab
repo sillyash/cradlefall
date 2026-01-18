@@ -1220,7 +1220,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6ed72511bf12c64682450dda6c4b644, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MouseControl
-  mainCamera: {fileID: 0}
+  mainCamera: {fileID: 95665150144060911}
   sensibility: 300
 --- !u!114 &8225159773639805063
 MonoBehaviour:
@@ -2243,7 +2243,7 @@ PrefabInstance:
     - target: {fileID: 2258223209890197420, guid: a16e6e5ac2ae29b439bddc0f7893b702, type: 3}
       propertyPath: stats
       value: 
-      objectReference: {fileID: 11400000, guid: 2da0e9c85f3b34448976ded88a280e8c, type: 2}
+      objectReference: {fileID: 11400000, guid: 2790786f3e98e8a44b3589d9d0872fb7, type: 2}
     - target: {fileID: 4015589250229557229, guid: a16e6e5ac2ae29b439bddc0f7893b702, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.68
