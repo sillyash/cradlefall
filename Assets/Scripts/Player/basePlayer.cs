@@ -5,6 +5,7 @@ using UnityEngine;
 public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
 {
     public static float TARGET_DISTANCE = 5;
+    public static float MIN_RAY_DISTANCE = 3;
 
     [SerializeField] private GameObject weaponPrefab;
 
@@ -24,6 +25,7 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
     public PlayerStats stats;
 
     private Vector3 targetPoint;
+    
 
     public override void OnNetworkSpawn()
     {
@@ -113,7 +115,7 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
         if (Physics.Raycast(ray, out hit))
         {
             // Ignore projectile
-            if(!hit.collider.TryGetComponent(out ProjectileBase var))
+            if(!hit.collider.TryGetComponent(out ProjectileBase var) && isNotDamageable(hit))
             {
                 targetPoint = hit.point;
             }
@@ -128,6 +130,11 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
         }
     }
 
+
+    public bool isNotDamageable(RaycastHit hit) 
+    {
+        return !(hit.collider.TryGetComponent(out IDamageable hitObject) && hit.distance < MIN_RAY_DISTANCE);
+    }
     public void TakeDamage(float damage)
     {
         health -= damage;

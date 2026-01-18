@@ -1,12 +1,13 @@
 using UnityEngine;
 
-public class ProjectileBase : MonoBehaviour
+public abstract class ProjectileBase : MonoBehaviour
 {
     public static float CURVE_AMP = 100;
     public static float CURVE_LENGTH_DIV = 2;
     public static float LIFESPAN = 2; // in seconds
-    [SerializeField] private ProjectileBehavior behavior;
-    [SerializeField] private ProjectileStats stats;
+
+    [SerializeField] protected ProjectileBehavior behavior;
+    [SerializeField] protected ProjectileStats stats;
 
     private Rigidbody rb;
 
@@ -18,11 +19,16 @@ public class ProjectileBase : MonoBehaviour
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    protected void Start()
     {
         if (behavior == null)
         {
             Debug.Log("No behavior assigned");
+        }
+
+        if (stats == null)
+        {
+            Debug.Log("No stats assigned");
         }
 
         rb = GetComponent<Rigidbody>();
@@ -33,38 +39,12 @@ public class ProjectileBase : MonoBehaviour
         startTime = Time.time;
     }
 
-    void OnTriggerEnter(Collider other)
-    {
-        if (!other.TryGetComponent<ProjectileBase>(out ProjectileBase var))
-        {
-            behavior.HandleCollision(other, stats.damage);
-            Destroy(gameObject);
-        }
-    }
-
-
-    void Update()
+    protected void Update()
     {
         if (Time.time - startTime > LIFESPAN)
         {
             Destroy(gameObject);
         }
-    }
-
-    // Fixed update is basically update with delta time
-    void FixedUpdate()
-    {
-        
-        Vector3 vel = rb.linearVelocity;
-
-        float point = Vector3.Distance(transform.position, initPos) / CURVE_LENGTH_DIV;
-
-        //vel.y = getCurveOrientation(point);
-
-        prevCurvVal = curveVal;
-
-        //rb.linearVelocity = vel;
-        UpdateRotation();
     }
 
     // Return the tangent on the curve in stat at given point

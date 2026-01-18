@@ -60,6 +60,7 @@ public class WaveSpawner : NetworkBehaviour
         if (countdownTimer.Value <= 0f)
         {
             Debug.Log("[Server] Wave Started!");
+            WaveStarted?.Invoke();
             isSpawning = true;
             StartCoroutine(SpawnCurrentWave());
         }
@@ -111,7 +112,7 @@ public class WaveSpawner : NetworkBehaviour
         // Wait until all spawned enemies are destroyed before finishing the wave
         while (true)
         {
-            // Clean up any null references left in the list
+            
             for (int i = wave.spawnedEnemies.Count - 1; i >= 0; i--)
             {
                 if (wave.spawnedEnemies[i] == null)
@@ -130,6 +131,7 @@ public class WaveSpawner : NetworkBehaviour
 
         // Wave finished
         waveIndex.Value += 1;
+        WaveFinished?.Invoke();
         isSpawning = false;
 
         if (waveIndex.Value < waves.Length)

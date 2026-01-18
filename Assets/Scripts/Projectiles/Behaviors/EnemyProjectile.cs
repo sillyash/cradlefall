@@ -8,11 +8,11 @@ public class EnemyProjectile : ProjectileBehavior
     
     public override void HandleCollision(Collider target, float damage)
     {
-        PlayerController player = target.GetComponent<PlayerController>();
+        basePlayer player = target.GetComponent<basePlayer>();
 
         if (player != null)
         {
-            throw new NotImplementedException("Damage not implemented for player");
+            player.TakeDamage(damage);
         }
         else
         {

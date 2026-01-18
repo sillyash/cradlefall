@@ -14,7 +14,7 @@ public class WaveBehavior : MonoBehaviour
     public List<GameObject> enemiesToSpawn = new List<GameObject>();
     public List<GameObject> spawnedEnemies = new List<GameObject>();
     private int remainingPoints;
-    public int enemiesLeft;
+    public int enemiesLeft; 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

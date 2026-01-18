@@ -23,7 +23,10 @@ public class BaseEnemy : MonoBehaviour, ICanDie, IDamageable
     public bool isAttacking = false;
     private bool hasFoundCapsule = false;
     public LayerMask targetMask;
-    
+
+ 
+
+
     void Start()
     {
         m_Agent = GetComponent<NavMeshAgent>();
@@ -81,14 +84,20 @@ public class BaseEnemy : MonoBehaviour, ICanDie, IDamageable
 
     public void TakeDamage(float damage)
     {
+        Debug.Log("hit received");
         health -= damage;
     }
 
     public void Die()
     {
+ 
         m_Agent.isStopped = true;
         m_Animator.SetTrigger("Die");
+       
     }
+
+  
+
 
     public GameObject AcquireClosestCapsule()
     {

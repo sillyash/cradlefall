@@ -292,6 +292,17 @@ MonoBehaviour:
   m_IgnoreFromBuild: 0
   m_ApplyToChildren: 1
   m_AffectedAgents: ffffffff
+--- !u!114 &65908664 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5066964923994949558, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
+  m_PrefabInstance: {fileID: 2124052927}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &103471972
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1611,6 +1622,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1249439888 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1481845672184965146, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
+  m_PrefabInstance: {fileID: 2124052927}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1379043495
 GameObject:
   m_ObjectHideFlags: 0
@@ -2488,31 +2510,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!1 &2018646838 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4263663073151763242, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
-  m_PrefabInstance: {fileID: 2124052927}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2018646848
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2018646838}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SerializedVersion: 0
-  m_OverrideArea: 0
-  m_Area: 0
-  m_OverrideGenerateLinks: 0
-  m_GenerateLinks: 0
-  m_IgnoreFromBuild: 1
-  m_ApplyToChildren: 1
-  m_AffectedAgents: ffffffff
 --- !u!1001 &2124052927
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2529,66 +2526,42 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 65422506517265125, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
-      propertyPath: m_TagString
-      value: MainCamera
-      objectReference: {fileID: 0}
-    - target: {fileID: 491223236184320609, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 512
-      objectReference: {fileID: 0}
-    - target: {fileID: 491223236184320609, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 118
-      objectReference: {fileID: 0}
-    - target: {fileID: 2115452035298164465, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
-      propertyPath: weapon
-      value: 
-      objectReference: {fileID: 2124052929}
-    - target: {fileID: 2115452035298164465, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
-      propertyPath: healthBar
-      value: 
-      objectReference: {fileID: 2124052928}
-    - target: {fileID: 2400725616754398652, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
-      propertyPath: smooth
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2400725616754398652, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
-      propertyPath: damageable
-      value: 
-      objectReference: {fileID: 2018646838}
-    - target: {fileID: 3525602671863827654, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-    - target: {fileID: 3525602671863827654, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3525602671863827654, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3525602671863827654, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4263663073151763242, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
       propertyPath: m_Name
       value: Joueur
       objectReference: {fileID: 0}
-    - target: {fileID: 4506216934731246766, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
-      propertyPath: spawner
+    - target: {fileID: 6896338367370617179, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
+      propertyPath: enemyIcon
       value: 
-      objectReference: {fileID: 1201000899}
-    - target: {fileID: 5377126007560446820, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
-      propertyPath: m_CullTransparentMesh
-      value: 1
+      objectReference: {fileID: 65908664}
+    - target: {fileID: 6896338367370617179, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
+      propertyPath: scalePunch
+      value: 1.15
       objectReference: {fileID: 0}
-    - target: {fileID: 8225159773639805063, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
-      propertyPath: movementSettings
+    - target: {fileID: 6896338367370617179, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
+      propertyPath: enemiesText
       value: 
-      objectReference: {fileID: 11400000, guid: 5eef73e5dede50d4d980ebe7f793d0a3, type: 2}
+      objectReference: {fileID: 1249439888}
+    - target: {fileID: 6896338367370617179, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
+      propertyPath: flashColor.a
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6896338367370617179, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
+      propertyPath: flashColor.b
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 6896338367370617179, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
+      propertyPath: flashColor.g
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 6896338367370617179, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
+      propertyPath: flashColor.r
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6896338367370617179, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
+      propertyPath: flashDuration
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 8444947561549270069, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
       propertyPath: m_LocalPosition.x
       value: -20.1
@@ -2632,33 +2605,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4263663073151763242, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2018646848}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
---- !u!114 &2124052928 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2400725616754398652, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
+--- !u!20 &2124052928 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 95665150144060911, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
   m_PrefabInstance: {fileID: 2124052927}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e14aa1aa5cc508c4db6d4d6f23babcf0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2124052929 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4522775827165223924, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
-  m_PrefabInstance: {fileID: 2124052927}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c8a7fcadb7b26449bba31a0dd1ea7ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

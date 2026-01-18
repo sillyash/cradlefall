@@ -31,6 +31,12 @@ public class WaveDisplay : MonoBehaviour
     public float startOutline = 0.05f;
     public float maxOutline = 0.3f;
 
+    private void Awake()
+    {
+        if (spawner == null)
+            spawner = Object.FindFirstObjectByType<WaveSpawner>();
+    }
+
     void Start()
     {
         if (waveText != null)
@@ -49,9 +55,7 @@ public class WaveDisplay : MonoBehaviour
     void Update()
     {
         if (spawner == null) return;
-
-        // Utilise soit le compteur du spawner, soit le debug si il a été incrémenté
-        int currentWave = spawner.CurrentWaveNumber;
+        int currentWave = spawner.CurrentWaveNumber +1 ;
 
         ShowWave(currentWave);
     }
