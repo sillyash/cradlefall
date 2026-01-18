@@ -537,6 +537,10 @@ PrefabInstance:
       propertyPath: damageable
       value: 
       objectReference: {fileID: 4263663073151763242}
+    - target: {fileID: 2006924553897672650, guid: e509449ac46f5f149a480eff17399a79, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 2115452035298164465}
     - target: {fileID: 3694539156529834385, guid: e509449ac46f5f149a480eff17399a79, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
