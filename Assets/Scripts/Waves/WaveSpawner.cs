@@ -6,7 +6,10 @@ public class WaveSpawner : NetworkBehaviour
 {
     [SerializeField] private float countdown;
     public WaveBehavior[] waves;
+    public event System.Action WaveFinished; // Pour affichage HUD
+    public event System.Action WaveStarted; // Pour affichage HUD
     private bool isSpawning = false;
+
 
     public NetworkVariable<int> waveIndex = new NetworkVariable<int>(
         0,

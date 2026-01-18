@@ -34,7 +34,7 @@ public class WaveTimerDisplay : MonoBehaviour
     {
         if (spawner == null || timerText == null) return;
 
-        float currentTimer = spawner.WaveTimer;
+        float currentTimer = spawner.countdownTimer.Value;
         showTimer(currentTimer);
 
         // --- Dégradé couleur principale + ombre ---
