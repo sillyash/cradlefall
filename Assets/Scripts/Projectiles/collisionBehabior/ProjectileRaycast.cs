@@ -10,7 +10,7 @@ public class ProjectileRaycast : ProjectileBase
 
     private Vector3 lastPosition;
 
-    void Start()
+    new void Start()
     {
         base.Start();
         lastPosition = transform.position;
@@ -21,7 +21,7 @@ public class ProjectileRaycast : ProjectileBase
     {
         Gizmos.DrawSphere(transform.position, radius * transform.localScale.y);
     }
-    void Update()
+    new void Update()
     {
         base.Update();
         float distance = (transform.position - lastPosition).magnitude;
