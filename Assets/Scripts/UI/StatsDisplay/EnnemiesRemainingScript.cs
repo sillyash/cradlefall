@@ -34,6 +34,7 @@ public class EnnemiesRemainingScript : MonoBehaviour
 
     void Update()
     {
+        if (spawner == null) return;
         if (spawner.CurrentWaveNumber >= spawner.waves.Length)
         {
             enemiesText.text = "0";
