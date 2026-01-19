@@ -30,7 +30,6 @@ public class ProjectileRaycast : ProjectileBase
         {
             if (!hit.collider.TryGetComponent(out ProjectileBase hitObject))
             {
-                Debug.Log(hit.collider.gameObject);
                 behavior.HandleCollision(hit.collider, stats.damage);
                 Destroy(gameObject);
             }
