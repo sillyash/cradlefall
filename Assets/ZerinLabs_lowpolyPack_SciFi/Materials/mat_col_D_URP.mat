@@ -101,6 +101,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _AOMapScale: 0
+    - _AddPrecomputedVelocity: 0
     - _AlphaClip: 0
     - _AlphaToMask: 0
     - _Blend: 0
@@ -137,7 +138,7 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 0.62352943, g: 0.17254902, b: 0.13333334, a: 1}
-    - _Color: {r: 0.62352943, g: 0.17254902, b: 0.13333334, a: 1}
+    - _Color: {r: 0.62352943, g: 0.17254898, b: 0.1333333, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
     - _VCtint: {r: 0.21698111, g: 0.18618874, b: 0.15250088, a: 1}
