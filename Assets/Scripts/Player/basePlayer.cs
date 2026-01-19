@@ -151,5 +151,35 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
         GameManager.instance.GameOver();
     }
 
+    public void DestroyOnNetwork()
+    {
+        if (!IsServer)
+        {
+            Debug.Log("Client Destroy");
+            // If client, call serveur
+            DestroyServerRpc();
+        }
+        else
+        {
+            Debug.Log("Server Destroy");
+            // If server, destroy directly
+            DestroyForEveryone();
+        }
+    }
+
+    [Rpc(SendTo.Server, InvokePermission = RpcInvokePermission.Everyone)]
+    private void DestroyServerRpc()
+    {
+        Debug.Log("RPC Destroy");
+        DestroyForEveryone();
+    }
+
+    private void DestroyForEveryone()
+    {
+        Debug.Log("Destroy FOR EVERYONE");
+        NetworkObject netObj = gameObject.GetComponent<NetworkObject>();
+        netObj.Despawn(destroy: true);
+    }
+
     public BaseWeapon CurrentWeapon => weapon; // Pour affichage HUD
 }
