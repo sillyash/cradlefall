@@ -14,7 +14,7 @@ public class BaseEnemy : NetworkBehaviour, ICanDie, IDamageable
     public EnemyStats stats;
 
     public bool isDead { get; set; } = false;
-    public float health { get; set; }
+
     public float maxHealth { get; set; }
 
     [SerializeField]
@@ -25,6 +25,16 @@ public class BaseEnemy : NetworkBehaviour, ICanDie, IDamageable
     public bool isAttacking = false;
     private bool hasFoundCapsule = false;
     public LayerMask targetMask;
+
+    public NetworkVariable<float> Health = new NetworkVariable<float>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+    public float health
+    {
+        get => Health.Value;
+        set
+        {
+            if (IsServer) Health.Value = value;
+        }
+    }
 
     public override void OnNetworkSpawn()
     {
@@ -37,19 +47,20 @@ public class BaseEnemy : NetworkBehaviour, ICanDie, IDamageable
             enabled = false;
             return;
         }
-/*        if (!behaviour)
-        {
-            Debug.LogError("Le script BaseEnemy du prefab Enemy n�a pas de ScriptableObject de behaviour assign�.");
-            enabled = false;
-            return;
-        }*/
-        
+        /*        if (!behaviour)
+                {
+                    Debug.LogError("Le script BaseEnemy du prefab Enemy n�a pas de ScriptableObject de behaviour assign�.");
+                    enabled = false;
+                    return;
+                }*/
 
-        health = stats.health;
         maxHealth = stats.health;
         m_Agent.stoppingDistance = stats.attackRange;
         m_Agent.speed = stats.moveSpeed;
-
+        if (IsServer)
+        {
+            Health.Value = stats.health;
+        }
     }
 
     void Update()
@@ -66,7 +77,7 @@ public class BaseEnemy : NetworkBehaviour, ICanDie, IDamageable
                 m_Animator.SetBool("isRunning", false);
             }
 
-            if (health <= 0)
+            if (Health.Value <= 0)
             {
                 isDead = true;
                 Die();
@@ -84,7 +95,14 @@ public class BaseEnemy : NetworkBehaviour, ICanDie, IDamageable
 
     public void TakeDamage(float damage)
     {
-        health -= damage;
+        TakeDamageRpc(damage);
+    }
+
+    [Rpc(SendTo.Server)]
+    void TakeDamageRpc(float damage)
+    {
+        Health.Value -= damage;
+        Debug.Log($"health {Health.Value}");
     }
 
     public void Die()
