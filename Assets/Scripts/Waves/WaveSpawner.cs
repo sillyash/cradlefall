@@ -97,6 +97,7 @@ public class WaveSpawner : NetworkBehaviour
             // Track spawned instance so we can wait for it to be destroyed
             if (instance != null)
             {
+                instance.GetComponent<NetworkObject>().Spawn();
                 wave.spawnedEnemies.Add(instance);
             }
 
