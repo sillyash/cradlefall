@@ -1,13 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Netcode;
 using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
-public class BaseEnemy : MonoBehaviour, ICanDie, IDamageable
+public class BaseEnemy : NetworkBehaviour, ICanDie, IDamageable
 {
     // [SerializeField] private EnemyBehavior behaviour;
     public EnemyStats stats;
@@ -16,6 +17,7 @@ public class BaseEnemy : MonoBehaviour, ICanDie, IDamageable
     public float health { get; set; }
     public float maxHealth { get; set; }
 
+    [SerializeField]
     private GameObject m_Target;
     private NavMeshAgent m_Agent;
     private Animator m_Animator;
@@ -24,10 +26,7 @@ public class BaseEnemy : MonoBehaviour, ICanDie, IDamageable
     private bool hasFoundCapsule = false;
     public LayerMask targetMask;
 
- 
-
-
-    void Start()
+    public override void OnNetworkSpawn()
     {
         m_Agent = GetComponent<NavMeshAgent>();
         m_Animator = GetComponent<Animator>();
@@ -55,6 +54,7 @@ public class BaseEnemy : MonoBehaviour, ICanDie, IDamageable
 
     void Update()
     {
+        if (!IsServer) return;
         if (!isDead)
         {
             if (m_Agent.velocity.magnitude >= 0.1f)
@@ -89,14 +89,44 @@ public class BaseEnemy : MonoBehaviour, ICanDie, IDamageable
 
     public void Die()
     {
- 
-        m_Agent.isStopped = true;
-        m_Animator.SetTrigger("Die");
-       
+        DieRpc();
     }
 
-  
+    [Rpc(SendTo.Everyone)]
+    private void DieRpc()
+    {
+        m_Agent.isStopped = true;
+        m_Animator.SetTrigger("Die");
+    }
 
+    public void DestroyOnNetwork()
+    {
+        if (!IsServer)
+        {
+            Debug.Log("Client Destroy");
+            // If client, call serveur
+            DestroyServerRpc();
+        } else
+        {
+            Debug.Log("Server Destroy");
+            // If server, destroy directly
+            DestroyForEveryone();
+        }
+    }
+
+    [Rpc(SendTo.Server, InvokePermission = RpcInvokePermission.Everyone)]
+    private void DestroyServerRpc()
+    {
+        Debug.Log("RPC Destroy");
+        DestroyForEveryone();
+    }
+
+    private void DestroyForEveryone()
+    {
+        Debug.Log("Destroy FOR EVERYONE");
+        NetworkObject netObj = gameObject.GetComponent<NetworkObject>();
+        netObj.Despawn(destroy: true);
+    }
 
     public GameObject AcquireClosestCapsule()
     {
@@ -186,10 +216,17 @@ public class BaseEnemy : MonoBehaviour, ICanDie, IDamageable
             {
                 m_Agent.isStopped = true;
                 isAttacking = true;
-                m_Animator.SetTrigger("Attack");
+                PlayAttackAnimationRpc();
             }
         }
     }
+
+    [Rpc(SendTo.Everyone)]
+    void PlayAttackAnimationRpc()
+    {
+        m_Animator.SetTrigger("Attack");
+    }
+
     public void LookAtTarget()
     {
         Vector3 direction = m_Target.transform.position - gameObject.transform.position;
@@ -202,5 +239,10 @@ public class BaseEnemy : MonoBehaviour, ICanDie, IDamageable
     public int GetCost()
     {
         return stats.cost;
+    }
+
+    public Boolean isServer()
+    {
+        return IsServer;
     }
 }
