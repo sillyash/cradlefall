@@ -84,7 +84,6 @@ public class BaseEnemy : MonoBehaviour, ICanDie, IDamageable
 
     public void TakeDamage(float damage)
     {
-        Debug.Log("hit received");
         health -= damage;
     }
 
