@@ -1549,7 +1549,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1201000899
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1702,7 +1702,8 @@ MonoBehaviour:
   stats: {fileID: 11400000, guid: 15f53ed1e4e3bf44da5c3e1d544a2ea3, type: 2}
   spawnPoints:
   - {fileID: 1724069777}
-  enemiesToSpawn: []
+  enemiesToSpawn:
+  - {fileID: 0}
   spawnedEnemies: []
   enemiesLeft: 0
 --- !u!4 &1379043497
