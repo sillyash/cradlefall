@@ -137,6 +137,7 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
     }
     public void TakeDamage(float damage)
     {
+        if (!IsOwner) return;
         health -= damage;
         if (health < 0)
         {
@@ -147,8 +148,9 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
 
     public void Die()
     {
-        Debug.Log("Joueur Mort");
-        GameManager.instance.GameOver();
+
+        Debug.LogWarning("Joueur Mort");
+        //GameManager.instance.GameOver();
     }
 
     public void DestroyOnNetwork()
