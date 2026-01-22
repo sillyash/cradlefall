@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using Unity.Netcode;
-using UnityEngine.SceneManagement;
+using Constants;
 
 public class MultiScreenScript : MonoBehaviour
 {
@@ -12,18 +12,12 @@ public class MultiScreenScript : MonoBehaviour
     {
         HostButton.onClick.AddListener(() =>
         {
-            Debug.Log("HOST");
-            NetworkManager.Singleton.StartHost();
-            NetworkManager.Singleton.SceneManager.LoadScene(
-                "MainGame (MULTI)",
-                LoadSceneMode.Single
-            );
+            GameManager.instance.HostGame();
         });
 
         ClientButton.onClick.AddListener(() =>
         {
-            Debug.Log("CLIENT");
-            NetworkManager.Singleton.StartClient();
+            GameManager.instance.StartClient();
         });
     }
 }
