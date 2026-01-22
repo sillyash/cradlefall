@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Constants
@@ -10,5 +11,9 @@ namespace Constants
         public static readonly string LoseMenu = "LoseMenu";
         public static readonly string VictoryMenu = "VictoryMenu";
         public static readonly string MultiScreen = "MultiScreen";
+
+        public static List<string> sceneList = new List<string> { MainMenu, MainGame, MainGameMulti, LoseMenu, VictoryMenu, MultiScreen };
+
+        public static bool isValidScene(string scene) { return sceneList.Contains(scene); }
     }
 }
