@@ -1,12 +1,28 @@
-using Unity.VisualScripting;
+using System;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Constants;
 
-public class GameManager : MonoBehaviour
+public class GameManager : NetworkBehaviour
 {
     public static GameManager instance;
     public enum GameState { MainMenu, Initialising, Playing, Paused, GameOver, Victory, MultiScreen}
     public GameState currentState;
+
+    public override void OnNetworkSpawn()
+    {
+        if (!IsServer) return;
+        base.OnNetworkSpawn();
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     public void ChangeState( GameState newState)
     {
