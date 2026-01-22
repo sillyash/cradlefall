@@ -93,7 +93,7 @@ public class GameManager : NetworkBehaviour
         Cursor.lockState = CursorLockMode.None;
     }
 
-    [Obsolete("StartGame should probably not be used. Use Multiplayer startup instead")]
+    // StartGame should probably not be used. Use Multiplayer startup instead
     public void StartGame()
     {
         Debug.Log("StartGame");
