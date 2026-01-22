@@ -12,13 +12,12 @@ public class MultiScreenScript : MonoBehaviour
     {
         HostButton.onClick.AddListener(() =>
         {
-            NetworkManager.Singleton.StartHost();
-            GameManager.instance.ChangeScene(Scenes.MainGameMulti);
+            GameManager.instance.HostGame();
         });
 
         ClientButton.onClick.AddListener(() =>
         {
-            NetworkManager.Singleton.StartClient();
+            GameManager.instance.StartClient();
         });
     }
 }

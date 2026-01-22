@@ -4,22 +4,21 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Constants;
 using System.Collections.Generic;
+using System.Collections;
+using System.Linq;
 
 public class GameManager : NetworkBehaviour
 {
     public static GameManager instance;
 
-    private NetworkVariable<GameState> currentState = new(
-        GameState.Menu,
+    public NetworkVariable<GameState> currentState = new(
+        GameState.Playing,
         NetworkVariableReadPermission.Everyone,
         NetworkVariableWritePermission.Server
     );
 
-    public override void OnNetworkSpawn()
+    private void Awake()
     {
-        if (!IsServer) return;
-        base.OnNetworkSpawn();
-
         if (instance == null)
         {
             instance = this;
@@ -32,31 +31,56 @@ public class GameManager : NetworkBehaviour
     }
 
     /// <summary>
-    /// [Server only] Loads a game scene and chages GameState accordingly. (multiplayer only)
+    /// Loads a game scene and changes GameState accordingly.
     /// </summary>
     /// <param name="scene">Scene to load. Must be a membre of Constants.Scenes</param>
     /// <exception cref="ArgumentException">The scene is not a valid scene</exception>
     public void ChangeScene(string scene)
     {
-        if (!IsServer) return;
-
-        if (Scenes.isValidScene(scene) && Scenes.SceneToStateMap.TryGetValue(scene, out GameState newState))
+        if (!Scenes.isValidScene(scene) || !Scenes.SceneToStateMap.TryGetValue(scene, out GameState newState))
+            throw new ArgumentException($"Scene : \"{scene}\" is not a valid scene. Please see Constants/Scenes.");
+        
+        if (!Scenes.isSoloScene(scene))
         {
+            // Multiplayer
+            if (!IsServer) return;
+
             currentState.Value = newState;
             NetworkManager.Singleton.SceneManager.LoadScene(
                 scene,
                 LoadSceneMode.Single
             );
-        } else
+        } 
+        else
         {
-            throw new ArgumentException($"Scene : \"{scene}\" is not a valid scene. Please see Constants/Scenes.");
+            // Solo (menus)
+            if (NetworkManager.Singleton != null && NetworkManager.Singleton.IsClient)
+            {
+                // Disconects Client if needed
+                NetworkManager.Singleton.Shutdown();
+            }
+            SceneManager.LoadScene(scene, LoadSceneMode.Single);
         }
     }
 
     public void HostGame()
     {
+        NetworkManager.Singleton.OnServerStarted += OnServerStarted;
         NetworkManager.Singleton.StartHost();
-        ChangeScene(Scenes.MainGameMulti);
+    }
+
+    private void OnServerStarted()
+    {
+        NetworkManager.Singleton.OnServerStarted -= OnServerStarted;
+        NetworkManager.Singleton.SceneManager.LoadScene(
+            Scenes.MainGameMulti,
+            LoadSceneMode.Single
+        );
+    }
+
+    public void StartClient()
+    {
+        NetworkManager.Singleton.StartClient();
     }
 
     public void PauseGame()
@@ -71,11 +95,23 @@ public class GameManager : NetworkBehaviour
 
     public void GameOver()
     {
+        GameOverRpc();
+    }
+
+    [Rpc(SendTo.Server, InvokePermission = RpcInvokePermission.Everyone)]
+    public void GameOverRpc()
+    {
         ChangeScene(Scenes.LoseMenu);
         Cursor.lockState = CursorLockMode.None;
     }
 
     public void Victory()
+    {
+        VictoryRpc();
+    }
+
+    [Rpc(SendTo.Server, InvokePermission = RpcInvokePermission.Everyone)]
+    public void VictoryRpc()
     {
         ChangeScene(Scenes.VictoryMenu);
         Cursor.lockState = CursorLockMode.None;

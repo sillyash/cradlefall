@@ -24,6 +24,10 @@ namespace Constants
 
         public static List<string> sceneList = new List<string> { MainMenu, MainGame, MainGameMulti, LoseMenu, VictoryMenu, MultiScreen };
 
+        public static List<string> soloScenesList = new List<string> { MainMenu, MainGame, MultiScreen };
+
         public static bool isValidScene(string scene) { return sceneList.Contains(scene); }
+
+        public static bool isSoloScene(string scene) { return soloScenesList.Contains(scene); }
     }
 }
