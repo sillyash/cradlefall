@@ -29,6 +29,21 @@ public class GameManager : NetworkBehaviour
         currentState = newState;
     }
 
+    /// <summary>
+    /// Loads a game scene. (multiplayer only)
+    /// </summary>
+    /// <param name="scene">Scene to load. Must be a membre of Constants.Scenes</param>
+    /// <exception cref="ArgumentException">The scene is not a valid scene</exception>
+    public void ChangeScene(string scene)
+    {
+        if (!Scenes.isValidScene(scene)) throw new ArgumentException($"Scene : \"{scene}\" is not a valid scene. Please see Constants/Scenes.");
+        NetworkManager.Singleton.SceneManager.LoadScene(
+            scene,
+            LoadSceneMode.Single
+        );
+    }
+
+    [Obsolete("StartGame should probably not be used. Use Multiplayer startup instead")]
     public void StartGame()
     {
         Debug.Log("StartGame");
