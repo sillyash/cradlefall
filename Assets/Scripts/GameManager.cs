@@ -3,14 +3,14 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Constants;
+using System.Collections.Generic;
 
 public class GameManager : NetworkBehaviour
 {
     public static GameManager instance;
-    public enum GameState { MainMenu, Initialising, Playing, Paused, GameOver, Victory}
 
     private NetworkVariable<GameState> currentState = new(
-        GameState.MainMenu,
+        GameState.Menu,
         NetworkVariableReadPermission.Everyone,
         NetworkVariableWritePermission.Server
     );
@@ -31,62 +31,58 @@ public class GameManager : NetworkBehaviour
         }
     }
 
-    public void ChangeState( GameState newState)
-    {
-        if (!IsServer) return;
-        currentState.Value = newState;
-    }
-
     /// <summary>
-    /// [Server only] Loads a game scene. (multiplayer only)
+    /// [Server only] Loads a game scene and chages GameState accordingly. (multiplayer only)
     /// </summary>
     /// <param name="scene">Scene to load. Must be a membre of Constants.Scenes</param>
     /// <exception cref="ArgumentException">The scene is not a valid scene</exception>
     public void ChangeScene(string scene)
     {
         if (!IsServer) return;
-        if (!Scenes.isValidScene(scene)) throw new ArgumentException($"Scene : \"{scene}\" is not a valid scene. Please see Constants/Scenes.");
-        NetworkManager.Singleton.SceneManager.LoadScene(
-            scene,
-            LoadSceneMode.Single
-        );
+
+        if (Scenes.isValidScene(scene) && Scenes.SceneToStateMap.TryGetValue(scene, out GameState newState))
+        {
+            currentState.Value = newState;
+            NetworkManager.Singleton.SceneManager.LoadScene(
+                scene,
+                LoadSceneMode.Single
+            );
+        } else
+        {
+            throw new ArgumentException($"Scene : \"{scene}\" is not a valid scene. Please see Constants/Scenes.");
+        }
     }
 
     public void HostGame()
     {
         NetworkManager.Singleton.StartHost();
-        ChangeState(GameState.Playing);
         ChangeScene(Scenes.MainGameMulti);
     }
 
     public void PauseGame()
     {
-        ChangeState(GameState.Paused);
+        throw new NotImplementedException(); // TODO
     }
 
     public void ResumeGame()
     {
-        ChangeState(GameState.Playing);
-
+        throw new NotImplementedException(); // TODO
     }
 
     public void GameOver()
     {
-        ChangeState(GameState.GameOver);
         ChangeScene(Scenes.LoseMenu);
         Cursor.lockState = CursorLockMode.None;
     }
 
     public void Victory()
     {
-        ChangeState(GameState.Victory);
         ChangeScene(Scenes.VictoryMenu);
         Cursor.lockState = CursorLockMode.None;
     }
 
     public void ReturnToMainMenu()
     {
-        ChangeState(GameState.MainMenu);
         ChangeScene(Scenes.MainMenu);
         Cursor.lockState = CursorLockMode.None;
     }
@@ -101,7 +97,7 @@ public class GameManager : NetworkBehaviour
     public void StartGame()
     {
         Debug.Log("StartGame");
-        ChangeState(GameState.Initialising);
+        //ChangeState(GameState.Initialising);
         SceneManager.LoadScene("MainGame");
     }
 }
