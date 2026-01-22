@@ -7,7 +7,7 @@ using Constants;
 public class GameManager : NetworkBehaviour
 {
     public static GameManager instance;
-    public enum GameState { MainMenu, Initialising, Playing, Paused, GameOver, Victory, MultiScreen}
+    public enum GameState { MainMenu, Initialising, Playing, Paused, GameOver, Victory}
     public GameState currentState;
 
     public override void OnNetworkSpawn()
@@ -43,13 +43,14 @@ public class GameManager : NetworkBehaviour
         );
     }
 
-    [Obsolete("StartGame should probably not be used. Use Multiplayer startup instead")]
-    public void StartGame()
+    public static void HostGame()
     {
-        Debug.Log("StartGame");
-        ChangeState(GameState.Initialising);
-        SceneManager.LoadScene("MainGame");
-
+        Debug.Log("HOST");
+        NetworkManager.Singleton.StartHost();
+        NetworkManager.Singleton.SceneManager.LoadScene(
+            "MainGame (MULTI)",
+            LoadSceneMode.Single
+        );
     }
 
     public void PauseGame()
@@ -91,20 +92,15 @@ public class GameManager : NetworkBehaviour
 
     public void GoToMultiScreen()
     {
-        ChangeState(GameState.MultiScreen);
         SceneManager.LoadScene("MultiScreen");
         Cursor.lockState = CursorLockMode.None;
     }
 
-    private void Awake()
+    [Obsolete("StartGame should probably not be used. Use Multiplayer startup instead")]
+    public void StartGame()
     {
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }       
+        Debug.Log("StartGame");
+        ChangeState(GameState.Initialising);
+        SceneManager.LoadScene("MainGame");
+    }
 }
