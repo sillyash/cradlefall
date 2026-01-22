@@ -8,15 +8,22 @@ public class GameManager : NetworkBehaviour
 {
     public static GameManager instance;
     public enum GameState { MainMenu, Initialising, Playing, Paused, GameOver, Victory}
-    public GameState currentState;
+
+    private NetworkVariable<GameState> currentState = new(
+        GameState.MainMenu,
+        NetworkVariableReadPermission.Everyone,
+        NetworkVariableWritePermission.Server
+    );
 
     public override void OnNetworkSpawn()
     {
         if (!IsServer) return;
         base.OnNetworkSpawn();
+
         if (instance == null)
         {
             instance = this;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -26,16 +33,18 @@ public class GameManager : NetworkBehaviour
 
     public void ChangeState( GameState newState)
     {
-        currentState = newState;
+        if (!IsServer) return;
+        currentState.Value = newState;
     }
 
     /// <summary>
-    /// Loads a game scene. (multiplayer only)
+    /// [Server only] Loads a game scene. (multiplayer only)
     /// </summary>
     /// <param name="scene">Scene to load. Must be a membre of Constants.Scenes</param>
     /// <exception cref="ArgumentException">The scene is not a valid scene</exception>
     public void ChangeScene(string scene)
     {
+        if (!IsServer) return;
         if (!Scenes.isValidScene(scene)) throw new ArgumentException($"Scene : \"{scene}\" is not a valid scene. Please see Constants/Scenes.");
         NetworkManager.Singleton.SceneManager.LoadScene(
             scene,
@@ -43,56 +52,48 @@ public class GameManager : NetworkBehaviour
         );
     }
 
-    public static void HostGame()
+    public void HostGame()
     {
-        Debug.Log("HOST");
         NetworkManager.Singleton.StartHost();
-        NetworkManager.Singleton.SceneManager.LoadScene(
-            "MainGame (MULTI)",
-            LoadSceneMode.Single
-        );
+        ChangeState(GameState.Playing);
+        ChangeScene(Scenes.MainGameMulti);
     }
 
     public void PauseGame()
     {
-        Debug.Log("in PauseGame");
         ChangeState(GameState.Paused);
     }
 
     public void ResumeGame()
     {
-        Debug.Log("in ResumeGame");
         ChangeState(GameState.Playing);
 
     }
 
     public void GameOver()
     {
-        Debug.Log("in GameOver");
         ChangeState(GameState.GameOver);
-        SceneManager.LoadScene("LoseMenu");
+        ChangeScene(Scenes.LoseMenu);
         Cursor.lockState = CursorLockMode.None;
     }
 
     public void Victory()
     {
-        Debug.Log("in GameVictory");
         ChangeState(GameState.Victory);
-        SceneManager.LoadScene("VictoryMenu");
+        ChangeScene(Scenes.VictoryMenu);
         Cursor.lockState = CursorLockMode.None;
     }
 
     public void ReturnToMainMenu()
     {
-        Debug.Log("in ReturnToMainMenu");
         ChangeState(GameState.MainMenu);
-        SceneManager.LoadScene("MainMenu");
+        ChangeScene(Scenes.MainMenu);
         Cursor.lockState = CursorLockMode.None;
     }
 
     public void GoToMultiScreen()
     {
-        SceneManager.LoadScene("MultiScreen");
+        ChangeScene(Scenes.MultiScreen);
         Cursor.lockState = CursorLockMode.None;
     }
 
