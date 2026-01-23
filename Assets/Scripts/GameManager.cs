@@ -10,6 +10,7 @@ using System.Linq;
 public class GameManager : NetworkBehaviour
 {
     public static GameManager instance;
+    [SerializeField] private GameObject ProjectileMachine;
 
     public NetworkVariable<GameState> currentState = new(
         GameState.Playing,
@@ -76,6 +77,8 @@ public class GameManager : NetworkBehaviour
             Scenes.MainGameMulti,
             LoadSceneMode.Single
         );
+        var obj = Instantiate(ProjectileMachine);
+        obj.GetComponent<NetworkObject>().Spawn();
     }
 
     public void StartClient()
