@@ -30,7 +30,10 @@ public class ProjectileRaycast : ProjectileBase
         {
             if (!hit.collider.TryGetComponent(out ProjectileBase hitObject))
             {
-                behavior.HandleCollision(hit.collider, stats.damage);
+                if (!gameObject.CompareTag("VisualOnly"))
+                {
+                    behavior.HandleCollision(hit.collider, stats.damage);
+                }
                 Destroy(gameObject);
             }
         }
