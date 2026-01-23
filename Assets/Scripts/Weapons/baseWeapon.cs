@@ -3,10 +3,10 @@ using System.Collections;
 
 public class BaseWeapon : MonoBehaviour
 {
-    [SerializeField] private WeaponBehavior behavior;
-    [SerializeField] private WeaponStats stats;
-    [SerializeField] private ProjectileBase projectile;
-    [SerializeField] private GameObject projectileSpawn;
+    [SerializeField] public WeaponBehavior behavior;
+    [SerializeField] public WeaponStats stats;
+    [SerializeField] public ProjectileBase projectile;
+    [SerializeField] public GameObject projectileSpawn;
     
     private int ammoCount;
     private bool isReadyToShoot = true;
@@ -15,7 +15,7 @@ public class BaseWeapon : MonoBehaviour
     // Variables partager a l'HUD munitions
     public int AmmoCount => ammoCount;
     public int MagSize => stats.magSize;
-    public event System.Action OnFire;
+    public event System.Action<BaseWeapon> OnFire;
     public event System.Action OnAmmoChanged;
     public event System.Action OnReloadStart;
     public event System.Action OnReloadEnd;
@@ -25,8 +25,14 @@ public class BaseWeapon : MonoBehaviour
     {
         ammoCount = stats.magSize;
         OnAmmoChanged?.Invoke();
+        StartCoroutine(WaitForInstance());
     }
 
+    private IEnumerator WaitForInstance()
+    {
+        yield return new WaitUntil(() => ProjectileVisualSync.instance != null);
+        ProjectileVisualSync.instance.subToWeaponFire(this);
+    }
 
     // Testing purpose
     //void Update()
@@ -42,7 +48,7 @@ public class BaseWeapon : MonoBehaviour
             behavior.OnFire(projectile, projectileSpawn.transform.transform, stats.spread);
             ammoCount--;
             OnAmmoChanged?.Invoke();
-            OnFire?.Invoke();
+            OnFire?.Invoke(this);
 
             isReadyToShoot = false;
             StartCoroutine(FireCooldown());
