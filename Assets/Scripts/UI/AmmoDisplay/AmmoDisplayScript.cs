@@ -113,7 +113,7 @@ public class AmmoDisplayScript : MonoBehaviour
     }
 
 
-    private void AmmoDisplayAnimation()
+    private void AmmoDisplayAnimation(BaseWeapon wep)
     {
         if (ammoDisplay == null) return;
 
