@@ -1861,6 +1861,30 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2651621414206535278, guid: a8e99f7f7f8037f4aac6825f119a552d, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3405618432
+      objectReference: {fileID: 0}
+    - target: {fileID: 2651621414206535278, guid: a8e99f7f7f8037f4aac6825f119a552d, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3298099105261033454, guid: a8e99f7f7f8037f4aac6825f119a552d, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1761611653
+      objectReference: {fileID: 0}
+    - target: {fileID: 3298099105261033454, guid: a8e99f7f7f8037f4aac6825f119a552d, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4587983577586732026, guid: a8e99f7f7f8037f4aac6825f119a552d, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3289859411
+      objectReference: {fileID: 0}
+    - target: {fileID: 4587983577586732026, guid: a8e99f7f7f8037f4aac6825f119a552d, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4751532716626378197, guid: a8e99f7f7f8037f4aac6825f119a552d, type: 3}
       propertyPath: m_Name
       value: CryotechnicRoom
@@ -1913,6 +1937,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5934587886392778850, guid: a8e99f7f7f8037f4aac6825f119a552d, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 768577036
+      objectReference: {fileID: 0}
+    - target: {fileID: 5934587886392778850, guid: a8e99f7f7f8037f4aac6825f119a552d, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6192116457104969517, guid: a8e99f7f7f8037f4aac6825f119a552d, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 219780124
+      objectReference: {fileID: 0}
+    - target: {fileID: 6192116457104969517, guid: a8e99f7f7f8037f4aac6825f119a552d, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7198994279205508388, guid: a8e99f7f7f8037f4aac6825f119a552d, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -1940,7 +1980,40 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8981144423650481168, guid: a8e99f7f7f8037f4aac6825f119a552d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 867302287}
+    - targetCorrespondingSourceObject: {fileID: 855673229345819494, guid: a8e99f7f7f8037f4aac6825f119a552d, type: 3}
+      insertIndex: 8
+      addedObject: {fileID: 1440225733}
   m_SourcePrefab: {fileID: 100100000, guid: a8e99f7f7f8037f4aac6825f119a552d, type: 3}
+--- !u!1 &1440225732 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 855673229345819494, guid: a8e99f7f7f8037f4aac6825f119a552d, type: 3}
+  m_PrefabInstance: {fileID: 1440225731}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1440225733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1440225732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 666222369
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 0
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0
 --- !u!1 &1568793611
 GameObject:
   m_ObjectHideFlags: 0
