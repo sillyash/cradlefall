@@ -61,6 +61,8 @@ public class BaseEnemy : NetworkBehaviour, ICanDie, IDamageable
         {
             Health.Value = stats.health;
         }
+
+        NetworkObject.DestroyWithScene = true;
     }
 
     void Update()

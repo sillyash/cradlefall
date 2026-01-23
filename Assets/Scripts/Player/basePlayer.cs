@@ -59,6 +59,11 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
 
             health = stats.health;
             maxHealth = stats.health;
+            NetworkObject.DestroyWithScene = false;
+        }
+        else
+        {
+            NetworkObject.DestroyWithScene = true;
         }
     }
 
