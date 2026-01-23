@@ -6,6 +6,7 @@ TagManager:
   tags:
   - MainEnemy
   - Capsule
+  - VisualOnly
   layers:
   - Default
   - TransparentFX
