@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Unity.Netcode;
 using UnityEngine;
@@ -186,6 +187,11 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
         Debug.Log("Destroy FOR EVERYONE");
         NetworkObject netObj = gameObject.GetComponent<NetworkObject>();
         netObj.Despawn(destroy: true);
+    }
+
+    public ulong getClientId()
+    {
+        return OwnerClientId;
     }
 
     public BaseWeapon CurrentWeapon => weapon; // Pour affichage HUD
