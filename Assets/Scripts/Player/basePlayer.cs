@@ -15,11 +15,10 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
     public float maxHealth { get; set; }
 
     [SerializeField] private HealthBarScript healthBar;
-
     [SerializeField] public Camera mainCamera;
-
     [SerializeField] private Transform TPSWeaponAnchorPoint;
     [SerializeField] private Transform FPSWeaponAnchorPoint;
+    [SerializeField] private GameObject playerCanvas; 
 
     public bool isDead { get; set; } = false;
 
@@ -65,6 +64,7 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
         else
         {
             NetworkObject.DestroyWithScene = true;
+            Destroy(playerCanvas); // Do not display other player's HUD
         }
     }
 

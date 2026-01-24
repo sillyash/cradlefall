@@ -464,6 +464,7 @@ MonoBehaviour:
   mainCamera: {fileID: 95665150144060911}
   TPSWeaponAnchorPoint: {fileID: 425534251396596048}
   FPSWeaponAnchorPoint: {fileID: 316491725339577519}
+  playerCanvas: {fileID: 2466486089039789121}
   stats: {fileID: 11400000, guid: 41ccfa7cd379515499abb2582c3819d4, type: 2}
 --- !u!114 &6504421229519761709
 MonoBehaviour:
@@ -533,6 +534,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8444947561549270069}
     m_Modifications:
+    - target: {fileID: 47073783543473002, guid: e509449ac46f5f149a480eff17399a79, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 95665150144060911}
+    - target: {fileID: 47073783543473002, guid: e509449ac46f5f149a480eff17399a79, type: 3}
+      propertyPath: m_RenderMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 47073783543473002, guid: e509449ac46f5f149a480eff17399a79, type: 3}
+      propertyPath: m_PixelPerfect
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 47073783543473002, guid: e509449ac46f5f149a480eff17399a79, type: 3}
+      propertyPath: m_PlaneDistance
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 47073783543473002, guid: e509449ac46f5f149a480eff17399a79, type: 3}
+      propertyPath: m_UpdateRectTransformForStandalone
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1341954754131955680, guid: e509449ac46f5f149a480eff17399a79, type: 3}
       propertyPath: damageable
       value: 
@@ -547,6 +568,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3694539156529834385, guid: e509449ac46f5f149a480eff17399a79, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6219554475398181474, guid: e509449ac46f5f149a480eff17399a79, type: 3}
+      propertyPath: m_PresetInfoIsWorld
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6853942558681945292, guid: e509449ac46f5f149a480eff17399a79, type: 3}
@@ -591,6 +616,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9162108720012228133, guid: e509449ac46f5f149a480eff17399a79, type: 3}
       propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9162108720012228133, guid: e509449ac46f5f149a480eff17399a79, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9162108720012228133, guid: e509449ac46f5f149a480eff17399a79, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9162108720012228133, guid: e509449ac46f5f149a480eff17399a79, type: 3}
+      propertyPath: m_LocalScale.z
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9162108720012228133, guid: e509449ac46f5f149a480eff17399a79, type: 3}
@@ -646,6 +683,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e509449ac46f5f149a480eff17399a79, type: 3}
+--- !u!1 &2466486089039789121 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8810829981561543893, guid: e509449ac46f5f149a480eff17399a79, type: 3}
+  m_PrefabInstance: {fileID: 6376220933790556308}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &2835783968231036593 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 9162108720012228133, guid: e509449ac46f5f149a480eff17399a79, type: 3}
