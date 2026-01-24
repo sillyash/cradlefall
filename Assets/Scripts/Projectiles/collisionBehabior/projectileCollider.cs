@@ -6,8 +6,7 @@ public class ProjectileCollider : ProjectileBase
     {
         if (!other.TryGetComponent<ProjectileBase>(out ProjectileBase var))
         {
-            if (gameObject.CompareTag("VisualOnly"))
-            
+            if (gameObject.CompareTag("VisualOnly")) {
                 behavior.HandleCollision(other, stats.damage);
             }
 
