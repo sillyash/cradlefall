@@ -101,9 +101,21 @@ public class GameManager : NetworkBehaviour
         GameOverRpc();
     }
 
+    /// <summary>
+    /// Notify server of game over and change scene for all clients
+    /// </summary>
     [Rpc(SendTo.Server, InvokePermission = RpcInvokePermission.Everyone)]
     public void GameOverRpc()
     {
+        // Despawn all players before changing scene
+        if (NetworkManager.Singleton.IsServer && PlayerManager.Instance != null)
+        {
+            foreach (var player in PlayerManager.Instance.GetAllPlayers())
+            {
+                PlayerManager.Instance.DespawnPlayerForClient(player.getClientId());
+            }
+        }
+        
         ChangeScene(Scenes.LoseMenu);
         Cursor.lockState = CursorLockMode.None;
     }

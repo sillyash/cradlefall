@@ -7,19 +7,38 @@ public class NetworkBootstrap : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
 
-        NetworkManager.Singleton.OnClientConnectedCallback += (clientId) =>
-        {
-            Debug.Log($"Client {clientId} connecté !");
-        };
+        // Track client connections
+        NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnected;
+        NetworkManager.Singleton.OnClientDisconnectCallback += OnClientDisconnected;
+        
+        NetworkManager.Singleton.OnServerStarted += OnServerStarted;
+    }
 
-        NetworkManager.Singleton.OnServerStarted += () =>
-        {
-            Debug.Log("Server started !");
-        };
+    private void OnServerStarted()
+    {
+        Debug.Log("[NetworkBootstrap] Server started! Waiting for clients...");
+        // PlayerManager will be instantiated separately
+    }
 
-        NetworkManager.Singleton.OnClientDisconnectCallback += (clientId) =>
+    private void OnClientConnected(ulong clientId)
+    {
+        Debug.Log($"[NetworkBootstrap] Client {clientId} connected!");
+        
+        if (NetworkManager.Singleton.IsServer)
         {
-            Debug.LogWarning("Client disconnected: " + clientId);
-        };
+            // Server spawns player for this client
+            PlayerManager.Instance?.SpawnPlayerForClient(clientId);
+        }
+    }
+
+    private void OnClientDisconnected(ulong clientId)
+    {
+        Debug.LogWarning($"[NetworkBootstrap] Client {clientId} disconnected!");
+        
+        if (NetworkManager.Singleton.IsServer)
+        {
+            // Server despawns this player
+            PlayerManager.Instance?.DespawnPlayerForClient(clientId);
+        }
     }
 }
