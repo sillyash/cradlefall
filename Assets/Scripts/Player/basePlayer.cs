@@ -31,7 +31,7 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
     {
         if (!stats)
         {
-            Debug.LogError($"Le Joueur {this.name} n'a pas SO stats");
+            Debug.LogError($"[Player] Le Joueur {this.name} n'a pas SO stats");
             enabled = false;
             return;
         }
@@ -47,7 +47,7 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
 
         if (IsOwner)
         {
-            Debug.Log($"Owner instanciate {OwnerClientId}");
+            Debug.Log($"[Player] Owner instanciate {OwnerClientId}");
             var weaponObjOwner = Instantiate(weaponPrefab, FPSWeaponAnchorPoint);
             weapon = weaponObjOwner.GetComponent<BaseWeapon>();
             weaponObjOwner.transform.SetParent(FPSWeaponAnchorPoint);

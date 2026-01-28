@@ -113,6 +113,9 @@ public class GameManager : NetworkBehaviour
         VictoryRpc();
     }
 
+    /// <summary>
+    /// Notify server of victory and change scene for all clients
+    /// </summary>
     [Rpc(SendTo.Server, InvokePermission = RpcInvokePermission.Everyone)]
     public void VictoryRpc()
     {
@@ -120,22 +123,30 @@ public class GameManager : NetworkBehaviour
         Cursor.lockState = CursorLockMode.None;
     }
 
+    /// <summary>
+    /// Return to main menu from any scene
+    /// </summary>
     public void ReturnToMainMenu()
     {
         ChangeScene(Scenes.MainMenu);
         Cursor.lockState = CursorLockMode.None;
     }
 
+    /// <summary>
+    /// Go to multiplayer screen from main menu
+    /// </summary>
     public void GoToMultiScreen()
     {
         ChangeScene(Scenes.MultiScreen);
         Cursor.lockState = CursorLockMode.None;
     }
 
-    // StartGame should probably not be used. Use Multiplayer startup instead
+    /// <summary>
+    /// StartGame should probably not be used. Use Multiplayer startup instead
+    /// </summary>
     public void StartGame()
     {
-        Debug.Log("StartGame");
+        Debug.Log("[GameManager] StartGame");
         //ChangeState(GameState.Initialising);
         SceneManager.LoadScene("MainGame");
     }
