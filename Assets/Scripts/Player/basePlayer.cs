@@ -154,39 +154,32 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
 
     public void Die()
     {
-
-        Debug.LogWarning("Joueur Mort");
-        //GameManager.instance.GameOver();
-    }
-
-    public void DestroyOnNetwork()
-    {
-        if (!IsServer)
+        Debug.LogWarning("[Player] Joueur Mort");
+        
+        // Notify server/PlayerManager
+        if (IsServer)
         {
-            Debug.Log("Client Destroy");
-            // If client, call serveur
-            DestroyServerRpc();
+            PlayerManager.Instance?.OnPlayerDeath(OwnerClientId);
         }
         else
         {
-            Debug.Log("Server Destroy");
-            // If server, destroy directly
-            DestroyForEveryone();
+            NotifyDeathRpc();
         }
     }
 
     [Rpc(SendTo.Server, InvokePermission = RpcInvokePermission.Everyone)]
-    private void DestroyServerRpc()
+    private void NotifyDeathRpc()
     {
-        Debug.Log("RPC Destroy");
-        DestroyForEveryone();
+        if (IsServer)
+        {
+            PlayerManager.Instance?.OnPlayerDeath(OwnerClientId);
+        }
     }
 
-    private void DestroyForEveryone()
+    public void DestroyOnNetwork()
     {
-        Debug.Log("Destroy FOR EVERYONE");
-        NetworkObject netObj = gameObject.GetComponent<NetworkObject>();
-        netObj.Despawn(destroy: true);
+        // This method is now deprecated - PlayerManager.DespawnPlayerForClient() is used instead
+        Debug.LogWarning("[Player] DestroyOnNetwork() is deprecated. Use PlayerManager.DespawnPlayerForClient()");
     }
 
     public ulong getClientId()
