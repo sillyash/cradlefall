@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class EnemySphereGestion : MonoBehaviour
 {
-    baseEnemies enemy;
+    BaseEnemy enemy;
     SphereCollider main;
 
     void Start()
     {
-        enemy = gameObject.GetComponent<baseEnemies>();
+        enemy = gameObject.GetComponent<BaseEnemy>();
         main = gameObject.GetComponentInChildren<SphereCollider>(true);
     }
 

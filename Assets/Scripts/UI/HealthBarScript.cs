@@ -26,13 +26,25 @@ public class HealthBarScript : MonoBehaviour
     {
         if (thing == null) return;
 
-        if (smooth)
+        int maxHealth = (int)thing.maxHealth;
+        int health = (int)thing.health;
+
+        // Remettre cette valeur empêche les problèmes de timing à l'initialisation
+        if (slider.maxValue != maxHealth)
         {
-            slider.value = Mathf.Lerp(slider.value, thing.health, Time.deltaTime * smoothSpeed);
+            slider.maxValue = maxHealth;
         }
-        else
+
+        if (slider.value != health)
         {
-            slider.value = thing.health;
+            if (smooth)
+            {
+                slider.value = Mathf.Lerp(slider.value, thing.health, Time.deltaTime * smoothSpeed);
+            }
+            else
+            {
+                slider.value = thing.health;
+            }
         }
     }
 }

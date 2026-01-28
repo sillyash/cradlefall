@@ -7,7 +7,6 @@ public class BaseWeapon : MonoBehaviour
     [SerializeField] private WeaponStats stats;
     [SerializeField] private ProjectileBase projectile;
     [SerializeField] private GameObject projectileSpawn;
-    [SerializeField] private float spread;
     
     private int ammoCount;
     private bool isReadyToShoot = true;
@@ -16,8 +15,10 @@ public class BaseWeapon : MonoBehaviour
     // Variables partager a l'HUD munitions
     public int AmmoCount => ammoCount;
     public int MagSize => stats.magSize;
-
+    public event System.Action OnFire;
     public event System.Action OnAmmoChanged;
+    public event System.Action OnReloadStart;
+    public event System.Action OnReloadEnd;
 
 
     void Start()
@@ -41,6 +42,7 @@ public class BaseWeapon : MonoBehaviour
             behavior.OnFire(projectile, projectileSpawn.transform.transform, stats.spread);
             ammoCount--;
             OnAmmoChanged?.Invoke();
+            OnFire?.Invoke();
 
             isReadyToShoot = false;
             StartCoroutine(FireCooldown());
@@ -57,6 +59,7 @@ public class BaseWeapon : MonoBehaviour
     {
         Debug.Log("reloading...");
         StartCoroutine(ReloadCooldown());
+        OnReloadStart?.Invoke();
     }
 
 
@@ -65,6 +68,7 @@ public class BaseWeapon : MonoBehaviour
         yield return new WaitForSeconds(stats.reloadTime);
         ammoCount = stats.magSize;
         OnAmmoChanged?.Invoke();
+        OnReloadEnd?.Invoke();
         Debug.Log("Done");
     }
 }

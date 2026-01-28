@@ -3,6 +3,7 @@ using UnityEngine;
 public class basePlayer : MonoBehaviour, IDamageable, ICanDie
 {
     public static float TARGET_DISTANCE = 5;
+    public static float MIN_RAY_DISTANCE = 3;
 
     [SerializeField] private BaseWeapon weapon;
     public BaseWeapon CurrentWeapon => weapon; // Pour affichage HUD
@@ -16,6 +17,7 @@ public class basePlayer : MonoBehaviour, IDamageable, ICanDie
     public PlayerStats stats;
 
     private Vector3 targetPoint;
+    
 
     void Start()
     {
@@ -62,23 +64,46 @@ public class basePlayer : MonoBehaviour, IDamageable, ICanDie
 
     void raycast()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
+        // When cursor is locked (gameplay), raycast from screen center (camera forward)
+        // When cursor is unlocked (menu/unfocused), use calculated forward point
+        Ray ray;
+        
+        if (Cursor.lockState == CursorLockMode.Locked)
+        {
+            // In gameplay: raycast from center of screen
+            ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+        }
+        else
+        {
+            // Cursor visible: use forward projection instead of mouse position to avoid flipping
+            targetPoint = calcTargetPoint();
+            return;
+        }
 
+        RaycastHit hit;
         if (Physics.Raycast(ray, out hit))
         {
             // Ignore projectile
-            if(!hit.collider.TryGetComponent(out ProjectileBase var))
+            if(!hit.collider.TryGetComponent(out ProjectileBase var) && isNotDamageable(hit))
             {
                 targetPoint = hit.point;
-                weapon.transform.LookAt(targetPoint);
             }
-        } else
+            else
+            {
+                targetPoint = calcTargetPoint();
+            }
+        }
+        else
         {
             targetPoint = calcTargetPoint();
         }
     }
 
+
+    public bool isNotDamageable(RaycastHit hit) 
+    {
+        return !(hit.collider.TryGetComponent(out IDamageable hitObject) && hit.distance < MIN_RAY_DISTANCE);
+    }
     public void TakeDamage(float damage)
     {
         health -= damage;
