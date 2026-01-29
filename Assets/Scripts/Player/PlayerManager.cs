@@ -161,4 +161,22 @@ public class PlayerManager : NetworkBehaviour
     {
         return activePlayers.Values;
     }
+
+    /// <summary>
+    /// Spawn players for all connected clients (used when transitioning from lobby to game)
+    /// </summary>
+    public void SpawnAllPlayers()
+    {
+        if (!IsServer) return;
+
+        Debug.Log("[PlayerManager] Spawning players for all connected clients...");
+        
+        foreach (var clientId in NetworkManager.Singleton.ConnectedClientsIds)
+        {
+            if (!activePlayers.ContainsKey(clientId))
+            {
+                SpawnPlayerForClient(clientId);
+            }
+        }
+    }
 }

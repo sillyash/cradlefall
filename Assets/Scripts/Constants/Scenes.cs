@@ -8,6 +8,7 @@ namespace Constants
         public static readonly string MainMenu = "MainMenu";
         public static readonly string MainGame = "MainGame";
         public static readonly string MainGameMulti = "MainGame (MULTI)";
+        public static readonly string Lobby = "Lobby";
         public static readonly string LoseMenu = "LoseMenu";
         public static readonly string VictoryMenu = "VictoryMenu";
         public static readonly string MultiScreen = "MultiScreen";
@@ -17,12 +18,13 @@ namespace Constants
             { Scenes.MainMenu, GameState.Menu },
             { Scenes.MainGame, GameState.Playing },
             { Scenes.MainGameMulti, GameState.Playing },
+            { Scenes.Lobby, GameState.Menu },
             { Scenes.LoseMenu, GameState.GameOver },
             { Scenes.VictoryMenu, GameState.Victory },
             { Scenes.MultiScreen, GameState.Menu }
         };
 
-        public static List<string> sceneList = new List<string> { MainMenu, MainGame, MainGameMulti, LoseMenu, VictoryMenu, MultiScreen };
+        public static List<string> sceneList = new List<string> { MainMenu, MainGame, MainGameMulti, Lobby, LoseMenu, VictoryMenu, MultiScreen };
 
         public static List<string> soloScenesList = new List<string> { MainMenu, MainGame, MultiScreen };
 

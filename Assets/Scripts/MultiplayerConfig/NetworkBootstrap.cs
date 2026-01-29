@@ -1,5 +1,7 @@
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using Constants;
 
 public class NetworkBootstrap : MonoBehaviour
 {
@@ -17,7 +19,6 @@ public class NetworkBootstrap : MonoBehaviour
     private void OnServerStarted()
     {
         Debug.Log("[NetworkBootstrap] Server started! Waiting for clients...");
-        // PlayerManager will be instantiated separately
     }
 
     private void OnClientConnected(ulong clientId)
@@ -26,8 +27,12 @@ public class NetworkBootstrap : MonoBehaviour
         
         if (NetworkManager.Singleton.IsServer)
         {
-            // Server spawns player for this client
-            PlayerManager.Instance?.SpawnPlayerForClient(clientId);
+            // Only spawn players in the actual game scene, not in lobby
+            string currentScene = SceneManager.GetActiveScene().name;
+            if (currentScene == Scenes.MainGameMulti)
+            {
+                PlayerManager.Instance?.SpawnPlayerForClient(clientId);
+            }
         }
     }
 

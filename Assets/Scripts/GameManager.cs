@@ -73,8 +73,9 @@ public class GameManager : NetworkBehaviour
     private void OnServerStarted()
     {
         NetworkManager.Singleton.OnServerStarted -= OnServerStarted;
+        // Load lobby scene instead of going directly to game
         NetworkManager.Singleton.SceneManager.LoadScene(
-            Scenes.MainGameMulti,
+            Scenes.Lobby,
             LoadSceneMode.Single
         );
         var obj = Instantiate(ProjectileMachine);
