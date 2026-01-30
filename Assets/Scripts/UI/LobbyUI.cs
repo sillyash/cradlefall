@@ -16,7 +16,7 @@ public class LobbyUI : MonoBehaviour
 
     private bool isLocalPlayerReady = false;
 
-    private void Start()
+    private void Awake()
     {
         if (readyButton != null)
         {
@@ -26,7 +26,7 @@ public class LobbyUI : MonoBehaviour
         UpdateUI();
     }
 
-    private void Update()
+    public void Update()
     {
         // Update UI every frame to reflect lobby state
         if (LobbyManager.Instance != null)
@@ -64,7 +64,7 @@ public class LobbyUI : MonoBehaviour
         // Update player count
         if (playerCountText != null)
         {
-            playerCountText.text = $"Players: {LobbyManager.Instance.ConnectedCount}\nReady: {LobbyManager.Instance.ReadyCount}";
+            playerCountText.text = $"Players: {PlayerManager.Instance?.NbOfActiveClients.Value}\nReady: {LobbyManager.Instance.ReadyCount}";
         }
 
         // Update status
