@@ -12,64 +12,24 @@ public class LobbyManager : NetworkBehaviour
 
 	[SerializeField] private int minPlayersToStart = 1;
 
-	private readonly HashSet<ulong> connectedClients = new();
-	private NetworkList<ulong> readyClients;
+	private NetworkList<ulong> readyClients = new NetworkList<ulong>();
 
-	private void Awake()
-	{
-		if (Instance != null && Instance != this)
-		{
-			Destroy(gameObject);
-			return;
-		}
-
-		Instance = this;
-		DontDestroyOnLoad(gameObject);
-
-		readyClients = new NetworkList<ulong>();
+    public void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            // Destroy(gameObject);
+        }
     }
 
-	public override void OnNetworkSpawn()
+    public override void OnNetworkSpawn()
 	{
-		if (!IsServer)
-		{
-			return;
-		}
-
-		connectedClients.Clear();
-		foreach (var clientId in NetworkManager.Singleton.ConnectedClientsIds)
-		{
-			connectedClients.Add(clientId);
-		}
-
-		NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnected;
-		NetworkManager.Singleton.OnClientDisconnectCallback += OnClientDisconnected;
-	}
-
-	public override void OnNetworkDespawn()
-	{
-		if (NetworkManager.Singleton != null)
-		{
-			NetworkManager.Singleton.OnClientConnectedCallback -= OnClientConnected;
-			NetworkManager.Singleton.OnClientDisconnectCallback -= OnClientDisconnected;
-		}
-
-		base.OnNetworkDespawn();
-	}
-
-	private void OnClientConnected(ulong clientId)
-	{
-		if (!IsServer) return;
-
-		connectedClients.Add(clientId);
-	}
-
-	private void OnClientDisconnected(ulong clientId)
-	{
-		if (!IsServer) return;
-
-		connectedClients.Remove(clientId);
-		readyClients.Remove(clientId);
+        if (!IsServer) return;
 	}
 
 	public bool IsReady(ulong clientId)
@@ -78,40 +38,39 @@ public class LobbyManager : NetworkBehaviour
 	}
 
 	public int ReadyCount => readyClients.Count;
-	public int ConnectedCount => connectedClients.Count;
-
-	public bool AllReady => connectedClients.Count >= minPlayersToStart
-						&& readyClients.Count == connectedClients.Count;
+	public bool AllReady => PlayerManager.Instance?.NbOfActiveClients.Value >= minPlayersToStart
+						&& readyClients.Count == PlayerManager.Instance?.NbOfActiveClients.Value;
 
 	public void SetLocalReady(bool ready)
 	{
-		if (!IsClient) return;
-		SetReadyServerRpc(ready);
+        if (IsClient)
+        {
+		    SetReadyServerRpc(ready);
+        } else
+        {
+            if (ready)
+            {
+                if (!readyClients.Contains(OwnerClientId))
+                {
+                    readyClients.Add(OwnerClientId);
+                }
+            }
+            else
+            {
+                readyClients.Remove(OwnerClientId);
+            }
+
+            if (AllReady)
+            {
+                GameManager.instance?.PlayGame();
+            }
+        }
 	}
 
-	public void TryStartGame()
-	{
-		if (!IsServer) return;
-		if (!AllReady) return;
-
-		StartGameServer();
-	}
-
-	private void StartGameServer()
-	{
-		Debug.Log("[LobbyManager] All players ready! Starting game...");
-		
-		// Spawn all players before transitioning to game scene
-		PlayerManager.Instance?.SpawnAllPlayers();
-		
-		// Change to game scene
-		GameManager.instance?.ChangeScene(Scenes.MainGameMulti);
-	}
-
-	[Rpc(SendTo.Server, InvokePermission = RpcInvokePermission.Everyone)]
-	private void SetReadyServerRpc(bool ready, RpcParams rpcParams = default)
-	{
-		if (!IsServer) return;
+    [Rpc(SendTo.Server, InvokePermission = RpcInvokePermission.Everyone)]
+    private void SetReadyServerRpc(bool ready, RpcParams rpcParams = default)
+    {
+        if (!IsServer) return;
 
 		ulong clientId = rpcParams.Receive.SenderClientId;
 
@@ -129,7 +88,7 @@ public class LobbyManager : NetworkBehaviour
 
 		if (AllReady)
 		{
-			StartGameServer();
+            GameManager.instance?.PlayGame();
 		}
 	}
 }
