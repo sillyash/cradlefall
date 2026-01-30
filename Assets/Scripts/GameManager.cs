@@ -11,6 +11,7 @@ public class GameManager : NetworkBehaviour
 {
     public static GameManager instance;
     [SerializeField] private GameObject ProjectileMachine;
+    [SerializeField] private GameObject LobbyManager;
 
     public NetworkVariable<GameState> currentState = new(
         GameState.Playing,
@@ -73,13 +74,28 @@ public class GameManager : NetworkBehaviour
     private void OnServerStarted()
     {
         NetworkManager.Singleton.OnServerStarted -= OnServerStarted;
-        // Load lobby scene instead of going directly to game
+        GoToLobby();
+    }
+
+    public void PlayGame()
+    {
         NetworkManager.Singleton.SceneManager.LoadScene(
-            Scenes.Lobby,
+            Scenes.MainGameMulti,
             LoadSceneMode.Single
         );
+
+        currentState.Value = GameState.Playing;
+
         var obj = Instantiate(ProjectileMachine);
         obj.GetComponent<NetworkObject>().Spawn();
+
+        StartCoroutine(SpawnPlayersAfterDelay());
+    }
+
+    private IEnumerator SpawnPlayersAfterDelay()
+    {
+        yield return new WaitForSeconds(0.5f);
+        PlayerManager.Instance?.SpawnAllPlayers();
     }
 
     public void StartClient()
@@ -151,6 +167,17 @@ public class GameManager : NetworkBehaviour
     public void GoToMultiScreen()
     {
         ChangeScene(Scenes.MultiScreen);
+        Cursor.lockState = CursorLockMode.None;
+    }
+
+    /// <summary>
+    /// Go to Lobby
+    /// </summary>
+    public void GoToLobby()
+    {
+        ChangeScene(Scenes.Lobby);
+        var obj = Instantiate(LobbyManager);
+        obj.GetComponent<NetworkObject>().Spawn();
         Cursor.lockState = CursorLockMode.None;
     }
 
