@@ -11,25 +11,28 @@ public class PlayerManager : NetworkBehaviour
 
     [SerializeField] private GameObject playerPrefab; // Reference to Player.prefab
     [SerializeField] private Vector3 spawnPosition = Vector3.zero;
-    
     private Dictionary<ulong, basePlayer> activePlayers = new();
 
     private void Awake()
     {
-        if (Instance != null && Instance != this)
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
         {
             Destroy(gameObject);
-            return;
         }
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
     }
 
     public override void OnNetworkSpawn()
     {
-        if (!IsServer)
+        if (IsServer)
         {
-            enabled = false;
+            // Track client connections
+            NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnected;
+            NetworkManager.Singleton.OnClientDisconnectCallback += OnClientDisconnected;
         }
     }
 
@@ -42,7 +45,6 @@ public class PlayerManager : NetworkBehaviour
     public void SpawnPlayerForClient(ulong clientId)
     {
         if (!IsServer) return;
-
         if (activePlayers.ContainsKey(clientId))
         {
             Debug.LogWarning($"[PlayerManager] Player for client {clientId} already exists!");
@@ -60,9 +62,8 @@ public class PlayerManager : NetworkBehaviour
             Destroy(playerObj);
             return;
         }
-
         // Spawn with ownership (client becomes owner)
-        networkObj.SpawnWithOwnership(clientId);
+        networkObj.SpawnAsPlayerObject(clientId, true);
 
         // Track this player
         activePlayers[clientId] = basePlayerComp;
@@ -80,6 +81,7 @@ public class PlayerManager : NetworkBehaviour
             Debug.LogWarning($"[PlayerManager] No active player found for client {clientId}");
             return;
         }
+        Debug.Log("Dispawn player");
 
         // Despawn the NetworkObject
         NetworkObject networkObj = player.GetComponent<NetworkObject>();
@@ -104,6 +106,8 @@ public class PlayerManager : NetworkBehaviour
     /// </param>
     public void OnPlayerDeath(ulong clientId)
     {
+        Debug.Log($"[PlayerManager] ICIIII");
+
         if (!IsServer) return;
 
         Debug.Log($"[PlayerManager] Player {clientId} died!");
@@ -136,6 +140,28 @@ public class PlayerManager : NetworkBehaviour
         SpawnPlayerForClient(clientId);
     }
 
+    private void OnClientConnected(ulong clientId)
+    {
+        Debug.Log($"[NetworkBootstrap] Client {clientId} connected!");
+
+        if (NetworkManager.Singleton.IsServer)
+        {
+            // Server spawns player for this client
+            SpawnPlayerForClient(clientId);
+        }
+    }
+
+    private void OnClientDisconnected(ulong clientId)
+    {
+        Debug.LogWarning($"[NetworkBootstrap] Client {clientId} disconnected!");
+
+        if (NetworkManager.Singleton.IsServer)
+        {
+            // Server despawns this player
+            DespawnPlayerForClient(clientId);
+        }
+    }
+
     /// <summary>
     /// Get active player by client ID
     /// </summary>
@@ -163,20 +189,13 @@ public class PlayerManager : NetworkBehaviour
     }
 
     /// <summary>
-    /// Spawn players for all connected clients (used when transitioning from lobby to game)
+    /// Get all active clients ids
     /// </summary>
-    public void SpawnAllPlayers()
+    /// <returns>
+    /// An enumerable of all active clients ids
+    /// </returns>
+    public IEnumerable<ulong> GetAllClients()
     {
-        if (!IsServer) return;
-
-        Debug.Log("[PlayerManager] Spawning players for all connected clients...");
-        
-        foreach (var clientId in NetworkManager.Singleton.ConnectedClientsIds)
-        {
-            if (!activePlayers.ContainsKey(clientId))
-            {
-                SpawnPlayerForClient(clientId);
-            }
-        }
+        return activePlayers.Keys;
     }
 }
