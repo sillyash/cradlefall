@@ -1,3 +1,4 @@
+using Constants;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
@@ -11,7 +12,13 @@ public class PlayerManager : NetworkBehaviour
 
     [SerializeField] private GameObject playerPrefab; // Reference to Player.prefab
     [SerializeField] private Vector3 spawnPosition = Vector3.zero;
-    private Dictionary<ulong, basePlayer> activePlayers = new();
+    public Dictionary<ulong, basePlayer> activePlayers = new();
+
+    public NetworkVariable<int> NbOfActiveClients = new(
+        0,
+        NetworkVariableReadPermission.Everyone,
+        NetworkVariableWritePermission.Server
+    );
 
     private void Awake()
     {
@@ -143,8 +150,8 @@ public class PlayerManager : NetworkBehaviour
     private void OnClientConnected(ulong clientId)
     {
         Debug.Log($"[NetworkBootstrap] Client {clientId} connected!");
-
-        if (NetworkManager.Singleton.IsServer)
+        NbOfActiveClients.Value++;
+        if (NetworkManager.Singleton.IsServer && GameManager.instance?.currentState.Value == GameState.Playing)
         {
             // Server spawns player for this client
             SpawnPlayerForClient(clientId);
@@ -159,6 +166,24 @@ public class PlayerManager : NetworkBehaviour
         {
             // Server despawns this player
             DespawnPlayerForClient(clientId);
+        }
+    }
+
+    /// <summary>
+    /// Spawn players for all connected clients (used when transitioning from lobby to game)
+    /// </summary>
+    public void SpawnAllPlayers()
+    {
+        Debug.Log("[PlayerManager] Spawning players for all connected clients...");
+
+        foreach (ulong clientId in NetworkManager.Singleton.ConnectedClientsIds)
+        {
+            Debug.Log("[PlayerManager] Spawning " + clientId);
+            if (!PlayerManager.Instance.activePlayers.ContainsKey(clientId))
+            {
+                Debug.Log("[PlayerManager] SpawningAAA " + clientId);
+                SpawnPlayerForClient(clientId);
+            }
         }
     }
 
