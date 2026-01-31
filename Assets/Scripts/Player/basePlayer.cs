@@ -178,8 +178,7 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
 
     public void DestroyOnNetwork()
     {
-        // This method is now deprecated - PlayerManager.DespawnPlayerForClient() is used instead
-        Debug.LogWarning("[Player] DestroyOnNetwork() is deprecated. Use PlayerManager.DespawnPlayerForClient()");
+        Die();
     }
 
     public ulong getClientId()
