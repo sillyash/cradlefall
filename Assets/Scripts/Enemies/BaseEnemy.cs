@@ -104,7 +104,6 @@ public class BaseEnemy : NetworkBehaviour, ICanDie, IDamageable
     void TakeDamageRpc(float damage)
     {
         Health.Value -= damage;
-        Debug.Log($"[Enemy Object] Health : {Health.Value}");
     }
 
     public void Die()
