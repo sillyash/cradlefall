@@ -120,8 +120,8 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     - _emissionFac: 10
-    - _shadowFac: 2
-    - _treshold: 0.3
+    - _shadowFac: 3
+    - _treshold: 0.5
     m_Colors:
     - _BaseColor: {r: 1, g: 0, b: 0, a: 1}
     - _Color: {r: 1, g: 0, b: 0, a: 1}
