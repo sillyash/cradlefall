@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 276113807
+  GlobalObjectIdHash: 3486133061
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -72,6 +72,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   playerPrefab: {fileID: 821926761254441425, guid: 6faf5ad85b09f2d46b19998f2af9b018, type: 3}
+  deathCamPrefab: {fileID: 5529215310212988558, guid: d11d94b5b7d896f49bafb200c4905488, type: 3}
   spawnPosition: {x: 0, y: 0, z: 0}
   NbOfActiveClients:
     m_InternalValue: 0
