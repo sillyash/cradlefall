@@ -148,7 +148,7 @@ public class PlayerManager : NetworkBehaviour
         // Immediately despawn the player
         DespawnPlayerForClient(clientId);
 
-        GameObject deathCam = Instantiate(deathCamPrefab, new Vector3(-33f, 9f, -41f), new Quaternion(0.14f, 0.15f, -0.02f, 0.97f));
+        GameObject deathCam = Instantiate(deathCamPrefab, new Vector3(-26f, 8f, -46f), new Quaternion(0.14f, 0.15f, -0.02f, 0.97f));
         NetworkObject deathCamNetworkObj = deathCam.GetComponent<NetworkObject>();
         deathCamNetworkObj.SpawnWithOwnership(clientId, true);
         activeDeathCameras[clientId] = deathCamNetworkObj;
