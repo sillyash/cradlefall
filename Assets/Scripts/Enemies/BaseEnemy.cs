@@ -249,11 +249,14 @@ public class BaseEnemy : NetworkBehaviour, ICanDie, IDamageable
 
     public void LookAtTarget()
     {
-        Vector3 direction = m_Target.transform.position - gameObject.transform.position;
-        gameObject.transform.rotation = Quaternion.LookRotation(direction);
+        if (m_Target != null)
+        {
+            Vector3 direction = m_Target.transform.position - gameObject.transform.position;
+            gameObject.transform.rotation = Quaternion.LookRotation(direction);
 
-        var yRotation = gameObject.transform.eulerAngles.y;
-        gameObject.transform.rotation = Quaternion.Euler(0, yRotation, 0);
+            var yRotation = gameObject.transform.eulerAngles.y;
+            gameObject.transform.rotation = Quaternion.Euler(0, yRotation, 0);
+        }
     }
 
     public int GetCost()
