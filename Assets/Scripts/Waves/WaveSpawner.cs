@@ -53,7 +53,6 @@ public class WaveSpawner : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log($"[WaveSpawner] Wave {waveIndex.Value + 1}.");
         if ( ! IsServer) return;
         if (isSpawning) return;
         if (waveIndex.Value >= waves.Length) return;
@@ -125,7 +124,7 @@ public class WaveSpawner : NetworkBehaviour
                 }
             }
 
-            if (wave.spawnedEnemies.Count == 0)
+            if (wave.spawnedEnemies.Count == 0 && wave.enemiesToSpawn.Count == 0)
             {
                 break;
             }
@@ -159,6 +158,6 @@ public class WaveSpawner : NetworkBehaviour
 
     /* ------------- Getters & Setters ------------- */
 
-    public int CurrentWaveNumber => waveIndex.Value + 1; // Pour affichage HUD
+    public int CurrentWaveNumber => waveIndex.Value; // Pour affichage HUD
     public float TimeUntilNextWave => countdownTimer.Value;
 }

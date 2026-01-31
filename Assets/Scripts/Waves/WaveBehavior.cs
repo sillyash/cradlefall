@@ -33,7 +33,7 @@ public class WaveBehavior : MonoBehaviour
             if (spawnedEnemies[i] == null)
             {
                 spawnedEnemies.RemoveAt(i);
-                enemiesLeft = Mathf.Max(0, enemiesLeft - 1);
+                enemiesLeft = Mathf.Max(0, enemiesToSpawn.Count + spawnedEnemies.Count);
             }
         }
     }
