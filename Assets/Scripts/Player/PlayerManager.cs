@@ -1,4 +1,5 @@
 using Constants;
+using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
@@ -103,6 +104,27 @@ public class PlayerManager : NetworkBehaviour
 
         activePlayers.Remove(clientId);
         Debug.Log($"[PlayerManager] Despawned player for client {clientId}");
+
+        StartCoroutine(RespawnPlayersAfterDelay(clientId));
+    }
+
+    /// <summary>
+    /// Respawn a player after a delay (used for multiple lives, etc.)
+    /// </summary>
+    /// <param name="clientId">
+    ///  The client ID of the player to respawn
+    /// </param>
+    private IEnumerator RespawnPlayersAfterDelay(ulong clientId)
+    {
+        yield return new WaitForSeconds(3f);
+
+        // Make sure old player is despawned first
+        if (activePlayers.ContainsKey(clientId))
+        {
+            DespawnPlayerForClient(clientId);
+        }
+
+        PlayerManager.Instance?.SpawnPlayerForClient(clientId);
     }
 
     /// <summary>
@@ -125,26 +147,6 @@ public class PlayerManager : NetworkBehaviour
         // TODO: In future, show lobby UI and wait for respawn signal
         // For now, we could auto-respawn after delay:
         // StartCoroutine(RespawnPlayerAfterDelay(clientId, 3f));
-    }
-
-    /// <summary>
-    /// Respawn a player (used for lobbies, multiple lives, etc.)
-    /// </summary>
-    /// <param name="clientId">
-    ///  The client ID of the player to respawn
-    /// </param>
-    public void RespawnPlayerForClient(ulong clientId)
-    {
-        if (!IsServer) return;
-
-        // Make sure old player is despawned first
-        if (activePlayers.ContainsKey(clientId))
-        {
-            DespawnPlayerForClient(clientId);
-        }
-
-        // Spawn new player instance
-        SpawnPlayerForClient(clientId);
     }
 
     private void OnClientConnected(ulong clientId)
