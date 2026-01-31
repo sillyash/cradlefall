@@ -5,11 +5,14 @@ public class DeathCamera : NetworkBehaviour
 {
     public float yaw = 6;
     public float tilt = 15;
-    private void Start()
+
+    public override void OnNetworkSpawn()
     {
+        gameObject.SetActive(IsOwner);
         if (!IsOwner) return;
         KeyMappingSettings.ApplyPresetZQSD();
     }
+
     void Update()
     {
         if (!IsOwner) return;
