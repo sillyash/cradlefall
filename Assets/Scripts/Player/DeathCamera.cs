@@ -1,3 +1,4 @@
+using System.Collections;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -6,11 +7,32 @@ public class DeathCamera : NetworkBehaviour
     public float yaw = 6;
     public float tilt = 15;
 
+    private float duration = 1f;
+    public AnimationCurve curve;
+    public RectTransform iris;
+
     public override void OnNetworkSpawn()
     {
         gameObject.SetActive(IsOwner);
         if (!IsOwner) return;
         KeyMappingSettings.ApplyPresetZQSD();
+        StartCoroutine(OpenIris());
+    }
+
+    IEnumerator OpenIris()
+    {
+        float t = 0f;
+
+        while (t < duration)
+        {
+            t += Time.deltaTime;
+            float value = curve.Evaluate(t / duration);
+            iris.localScale = new Vector3(value, value, 1);
+            yield return null;
+        }
+
+        iris.localScale = Vector3.zero;
+        iris.gameObject.SetActive(false);
     }
 
     void Update()
