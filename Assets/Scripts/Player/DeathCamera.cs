@@ -1,15 +1,18 @@
+using Unity.Netcode;
 using UnityEngine;
 
-public class DeathCamera : MonoBehaviour
+public class DeathCamera : NetworkBehaviour
 {
     public float yaw = 6;
     public float tilt = 15;
     private void Start()
     {
+        if (!IsOwner) return;
         KeyMappingSettings.ApplyPresetZQSD();
     }
     void Update()
     {
+        if (!IsOwner) return;
         HandleLook();
     }
 
@@ -23,8 +26,6 @@ public class DeathCamera : MonoBehaviour
 
         yaw = Mathf.Clamp(yaw, -60f, 60f);
         tilt = Mathf.Clamp(tilt, -40f, 40f);
-
-        Debug.Log("yaw " + yaw + "tilt " + tilt);
 
         transform.rotation = Quaternion.Euler(-tilt, yaw, 0f);
     }
