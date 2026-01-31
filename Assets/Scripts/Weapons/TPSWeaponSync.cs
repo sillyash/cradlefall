@@ -3,10 +3,8 @@ using UnityEngine;
 
 public class TPSWeaponSync : NetworkBehaviour
 {
-    public override void OnNetworkSpawn()
+    public void Awake()
     {
-        base.OnNetworkSpawn();
-
         if (IsOwner)
         {
             gameObject.SetActive(false);
@@ -14,6 +12,15 @@ public class TPSWeaponSync : NetworkBehaviour
         else
         {
             transform.localRotation = Quaternion.identity;
+        }
+    }
+
+    public override void OnNetworkSpawn()
+    {
+        base.OnNetworkSpawn();
+        if (IsOwner)
+        {
+            gameObject.SetActive(false);
         }
     }
 }
