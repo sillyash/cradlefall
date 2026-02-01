@@ -162,7 +162,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2332267421478981496}
-  - component: {fileID: 7991793917644321291}
+  - component: {fileID: 170440071024511444}
   m_Layer: 0
   m_Name: aimIK
   m_TagString: Untagged
@@ -185,7 +185,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8330232208981785165}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7991793917644321291
+--- !u!114 &170440071024511444
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -194,20 +194,44 @@ MonoBehaviour:
   m_GameObject: {fileID: 650121376489321732}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 796b75e345bd64d47a31edd757bd2670, type: 3}
+  m_Script: {fileID: 11500000, guid: fdb90b913935e644baaa86c076d788e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Weight: 1
   m_Data:
-    m_Root: {fileID: 3843252079364412849}
-    m_Tip: {fileID: 1344277386992913367}
-    m_Target: {fileID: 1343634213472258257}
-    m_ChainRotationWeight: 1
-    m_TipRotationWeight: 1
-    m_MaxIterations: 15
-    m_Tolerance: 0.00149
-    m_MaintainTargetPositionOffset: 0
-    m_MaintainTargetRotationOffset: 1
+    m_ConstrainedObject: {fileID: 1344277386992913367}
+    m_SourceObjects:
+      m_Length: 1
+      m_Item0:
+        transform: {fileID: 497909600712347723}
+        weight: 1
+      m_Item1:
+        transform: {fileID: 0}
+        weight: 0
+      m_Item2:
+        transform: {fileID: 0}
+        weight: 0
+      m_Item3:
+        transform: {fileID: 0}
+        weight: 0
+      m_Item4:
+        transform: {fileID: 0}
+        weight: 0
+      m_Item5:
+        transform: {fileID: 0}
+        weight: 0
+      m_Item6:
+        transform: {fileID: 0}
+        weight: 0
+      m_Item7:
+        transform: {fileID: 0}
+        weight: 0
+    m_Offset: {x: 0, y: 0, z: 0}
+    m_ConstrainedAxes:
+      x: 1
+      y: 1
+      z: 0
+    m_MaintainOffset: 0
 --- !u!1 &2691686695440110205
 GameObject:
   m_ObjectHideFlags: 0
@@ -263,8 +287,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3496071364253825969}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.0000000014183333, y: -0.99992925, z: 0.011897845, w: 0.000000119200884}
-  m_LocalPosition: {x: -0, y: -1.5713835, z: -0.5275309}
+  m_LocalRotation: {x: 0.0000000014183332, y: -0.99992925, z: 0.011897845, w: 0.000000119200884}
+  m_LocalPosition: {x: -0, y: -1.19, z: -0.54}
   m_LocalScale: {x: 5.2631583, y: 5.2631574, z: 5.2631574}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -432,7 +456,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MouseControl
   ShowTopMostFoldoutHeaderGroup: 1
-  mainCamera: {fileID: 95665150144060911}
+  chest: {fileID: 497909600712347723}
   sensibility: 300
 --- !u!114 &8225159773639805063
 MonoBehaviour:
@@ -578,6 +602,37 @@ MonoBehaviour:
       Synchronize: 1
       ParameterType: 4
   AnimatorParametersExpanded: 0
+--- !u!1 &5562006445149841641
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 497909600712347723}
+  m_Layer: 8
+  m_Name: chestControl
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &497909600712347723
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5562006445149841641}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
+  m_LocalPosition: {x: 0, y: -2.2947369, z: 0}
+  m_LocalScale: {x: 5.2631583, y: 5.2631583, z: 5.2631583}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 238604523802943213}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6327254246826846011
 GameObject:
   m_ObjectHideFlags: 0
@@ -719,6 +774,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 462df4e2dbace61418fa60772abe207f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8330232208981785165}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 462df4e2dbace61418fa60772abe207f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 497909600712347723}
     - targetCorrespondingSourceObject: {fileID: 1613095540208415441, guid: 462df4e2dbace61418fa60772abe207f, type: 3}
       insertIndex: 0
       addedObject: {fileID: 6470111347952197392}
