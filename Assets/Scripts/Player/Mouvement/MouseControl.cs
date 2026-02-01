@@ -42,10 +42,10 @@ public class MouseControl : NetworkBehaviour
         //
         //if (math.abs(yRotation + yRotationSigned) >= 90f)
         //{
-            // Apply horizontal rotation to player
-            transform.rotation = Quaternion.Euler(0f, yRotation, 0f);
-            // Apply vertical rotation to chest (camera)
-            chest.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+        // Apply horizontal rotation to player
+        transform.rotation = Quaternion.Euler(0f, yRotation, 0f);
+        // Apply vertical rotation to chest (camera)
+        chest.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         //}
         //else
         //{
