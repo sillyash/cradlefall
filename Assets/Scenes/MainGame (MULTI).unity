@@ -560,7 +560,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6024579443742979868, guid: 70e5b0fa93ab22b48a0049fdec9e73d9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -77.210846
+      value: -78
       objectReference: {fileID: 0}
     - target: {fileID: 6024579443742979868, guid: 70e5b0fa93ab22b48a0049fdec9e73d9, type: 3}
       propertyPath: m_LocalPosition.z
@@ -693,7 +693,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.26666668
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: e6614d9557eff7146bcda07fbb42c7a9, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: e4510315fc7cb3c4c84cd3e755d8dff5, type: 2}
   m_BuildHeightMesh: 0
 --- !u!4 &1184709875
 Transform:
