@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using Unity.Netcode;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 
 public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
 {
@@ -9,6 +11,11 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
     public static float MIN_RAY_DISTANCE = 3;
 
     [SerializeField] private GameObject weaponPrefab;
+
+    // Rig and IK
+    [SerializeField] private RigBuilder rigBuilder;
+    [SerializeField] private TwoBoneIKConstraint rightHandIK;
+    [SerializeField] private TwoBoneIKConstraint leftHandIK;
 
     private BaseWeapon weapon;
     public float health { get; set; }
@@ -18,7 +25,7 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
     [SerializeField] public Camera mainCamera;
     [SerializeField] private Transform TPSWeaponAnchorPoint;
     [SerializeField] private Transform FPSWeaponAnchorPoint;
-    [SerializeField] private GameObject playerCanvas; 
+    [SerializeField] private GameObject playerCanvas;
 
     public bool isDead { get; set; } = false;
 
@@ -57,6 +64,9 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
                 Destroy(netObj);
             }
 
+            // Stick hands to weapon
+            setHandTarget();
+
             health = stats.health;
             maxHealth = stats.health;
             NetworkObject.DestroyWithScene = false;
@@ -68,6 +78,21 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
         }
     }
 
+    void setHandTarget()
+    {
+        // Find by name, not perfect but couldn't find a better way
+        Transform handTargetR = weapon.transform.Find("Hand_R_target");
+        Transform handTargetL = weapon.transform.Find("Hand_L_target");
+
+        rightHandIK.data.target = handTargetR;
+        rightHandIK.data.hint = handTargetR.GetChild(0);
+
+        leftHandIK.data.target = handTargetL;
+        leftHandIK.data.hint = handTargetL.GetChild(0);
+
+        rigBuilder.Build();
+    }
+
     void Update()
     {
         if (!IsOwner) return;
@@ -76,6 +101,11 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
         weapon.transform.LookAt(targetPoint);
 
         weaponInput();
+    }
+
+    void UpdateHandPosition()
+    {
+        
     }
 
     void weaponInput()
