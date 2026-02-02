@@ -59,7 +59,7 @@ public class LobbyUI : MonoBehaviour
         if (LobbyManager.Instance == null) return;
 
         isLocalPlayerReady = !isLocalPlayerReady;
-        LobbyManager.Instance.SetLocalReady(isLocalPlayerReady);
+        LobbyManager.Instance.SetLocalReady(isLocalPlayerReady, roleIndex);
 
         UpdateUI();
     }
