@@ -4,9 +4,9 @@ public class ProjectileCollider : ProjectileBase
 {
     void OnTriggerEnter(Collider other)
     {
-        if (!other.TryGetComponent<ProjectileBase>(out ProjectileBase var))
+        if (!other.TryGetComponent(out ProjectileBase var))
         {
-            if (gameObject.CompareTag("VisualOnly")) {
+            if (!gameObject.CompareTag("VisualOnly")) {
                 behavior.HandleCollision(other, stats.damage);
             }
 
