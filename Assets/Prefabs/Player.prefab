@@ -589,7 +589,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   NetworkAnimatorExpanded: 0
-  AuthorityMode: 0
+  AuthorityMode: 1
   m_Animator: {fileID: 3868688691983650304}
   TransitionStateInfoList: []
   AnimatorParameterEntries:
