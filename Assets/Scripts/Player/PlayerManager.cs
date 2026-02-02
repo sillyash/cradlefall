@@ -76,9 +76,16 @@ public class PlayerManager : NetworkBehaviour
             return;
         }
 
-        GameObject role = activePlayersPrefabs.TryGetValue(clientId, out var foundRole)
-        ? foundRole
-        : playerPrefabs[0]; // Defaults to DPS
+        GameObject role;
+        if(activePlayersPrefabs.TryGetValue(clientId, out var foundRole))
+        {
+            role = foundRole;
+        }
+        else
+        {
+            role = playerPrefabs[0]; //Defaluts to dps
+            activePlayersPrefabs[clientId] = role;
+        }
 
         // Instantiate player locally on server
         GameObject playerObj = Instantiate(role, spawnPosition, Quaternion.identity);
