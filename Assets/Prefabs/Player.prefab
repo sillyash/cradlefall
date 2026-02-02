@@ -472,6 +472,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::KeyboardController
   ShowTopMostFoldoutHeaderGroup: 1
   movementSettings: {fileID: 11400000, guid: 5eef73e5dede50d4d980ebe7f793d0a3, type: 2}
+  mainCamera: {fileID: 95665150144060911}
 --- !u!114 &2115452035298164465
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -626,7 +627,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5562006445149841641}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -2.2947369, z: 0}
   m_LocalScale: {x: 5.2631583, y: 5.2631583, z: 5.2631583}
   m_ConstrainProportionsScale: 0
@@ -755,6 +756,22 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 462df4e2dbace61418fa60772abe207f, type: 3}
       propertyPath: m_Name
       value: DPS
+      objectReference: {fileID: 0}
+    - target: {fileID: 1613095540208415441, guid: 462df4e2dbace61418fa60772abe207f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1613095540208415441, guid: 462df4e2dbace61418fa60772abe207f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.00000008940697
+      objectReference: {fileID: 0}
+    - target: {fileID: 1613095540208415441, guid: 462df4e2dbace61418fa60772abe207f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1613095540208415441, guid: 462df4e2dbace61418fa60772abe207f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.0000000028372489
       objectReference: {fileID: 0}
     - target: {fileID: 3727956284482021115, guid: 462df4e2dbace61418fa60772abe207f, type: 3}
       propertyPath: m_Mesh

@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class PlayerController : PlayerMovement
 {
+    [SerializeField] private Camera mainCamera;
+
     private CharacterController characterController;
 
     private float speed;
@@ -47,11 +49,11 @@ public class PlayerController : PlayerMovement
         speed = Input.GetKey(KeyCode.LeftShift) ? movementSettings.runningSpeed : movementSettings.walkingSpeed;
 
         // Direction horizontale du transform
-        Vector3 forward = transform.forward;
+        Vector3 forward = mainCamera.transform.forward;
         forward.y = 0;
         forward.Normalize();
 
-        Vector3 right = transform.right;
+        Vector3 right = mainCamera.transform.right;
         right.y = 0;
         right.Normalize();
 
