@@ -9,6 +9,7 @@ public class MouseControl : NetworkBehaviour
     [SerializeField] private float sensibility = 200f;
 
     private float xRotation = 0f; // vertical
+    private float yChestRotation = 0f;
     private float yRotation = 0f; // horizontal
 
     public override void OnNetworkSpawn()
@@ -32,25 +33,23 @@ public class MouseControl : NetworkBehaviour
         float mouseY = Input.GetAxis("Mouse Y") * sensibility * Time.deltaTime;
 
         // Accumulate rotations
+        xRotation += mouseY;
         yRotation += mouseX;
-        xRotation += mouseY;         
+
+        // Get chest rotation (camera)
+        yChestRotation += mouseX;
+        yChestRotation = Mathf.Clamp(yChestRotation, -90f, 90f); // Clamp it to max bone stretch
+        
         xRotation = Mathf.Clamp(xRotation, -90f, 90f); // Prevent vertical over-rotation
 
 
-        float yRotationSigned = (yRotation > 180) ? yRotation - 360 : yRotation;
+        if (math.abs(yChestRotation) == 90f)
+        {
+            // Apply non-chest rotation to player
+            transform.rotation = Quaternion.Euler(0f, yRotation - yChestRotation, 0f);
+        }
 
-        //
-        //if (math.abs(yRotation + yRotationSigned) >= 90f)
-        //{
-        // Apply horizontal rotation to player
-        transform.rotation = Quaternion.Euler(0f, yRotation, 0f);
-        // Apply vertical rotation to chest (camera)
-        chest.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-        //}
-        //else
-        //{
-        //    // Apply full rotation to chest (camera)
-        //    chest.localRotation = Quaternion.Euler(xRotation, yRotation, 0f);
-        //}
+        // Apply remaining rotation to chest (camera)
+        chest.localRotation = Quaternion.Euler(xRotation, yChestRotation, 0f);
     }
 }
