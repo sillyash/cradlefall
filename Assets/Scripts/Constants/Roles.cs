@@ -5,8 +5,8 @@ namespace Constants
 {
     public class Roles
     {
-        public static readonly string DPS = "DPS";
-        public static readonly string TECH = "Technicien";
+        public const string DPS = "DPS";
+        public const string TECH = "Technicien";
 
         public static List<string> roles = new List<string> { DPS, TECH };
 
