@@ -42257,6 +42257,18 @@ PrefabInstance:
       propertyPath: playerPrefab
       value: 
       objectReference: {fileID: 2657582332648282985, guid: 69d8c91efb442c546889ed522a20e753, type: 3}
+    - target: {fileID: 1680652054210900551, guid: f820f765256bbf3478f5d7a1eaea8083, type: 3}
+      propertyPath: playerPrefabs.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1680652054210900551, guid: f820f765256bbf3478f5d7a1eaea8083, type: 3}
+      propertyPath: 'playerPrefabs.Array.data[0]'
+      value: 
+      objectReference: {fileID: 821926761254441425, guid: 6faf5ad85b09f2d46b19998f2af9b018, type: 3}
+    - target: {fileID: 1680652054210900551, guid: f820f765256bbf3478f5d7a1eaea8083, type: 3}
+      propertyPath: 'playerPrefabs.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2657582332648282985, guid: 69d8c91efb442c546889ed522a20e753, type: 3}
     - target: {fileID: 6119874578700465426, guid: f820f765256bbf3478f5d7a1eaea8083, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 863662083
