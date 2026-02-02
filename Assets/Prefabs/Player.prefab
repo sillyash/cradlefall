@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 212863366956092494}
   - component: {fileID: 3722609984733017593}
   - component: {fileID: 3016276676891041721}
+  - component: {fileID: 4922474468673203845}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -171,6 +172,23 @@ MonoBehaviour:
   blendDistance: 0
   weight: 1
   sharedProfile: {fileID: 11400000, guid: 99068e42298386b46bef998ab5be411d, type: 2}
+--- !u!114 &4922474468673203845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 65422506517265125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IsGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 0
+  sharedProfile: {fileID: 11400000, guid: e0914b167188a794fbb1e8ef413d87fc, type: 2}
 --- !u!1 &2691686695440110205
 GameObject:
   m_ObjectHideFlags: 0
@@ -284,6 +302,7 @@ GameObject:
   - component: {fileID: 2115452035298164465}
   - component: {fileID: 6504421229519761709}
   - component: {fileID: 8533640243390756548}
+  - component: {fileID: 5449070691378926870}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -544,6 +563,19 @@ MonoBehaviour:
   SwitchTransformSpaceWhenParented: 0
   Interpolate: 1
   SlerpPosition: 0
+--- !u!114 &5449070691378926870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4263663073151763242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cedb2e020221ab54eae7ffd785af9708, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nightVolume: {fileID: 4922474468673203845}
 --- !u!1001 &6376220933790556308
 PrefabInstance:
   m_ObjectHideFlags: 0
