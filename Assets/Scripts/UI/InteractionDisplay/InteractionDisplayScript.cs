@@ -63,7 +63,7 @@ public class InteractionDisplayScript : MonoBehaviour
             BaseModule module = hitObject.GetComponent<BaseModule>();
             if (module != null && module.broken)
             {
-                ShowText("Maintenir [E] pour réparer");
+                ShowText("Maintenez [E] pour réparer");
                 return;
             }
         }
