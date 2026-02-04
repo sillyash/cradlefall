@@ -2,6 +2,7 @@ using DG.Tweening;
 using Unity.Mathematics;
 using Unity.Netcode;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 public class MouseControl : NetworkBehaviour
 {
@@ -12,8 +13,15 @@ public class MouseControl : NetworkBehaviour
     private float yChestRotation = 0f;
     private float yRotation = 0f; // horizontal
 
-    public override void OnNetworkSpawn()
+    public NetworkVariable<Quaternion> chestNetwork = new NetworkVariable<Quaternion>(Quaternion.Euler(0f,0f,0f), NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+
+    public Quaternion chestRotation
     {
+        get => chestNetwork.Value;
+    }
+
+    public override void OnNetworkSpawn()
+    {    
         if (!IsOwner) return;
 
         Cursor.lockState = CursorLockMode.Locked;
@@ -21,6 +29,8 @@ public class MouseControl : NetworkBehaviour
 
     void Update()
     {
+        chest.localRotation = chestRotation;
+
         if (!IsOwner) return;
 
         HandleMouseLook();
@@ -50,6 +60,6 @@ public class MouseControl : NetworkBehaviour
         }
 
         // Apply remaining rotation to chest (camera)
-        chest.localRotation = Quaternion.Euler(xRotation, yChestRotation, 0f);
+        chestNetwork.Value = Quaternion.Euler(xRotation, yChestRotation, 0f);
     }
 }
