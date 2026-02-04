@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 
-public class NightVisionToggle : MonoBehaviour
+public class NightVision : MonoBehaviour
 {
     public Volume nightVolume;
     private bool nightActive = false;
