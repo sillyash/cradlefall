@@ -3,7 +3,7 @@ using UnityEngine;
 public abstract class VisionDevice : MonoBehaviour, IBatteryUser
 {
     public float BatteryUsage { get; set; }
-    private bool IsActive = false;
+    public bool IsActive = false;
 
     private PlayerBattery BatteryManager;
 
@@ -19,7 +19,14 @@ public abstract class VisionDevice : MonoBehaviour, IBatteryUser
             if (Input.GetKeyDown(KeyCode.F))
             {
                 IsActive = !IsActive;
-                OnActivate();
+                if (IsActive)
+                {
+                    OnActivate();
+                }
+                else
+                {
+                    OnDeactivate();
+                }
             }
         }
         else
