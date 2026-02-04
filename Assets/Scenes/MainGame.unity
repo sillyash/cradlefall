@@ -2530,6 +2530,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Joueur
       objectReference: {fileID: 0}
+    - target: {fileID: 6814679219693309533, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6814679219693309533, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6814679219693309533, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6814679219693309533, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.3150177
+      objectReference: {fileID: 0}
     - target: {fileID: 6896338367370617179, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
       propertyPath: enemyIcon
       value: 
@@ -2607,11 +2623,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
---- !u!20 &2124052928 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 95665150144060911, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
-  m_PrefabInstance: {fileID: 2124052927}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
