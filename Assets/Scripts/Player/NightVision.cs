@@ -8,7 +8,7 @@ public class NightVision : MonoBehaviour, IBatteryUser
     private bool nightActive = false;
     private PlayerBattery BatteryManager;
 
-    public float BatteryUsage { get; set; } = 2;
+    public float BatteryUsage { get; set; } = 2; // per second
 
     void Start()
     {
@@ -40,6 +40,6 @@ public class NightVision : MonoBehaviour, IBatteryUser
 
     public void UseBattery(float ammount)
     {
-        BatteryManager.Consume(ammount);
+        BatteryManager.Consume(ammount * Time.deltaTime);
     }
 }
