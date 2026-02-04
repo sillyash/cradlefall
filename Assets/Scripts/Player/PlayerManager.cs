@@ -12,8 +12,10 @@ public class PlayerManager : NetworkBehaviour
     public static PlayerManager Instance { get; private set; }
 
     [SerializeField] private GameObject playerPrefab; // Reference to Player.prefab
+    [SerializeField] private GameObject deathCamPrefab;
     [SerializeField] private Vector3 spawnPosition = Vector3.zero;
     public Dictionary<ulong, basePlayer> activePlayers = new();
+    public Dictionary<ulong, NetworkObject> activeDeathCameras = new();
 
     public NetworkVariable<int> NbOfActiveClients = new(
         0,
@@ -104,8 +106,6 @@ public class PlayerManager : NetworkBehaviour
 
         activePlayers.Remove(clientId);
         Debug.Log($"[PlayerManager] Despawned player for client {clientId}");
-
-        StartCoroutine(RespawnPlayersAfterDelay(clientId));
     }
 
     /// <summary>
@@ -116,14 +116,18 @@ public class PlayerManager : NetworkBehaviour
     /// </param>
     private IEnumerator RespawnPlayersAfterDelay(ulong clientId)
     {
-        yield return new WaitForSeconds(3f);
+        Debug.Log("Respawn");
+        yield return new WaitForSeconds(10f);
 
         // Make sure old player is despawned first
         if (activePlayers.ContainsKey(clientId))
         {
             DespawnPlayerForClient(clientId);
         }
-
+        if (activeDeathCameras.TryGetValue(clientId, out NetworkObject deatCam))
+        {
+            deatCam.Despawn(true);
+        }
         PlayerManager.Instance?.SpawnPlayerForClient(clientId);
     }
 
@@ -140,13 +144,16 @@ public class PlayerManager : NetworkBehaviour
         if (!IsServer) return;
 
         Debug.Log($"[PlayerManager] Player {clientId} died!");
-        
+
         // Immediately despawn the player
         DespawnPlayerForClient(clientId);
-        
-        // TODO: In future, show lobby UI and wait for respawn signal
-        // For now, we could auto-respawn after delay:
-        // StartCoroutine(RespawnPlayerAfterDelay(clientId, 3f));
+
+        GameObject deathCam = Instantiate(deathCamPrefab, new Vector3(-26f, 8f, -46f), new Quaternion(0.14f, 0.15f, -0.02f, 0.97f));
+        NetworkObject deathCamNetworkObj = deathCam.GetComponent<NetworkObject>();
+        deathCamNetworkObj.SpawnWithOwnership(clientId, true);
+        activeDeathCameras[clientId] = deathCamNetworkObj;
+
+        StartCoroutine(RespawnPlayersAfterDelay(clientId));
     }
 
     private void OnClientConnected(ulong clientId)

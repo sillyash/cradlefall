@@ -7,10 +7,16 @@ using NUnit.Framework.Internal;
 
 public class MainMenu : MonoBehaviour {
 
-    public void OnPlayButtonClicked ()
+    public void OnHostButtonClicked ()
     {
-        Debug.Log("Playing game");
-        GameManager.instance.StartGame();
+        Debug.Log("Hosting game...");
+        GameManager.instance.HostGame();
+    }
+
+    public void OnJoinButtonClicked()
+    {
+        Debug.Log("Join game menu...");
+        GameManager.instance.StartClient();
     }
 
     public void OnQuitButtonClicked()
@@ -29,11 +35,5 @@ public class MainMenu : MonoBehaviour {
     {
         Debug.Log("Loading Credits Menu...");
         // TODO: Load Credits Menu
-    }
-
-    public void OnMultiButtonClicked()
-    {
-        Debug.Log("Playing game");
-        GameManager.instance.GoToMultiScreen();
     }
 }

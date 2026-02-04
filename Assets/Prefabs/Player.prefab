@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 5026662282291037983}
   - component: {fileID: 212863366956092494}
   - component: {fileID: 3722609984733017593}
+  - component: {fileID: 3016276676891041721}
+  - component: {fileID: 4922474468673203845}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -66,9 +68,9 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 60
+  near clip plane: 0.01
+  far clip plane: 10000
+  field of view: 80
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -117,8 +119,8 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
-  m_Antialiasing: 0
+  m_RenderPostProcessing: 1
+  m_Antialiasing: 1
   m_AntialiasingQuality: 2
   m_StopNaN: 0
   m_Dithering: 0
