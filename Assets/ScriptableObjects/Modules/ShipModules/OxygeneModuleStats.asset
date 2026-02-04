@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e85b294ae6fd7a44d98561df34b7380b, type: 3}
   m_Name: OxygeneModuleStats
   m_EditorClassIdentifier: 
-  health: 100
-  breakChance: 180
-  repairTime: 3
-  timerDuration: 90
+  health: 400
+  breakChance: 10
+  repairTime: 8
+  timerDuration: 120
