@@ -303,6 +303,7 @@ GameObject:
   - component: {fileID: 6504421229519761709}
   - component: {fileID: 8533640243390756548}
   - component: {fileID: 5449070691378926870}
+  - component: {fileID: 3498990647301943432}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -576,6 +577,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nightVolume: {fileID: 4922474468673203845}
+--- !u!114 &3498990647301943432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4263663073151763242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eade918f7e3f5874ca2716cdab37db8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats: {fileID: 11400000, guid: 41ccfa7cd379515499abb2582c3819d4, type: 2}
 --- !u!1001 &6376220933790556308
 PrefabInstance:
   m_ObjectHideFlags: 0
