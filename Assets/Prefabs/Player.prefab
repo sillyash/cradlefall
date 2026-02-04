@@ -401,7 +401,7 @@ GameObject:
   - component: {fileID: 8533640243390756548}
   - component: {fileID: 3868688691983650304}
   - component: {fileID: -6638794731525272804}
-  - component: {fileID: -6024745115024923428}
+  - component: {fileID: -5099417475786487224}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -665,7 +665,7 @@ MonoBehaviour:
       Synchronize: 1
       ParameterType: 4
   AnimatorParametersExpanded: 0
---- !u!114 &-6024745115024923428
+--- !u!114 &-5099417475786487224
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -909,7 +909,11 @@ PrefabInstance:
     - target: {fileID: 3727956284482021115, guid: 462df4e2dbace61418fa60772abe207f, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: -8670151273213183110, guid: 462df4e2dbace61418fa60772abe207f, type: 3}
+      objectReference: {fileID: 0}
+    - target: {fileID: 3727956284482021115, guid: 462df4e2dbace61418fa60772abe207f, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8879528566716807029, guid: 462df4e2dbace61418fa60772abe207f, type: 3}
       propertyPath: m_LocalPosition.y
       value: -7.13
