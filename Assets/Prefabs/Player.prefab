@@ -13,8 +13,6 @@ GameObject:
   - component: {fileID: 5026662282291037983}
   - component: {fileID: 212863366956092494}
   - component: {fileID: 3722609984733017593}
-  - component: {fileID: 3016276676891041721}
-  - component: {fileID: 4922474468673203845}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -403,6 +401,7 @@ GameObject:
   - component: {fileID: 8533640243390756548}
   - component: {fileID: 3868688691983650304}
   - component: {fileID: -6638794731525272804}
+  - component: {fileID: -6024745115024923428}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -516,6 +515,8 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   chest: {fileID: 497909600712347723}
   sensibility: 300
+  chestNetwork:
+    m_InternalValue: {x: 0, y: 0, z: 0, w: 1}
 --- !u!114 &8225159773639805063
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -664,6 +665,19 @@ MonoBehaviour:
       Synchronize: 1
       ParameterType: 4
   AnimatorParametersExpanded: 0
+--- !u!114 &-6024745115024923428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4263663073151763242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cedb2e020221ab54eae7ffd785af9708, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nightVolume: {fileID: 0}
 --- !u!1 &5562006445149841641
 GameObject:
   m_ObjectHideFlags: 0
