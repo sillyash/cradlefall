@@ -2,44 +2,24 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 
-public class NightVision : MonoBehaviour, IBatteryUser
+public class NightVision : VisionDevice
 {
     public Volume nightVolume;
     private bool nightActive = false;
-    private PlayerBattery BatteryManager;
 
-    public float BatteryUsage { get; set; } = 2; // per second
-
-    void Start()
+    public override void Start()
     {
         nightVolume.weight = 0f;
-        BatteryManager = GetComponent<PlayerBattery>();
+        base.Start();
     }
 
-    void Update()
+    public override void OnActivate()
     {
-        if (!BatteryManager.IsEmpty())
-        {
-            if (Input.GetKeyDown(KeyCode.F))
-            {
-                nightActive = !nightActive;
-                nightVolume.weight = nightActive ? 1f : 0f;
-            }
-        }
-        else
-        {
-            nightActive = false;
-            nightVolume.weight = 0f;
-        }
-
-        if (nightActive)
-        {
-            UseBattery(BatteryUsage);
-        }
+        nightVolume.weight = nightActive ? 1f : 0f;
     }
 
-    public void UseBattery(float ammount)
+    public override void OnDeactivate()
     {
-        BatteryManager.Consume(ammount * Time.deltaTime);
+        nightVolume.weight = 0f;
     }
 }
