@@ -127,7 +127,7 @@ public class GameManager : NetworkBehaviour
         // Despawn all players before changing scene
         if (NetworkManager.Singleton.IsServer && PlayerManager.Instance != null)
         {
-            foreach (var player in PlayerManager.Instance.GetAllPlayers())
+            foreach (var player in PlayerManager.Instance.GetAllPlayers().ToList())
             {
                 PlayerManager.Instance.DespawnPlayerForClient(player.getClientId());
             }
