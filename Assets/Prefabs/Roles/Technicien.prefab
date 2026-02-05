@@ -12,13 +12,41 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 2145528292
       objectReference: {fileID: 0}
+    - target: {fileID: 577693443378316375, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
+      propertyPath: m_Name
+      value: Technicien
+      objectReference: {fileID: 0}
     - target: {fileID: 2115452035298164465, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
       propertyPath: weaponPrefab
       value: 
       objectReference: {fileID: 6906893552160893867, guid: a16e6e5ac2ae29b439bddc0f7893b702, type: 3}
+    - target: {fileID: 3997319107208962045, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -8670151273213183110, guid: 512972696f4c8ed4dbb78cd28fbbaf17, type: 3}
+    - target: {fileID: 3997319107208962045, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3997319107208962045, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: a0dcd860f971caa4d960492371631eb5, type: 2}
+    - target: {fileID: 3997319107208962045, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 8446be8cd222edb4ba3cec8c60689297, type: 2}
+    - target: {fileID: 3997319107208962045, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
+      propertyPath: 'm_Materials.Array.data[2]'
+      value: 
+      objectReference: {fileID: 2100000, guid: fe536599d6556344ab56642193b8d6bc, type: 2}
+    - target: {fileID: 3997319107208962045, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
+      propertyPath: 'm_Materials.Array.data[3]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 5dc86ed32f267a649b8378ee905c7a42, type: 2}
     - target: {fileID: 4263663073151763242, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
       propertyPath: m_Name
-      value: Technichien
+      value: Technicien
       objectReference: {fileID: 0}
     - target: {fileID: 8225159773639805063, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
       propertyPath: movementSettings

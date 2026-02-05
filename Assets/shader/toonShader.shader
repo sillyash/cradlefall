@@ -62,14 +62,16 @@ Shader "Unlit/ToonShader"
       } 
 
       float3 Fragment(VertexOutput input) : SV_TARGET{ 
-        float emissionMask = tex2D(_emissionMask, input.uv).r;
+        float2 uv = saturate(input.uv);   // clamps UV to 0–1
+
+        float emissionMask = tex2D(_emissionMask, uv).r;
 
         if(emissionMask > 0.5){
            return _emissionColor * _emissionFac; 
         }
 
         Light mainLight = GetMainLight();
-        float3 direction = normalize(-mainLight.direction);
+        float3 direction = normalize(mainLight.direction);
         _mainColor = _mainColor * mainLight.color;
 
         float shadowMask = (dot(input.normalWS, direction) + 1)/2;
