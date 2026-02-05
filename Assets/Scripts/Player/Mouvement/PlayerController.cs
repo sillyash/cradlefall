@@ -2,12 +2,15 @@ using UnityEngine;
 
 public class PlayerController : PlayerMovement
 {
+    [SerializeField] private Camera mainCamera;
+
     private CharacterController characterController;
 
     private float speed;
 
     private Vector3 velocity;
     private Vector3 move;
+    private Animator animator;
 
     public override void OnNetworkSpawn()
     {
@@ -16,6 +19,8 @@ public class PlayerController : PlayerMovement
         KeyMappingSettings.LoadPreset();
 
         characterController = GetComponent<CharacterController>();
+        animator = GetComponent<Animator>();
+
         if (!movementSettings)
         {
             Debug.LogError("Le script CharacterController du prefab Joueur n’a pas de ScriptableObject de mouvement assigné.");
@@ -32,6 +37,7 @@ public class PlayerController : PlayerMovement
         HandleJump();
         ApplyGravity();
         ApplyFinalMovement();
+        updateAnim();
     }
 
 
@@ -43,16 +49,24 @@ public class PlayerController : PlayerMovement
         speed = Input.GetKey(KeyCode.LeftShift) ? movementSettings.runningSpeed : movementSettings.walkingSpeed;
 
         // Direction horizontale du transform
-        Vector3 forward = transform.forward;
+        Vector3 forward = mainCamera.transform.forward;
         forward.y = 0;
         forward.Normalize();
 
-        Vector3 right = transform.right;
+        Vector3 right = mainCamera.transform.right;
         right.y = 0;
         right.Normalize();
 
         move = right * axisX + forward * axisY;
     }
+
+    public void updateAnim()
+    {
+
+        animator.SetBool("onGround", characterController.isGrounded);
+        animator.SetFloat("movingSpeed", move.magnitude * speed);
+    }
+
 
     protected override void HandleJump()
     {
