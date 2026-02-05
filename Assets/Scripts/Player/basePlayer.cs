@@ -120,7 +120,13 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
 
         if (CustomInputRouter.GetButtonShoot())
         {
-            weapon.Fire();
+            if (weapon.AmmoCount > 0)
+            {
+                weapon.Fire();
+            } else
+            {
+                weapon.Reload();
+            }
         }
     }
 
