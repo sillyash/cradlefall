@@ -647,6 +647,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1336169191}
     m_Modifications:
+    - target: {fileID: 1258467792776249150, guid: 4e2b50e4ba8be318c9c86115e9c20ef6, type: 3}
+      propertyPath: showLabel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1258467792776249150, guid: 4e2b50e4ba8be318c9c86115e9c20ef6, type: 3}
+      propertyPath: progressColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1258467792776249150, guid: 4e2b50e4ba8be318c9c86115e9c20ef6, type: 3}
+      propertyPath: progressColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1258467792776249150, guid: 4e2b50e4ba8be318c9c86115e9c20ef6, type: 3}
+      propertyPath: progressColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1258467792776249150, guid: 4e2b50e4ba8be318c9c86115e9c20ef6, type: 3}
+      propertyPath: percentageColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1258467792776249150, guid: 4e2b50e4ba8be318c9c86115e9c20ef6, type: 3}
+      propertyPath: percentageColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1258467792776249150, guid: 4e2b50e4ba8be318c9c86115e9c20ef6, type: 3}
+      propertyPath: percentageColor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3591481588559774064, guid: 4e2b50e4ba8be318c9c86115e9c20ef6, type: 3}
       propertyPath: m_Name
       value: RadialProgress

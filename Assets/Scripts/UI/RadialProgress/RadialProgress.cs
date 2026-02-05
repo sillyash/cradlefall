@@ -32,6 +32,11 @@ namespace ScrumbagsUI
         // This is the number that the Label displays as a percentage.
         float m_Progress;
 
+        // Flags to track if properties were set programmatically
+        bool m_TrackColorSet = false;
+        bool m_ProgressColorSet = false;
+        bool m_ShowLabelSet = false;
+
         /// <summary>
         /// A value between 0 and 100
         /// </summary>
@@ -47,6 +52,47 @@ namespace ScrumbagsUI
                 m_Progress = value;
                 m_Label.text = Mathf.Clamp(Mathf.Round(value), 0, 100) + "%";
                 MarkDirtyRepaint();
+            }
+        }
+
+        /// <summary>
+        /// The color of the track (background circle)
+        /// </summary>
+        public Color trackColor
+        {
+            get => m_TrackMesh.color;
+            set
+            {
+                m_TrackColorSet = true;
+                m_TrackMesh.color = value;
+                MarkDirtyRepaint();
+            }
+        }
+
+        /// <summary>
+        /// The color of the progress (filled portion)
+        /// </summary>
+        public Color progressColor
+        {
+            get => m_ProgressMesh.color;
+            set
+            {
+                m_ProgressColorSet = true;
+                m_ProgressMesh.color = value;
+                MarkDirtyRepaint();
+            }
+        }
+
+        /// <summary>
+        /// Whether to show the percentage label
+        /// </summary>
+        public bool showLabel
+        {
+            get => m_Label.style.display == DisplayStyle.Flex;
+            set
+            {
+                m_ShowLabelSet = true;
+                m_Label.style.display = value ? DisplayStyle.Flex : DisplayStyle.None;
             }
         }
 
@@ -81,20 +127,20 @@ namespace ScrumbagsUI
         }
 
         // After the custom colors are resolved, this method uses them to color the meshes and (if necessary) repaint
-        // the control.
+        // the control. Only apply USS values if properties haven't been set programmatically.
         void UpdateCustomStyles()
         {
-            if (customStyle.TryGetValue(s_ProgressColor, out var progressColor))
+            if (!m_ProgressColorSet && customStyle.TryGetValue(s_ProgressColor, out var progressColor))
             {
                 m_ProgressMesh.color = progressColor;
             }
 
-            if (customStyle.TryGetValue(s_TrackColor, out var trackColor))
+            if (!m_TrackColorSet && customStyle.TryGetValue(s_TrackColor, out var trackColor))
             {
                 m_TrackMesh.color = trackColor;
             }
 
-            if (customStyle.TryGetValue(s_ShowLabel, out var showLabel))
+            if (!m_ShowLabelSet && customStyle.TryGetValue(s_ShowLabel, out var showLabel))
             {
                 m_Label.style.display = showLabel ? DisplayStyle.Flex : DisplayStyle.None;
             }
