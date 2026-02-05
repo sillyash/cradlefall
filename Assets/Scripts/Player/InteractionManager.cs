@@ -69,7 +69,7 @@ public class InteractionManager : NetworkBehaviour
         BaseModule module = target.GetComponent<BaseModule>();
         if (module != null)
         {
-            if (!module.broken)
+            if (!module.broken.Value)
             {
                 ResetHold();
                 return;
@@ -80,7 +80,7 @@ public class InteractionManager : NetworkBehaviour
 
             if (holdTimer >= CurrentHoldDuration)
             {
-                module.Repair();
+                module.RepairServerRpc();
                 ResetHold();
             }
 

@@ -61,7 +61,7 @@ public class InteractionDisplayScript : MonoBehaviour
             GameObject hitObject = hit.transform.gameObject;
 
             BaseModule module = hitObject.GetComponent<BaseModule>();
-            if (module != null && module.broken)
+            if (module != null && module.broken.Value)
             {
                 ShowText("Maintenez [E] pour réparer");
                 return;
