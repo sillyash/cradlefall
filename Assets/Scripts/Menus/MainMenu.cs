@@ -9,19 +9,16 @@ public class MainMenu : MonoBehaviour {
 
     public void OnHostButtonClicked ()
     {
-        Debug.Log("Hosting game...");
         GameManager.instance.HostGame();
     }
 
     public void OnJoinButtonClicked()
     {
-        Debug.Log("Join game menu...");
         GameManager.instance.StartClient();
     }
 
     public void OnQuitButtonClicked()
     {
-        Debug.Log("Quitting now.");
         Application.Quit();
     }
 

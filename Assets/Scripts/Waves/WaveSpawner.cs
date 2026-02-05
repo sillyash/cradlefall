@@ -61,7 +61,6 @@ public class WaveSpawner : NetworkBehaviour
 
         if (countdownTimer.Value <= 0f)
         {
-            Debug.Log("[Server] Wave Started!");
             WaveStarted?.Invoke();
             isSpawning = true;
             StartCoroutine(SpawnCurrentWave());
@@ -143,7 +142,6 @@ public class WaveSpawner : NetworkBehaviour
         }
         else
         {
-            Debug.Log("All waves completed.");
             this.enabled = false;
             GameManager.instance.Victory();
         }
@@ -153,7 +151,7 @@ public class WaveSpawner : NetworkBehaviour
 
     private void OnWaveIndexChanged(int previousValue, int newValue)
     {
-        Debug.Log($"[Network] Wave index changed from {previousValue} to {newValue}");
+        //Debug.Log($"[Network] Wave index changed from {previousValue} to {newValue}");
     }
 
     /* ------------- Getters & Setters ------------- */

@@ -122,12 +122,10 @@ public class BaseEnemy : NetworkBehaviour, ICanDie, IDamageable
     {
         if (!IsServer)
         {
-            Debug.Log("[Enemy Object] Client Destroy");
             // If client, call serveur
             DestroyServerRpc();
         } else
         {
-            Debug.Log("[Enemy Object] Server Destroy");
             // If server, destroy directly
             DestroyForEveryone();
         }
@@ -136,13 +134,11 @@ public class BaseEnemy : NetworkBehaviour, ICanDie, IDamageable
     [Rpc(SendTo.Server, InvokePermission = RpcInvokePermission.Everyone)]
     private void DestroyServerRpc()
     {
-        Debug.Log("[Enemy Object] RPC Destroy");
         DestroyForEveryone();
     }
 
     private void DestroyForEveryone()
     {
-        Debug.Log("[Enemy Object] Destroy FOR EVERYONE");
         NetworkObject netObj = gameObject.GetComponent<NetworkObject>();
         netObj.Despawn(destroy: true);
     }

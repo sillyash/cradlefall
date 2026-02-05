@@ -54,7 +54,6 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
 
         if (IsOwner)
         {
-            Debug.Log($"[Player] Owner instanciate {OwnerClientId}");
             var weaponObjOwner = Instantiate(weaponPrefab, FPSWeaponAnchorPoint);
             weapon = weaponObjOwner.GetComponent<BaseWeapon>();
             weaponObjOwner.transform.SetParent(FPSWeaponAnchorPoint);

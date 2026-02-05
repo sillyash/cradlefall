@@ -77,8 +77,6 @@ public class PlayerManager : NetworkBehaviour
 
         // Track this player
         activePlayers[clientId] = basePlayerComp;
-        
-        Debug.Log($"[PlayerManager] Spawned player for client {clientId}");
     }
 
     // Despawn a player when they die or disconnect
@@ -91,7 +89,6 @@ public class PlayerManager : NetworkBehaviour
             Debug.LogWarning($"[PlayerManager] No active player found for client {clientId}");
             return;
         }
-        Debug.Log("Dispawn player");
 
         // Despawn the NetworkObject
         NetworkObject networkObj = player.GetComponent<NetworkObject>();
@@ -105,7 +102,6 @@ public class PlayerManager : NetworkBehaviour
         }
 
         activePlayers.Remove(clientId);
-        Debug.Log($"[PlayerManager] Despawned player for client {clientId}");
     }
 
     /// <summary>
@@ -116,7 +112,6 @@ public class PlayerManager : NetworkBehaviour
     /// </param>
     private IEnumerator RespawnPlayersAfterDelay(ulong clientId)
     {
-        Debug.Log("Respawn");
         yield return new WaitForSeconds(10f);
 
         // Make sure old player is despawned first
@@ -139,11 +134,7 @@ public class PlayerManager : NetworkBehaviour
     /// </param>
     public void OnPlayerDeath(ulong clientId)
     {
-        Debug.Log($"[PlayerManager] ICIIII");
-
         if (!IsServer) return;
-
-        Debug.Log($"[PlayerManager] Player {clientId} died!");
 
         // Immediately despawn the player
         DespawnPlayerForClient(clientId);
@@ -158,7 +149,6 @@ public class PlayerManager : NetworkBehaviour
 
     private void OnClientConnected(ulong clientId)
     {
-        Debug.Log($"[NetworkBootstrap] Client {clientId} connected!");
         NbOfActiveClients.Value++;
         if (NetworkManager.Singleton.IsServer && GameManager.instance?.currentState.Value == GameState.Playing)
         {
@@ -169,8 +159,6 @@ public class PlayerManager : NetworkBehaviour
 
     private void OnClientDisconnected(ulong clientId)
     {
-        Debug.LogWarning($"[NetworkBootstrap] Client {clientId} disconnected!");
-
         if (NetworkManager.Singleton.IsServer)
         {
             // Server despawns this player
@@ -183,14 +171,10 @@ public class PlayerManager : NetworkBehaviour
     /// </summary>
     public void SpawnAllPlayers()
     {
-        Debug.Log("[PlayerManager] Spawning players for all connected clients...");
-
         foreach (ulong clientId in NetworkManager.Singleton.ConnectedClientsIds)
         {
-            Debug.Log("[PlayerManager] Spawning " + clientId);
             if (!PlayerManager.Instance.activePlayers.ContainsKey(clientId))
             {
-                Debug.Log("[PlayerManager] SpawningAAA " + clientId);
                 SpawnPlayerForClient(clientId);
             }
         }

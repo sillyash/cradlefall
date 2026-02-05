@@ -1081,6 +1081,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 11.200001
       objectReference: {fileID: 0}
+    - target: {fileID: 4737704563829250228, guid: a8e99f7f7f8037f4aac6825f119a552d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4751532716626378197, guid: a8e99f7f7f8037f4aac6825f119a552d, type: 3}
       propertyPath: m_Name
       value: CryotechnicRoom
