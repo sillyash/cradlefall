@@ -10,7 +10,7 @@ public class BaseWeapon : MonoBehaviour
     
     private int ammoCount;
     private bool isReadyToShoot = true;
-
+    private bool isReloading = false;
 
     // Variables partager a l'HUD munitions
     public int AmmoCount => ammoCount;
@@ -42,7 +42,7 @@ public class BaseWeapon : MonoBehaviour
 
     public void Fire()
     {
-        if (isReadyToShoot && ammoCount > 0) {
+        if (!isReloading && isReadyToShoot && ammoCount > 0) {
             Quaternion projRot = projectileSpawn.transform.rotation;
 
             behavior.OnFire(projectile, projectileSpawn.transform.transform, stats.spread);
@@ -64,6 +64,7 @@ public class BaseWeapon : MonoBehaviour
     public void Reload()
     {
         Debug.Log("reloading...");
+        isReloading = true;
         StartCoroutine(ReloadCooldown());
         OnReloadStart?.Invoke();
     }
@@ -73,6 +74,7 @@ public class BaseWeapon : MonoBehaviour
     {
         yield return new WaitForSeconds(stats.reloadTime);
         ammoCount = stats.magSize;
+        isReloading = false;
         OnAmmoChanged?.Invoke();
         OnReloadEnd?.Invoke();
         Debug.Log("Done");
