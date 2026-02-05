@@ -1173,6 +1173,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Joueur
       objectReference: {fileID: 0}
+    - target: {fileID: 6814679219693309533, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6814679219693309533, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6814679219693309533, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6814679219693309533, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.3150177
+      objectReference: {fileID: 0}
     - target: {fileID: 6896338367370617179, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
       propertyPath: enemyIcon
       value: 
