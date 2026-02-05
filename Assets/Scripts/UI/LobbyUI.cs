@@ -2,6 +2,8 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections.Generic;
+using Constants;
 
 /// <summary>
 /// UI controller for the lobby scene
@@ -10,11 +12,16 @@ public class LobbyUI : MonoBehaviour
 {
     [Header("UI Elements")]
     [SerializeField] private Button readyButton;
+    [SerializeField] private Button flecheGauche;
+    [SerializeField] private Button flecheDroite;
     [SerializeField] private TextMeshProUGUI readyButtonText;
     [SerializeField] private TextMeshProUGUI statusText;
     [SerializeField] private TextMeshProUGUI playerCountText;
+    [SerializeField] private TextMeshProUGUI RoleText;
 
     private bool isLocalPlayerReady = false;
+    private int roleIndex = 0;
+    private List<string> roles;
 
     private void Awake()
     {
@@ -22,6 +29,18 @@ public class LobbyUI : MonoBehaviour
         {
             readyButton.onClick.AddListener(OnReadyButtonClicked);
         }
+        if (flecheGauche != null)
+        {
+            flecheGauche.onClick.AddListener(OnFlecheGaucheClicked);
+        }
+        if (flecheDroite != null)
+        {
+            flecheDroite.onClick.AddListener(OnFlecheDroiteClicked);
+        }
+
+        roles = Roles.roles;
+        RoleText.text = roles[roleIndex];
+        Debug.Log(roles[roleIndex]);
 
         UpdateUI();
     }
@@ -40,8 +59,24 @@ public class LobbyUI : MonoBehaviour
         if (LobbyManager.Instance == null) return;
 
         isLocalPlayerReady = !isLocalPlayerReady;
-        LobbyManager.Instance.SetLocalReady(isLocalPlayerReady);
+        LobbyManager.Instance.SetLocalReady(isLocalPlayerReady, roleIndex);
 
+        UpdateUI();
+    }
+
+    private void OnFlecheGaucheClicked()
+    {
+        roleIndex--;
+        if (roleIndex < 0) roleIndex = roles.Count - 1;
+        RoleText.text = roles[roleIndex];
+        UpdateUI();
+    }
+
+    private void OnFlecheDroiteClicked()
+    {
+        roleIndex++;
+        if (roleIndex >= roles.Count) roleIndex = 0;
+        RoleText.text = roles[roleIndex];
         UpdateUI();
     }
 

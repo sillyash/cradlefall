@@ -1,4 +1,5 @@
 using Constants;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
@@ -11,10 +12,11 @@ public class PlayerManager : NetworkBehaviour
 {
     public static PlayerManager Instance { get; private set; }
 
-    [SerializeField] private GameObject playerPrefab; // Reference to Player.prefab
+    [SerializeField] private List<GameObject> playerPrefabs;
     [SerializeField] private GameObject deathCamPrefab;
     [SerializeField] private Vector3 spawnPosition = Vector3.zero;
     public Dictionary<ulong, basePlayer> activePlayers = new();
+    public Dictionary<ulong, GameObject> activePlayersPrefabs = new();
     public Dictionary<ulong, NetworkObject> activeDeathCameras = new();
 
     public NetworkVariable<int> NbOfActiveClients = new(
@@ -46,6 +48,19 @@ public class PlayerManager : NetworkBehaviour
         }
     }
 
+    public void SetRoleForClient(int roleIdex, ulong ownerClientId)
+    {
+        switch (Roles.RolesMap[roleIdex])
+        {
+            case Roles.DPS:
+                activePlayersPrefabs[ownerClientId] = playerPrefabs[0];
+                break;
+            case Roles.TECH:
+                activePlayersPrefabs[ownerClientId] = playerPrefabs[1];
+                break;
+        }
+    }
+
     /// <summary>
     /// Spawn a new player for the given client
     /// </summary>
@@ -61,8 +76,19 @@ public class PlayerManager : NetworkBehaviour
             return;
         }
 
+        GameObject role;
+        if(activePlayersPrefabs.TryGetValue(clientId, out var foundRole))
+        {
+            role = foundRole;
+        }
+        else
+        {
+            role = playerPrefabs[0]; //Defaluts to dps
+            activePlayersPrefabs[clientId] = role;
+        }
+
         // Instantiate player locally on server
-        GameObject playerObj = Instantiate(playerPrefab, spawnPosition, Quaternion.identity);
+        GameObject playerObj = Instantiate(role, spawnPosition, Quaternion.identity);
         NetworkObject networkObj = playerObj.GetComponent<NetworkObject>();
         basePlayer basePlayerComp = playerObj.GetComponent<basePlayer>();
 

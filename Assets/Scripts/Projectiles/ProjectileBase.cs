@@ -4,7 +4,6 @@ public abstract class ProjectileBase : MonoBehaviour
 {
     public static float CURVE_AMP = 100;
     public static float CURVE_LENGTH_DIV = 2;
-    public static float LIFESPAN = 2; // in seconds
 
     [SerializeField] protected ProjectileBehavior behavior;
     [SerializeField] protected ProjectileStats stats;
@@ -41,7 +40,7 @@ public abstract class ProjectileBase : MonoBehaviour
 
     protected void Update()
     {
-        if (Time.time - startTime > LIFESPAN)
+        if (Time.time - startTime > stats.lifespan)
         {
             Destroy(gameObject);
         }

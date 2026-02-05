@@ -41,10 +41,11 @@ public class LobbyManager : NetworkBehaviour
 	public bool AllReady => PlayerManager.Instance?.NbOfActiveClients.Value >= minPlayersToStart
 						&& readyClients.Count == PlayerManager.Instance?.NbOfActiveClients.Value;
 
-	public void SetLocalReady(bool ready)
+	public void SetLocalReady(bool ready, int roleIdex)
 	{
         if (IsClient)
         {
+            PlayerManager.Instance.SetRoleForClient(roleIdex, OwnerClientId);
 		    SetReadyServerRpc(ready);
         } else
         {
