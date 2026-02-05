@@ -87,7 +87,7 @@ public class BaseModule : NetworkBehaviour
     {
         broken.Value = true;
         behaviour.OnBreak(this);
-        Debug.Log("The module is broken");
+        Debug.LogWarning("The module is broken");
     }
 
     [Rpc(SendTo.Server, InvokePermission = RpcInvokePermission.Everyone)]

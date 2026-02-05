@@ -18,31 +18,33 @@ public class InteractionManager : NetworkBehaviour
 
     [SerializeField] private float healPerSecond = 4f;
 
-    private void Awake()
+    public override void OnNetworkSpawn()
     {
         if (!IsOwner) return;
 
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
-            return;
+        }
+        else
+        {
+            Instance = this;
         }
 
-        Instance = this;
-    }
-
-    private void Start()
-    {
         player = GetComponent<basePlayer>();
         playerCamera = player.mainCamera;
     }
+
 
     private void Update()
     {
         IsHoldingInteract = CustomInputRouter.GetButtonInteract();
 
-        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+        Ray ray = playerCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
         RaycastHit hit;
+
+        Debug.LogWarning(player.stats.InteractionRange + " CCCCCCCCCCCCCCCCCC");
+
 
         if (Physics.Raycast(ray, out hit, player.stats.InteractionRange))
         {

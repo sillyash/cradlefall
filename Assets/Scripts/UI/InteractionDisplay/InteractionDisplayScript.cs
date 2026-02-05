@@ -11,6 +11,8 @@ public class InteractionDisplayScript : MonoBehaviour
     [Header("Text Effect")]
     [SerializeField] private float blinkSpeed = 2f;
 
+    public Camera playerCamera;
+
     private basePlayer player;
     private Color baseTextColor;
 
@@ -53,9 +55,11 @@ public class InteractionDisplayScript : MonoBehaviour
 
     private void DetectInteractable()
     {
-        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
-        RaycastHit hit;
+        Debug.LogWarning(player.stats.InteractionRange + " BBBBBBBBBBBBB");
 
+        Ray ray = playerCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+        RaycastHit hit;
+        Debug.LogWarning(player.stats.InteractionRange + " AAAAAAAAAAAA");
         if (Physics.Raycast(ray, out hit, player.stats.InteractionRange))
         {
             GameObject hitObject = hit.transform.gameObject;
