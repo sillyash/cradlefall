@@ -64,7 +64,7 @@ public class InteractionDisplayScript : MonoBehaviour
             BaseModule module = hitObject.GetComponent<BaseModule>();
             if (module != null && module.broken.Value)
             {
-                ShowText("Maintenez [E] pour r�parer");
+                ShowText("Hold [E] to repair");
                 return;
             }
         }
