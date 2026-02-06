@@ -8,6 +8,8 @@ public class BaseWeapon : MonoBehaviour
     [SerializeField] public ProjectileBase projectile;
     [SerializeField] public GameObject projectileSpawn;
     
+    private MuzzleFlash muzzleFlash;
+    
     private int ammoCount;
     private bool isReadyToShoot = true;
     private bool isReloading = false;
@@ -25,6 +27,7 @@ public class BaseWeapon : MonoBehaviour
     {
         ammoCount = stats.magSize;
         OnAmmoChanged?.Invoke();
+        muzzleFlash = GetComponent<MuzzleFlash>();
         StartCoroutine(WaitForInstance());
     }
 
@@ -49,7 +52,10 @@ public class BaseWeapon : MonoBehaviour
             ammoCount--;
             OnAmmoChanged?.Invoke();
             OnFire?.Invoke(this);
-
+            if (muzzleFlash != null) // Only for weapons with muzzle flash
+            {
+                muzzleFlash.PlayMuzzleFlash();
+            }
             isReadyToShoot = false;
             StartCoroutine(FireCooldown());
         }  
