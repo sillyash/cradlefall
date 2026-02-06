@@ -1,6 +1,4 @@
-# Titre
-
-Description détaillée de l'issue parent.
+Description détaillée et concise de l'issue parent.
 
 ## Critères d'acceptation
 

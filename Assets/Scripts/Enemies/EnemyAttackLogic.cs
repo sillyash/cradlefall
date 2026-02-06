@@ -1,0 +1,41 @@
+using Unity.VisualScripting;
+using UnityEngine;
+
+public class EnemyAttackLogic : StateMachineBehaviour
+{
+    private BaseEnemy enemy;
+    private SphereCollider main;
+
+    // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
+    override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        enemy = animator.gameObject.GetComponent<BaseEnemy>();
+        main = animator.gameObject.GetComponentInChildren<SphereCollider>(true);
+    }
+
+    // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
+    override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        if (!enemy.IsServer) return;
+        enemy.LookAtTarget();
+    }
+
+    // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
+    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        enemy.isAttacking = false;
+        main.gameObject.GetComponent<EnemySphereBehavior>().hasTouched = false; // reset if we touched something
+    }
+
+    // OnStateMove is called right after Animator.OnAnimatorMove()
+    //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    //{
+    //    // Implement code that processes and affects root motion
+    //}
+
+    // OnStateIK is called right after Animator.OnAnimatorIK()
+    //override public void OnStateIK(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    //{
+    //    // Implement code that sets up animation IK (inverse kinematics)
+    //}
+}

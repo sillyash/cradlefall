@@ -9,6 +9,7 @@
 /[Bb]uild/
 /[Bb]uilds/
 /[Ll]ogs/
+/BuildUnity/
 /[Uu]ser[Ss]ettings/
 *.log
 
@@ -109,3 +110,17 @@ InitTestScene*.unity*
 # Python
 __pycache__/
 env/
+
+# Discord Rich Presence add-on
+.erp
+/[Aa]ssets/ERP/
+/[Aa]ssets/ERP.meta
+
+# Build outputs
+/CRADLEFALL_Data/
+/CRADLEFALL_BurstDebugInformation_DoNotShip/
+/CRADLEFALL.x86_64
+/CRADLEFALL.exe
+/*.so
+/*.so.*
+Assets/ZerinLabs_lowpolyPack_SciFi/

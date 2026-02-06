@@ -113,22 +113,6 @@ Après avoir créé un nouveau tag, il faut le pousser:
 git push --tags
 ```
 
-#### dotnet format
-
-Uniformise le style C# selon `.editorconfig`.
-
-Commande manuelle:
-
-```bash
-dotnet format
-```
-
-Vérification sans modifier:
-
-```bash
-dotnet format --verify-no-changes
-```
-
 ### Game-CI
 
 Nous utilisons [Game-CI](https://game.ci/) pour automatiser les builds Unity.

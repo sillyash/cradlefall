@@ -138,6 +138,11 @@ Rôles distincts (DPS, Tank, Technicien, Soutien) — chacun disposant de capaci
 
 La coordination est nécessaire pour gérer les menaces et protéger les objectifs.
 
+La carte et le gameplay sont faits de manière à ce que chaque rôle, en plus de ses capacités, ait sa place. Par exemple, là où un DPS est petit et rapide, un Tank est plus gros? Ainsi, le DPS pourra être plus mobile et alterner entre plusieurs points pour gérer des situations critiques où ses alliés n'ont pas le temps d’aller. Le Tank, quant à lui, devra rester souvent au même endroit pendant plus longtemps et sera le pilier de la défense. Le technicien est un peu particulier, il doit être prêt à partir réparer les modules à tout moment, et le Support doit essayer de gérer tous les déplacements de ses alliés en même temps.
+
+Il faut donc gérer le bal des rôles au mieux pour affronter les vagues et les incidents. Sans une bonne coordination et communication, les joueurs peuvent se retrouver vite submergés.
+
+
 | Rôle       | Capacité                       | Passif(s)                                | Arme                       | 
 |:----------:|:-------------------------------|:-----------------------------------------|:---------------------------|
 | DPS        | Dégâts de zone + Repoussement  | Vitesse de déplacement                   | Canon laser                |
@@ -153,7 +158,7 @@ Boucle de base : système de vagues
 - En découle les objectifs secondaires: la protection et réparation de modules du vaisseau affectant les joueurs (énergie, soin, lumière...).
 - Pour cela on a une complémentarité des rôles (DPS, Tank, Technicien, Soutien), afin de survivre le plus longtemps possible.
 - Atmosphère tendue : on veut faire sentir la fragilité de la position tout en valorisant la coordination.
-- Entre les vagues, les joueurs pourront se soigner, se provisioner et les joueurs précédemment décédés se verront respawn.
+- Entre les vagues, les joueurs pourront se soigner, se provisioner et les joueurs précédemment décédés se verront reconstruis à leurs points de spawn.
 - Inspirations :
   - Halo Firefight / Destiny 2 modes Horde (défense d’objectifs),
   - Helldivers (pression cumulative et priorisation des menaces).
@@ -307,6 +312,12 @@ Voir [Annexes](#annexes).
 ## Niveaux
 
 Le niveau est unique : un vaisseau spatial subdivisé en plusieurs zones interconnectées.
+
+Sa structure est simple et les pièces sont interconnectées par de longs couloirs. Les pièces ont des formes différentes, plus ou moins grandes, et chacune a son rôle à jouer. Si certaines contiennent des modules, d’autres seront des points stratégiques pour la défense.
+
+Cette structure encourage à la fois un gameplay mobile pour le DPS et le technicien, qui peuvent être amenés à se déplacer de salle en salle, et un gameplay plus sédentaire pour le Tank, qui devra surveiller un couloir ou une zone.
+
+De plus, les spawns des monstres sont répartis tout autour du centre. Les joueurs peuvent donc se faire attaquer de tous les côtés, sans jamais savoir d’où.
 
 ![Layout vaisseau](./Mediatheque/ship_layout.png)
 
