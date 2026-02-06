@@ -22,6 +22,7 @@ Shader "Unlit/ToonShader"
 
       #pragma vertex Vertex
       #pragma fragment Fragment
+      #pragma multi_compile _ _FORWARD_PLUS
       //shader code goes here
 
       #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
@@ -52,8 +53,9 @@ Shader "Unlit/ToonShader"
       struct VertexOutput { 
         float4 positionCS  : SV_POSITION;
         float2 uv         : TEXCOORD0;
-        float3 normalWS : TEXCOORD1; 
-        float3 cameraDirection : TEXCOORD2;
+        float rimMask : TEXCOORD1; 
+        float shadowMask : TEXCOORD2;
+        float3 lightColor : TEXCOORD3;
         
       };
 
@@ -63,11 +65,33 @@ Shader "Unlit/ToonShader"
         VertexPositionInputs posInputs = GetVertexPositionInputs(input.positionOS);
         output.positionCS = posInputs.positionCS;
         
-        output.normalWS = normalize(TransformObjectToWorldNormal(input.normalOS));
+        float3 normalWS = normalize(TransformObjectToWorldNormal(input.normalOS));
         
         output.uv = input.uv;
 
-        output.cameraDirection = normalize(_WorldSpaceCameraPos - posInputs.positionWS);
+        Light mainLight = GetMainLight();
+        output.lightColor = mainLight.color;
+        float3 direction = normalize(mainLight.direction);  
+
+        output.shadowMask = (dot(normalWS, direction) + 1) * 0.5;
+
+        //Iterate over additional lights
+        uint count = GetAdditionalLightsCount();
+
+        
+        InputData inputData = (InputData)0;
+
+        LIGHT_LOOP_BEGIN(count)
+		    Light light = GetAdditionalLight(lightIndex, posInputs.positionWS);
+            output.lightColor += light.color * light.distanceAttenuation;
+
+            output.shadowMask += (dot(normalWS, light.direction) + 1) * 0.5 * light.distanceAttenuation;
+        LIGHT_LOOP_END
+
+        if(_rimLight){
+            float3 cameraDirection = normalize(_WorldSpaceCameraPos - posInputs.positionWS);
+            output.rimMask = dot(normalWS, cameraDirection);
+        }
 
         return output;
       } 
@@ -80,25 +104,19 @@ Shader "Unlit/ToonShader"
         if(emissionMask > 0.5){
            return _emissionColor * _emissionFac; 
         }
+      
 
-        Light mainLight = GetMainLight();
-        float3 direction = normalize(mainLight.direction);  
-
-        float shadowMask = (dot(input.normalWS, direction) + 1)/2;
-
-        if(shadowMask <= _shadowTreshold){ 
+        if(input.shadowMask <= _shadowTreshold){ 
            _mainColor /= _shadowFac; 
         }
 
         if(_rimLight){
-            float rimMask = dot(input.normalWS, input.cameraDirection);
-
-            if(rimMask <= _rimTreshold){
+            if(input.rimMask <= _rimTreshold){
                 _mainColor = _rimColor;
             }
         }
 
-        return _mainColor * mainLight.color;
+        return _mainColor * input.lightColor;
       }
 
       ENDHLSL
