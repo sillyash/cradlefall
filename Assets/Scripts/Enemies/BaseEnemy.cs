@@ -17,7 +17,6 @@ public class BaseEnemy : NetworkBehaviour, ICanDie, IDamageable
 
     public float maxHealth { get; set; }
 
-    [SerializeField]
     private GameObject m_Target;
     private NavMeshAgent m_Agent;
     private Animator m_Animator;
