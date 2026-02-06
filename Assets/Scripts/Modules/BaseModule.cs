@@ -59,6 +59,7 @@ public class BaseModule : NetworkBehaviour
         if (!broken.Value && Random.value < chancePerFrame)
         {
             Break();
+            Debug.LogError($"The module IS BROKEN");
         }
     }
 
