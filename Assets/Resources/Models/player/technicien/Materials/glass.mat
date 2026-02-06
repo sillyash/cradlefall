@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: glass
-  m_Shader: {fileID: 4800000, guid: d42be370735b771428032a430651287f, type: 3}
+  m_Shader: {fileID: 4800000, guid: 4264e1166a5b22f40af57df4dd88fe9d, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -117,7 +117,8 @@ Material:
     - _Surface: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
-    - _emissionFac: 10
+    - _emissionFac: 1
+    - _rimFac: 0.1
     - _rimLight: 0
     - _rimTreshold: 0.5
     - _shadowFac: 4
