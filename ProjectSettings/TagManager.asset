@@ -7,6 +7,8 @@ TagManager:
   - MainEnemy
   - Capsule
   - VisualOnly
+  - IK_target
+  - Technichien
   layers:
   - Default
   - TransparentFX
