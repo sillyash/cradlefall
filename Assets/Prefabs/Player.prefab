@@ -550,7 +550,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MouseControl
   ShowTopMostFoldoutHeaderGroup: 1
   chest: {fileID: 497909600712347723}
-  sensibility: 300
+  sensibility: 200
   chestNetwork:
     m_InternalValue: {x: 0, y: 0, z: 0, w: 1}
 --- !u!114 &8225159773639805063
