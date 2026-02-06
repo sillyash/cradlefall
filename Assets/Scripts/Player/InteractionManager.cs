@@ -73,10 +73,11 @@ public class InteractionManager : NetworkBehaviour
                 ResetHold();
                 return;
             }
-
             CurrentHoldDuration = module.stats.repairTime;
             holdTimer += Time.deltaTime;
-
+            if (player.CompareTag("Technichien")) 
+                CurrentHoldDuration = CurrentHoldDuration/2 ;
+            
             if (holdTimer >= CurrentHoldDuration)
             {
                 module.RepairServerRpc();
