@@ -2,9 +2,12 @@ Shader "Unlit/ToonShader"
 {
   
   Properties{
-    _treshold ("Shadow treshold", float) = 0.5  
+    _shadowTreshold ("Shadow treshold", float) = 0.5  
     _shadowFac ("Shadow strength", float) = 4
-    _mainColor ("Color", Color) = (1,1,1) 
+    _mainColor ("Color", Color) = (1,1,1)
+    [Toggle] _rimLight ("Rim light", float) = 0
+    _rimTreshold ("Rim light treshold", float) = 0.5  
+    _rimColor ("Rim light color", Color) = (1,1,1)
     _emissionColor ("Emission Color", Color) = (1,1,1)
     _emissionFac ("Emission strength", float) = 10
     _emissionMask ("Emission mask", 2D) = "black" {}
@@ -25,9 +28,13 @@ Shader "Unlit/ToonShader"
       CBUFFER_START(UnityPerMaterial) 
 
       //Material Properties
-      float _treshold;
+      float _shadowTreshold;
       float _shadowFac;
       float3 _mainColor;
+
+      bool _rimLight;
+      float _rimTreshold;
+      float3 _rimColor;
 
       sampler2D _emissionMask;
       float _emissionFac;
@@ -35,7 +42,6 @@ Shader "Unlit/ToonShader"
 
       CBUFFER_END
 
-      
 
       struct VertexInput { 
         float3 positionOS : POSITION0;
@@ -46,7 +52,8 @@ Shader "Unlit/ToonShader"
       struct VertexOutput { 
         float4 positionCS  : SV_POSITION;
         float2 uv         : TEXCOORD0;
-        float3 normalWS : TEXCOORD1; //User defined channel
+        float3 normalWS : TEXCOORD1; 
+        float3 cameraDirection : TEXCOORD2;
         
       };
 
@@ -55,8 +62,12 @@ Shader "Unlit/ToonShader"
 
         VertexPositionInputs posInputs = GetVertexPositionInputs(input.positionOS);
         output.positionCS = posInputs.positionCS;
+        
         output.normalWS = normalize(TransformObjectToWorldNormal(input.normalOS));
+        
         output.uv = input.uv;
+
+        output.cameraDirection = normalize(_WorldSpaceCameraPos - posInputs.positionWS);
 
         return output;
       } 
@@ -71,16 +82,23 @@ Shader "Unlit/ToonShader"
         }
 
         Light mainLight = GetMainLight();
-        float3 direction = normalize(mainLight.direction);
-        _mainColor = _mainColor * mainLight.color;
+        float3 direction = normalize(mainLight.direction);  
 
         float shadowMask = (dot(input.normalWS, direction) + 1)/2;
 
-        if(shadowMask > _treshold){ 
-           return _mainColor;
+        if(shadowMask <= _shadowTreshold){ 
+           _mainColor /= _shadowFac; 
         }
 
-        return _mainColor/_shadowFac; 
+        if(_rimLight){
+            float rimMask = dot(input.normalWS, input.cameraDirection);
+
+            if(rimMask <= _rimTreshold){
+                _mainColor = _rimColor;
+            }
+        }
+
+        return _mainColor * mainLight.color;
       }
 
       ENDHLSL
