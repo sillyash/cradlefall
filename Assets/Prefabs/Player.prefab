@@ -604,6 +604,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
+  playerCamera: {fileID: 95665150144060911}
   healPerSecond: 4
 --- !u!114 &8533640243390756548
 MonoBehaviour:

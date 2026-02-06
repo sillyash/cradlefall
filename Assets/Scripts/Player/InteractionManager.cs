@@ -6,7 +6,7 @@ public class InteractionManager : NetworkBehaviour
     public static InteractionManager Instance { get; private set; }
 
     private basePlayer player;
-    private Camera playerCamera;
+    public Camera playerCamera;
 
     // Timer interne
     private float holdTimer = 0f;
@@ -30,16 +30,17 @@ public class InteractionManager : NetworkBehaviour
         {
             Instance = this;
         }
+    }
 
+    public void Start()
+    {
         player = GetComponent<basePlayer>();
-        playerCamera = player.mainCamera;
     }
 
 
     private void Update()
     {
         IsHoldingInteract = CustomInputRouter.GetButtonInteract();
-
         Ray ray = playerCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
         RaycastHit hit;
 
