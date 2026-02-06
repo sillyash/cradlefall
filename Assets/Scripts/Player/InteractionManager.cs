@@ -43,9 +43,6 @@ public class InteractionManager : NetworkBehaviour
         Ray ray = playerCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
         RaycastHit hit;
 
-        Debug.LogWarning(player.stats.InteractionRange + " CCCCCCCCCCCCCCCCCC");
-
-
         if (Physics.Raycast(ray, out hit, player.stats.InteractionRange))
         {
             GameObject hitObject = hit.transform.gameObject;
