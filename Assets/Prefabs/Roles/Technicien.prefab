@@ -92,6 +92,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Technicien
       objectReference: {fileID: 0}
+    - target: {fileID: 4263663073151763242, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
+      propertyPath: m_TagString
+      value: Technichien
+      objectReference: {fileID: 0}
     - target: {fileID: 8225159773639805063, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
       propertyPath: movementSettings
       value: 
