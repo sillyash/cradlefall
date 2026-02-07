@@ -17,6 +17,7 @@ public class BlinkingLightController : MonoBehaviour
 
 
     private Light Light;
+    private float BaseIntensity;
     private float TimePast;
     private float curveEnd;
     private float curveStart;
@@ -24,6 +25,7 @@ public class BlinkingLightController : MonoBehaviour
     private void Start()
     {
         Light = GetComponent<Light>();
+        BaseIntensity = Light.intensity;
     }
 
     private void Update()
@@ -66,6 +68,5 @@ public class BlinkingLightController : MonoBehaviour
     }
 
     public void SwitchOnBlinking() { ShouldBlink = true; }
-    public void SwitchOffBlinking() { ShouldBlink = false; }
-    public void SwitchBlinking() { ShouldBlink = !ShouldBlink; }
+    public void SwitchOffBlinking() { ShouldBlink = false; Light.intensity = BaseIntensity; }
 }
