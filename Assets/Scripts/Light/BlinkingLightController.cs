@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class BlinkingLightController : MonoBehaviour
 {
-    public bool lit;
+    public bool ShouldBlink = false;
     public AnimationCurve pattern;
     public float IntensityMultiplier = 10;
     public float SpeedModifier = 1;
@@ -28,7 +28,7 @@ public class BlinkingLightController : MonoBehaviour
 
     private void Update()
     {
-        if (lit)
+        if (ShouldBlink)
         {
             Blink();
         }
@@ -65,7 +65,7 @@ public class BlinkingLightController : MonoBehaviour
         Light.intensity = intensity;
     }
 
-    public void SwitchOn() { lit = true; }
-    public void SwitchOff() { lit = false; }
-    public void Switch() { lit = !lit; }
+    public void SwitchOnBlinking() { ShouldBlink = true; }
+    public void SwitchOffBlinking() { ShouldBlink = false; }
+    public void SwitchBlinking() { ShouldBlink = !ShouldBlink; }
 }
