@@ -82612,6 +82612,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   ProjectileMachine: {fileID: 2032721870522376861, guid: 40f8c61886507ed40b8b5ab7fc7320f0, type: 3}
+  LightManager: {fileID: 9101066866104713726, guid: f34d1c62e4f76e24a89506a513c4babd, type: 3}
   LobbyManager: {fileID: 2176270620501923407, guid: cb350a897bb166342b55874aabf28dac, type: 3}
   currentState:
     m_InternalValue: 2
