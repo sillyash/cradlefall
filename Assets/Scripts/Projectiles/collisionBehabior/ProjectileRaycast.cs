@@ -1,4 +1,6 @@
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class ProjectileRaycast : ProjectileBase
 {
@@ -25,11 +27,16 @@ public class ProjectileRaycast : ProjectileBase
 
         if (Physics.SphereCast(transform.position, radius, -transform.forward, out RaycastHit hit, distance))
         {
+
+            
+
             if (!hit.collider.TryGetComponent(out ProjectileBase hitObject))
             {
+                VisualEffect hitFX = spawnFX(hit.collider.gameObject);
+
                 if (!gameObject.CompareTag("VisualOnly"))
                 {
-                    behavior.HandleCollision(hit.collider, stats.damage);
+                    behavior.HandleCollision(hit.collider, stats.damage, hitFX);
                 }
                 Destroy(gameObject);
             }

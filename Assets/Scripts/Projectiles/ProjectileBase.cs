@@ -1,10 +1,13 @@
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public abstract class ProjectileBase : MonoBehaviour
 {
     public static float CURVE_AMP = 100;
     public static float CURVE_LENGTH_DIV = 2;
 
+    [SerializeField] protected VisualEffectAsset hitFXAsset;
     [SerializeField] protected ProjectileBehavior behavior;
     [SerializeField] protected ProjectileStats stats;
 
@@ -44,6 +47,18 @@ public abstract class ProjectileBase : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    protected VisualEffect spawnFX(GameObject target)
+    {
+        VisualEffect hitFX = target.AddComponent<VisualEffect>();
+
+        hitFX.visualEffectAsset = hitFXAsset;
+
+        hitFX.SetVector3("spillDirection", -transform.forward);
+        hitFX.SetInt("bloodAmount", (int)stats.damage);
+
+        return hitFX;
     }
 
     // Return the tangent on the curve in stat at given point

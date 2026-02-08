@@ -213,6 +213,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d46c8cc68b244a149a348f811da124c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitFXAsset: {fileID: 8926484042661614526, guid: 937bb69860d87dd4499728c3a425b2e6, type: 3}
   behavior: {fileID: 11400000, guid: bba7ce6a41430964a980b7ffb50e657b, type: 2}
   stats: {fileID: 11400000, guid: 3a728be2a6642a947af7b4630eca4481, type: 2}
   radius: 1
