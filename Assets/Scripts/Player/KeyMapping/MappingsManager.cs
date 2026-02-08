@@ -1,22 +1,20 @@
-// Ce fichier sert d'exemple pour l'implémentation de l'ui de mapping
-/*
+
 using UnityEngine;
 using UnityEngine.UI;
 
 public class InputRebindingUI : MonoBehaviour
 {
-    public Button btnPresetZqsd;
-    public Button btnPresetWasd;
+    public Button ZQSDPresetButton;
+    public Button WASDPresetButton;
 
     void Start()
     {
-        btnPresetZqsd.onClick.AddListener(() => {
+        ZQSDPresetButton.onClick.AddListener(() => {
             KeyMappingSettings.ApplyPresetZQSD();
         });
 
-        btnPresetWasd.onClick.AddListener(() => {
+        WASDPresetButton.onClick.AddListener(() => {
             KeyMappingSettings.ApplyPresetWASD();
         });
     }
 }
-*/
