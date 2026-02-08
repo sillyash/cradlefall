@@ -37,12 +37,6 @@ public class BaseWeapon : MonoBehaviour
         ProjectileVisualSync.instance.subToWeaponFire(this);
     }
 
-    // Testing purpose
-    //void Update()
-    //{
-    //    Fire();
-    //}
-
     public void Fire()
     {
         if (!isReloading && isReadyToShoot && ammoCount > 0) {
@@ -69,7 +63,11 @@ public class BaseWeapon : MonoBehaviour
 
     public void Reload()
     {
-        Debug.Log("reloading...");
+        if (isReloading || ammoCount == stats.magSize)
+        {
+            return;
+        }
+
         isReloading = true;
         StartCoroutine(ReloadCooldown());
         OnReloadStart?.Invoke();
@@ -83,6 +81,5 @@ public class BaseWeapon : MonoBehaviour
         isReloading = false;
         OnAmmoChanged?.Invoke();
         OnReloadEnd?.Invoke();
-        Debug.Log("Done");
     }
 }
