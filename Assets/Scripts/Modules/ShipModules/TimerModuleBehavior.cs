@@ -11,12 +11,14 @@ public class TimerModuleBehavior : ModuleBehavior
     public override void OnBreak(BaseModule module)
     {
         this.module = module;
+        LightManager.instance.MakeCapsulesBlink();
         module.StartCoroutine(CountDown());
     }
 
     public override void OnRepair(BaseModule module)
     {
         CancelTimer();
+        LightManager.instance.StopCapsulesBlink();
     }
 
     private IEnumerator CountDown()
