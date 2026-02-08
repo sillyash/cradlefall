@@ -15,7 +15,7 @@ public class DeathCamera : NetworkBehaviour
     {
         gameObject.SetActive(IsOwner);
         if (!IsOwner) return;
-        KeyMappingSettings.ApplyPresetZQSD();
+        KeyMappingSettings.LoadPreset();
         StartCoroutine(OpenIris());
     }
 
