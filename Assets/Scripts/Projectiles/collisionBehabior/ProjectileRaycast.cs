@@ -32,11 +32,10 @@ public class ProjectileRaycast : ProjectileBase
 
             if (!hit.collider.TryGetComponent(out ProjectileBase hitObject))
             {
-                VisualEffect hitFX = spawnFX(hit.collider.gameObject);
 
                 if (!gameObject.CompareTag("VisualOnly"))
                 {
-                    behavior.HandleCollision(hit.collider, stats.damage, hitFX);
+                    behavior.HandleCollision(hit.collider, stats.damage, hit.point, hit.normal, hitFXAsset);
                 }
                 Destroy(gameObject);
             }

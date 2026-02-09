@@ -7,14 +7,13 @@ public class EnemyProjectile : ProjectileBehavior
 {
     // TODO : Rework 
     
-    public override void HandleCollision(Collider target, float damage, VisualEffect hitFX)
+    public override void HandleCollision(Collider target, float damage, Vector3 hitLocation, Vector3 hitNormal, VisualEffectAsset hitFXAsset)
     {
         basePlayer player = target.GetComponent<basePlayer>();
 
         if (player != null)
         {
             player.TakeDamage(damage);
-            hitFX.Play();
         }
         else
         {

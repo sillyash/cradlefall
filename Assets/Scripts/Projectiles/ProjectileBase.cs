@@ -49,18 +49,6 @@ public abstract class ProjectileBase : MonoBehaviour
         }
     }
 
-    protected VisualEffect spawnFX(GameObject target)
-    {
-        VisualEffect hitFX = target.AddComponent<VisualEffect>();
-
-        hitFX.visualEffectAsset = hitFXAsset;
-
-        hitFX.SetVector3("spillDirection", -transform.forward);
-        hitFX.SetInt("bloodAmount", (int)stats.damage);
-
-        return hitFX;
-    }
-
     // Return the tangent on the curve in stat at given point
     float getCurveOrientation(float point)
     {

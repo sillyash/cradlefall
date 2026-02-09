@@ -194,7 +194,8 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 1045532422937719108, guid: f1fbc6e08dfc79b4baac54479805ef17, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 7079945560405015623, guid: f1fbc6e08dfc79b4baac54479805ef17, type: 3}
       insertIndex: -1
@@ -224,6 +225,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 103312a9fdebd384a894d9f5699c1a4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitFXAsset: {fileID: 8926484042661614526, guid: 937bb69860d87dd4499728c3a425b2e6, type: 3}
   behavior: {fileID: 11400000, guid: bba7ce6a41430964a980b7ffb50e657b, type: 2}
   stats: {fileID: 11400000, guid: f75eca307aa28bb46916e61185940b7a, type: 2}
 --- !u!135 &-549011000092130481

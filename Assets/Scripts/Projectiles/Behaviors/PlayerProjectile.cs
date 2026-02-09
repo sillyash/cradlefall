@@ -1,12 +1,15 @@
 using System;
+using Unity.VisualScripting;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
+using UnityEngine.UIElements;
 using UnityEngine.VFX;
 
 [CreateAssetMenu(menuName = "Projectiles/Behaviours/Player")]
 public class PlayerProjectile : ProjectileBehavior
 {
 
-    public override void HandleCollision(Collider target, float damage, VisualEffect hitFX)
+    public override void HandleCollision(Collider target, float damage, Vector3 hitLocation, Vector3 hitNormal, VisualEffectAsset hitFXAsset)
     {
         BaseEnemy enemy = target.GetComponent<BaseEnemy>();
 
@@ -14,10 +17,17 @@ public class PlayerProjectile : ProjectileBehavior
         {
             enemy.TakeDamage(damage);
 
-            if (hitFX != null)
-            {
-                hitFX.Play();
-            }
+            GameObject rootFX = new GameObject();
+
+            VisualEffect hitFX = rootFX.AddComponent<VisualEffect>();
+
+
+            rootFX.transform.position = hitLocation;
+
+            hitFX.visualEffectAsset = hitFXAsset;
+            Debug.Log("spawned");
+            hitFX.SetVector3("spillDirection", hitNormal);
+            hitFX.SetInt("bloodAmount", (int)damage);
         }
     }
 }

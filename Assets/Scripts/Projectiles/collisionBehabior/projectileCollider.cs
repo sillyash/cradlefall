@@ -7,10 +7,13 @@ public class ProjectileCollider : ProjectileBase
     {
         if (!other.TryGetComponent(out ProjectileBase var))
         {
-            VisualEffect hitFX = spawnFX(other.gameObject);
 
             if (!gameObject.CompareTag("VisualOnly")) {
-                behavior.HandleCollision(other, stats.damage, hitFX);
+                Vector3 hit = other.ClosestPoint(transform.position);
+
+                Vector3 normal = (transform.position - hit).normalized;
+
+                behavior.HandleCollision(other, stats.damage, hit, normal, hitFXAsset);
             }
 
             Destroy(gameObject);
