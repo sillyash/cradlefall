@@ -280,12 +280,15 @@ public class BaseEnemy : NetworkBehaviour, ICanDie, IDamageable
     [Rpc(SendTo.Everyone)]
     void startDancingRpc(Quaternion rotation)
     {
-        Debug.Log(rotation);
+        // TODO: rotate to face player
         isDead = true;
 
         m_Agent.isStopped = true;
-        transform.rotation = Quaternion.identity;
+        //m_Agent.updateRotation = false;
+
+        
         m_Animator.applyRootMotion = true;
         m_Animator.SetTrigger("Dance");
+        //transform.rotation = rotation;
     }
 }

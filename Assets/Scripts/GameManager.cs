@@ -98,7 +98,7 @@ public class GameManager : NetworkBehaviour
 
     private IEnumerator SpawnPlayersAfterDelay()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
         PlayerManager.Instance?.SpawnAllPlayers();
     }
 
