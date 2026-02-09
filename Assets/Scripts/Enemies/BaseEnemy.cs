@@ -18,7 +18,7 @@ public class BaseEnemy : NetworkBehaviour, ICanDie, IDamageable
     public float maxHealth { get; set; }
 
     private GameObject m_Target;
-    private NavMeshAgent m_Agent;
+    public NavMeshAgent m_Agent;
     private Animator m_Animator;
 
     public bool isAttacking = false;
@@ -280,11 +280,12 @@ public class BaseEnemy : NetworkBehaviour, ICanDie, IDamageable
     [Rpc(SendTo.Everyone)]
     void startDancingRpc(Quaternion rotation)
     {
-        Debug.Log("dance");
+        Debug.Log(rotation);
         isDead = true;
 
         m_Agent.isStopped = true;
-        transform.rotation = rotation;
+        transform.rotation = Quaternion.identity;
+        m_Animator.applyRootMotion = true;
         m_Animator.SetTrigger("Dance");
     }
 }
