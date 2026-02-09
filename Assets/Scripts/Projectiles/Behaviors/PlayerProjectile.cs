@@ -25,7 +25,6 @@ public class PlayerProjectile : ProjectileBehavior
             rootFX.transform.position = hitLocation;
 
             hitFX.visualEffectAsset = hitFXAsset;
-            Debug.Log("spawned");
             hitFX.SetVector3("spillDirection", hitNormal);
             hitFX.SetInt("bloodAmount", (int)damage);
         }

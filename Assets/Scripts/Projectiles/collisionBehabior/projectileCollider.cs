@@ -11,7 +11,7 @@ public class ProjectileCollider : ProjectileBase
             if (!gameObject.CompareTag("VisualOnly")) {
                 Vector3 hit = other.ClosestPoint(transform.position);
 
-                Vector3 normal = (transform.position - hit).normalized;
+                Vector3 normal = -transform.forward.normalized;
 
                 behavior.HandleCollision(other, stats.damage, hit, normal, hitFXAsset);
             }
