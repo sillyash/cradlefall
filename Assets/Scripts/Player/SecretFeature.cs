@@ -13,8 +13,9 @@ public class SecretFeature : MonoBehaviour
     };
 
     private int index = 0;
+    private Quaternion rotation;
 
-    public static event Action OnCheatCode;
+    public static event Action<Quaternion> OnCheatCode;
 
     // Update is called once per frame
     void Update()
@@ -27,7 +28,8 @@ public class SecretFeature : MonoBehaviour
 
             if (index >= cheatcode.Length)
             {
-                OnCheatCode?.Invoke();
+                rotation.SetLookRotation(transform.position);
+                OnCheatCode?.Invoke(rotation);
                 index = 0;
             }
         }
