@@ -57,7 +57,7 @@ public class BaseEnemy : NetworkBehaviour, ICanDie, IDamageable
         m_Agent.stoppingDistance = stats.attackRange;
         m_Agent.speed = stats.moveSpeed;
 
-        SecretFeature.OnCheatCode += startDancing;
+        SecretFeature.OnCheatCode += startDancingRpc;
 
         if (IsServer)
         {
@@ -70,6 +70,7 @@ public class BaseEnemy : NetworkBehaviour, ICanDie, IDamageable
     void Update()
     {
         if (!IsServer) return;
+
         if (!isDead)
         {
             if (m_Agent.velocity.magnitude >= 0.1f)
@@ -270,9 +271,20 @@ public class BaseEnemy : NetworkBehaviour, ICanDie, IDamageable
 
     //------------------------- ULTRA SECRET --------------------------
 
-    void startDancing()
+    bool IsDancing()
+    {
+        return m_Animator.GetCurrentAnimatorStateInfo(0).IsName("secretState");
+    }
+
+
+    [Rpc(SendTo.Everyone)]
+    void startDancingRpc(Quaternion rotation)
     {
         Debug.Log("dance");
+        isDead = true;
+
+        m_Agent.isStopped = true;
+        transform.rotation = rotation;
         m_Animator.SetTrigger("Dance");
     }
 }
