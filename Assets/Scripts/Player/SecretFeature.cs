@@ -14,6 +14,8 @@ public class SecretFeature : MonoBehaviour
 
     private int index = 0;
 
+    public static event Action OnCheatCode;
+
     // Update is called once per frame
     void Update()
     {
@@ -25,19 +27,13 @@ public class SecretFeature : MonoBehaviour
 
             if (index >= cheatcode.Length)
             {
-                OnCheatCode();
+                OnCheatCode?.Invoke();
                 index = 0;
             }
         }
         else
         {
-            // Only reset if the player pressed a key that is part of the konami set
             index = 0;
         }
-    }
-
-    void OnCheatCode()
-    {
-        Debug.Log("THRILLER");
     }
 }

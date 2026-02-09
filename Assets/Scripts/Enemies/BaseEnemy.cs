@@ -56,11 +56,14 @@ public class BaseEnemy : NetworkBehaviour, ICanDie, IDamageable
         maxHealth = stats.health;
         m_Agent.stoppingDistance = stats.attackRange;
         m_Agent.speed = stats.moveSpeed;
+
+        SecretFeature.OnCheatCode += startDancing;
+
         if (IsServer)
         {
             Health.Value = stats.health;
         }
-
+       
         NetworkObject.DestroyWithScene = true;
     }
 
@@ -261,5 +264,15 @@ public class BaseEnemy : NetworkBehaviour, ICanDie, IDamageable
     public Boolean isServer()
     {
         return IsServer;
+    }
+
+
+
+    //------------------------- ULTRA SECRET --------------------------
+
+    void startDancing()
+    {
+        Debug.Log("dance");
+        m_Animator.SetTrigger("Dance");
     }
 }
