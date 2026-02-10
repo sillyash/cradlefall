@@ -5,6 +5,7 @@ Shader "Unlit/GlassToonShader"
     _mainColor ("Color", Color) = (1,1,1)  
     _rimColor ("Rim light color", Color) = (1,1,1)
     _rimFac ("Rim factor", float) = 0.5
+    _scatterFac ("Rim sharpness", float) = 5
     _emissionFac ("Emission strength", float) = 10
   }
 
@@ -28,6 +29,7 @@ Shader "Unlit/GlassToonShader"
 
       bool _rimLight;
       float _rimFac;
+      float _scatterFac;
       float3 _rimColor;
 
       float _emissionFac;
@@ -55,7 +57,7 @@ Shader "Unlit/GlassToonShader"
        
 
         float3 cameraDirection = normalize(_WorldSpaceCameraPos - posInputs.positionWS);
-        output.rimMask = (1 - dot(normalWS, cameraDirection)) * _rimFac;
+        output.rimMask = pow(1 - saturate(dot(cameraDirection, normalWS)), _scatterFac) * _rimFac;
       
         return output;
       } 

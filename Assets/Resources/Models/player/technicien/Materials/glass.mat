@@ -117,10 +117,11 @@ Material:
     - _Surface: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
-    - _emissionFac: 1
-    - _rimFac: 0.1
+    - _emissionFac: 10
+    - _rimFac: 10
     - _rimLight: 0
     - _rimTreshold: 0.5
+    - _scatterFac: 8
     - _shadowFac: 4
     - _shadowTreshold: 0.5
     - _treshold: 0.5
