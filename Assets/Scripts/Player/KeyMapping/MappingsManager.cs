@@ -54,6 +54,9 @@ public class MappingsManager : MonoBehaviour
                 RefreshAllKeyDisplays();
             });
         }
+
+        // Ensure all key displays are updated after UI is fully initialized
+        RefreshAllKeyDisplays();
     }
 
     void Update()

@@ -32,6 +32,12 @@ public static class KeyMappingSettings
     private const string PREFS_KEY = "CurrentPreset";
     private const string CUSTOM_KEY_PREFIX = "CustomKey_";
 
+    static KeyMappingSettings()
+    {
+        LoadPreset();
+        LoadCustomKeys();
+    }
+
     // Applique le preset ZQSD classique
     public static void ApplyPresetZQSD()
     {
