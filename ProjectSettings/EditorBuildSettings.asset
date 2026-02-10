@@ -9,8 +9,17 @@ EditorBuildSettings:
     path: Assets/Scenes/Menus/MainMenu.unity
     guid: 5d6175960aa3fee429bcf1090fe5c5d1
   - enabled: 1
+    path: Assets/Scenes/Menus/MultiScreen.unity
+    guid: 5203e6c496f625145bc07b959b3ef894
+  - enabled: 1
+    path: Assets/Scenes/Menus/Lobby.unity
+    guid: f4139cca82a430a4d9a66089c50ac716
+  - enabled: 1
     path: Assets/Scenes/MainGame.unity
     guid: 9edea1c096e6d2684b4ef4a94ed3263e
+  - enabled: 1
+    path: Assets/Scenes/MainGame (MULTI).unity
+    guid: f0e69487d13d8474e9ed0468300ac67f
   - enabled: 1
     path: Assets/Scenes/Menus/LoseMenu.unity
     guid: b8cac7c53ba402942b09cc290d86f366

@@ -7,15 +7,18 @@ using NUnit.Framework.Internal;
 
 public class MainMenu : MonoBehaviour {
 
-    public void OnPlayButtonClicked ()
+    public void OnHostButtonClicked ()
     {
-        Debug.Log("Playing game");
-        GameManager.instance.StartGame();
+        GameManager.instance.HostGame();
+    }
+
+    public void OnJoinButtonClicked()
+    {
+        GameManager.instance.StartClient();
     }
 
     public void OnQuitButtonClicked()
     {
-        Debug.Log("Quitting now.");
         Application.Quit();
     }
 

@@ -1,7 +1,4 @@
-using System.Drawing;
-using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 public class ProjectileRaycast : ProjectileBase
 {
@@ -30,8 +27,10 @@ public class ProjectileRaycast : ProjectileBase
         {
             if (!hit.collider.TryGetComponent(out ProjectileBase hitObject))
             {
-                Debug.Log(hit.collider.gameObject);
-                behavior.HandleCollision(hit.collider, stats.damage);
+                if (!gameObject.CompareTag("VisualOnly"))
+                {
+                    behavior.HandleCollision(hit.collider, stats.damage);
+                }
                 Destroy(gameObject);
             }
         }

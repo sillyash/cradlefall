@@ -4,6 +4,7 @@ using UnityEngine;
 public abstract class WeaponBehavior : ScriptableObject
 {
     public abstract void OnFire(ProjectileBase projectile, Transform transform, float spread);
+    public abstract Quaternion CalcSpread(Transform projectile, float spread);
 
     public Vector3 spreadValue(Vector3 angles, float val)
     {

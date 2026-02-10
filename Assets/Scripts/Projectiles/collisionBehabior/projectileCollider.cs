@@ -2,11 +2,14 @@ using UnityEngine;
 
 public class ProjectileCollider : ProjectileBase
 {
-        void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
-        if (!other.TryGetComponent<ProjectileBase>(out ProjectileBase var))
+        if (!other.TryGetComponent(out ProjectileBase var))
         {
-            behavior.HandleCollision(other, stats.damage);
+            if (!gameObject.CompareTag("VisualOnly")) {
+                behavior.HandleCollision(other, stats.damage);
+            }
+
             Destroy(gameObject);
         }
     }

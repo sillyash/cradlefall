@@ -1,52 +1,67 @@
 using System.Collections;
 using UnityEngine;
+using Unity.Netcode;
 
-public class WaveSpawner : MonoBehaviour
+public class WaveSpawner : NetworkBehaviour
 {
     [SerializeField] private float countdown;
     public WaveBehavior[] waves;
-    private int waveIndex = 0;
-    public int CurrentWaveNumber => waveIndex; // Pour affichage HUD
-    public float WaveTimer => countdownTimer; // Pour affichage HUD
     public event System.Action WaveFinished; // Pour affichage HUD
     public event System.Action WaveStarted; // Pour affichage HUD
-    private float countdownTimer;
     private bool isSpawning = false;
 
-    
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public NetworkVariable<int> waveIndex = new NetworkVariable<int>(
+        0,
+        NetworkVariableReadPermission.Everyone,
+        NetworkVariableWritePermission.Server
+    );
+    
+    public NetworkVariable<float> countdownTimer = new NetworkVariable<float>(
+        0f,
+        NetworkVariableReadPermission.Everyone,
+        NetworkVariableWritePermission.Server
+    );
+
+    public override void OnNetworkSpawn()
     {
+        Debug.Log("[Network] WaveSpawner spawned.");
+        GetNetworkHooks();
+        if ( ! IsServer) return;
+
         if (waves == null || waves.Length == 0)
         {
-            Debug.LogError("No waves assigned to WaveSpawner.");
+            Debug.LogError("[Server] No waves assigned to WaveSpawner.");
             this.enabled = false;
             return;
         }
 
-        countdownTimer = countdown;
+        countdownTimer.Value = countdown;
+    }
+
+    public override void OnNetworkDespawn()
+    {
+        waveIndex.OnValueChanged -= OnWaveIndexChanged;
+    }
+
+    // Setup network variable change callbacks
+    private void GetNetworkHooks()
+    {
+        waveIndex.OnValueChanged += OnWaveIndexChanged;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (isSpawning)
-        {
-            return;
-        }
+        if ( ! IsServer) return;
+        if (isSpawning) return;
+        if (waveIndex.Value >= waves.Length) return;
 
-        if (waveIndex >= waves.Length)
-        {
-            return;
-        }
+        countdownTimer.Value -= Time.deltaTime;
 
-        countdownTimer -= Time.deltaTime;
-
-        if (countdownTimer <= 0f)
+        if (countdownTimer.Value <= 0f)
         {
-            Debug.Log("Wave Started!");
-            WaveStarted?.Invoke(); // Pour affichage HUD
+            WaveStarted?.Invoke();
             isSpawning = true;
             StartCoroutine(SpawnCurrentWave());
         }
@@ -54,13 +69,13 @@ public class WaveSpawner : MonoBehaviour
 
     private IEnumerator SpawnCurrentWave()
     {
-        if (waveIndex >= waves.Length)
+        if (waveIndex.Value >= waves.Length)
         {
             isSpawning = false;
             yield break;
         }
 
-        WaveBehavior wave = waves[waveIndex];
+        WaveBehavior wave = waves[waveIndex.Value];
 
         GameObject enemyToSpawn;
         
@@ -80,6 +95,7 @@ public class WaveSpawner : MonoBehaviour
             // Track spawned instance so we can wait for it to be destroyed
             if (instance != null)
             {
+                instance.GetComponent<NetworkObject>().Spawn();
                 wave.spawnedEnemies.Add(instance);
             }
 
@@ -107,7 +123,7 @@ public class WaveSpawner : MonoBehaviour
                 }
             }
 
-            if (wave.spawnedEnemies.Count == 0)
+            if (wave.spawnedEnemies.Count == 0 && wave.enemiesToSpawn.Count == 0)
             {
                 break;
             }
@@ -116,19 +132,30 @@ public class WaveSpawner : MonoBehaviour
         }
 
         // Wave finished
-        WaveFinished?.Invoke(); // Pour affichage HUD
-        waveIndex += 1;
+        waveIndex.Value += 1;
+        WaveFinished?.Invoke();
         isSpawning = false;
 
-        if (waveIndex < waves.Length)
+        if (waveIndex.Value < waves.Length)
         {
-            countdownTimer = countdown;
+            countdownTimer.Value = countdown;
         }
         else
         {
-            Debug.Log("All waves completed.");
             this.enabled = false;
             GameManager.instance.Victory();
         }
     }
+
+    /* ------------- Network Variable Callbacks ------------- */
+
+    private void OnWaveIndexChanged(int previousValue, int newValue)
+    {
+        //Debug.Log($"[Network] Wave index changed from {previousValue} to {newValue}");
+    }
+
+    /* ------------- Getters & Setters ------------- */
+
+    public int CurrentWaveNumber => waveIndex.Value; // Pour affichage HUD
+    public float TimeUntilNextWave => countdownTimer.Value;
 }

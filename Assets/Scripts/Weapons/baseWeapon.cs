@@ -3,19 +3,21 @@ using System.Collections;
 
 public class BaseWeapon : MonoBehaviour
 {
-    [SerializeField] private WeaponBehavior behavior;
-    [SerializeField] private WeaponStats stats;
-    [SerializeField] private ProjectileBase projectile;
-    [SerializeField] private GameObject projectileSpawn;
+    [SerializeField] public WeaponBehavior behavior;
+    [SerializeField] public WeaponStats stats;
+    [SerializeField] public ProjectileBase projectile;
+    [SerializeField] public GameObject projectileSpawn;
+    
+    private MuzzleFlash muzzleFlash;
     
     private int ammoCount;
     private bool isReadyToShoot = true;
-
+    private bool isReloading = false;
 
     // Variables partager a l'HUD munitions
     public int AmmoCount => ammoCount;
     public int MagSize => stats.magSize;
-    public event System.Action OnFire;
+    public event System.Action<BaseWeapon> OnFire;
     public event System.Action OnAmmoChanged;
     public event System.Action OnReloadStart;
     public event System.Action OnReloadEnd;
@@ -25,25 +27,29 @@ public class BaseWeapon : MonoBehaviour
     {
         ammoCount = stats.magSize;
         OnAmmoChanged?.Invoke();
+        muzzleFlash = GetComponent<MuzzleFlash>();
+        StartCoroutine(WaitForInstance());
     }
 
-
-    // Testing purpose
-    //void Update()
-    //{
-    //    Fire();
-    //}
+    private IEnumerator WaitForInstance()
+    {
+        yield return new WaitUntil(() => ProjectileVisualSync.instance != null);
+        ProjectileVisualSync.instance.subToWeaponFire(this);
+    }
 
     public void Fire()
     {
-        if (isReadyToShoot && ammoCount > 0) {
+        if (!isReloading && isReadyToShoot && ammoCount > 0) {
             Quaternion projRot = projectileSpawn.transform.rotation;
 
             behavior.OnFire(projectile, projectileSpawn.transform.transform, stats.spread);
             ammoCount--;
             OnAmmoChanged?.Invoke();
-            OnFire?.Invoke();
-
+            OnFire?.Invoke(this);
+            if (muzzleFlash != null) // Only for weapons with muzzle flash
+            {
+                muzzleFlash.PlayMuzzleFlash();
+            }
             isReadyToShoot = false;
             StartCoroutine(FireCooldown());
         }  
@@ -57,7 +63,12 @@ public class BaseWeapon : MonoBehaviour
 
     public void Reload()
     {
-        Debug.Log("reloading...");
+        if (isReloading || ammoCount == stats.magSize)
+        {
+            return;
+        }
+
+        isReloading = true;
         StartCoroutine(ReloadCooldown());
         OnReloadStart?.Invoke();
     }
@@ -67,8 +78,8 @@ public class BaseWeapon : MonoBehaviour
     {
         yield return new WaitForSeconds(stats.reloadTime);
         ammoCount = stats.magSize;
+        isReloading = false;
         OnAmmoChanged?.Invoke();
         OnReloadEnd?.Invoke();
-        Debug.Log("Done");
     }
 }

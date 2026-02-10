@@ -1,19 +1,20 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Netcode;
 using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
-public class BaseEnemy : MonoBehaviour, ICanDie, IDamageable
+public class BaseEnemy : NetworkBehaviour, ICanDie, IDamageable
 {
     // [SerializeField] private EnemyBehavior behaviour;
     public EnemyStats stats;
 
     public bool isDead { get; set; } = false;
-    public float health { get; set; }
+
     public float maxHealth { get; set; }
 
     private GameObject m_Target;
@@ -24,10 +25,17 @@ public class BaseEnemy : MonoBehaviour, ICanDie, IDamageable
     private bool hasFoundCapsule = false;
     public LayerMask targetMask;
 
- 
+    public NetworkVariable<float> Health = new NetworkVariable<float>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+    public float health
+    {
+        get => Health.Value;
+        set
+        {
+            if (IsServer) Health.Value = value;
+        }
+    }
 
-
-    void Start()
+    public override void OnNetworkSpawn()
     {
         m_Agent = GetComponent<NavMeshAgent>();
         m_Animator = GetComponent<Animator>();
@@ -38,23 +46,27 @@ public class BaseEnemy : MonoBehaviour, ICanDie, IDamageable
             enabled = false;
             return;
         }
-/*        if (!behaviour)
-        {
-            Debug.LogError("Le script BaseEnemy du prefab Enemy n�a pas de ScriptableObject de behaviour assign�.");
-            enabled = false;
-            return;
-        }*/
-        
+        /*        if (!behaviour)
+                {
+                    Debug.LogError("Le script BaseEnemy du prefab Enemy n�a pas de ScriptableObject de behaviour assign�.");
+                    enabled = false;
+                    return;
+                }*/
 
-        health = stats.health;
         maxHealth = stats.health;
         m_Agent.stoppingDistance = stats.attackRange;
         m_Agent.speed = stats.moveSpeed;
+        if (IsServer)
+        {
+            Health.Value = stats.health;
+        }
 
+        NetworkObject.DestroyWithScene = true;
     }
 
     void Update()
     {
+        if (!IsServer) return;
         if (!isDead)
         {
             if (m_Agent.velocity.magnitude >= 0.1f)
@@ -66,7 +78,7 @@ public class BaseEnemy : MonoBehaviour, ICanDie, IDamageable
                 m_Animator.SetBool("isRunning", false);
             }
 
-            if (health <= 0)
+            if (Health.Value <= 0)
             {
                 isDead = true;
                 Die();
@@ -84,20 +96,51 @@ public class BaseEnemy : MonoBehaviour, ICanDie, IDamageable
 
     public void TakeDamage(float damage)
     {
-        Debug.Log("hit received");
-        health -= damage;
+        TakeDamageRpc(damage);
+    }
+
+    [Rpc(SendTo.Server)]
+    void TakeDamageRpc(float damage)
+    {
+        Health.Value -= damage;
     }
 
     public void Die()
     {
- 
-        m_Agent.isStopped = true;
-        m_Animator.SetTrigger("Die");
-       
+        DieRpc();
     }
 
-  
+    [Rpc(SendTo.Everyone)]
+    private void DieRpc()
+    {
+        m_Agent.isStopped = true;
+        m_Animator.SetTrigger("Die");
+    }
 
+    public void DestroyOnNetwork()
+    {
+        if (!IsServer)
+        {
+            // If client, call serveur
+            DestroyServerRpc();
+        } else
+        {
+            // If server, destroy directly
+            DestroyForEveryone();
+        }
+    }
+
+    [Rpc(SendTo.Server, InvokePermission = RpcInvokePermission.Everyone)]
+    private void DestroyServerRpc()
+    {
+        DestroyForEveryone();
+    }
+
+    private void DestroyForEveryone()
+    {
+        NetworkObject netObj = gameObject.GetComponent<NetworkObject>();
+        netObj.Despawn(destroy: true);
+    }
 
     public GameObject AcquireClosestCapsule()
     {
@@ -187,21 +230,36 @@ public class BaseEnemy : MonoBehaviour, ICanDie, IDamageable
             {
                 m_Agent.isStopped = true;
                 isAttacking = true;
-                m_Animator.SetTrigger("Attack");
+                PlayAttackAnimationRpc();
             }
         }
     }
+
+    [Rpc(SendTo.Everyone)]
+    void PlayAttackAnimationRpc()
+    {
+        m_Animator.SetTrigger("Attack");
+    }
+
     public void LookAtTarget()
     {
-        Vector3 direction = m_Target.transform.position - gameObject.transform.position;
-        gameObject.transform.rotation = Quaternion.LookRotation(direction);
+        if (m_Target != null)
+        {
+            Vector3 direction = m_Target.transform.position - gameObject.transform.position;
+            gameObject.transform.rotation = Quaternion.LookRotation(direction);
 
-        var yRotation = gameObject.transform.eulerAngles.y;
-        gameObject.transform.rotation = Quaternion.Euler(0, yRotation, 0);
+            var yRotation = gameObject.transform.eulerAngles.y;
+            gameObject.transform.rotation = Quaternion.Euler(0, yRotation, 0);
+        }
     }
 
     public int GetCost()
     {
         return stats.cost;
+    }
+
+    public Boolean isServer()
+    {
+        return IsServer;
     }
 }

@@ -1,24 +1,40 @@
+using Unity.Netcode;
 using UnityEngine;
 
-public class CryogenicBox : MonoBehaviour, IDamageable
+public class CryogenicBox : NetworkBehaviour, IDamageable
 {
-    public float health { get; set; }
     public float maxHealth { get; set; } = 500;
 
-    private bool broken = false;
+    public NetworkVariable<float> Health = new NetworkVariable<float>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+    public NetworkVariable<bool> Broken = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
 
-    void Start()
+    public float health
     {
-        health = maxHealth;
+        get => Health.Value;
+        set { if (IsServer) Health.Value = value; }
+    }
+
+    public bool broken
+    {
+        get => Broken.Value;
+        set { if (IsServer) Broken.Value = value; }
+    }
+
+    public override void OnNetworkSpawn()
+    {
+        NetworkObject.DestroyWithScene = true;
+        if (!IsServer) return;
+        Health.Value = maxHealth;
     }
 
     public void TakeDamage(float amount)
     {
-        if (broken) return;
+        if (Broken.Value) return;
+        if (!IsServer) return;
 
-        health -= amount;
+        Health.Value -= amount;
 
-        if (health <= 0)
+        if (Health.Value <= 0)
         {
             Break();
         }
@@ -26,26 +42,33 @@ public class CryogenicBox : MonoBehaviour, IDamageable
 
     public void Break()
     {
-        if (broken) return;
-        broken = true;
+        if (Broken.Value) return;
+        Broken.Value = true;
         GameManager.instance.GameOver();
     }
 
     public void Heal(float ammount)
     {
-        if (health < (0.75*maxHealth))
+        HealRpc(ammount);
+    }
+
+    [Rpc(SendTo.Server, InvokePermission = RpcInvokePermission.Everyone)]
+
+    public void HealRpc(float ammount)
+    {
+        if (Health.Value < (0.75 * maxHealth))
         {
-            health += ammount;
+            Health.Value += ammount;
         }
     }
 
     public bool IsBroken()
     {
-        return broken;
+        return Broken.Value;
     }
 
     public float Gethealth()
     {
-        return health;
+        return Health.Value;
     }
 }

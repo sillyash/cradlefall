@@ -1,16 +1,31 @@
+using System;
+using System.Collections;
+using Unity.Netcode;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 
-public class basePlayer : MonoBehaviour, IDamageable, ICanDie
+public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
 {
     public static float TARGET_DISTANCE = 5;
     public static float MIN_RAY_DISTANCE = 3;
 
-    [SerializeField] private BaseWeapon weapon;
-    public BaseWeapon CurrentWeapon => weapon; // Pour affichage HUD
+    [SerializeField] private GameObject weaponPrefab;
+
+    // Rig and IK
+    [SerializeField] private RigBuilder rigBuilder;
+    [SerializeField] private TwoBoneIKConstraint rightHandIK;
+    [SerializeField] private TwoBoneIKConstraint leftHandIK;
+
+    private BaseWeapon weapon;
     public float health { get; set; }
     public float maxHealth { get; set; }
 
     [SerializeField] private HealthBarScript healthBar;
+    [SerializeField] public Camera mainCamera;
+    [SerializeField] private Transform TPSWeaponAnchorPoint;
+    [SerializeField] private Transform FPSWeaponAnchorPoint;
+    [SerializeField] private GameObject playerCanvas;
 
     public bool isDead { get; set; } = false;
 
@@ -19,26 +34,77 @@ public class basePlayer : MonoBehaviour, IDamageable, ICanDie
     private Vector3 targetPoint;
     
 
-    void Start()
+    public override void OnNetworkSpawn()
     {
         if (!stats)
         {
-            Debug.LogError($"Le Joueur {this.name} n'a pas SO stats");
+            Debug.LogError($"[Player] Le Joueur {this.name} n'a pas SO stats");
             enabled = false;
             return;
         }
 
-        health = stats.health;
-        maxHealth = stats.health;
+        if (IsServer)
+        {
+            var weaponObj = Instantiate(weaponPrefab, TPSWeaponAnchorPoint);
+            var weaponNetObj = weaponObj.GetComponent<NetworkObject>();
+
+            weaponNetObj.SpawnWithOwnership(OwnerClientId);
+            weaponNetObj.TrySetParent(GetComponent<NetworkObject>());
+        }
+
+        if (IsOwner)
+        {
+            var weaponObjOwner = Instantiate(weaponPrefab, FPSWeaponAnchorPoint);
+            weapon = weaponObjOwner.GetComponent<BaseWeapon>();
+            weaponObjOwner.transform.SetParent(FPSWeaponAnchorPoint);
+
+            if (weapon.TryGetComponent<NetworkObject>(out var netObj))
+            {
+                Destroy(netObj);
+            }
+
+            // Stick hands to weapon
+            setHandTarget();
+
+            health = stats.health;
+            maxHealth = stats.health;
+            NetworkObject.DestroyWithScene = false;
+        }
+        else
+        {
+            NetworkObject.DestroyWithScene = true;
+            Destroy(playerCanvas); // Do not display other player's HUD
+        }
+    }
+
+    void setHandTarget()
+    {
+        // Find by name, not perfect but couldn't find a better way
+        Transform handTargetR = weapon.transform.Find("Hand_R_target");
+        Transform handTargetL = weapon.transform.Find("Hand_L_target");
+
+        rightHandIK.data.target = handTargetR;
+        rightHandIK.data.hint = handTargetR.GetChild(0);
+
+        leftHandIK.data.target = handTargetL;
+        leftHandIK.data.hint = handTargetL.GetChild(0);
+
+        rigBuilder.Build();
     }
 
     void Update()
     {
+        if (!IsOwner) return;
+
         raycast();
         weapon.transform.LookAt(targetPoint);
 
-
         weaponInput();
+    }
+
+    void UpdateHandPosition()
+    {
+        
     }
 
     void weaponInput()
@@ -53,13 +119,19 @@ public class basePlayer : MonoBehaviour, IDamageable, ICanDie
 
         if (CustomInputRouter.GetButtonShoot())
         {
-            weapon.Fire();
+            if (weapon.AmmoCount > 0)
+            {
+                weapon.Fire();
+            } else
+            {
+                weapon.Reload();
+            }
         }
     }
 
     Vector3 calcTargetPoint()
     {
-        return Camera.main.transform.position + Camera.main.transform.forward * TARGET_DISTANCE;
+        return mainCamera.transform.position + mainCamera.transform.forward * TARGET_DISTANCE;
     }
 
     void raycast()
@@ -71,7 +143,7 @@ public class basePlayer : MonoBehaviour, IDamageable, ICanDie
         if (Cursor.lockState == CursorLockMode.Locked)
         {
             // In gameplay: raycast from center of screen
-            ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+            ray = new Ray(mainCamera.transform.position, mainCamera.transform.forward);
         }
         else
         {
@@ -106,6 +178,7 @@ public class basePlayer : MonoBehaviour, IDamageable, ICanDie
     }
     public void TakeDamage(float damage)
     {
+        if (!IsOwner) return;
         health -= damage;
         if (health < 0)
         {
@@ -116,7 +189,37 @@ public class basePlayer : MonoBehaviour, IDamageable, ICanDie
 
     public void Die()
     {
-        Debug.Log("Joueur Mort");
-        GameManager.instance.GameOver();
+        Debug.LogWarning("[Player] Joueur Mort");
+        
+        // Notify server/PlayerManager
+        if (IsServer)
+        {
+            PlayerManager.Instance?.OnPlayerDeath(OwnerClientId);
+        }
+        else
+        {
+            NotifyDeathRpc();
+        }
     }
+
+    [Rpc(SendTo.Server, InvokePermission = RpcInvokePermission.Everyone)]
+    private void NotifyDeathRpc()
+    {
+        if (IsServer)
+        {
+            PlayerManager.Instance?.OnPlayerDeath(OwnerClientId);
+        }
+    }
+
+    public void DestroyOnNetwork()
+    {
+        Die();
+    }
+
+    public ulong getClientId()
+    {
+        return OwnerClientId;
+    }
+
+    public BaseWeapon CurrentWeapon => weapon; // Pour affichage HUD
 }

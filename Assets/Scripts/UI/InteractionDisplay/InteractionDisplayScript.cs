@@ -11,22 +11,24 @@ public class InteractionDisplayScript : MonoBehaviour
     [Header("Text Effect")]
     [SerializeField] private float blinkSpeed = 2f;
 
+    public Camera playerCamera;
+
     private basePlayer player;
     private Color baseTextColor;
 
     private void Start()
     {
-        // Sécurité
+        // Sï¿½curitï¿½
         if (interactionText == null)
         {
-            Debug.LogError("InteractionDisplayScript : InteractionText n'est pas assigné !");
+            Debug.LogError("InteractionDisplayScript : InteractionText n'est pas assignï¿½ !");
             enabled = false;
             return;
         }
 
         if (progressBar == null)
         {
-            Debug.LogError("InteractionDisplayScript : ProgressBar n'est pas assignée !");
+            Debug.LogError("InteractionDisplayScript : ProgressBar n'est pas assignï¿½e !");
             enabled = false;
             return;
         }
@@ -53,17 +55,16 @@ public class InteractionDisplayScript : MonoBehaviour
 
     private void DetectInteractable()
     {
-        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+        Ray ray = playerCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
         RaycastHit hit;
-
         if (Physics.Raycast(ray, out hit, player.stats.InteractionRange))
         {
             GameObject hitObject = hit.transform.gameObject;
 
             BaseModule module = hitObject.GetComponent<BaseModule>();
-            if (module != null && module.broken)
+            if (module != null && module.broken.Value)
             {
-                ShowText("Maintenez [E] pour réparer");
+                ShowText("Hold [E] to repair");
                 return;
             }
         }

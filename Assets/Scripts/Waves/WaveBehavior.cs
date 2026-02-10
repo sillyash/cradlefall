@@ -33,7 +33,7 @@ public class WaveBehavior : MonoBehaviour
             if (spawnedEnemies[i] == null)
             {
                 spawnedEnemies.RemoveAt(i);
-                enemiesLeft = Mathf.Max(0, enemiesLeft - 1);
+                enemiesLeft = Mathf.Max(0, enemiesToSpawn.Count + spawnedEnemies.Count);
             }
         }
     }
@@ -60,7 +60,7 @@ public class WaveBehavior : MonoBehaviour
             GameObject randomEnemy = stats.availableEnemies[Random.Range(0, stats.availableEnemies.Length)];
             int enemyCost = randomEnemy.GetComponent<BaseEnemy>().GetCost();
 
-            if (remainingPoints >= enemyCost)
+            if (remainingPoints >= enemyCost && randomEnemy != null)
             {
                 enemiesToSpawn.Add(randomEnemy);
                 remainingPoints -= enemyCost;
@@ -69,6 +69,13 @@ public class WaveBehavior : MonoBehaviour
             {
                 // Not enough points to add this enemy, break
                 break;
+            }
+        }
+        for (int i = enemiesToSpawn.Count - 1; i >= 0; i--)
+        {
+            if (enemiesToSpawn[i] == null)
+            {
+                enemiesToSpawn.RemoveAt(i);
             }
         }
     }

@@ -4,6 +4,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Projectiles/Behaviours/Enemy")]
 public class EnemyProjectile : ProjectileBehavior
 {
+    // TODO : Rework 
     
     public override void HandleCollision(Collider target, float damage)
     {
@@ -19,7 +20,7 @@ public class EnemyProjectile : ProjectileBehavior
 
             if (module != null)
             {
-                module.Break();
+                // module.Break(); TODO: to handle 
             }
         }
     }
