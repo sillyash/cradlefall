@@ -1,9 +1,12 @@
+using System;
 using Unity.Netcode;
 using UnityEngine;
 
 public class LightManager : NetworkBehaviour
 {
     public static LightManager instance { get; private set; }
+
+    private GameObject[] AllLights;
     private void Awake()
     {
         if (instance == null)
@@ -50,6 +53,39 @@ public class LightManager : NetworkBehaviour
         {
             BlinkingLightController blinkingController = capsule.GetComponentInChildren<BlinkingLightController>();
             blinkingController.SwitchOffBlinking();
+        }
+    }
+
+    public void TurnOffEveryLights()
+    {
+        if (!IsServer) return;
+        TurnOffEveryLightsClientRpc();
+    }
+
+    public void TurnOnEveryLights()
+    {
+        if (!IsServer) return;
+        TurnOnEveryLightsClientRpc();
+    }
+
+    [ClientRpc]
+    private void TurnOffEveryLightsClientRpc()
+    {
+        AllLights = GameObject.FindGameObjectsWithTag("Module-Light");
+
+        foreach (GameObject light in AllLights)
+        {
+            light.SetActive(false);
+        }
+    }
+
+    [ClientRpc]
+    private void TurnOnEveryLightsClientRpc()
+    {
+        // Ici on peut pas faire des recherche par Tag parceque si l'object est pas Active, il est pas retrouvable par Tag
+        foreach (GameObject light in AllLights)
+        {
+            light.SetActive(true);
         }
     }
 }
