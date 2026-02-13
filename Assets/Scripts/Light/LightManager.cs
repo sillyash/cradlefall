@@ -1,12 +1,16 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
 public class LightManager : NetworkBehaviour
 {
     public static LightManager instance { get; private set; }
-
+    [SerializeField] private float delayBetweenLights = 0.15f;
     private GameObject[] AllLights;
+
+
     private void Awake()
     {
         if (instance == null)
@@ -83,9 +87,22 @@ public class LightManager : NetworkBehaviour
     private void TurnOnEveryLightsClientRpc()
     {
         // Ici on peut pas faire des recherche par Tag parceque si l'object est pas Active, il est pas retrouvable par Tag
-        foreach (GameObject light in AllLights)
+        StartCoroutine(TurnOnLightsCoroutine());
+    }
+
+    private IEnumerator TurnOnLightsCoroutine()
+    {
+        List<GameObject> lightsList = new List<GameObject>(AllLights);
+
+        while (lightsList.Count > 0)
         {
-            light.SetActive(true);
+            int index = UnityEngine.Random.Range(0, lightsList.Count);
+            GameObject randomLight = lightsList[index];
+            randomLight.SetActive(true);
+
+            lightsList.RemoveAt(index);
+
+            yield return new WaitForSeconds(delayBetweenLights);
         }
     }
 }
