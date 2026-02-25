@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7575306722594325015}
   m_Layer: 0
   m_Name: Station de Charge
-  m_TagString: Untagged
+  m_TagString: Charging-Station
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -78,3 +78,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   batteryPerSeconde: 5
+  Broken: 0
