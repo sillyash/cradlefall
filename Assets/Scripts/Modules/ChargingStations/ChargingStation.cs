@@ -17,4 +17,9 @@ public class ChargingStation : MonoBehaviour
     {
         Broken = true;
     }
+
+    public void Repair()
+    {
+        Broken = false;
+    }
 }
