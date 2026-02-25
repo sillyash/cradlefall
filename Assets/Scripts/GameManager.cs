@@ -13,6 +13,7 @@ public class GameManager : NetworkBehaviour
     [SerializeField] private GameObject ProjectileMachine;
     [SerializeField] private GameObject LightManager;
     [SerializeField] private GameObject LobbyManager;
+    [SerializeField] private GameObject ChargingStation;
 
     public NetworkVariable<GameState> currentState = new(
         GameState.Playing,
@@ -92,6 +93,9 @@ public class GameManager : NetworkBehaviour
 
         var lightManager = Instantiate(LightManager);
         lightManager.GetComponent<NetworkObject>().Spawn();
+
+        var chargingStationsManager = Instantiate(ChargingStation);
+        chargingStationsManager.GetComponent<NetworkObject>().Spawn();
 
         StartCoroutine(SpawnPlayersAfterDelay());
     }
