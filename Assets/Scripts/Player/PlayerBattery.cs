@@ -30,7 +30,7 @@ public class PlayerBattery : MonoBehaviour
     public void Recharge(float amount)
     {
         float wantedLevel = BatteryLevel + amount;
-        BatteryLevel = Mathf.Min(0, stats.maxBattery);
+        BatteryLevel = Mathf.Min(wantedLevel, stats.maxBattery);
     }
 
     public float getPourcentOfBattery()
