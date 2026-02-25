@@ -439,6 +439,7 @@ GameObject:
   - component: {fileID: 3868688691983650304}
   - component: {fileID: -6638794731525272804}
   - component: {fileID: -5099417475786487224}
+  - component: {fileID: 2061913146175803509}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -714,7 +715,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cedb2e020221ab54eae7ffd785af9708, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsActive: 0
   nightVolume: {fileID: 825988467645621928}
+--- !u!114 &2061913146175803509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4263663073151763242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eade918f7e3f5874ca2716cdab37db8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats: {fileID: 0}
 --- !u!1 &5562006445149841641
 GameObject:
   m_ObjectHideFlags: 0

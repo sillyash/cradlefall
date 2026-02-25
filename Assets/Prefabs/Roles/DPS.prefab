@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 3558826447
       objectReference: {fileID: 0}
+    - target: {fileID: 2061913146175803509, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
+      propertyPath: stats
+      value: 
+      objectReference: {fileID: 11400000, guid: 41ccfa7cd379515499abb2582c3819d4, type: 2}
     - target: {fileID: 2115452035298164465, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
       propertyPath: healthBar
       value: 
