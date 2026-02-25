@@ -11,6 +11,8 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
     [SerializeField] private GameObject weaponPrefab;
 
     private BaseWeapon weapon;
+    public PlayerBattery battery { get; private set; }
+
     public float health { get; set; }
     public float maxHealth { get; set; }
 
@@ -48,6 +50,7 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
         if (IsOwner)
         {
             Debug.Log($"[Player] Owner instanciate {OwnerClientId}");
+            battery = GetComponent<PlayerBattery>();
             var weaponObjOwner = Instantiate(weaponPrefab, FPSWeaponAnchorPoint);
             weapon = weaponObjOwner.GetComponent<BaseWeapon>();
             weaponObjOwner.transform.SetParent(FPSWeaponAnchorPoint);
