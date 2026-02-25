@@ -9,6 +9,7 @@ TagManager:
   - VisualOnly
   - IK_target
   - Technichien
+  - Module-Light
   layers:
   - Default
   - TransparentFX
