@@ -10,6 +10,7 @@ TagManager:
   - IK_target
   - Technichien
   - Module-Light
+  - Charging-Station
   layers:
   - Default
   - TransparentFX
