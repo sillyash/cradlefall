@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: DPSModuleBehaviour
   m_EditorClassIdentifier: 
   isBroken: 0
+  Role: DPS
