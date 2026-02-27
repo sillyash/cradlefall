@@ -1,5 +1,5 @@
 using UnityEngine;
-using System.Collections;
+using Unity.Netcode;
 
 [CreateAssetMenu(menuName = "Modules/Behaviours/Role")]
 public class RoleModuleBehaviour : ModuleBehavior
@@ -9,6 +9,16 @@ public class RoleModuleBehaviour : ModuleBehavior
     public event System.Action<BaseModule> OnRepairEvent;
 
     public bool isBroken = false;
+
+    public Role role;
+    public enum Role
+    {
+        DPS,
+        Technicien,
+        Soigneur,
+        Tank
+    }
+
     public override void OnStart(BaseModule module)
     {
         RoleModuleManager.instance.SubToModule(module);
