@@ -9,6 +9,10 @@ public class RoleModuleBehaviour : ModuleBehavior
     public event System.Action<BaseModule> OnRepairEvent;
 
     public bool isBroken = false;
+    public override void OnStart(BaseModule module)
+    {
+        RoleModuleManager.instance.SubToModule(module);
+    }
 
     public override void OnBreak(BaseModule module)
     {
