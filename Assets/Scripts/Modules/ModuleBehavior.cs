@@ -6,6 +6,8 @@ using UnityEngine;
 /// </summary>
 public abstract class ModuleBehavior : ScriptableObject
 {
+    public virtual void OnStart(BaseModule module) { return; }
+
     // A voir si on a vraiment de passer de Module - peut-être inutile
     public abstract void OnBreak(BaseModule module);
     public abstract void OnRepair(BaseModule module);
