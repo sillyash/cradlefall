@@ -1,25 +1,18 @@
+using Unity.Netcode;
 using UnityEngine;
 
-public class ChargingStation : MonoBehaviour
+public class ChargingStation : NetworkBehaviour
 {
     [SerializeField] private float batteryPerSeconde = 3;
-    public bool Broken = false;
+    public NetworkVariable<bool> Broken = new(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
     void OnTriggerStay(Collider other)
     {
-        if (Broken) return;
+        if (!IsServer) return;
+        if (Broken.Value) return;
+
         if (other.TryGetComponent(out basePlayer player))
         {
             player.battery.Recharge(batteryPerSeconde * Time.deltaTime);
         }
-    }
-
-    public void Break() 
-    {
-        Broken = true;
-    }
-
-    public void Repair()
-    {
-        Broken = false;
     }
 }

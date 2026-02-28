@@ -33,7 +33,7 @@ public class ChargingStationManager : NetworkBehaviour
         foreach (GameObject station in stations)
         {
             ChargingStation chargingStation = station.GetComponent<ChargingStation>();
-            chargingStation.Break();
+            chargingStation.Broken.Value = true;
         }
     }
 
@@ -51,7 +51,7 @@ public class ChargingStationManager : NetworkBehaviour
         foreach (GameObject station in stations)
         {
             ChargingStation chargingStation = station.GetComponent<ChargingStation>();
-            chargingStation.Repair();
+            chargingStation.Broken.Value = false;
         }
     }
 }
