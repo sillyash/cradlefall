@@ -1,44 +1,51 @@
+using Unity.Netcode;
 using UnityEngine;
 
-public abstract class VisionDevice : MonoBehaviour, IBatteryUser
+public abstract class VisionDevice : NetworkBehaviour, IBatteryUser
 {
     public float BatteryUsage { get; set; }
-    public bool IsActive = false;
+
+    public NetworkVariable<bool> IsActive = new(
+        false,
+        NetworkVariableReadPermission.Everyone,
+        NetworkVariableWritePermission.Server
+    );
 
     private PlayerBattery BatteryManager;
 
-    public virtual void Start()
+    public override void OnNetworkSpawn()
     {
+        if (!IsOwner) return;
         BatteryManager = GetComponent<PlayerBattery>();
+
+        IsActive.OnValueChanged += (oldValue, newValue) =>
+        {
+            if (newValue)
+                OnActivate();
+            else
+                OnDeactivate();
+        };
     }
 
     public virtual void Update()
     {
+        if (!IsOwner) return;
         if (!BatteryManager.IsEmpty())
         {
             if (Input.GetKeyDown(KeyCode.F))
             {
-                IsActive = !IsActive;
-                if (IsActive)
-                {
-                    OnActivate();
-                }
-                else
-                {
-                    OnDeactivate();
-                }
+                UpdateIsActiveServerRpc(!IsActive.Value);
             }
         }
         else
         {
-            if (IsActive)
+            if (IsActive.Value)
             {
-                IsActive = false;
-                OnDeactivate();
+                UpdateIsActiveServerRpc(false);
             }
         }
 
-        if (IsActive)
+        if (IsActive.Value)
         {
             UseBattery(BatteryUsage);
         }
@@ -46,7 +53,15 @@ public abstract class VisionDevice : MonoBehaviour, IBatteryUser
 
     public virtual void UseBattery(float ammount)
     {
+        if (!IsOwner) return;
         BatteryManager.Consume(ammount * Time.deltaTime);
+    }
+
+    [Rpc(SendTo.Server, InvokePermission = RpcInvokePermission.Everyone)]
+    private void UpdateIsActiveServerRpc(bool active)
+    {
+        if (!IsServer) return;
+        IsActive.Value = active;
     }
 
     public abstract void OnActivate();
