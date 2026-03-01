@@ -69,6 +69,12 @@ public class InteractionManager : NetworkBehaviour
         BaseModule module = target.GetComponent<BaseModule>();
         if (module != null)
         {
+            if (module.behaviour is RoleModuleBehaviour)
+            {
+                // Si c'est un module de rôle on vérif si on a le bon rôle
+                RoleModuleBehaviour behaviour = (RoleModuleBehaviour) module.behaviour;
+                if (behaviour.role != player.role) return;
+            }
             if (!module.broken.Value)
             {
                 ResetHold();
