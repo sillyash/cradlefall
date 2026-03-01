@@ -34,12 +34,14 @@ public class InteractionManager : NetworkBehaviour
 
     public void Start()
     {
+        if (!IsOwner) return;
         player = GetComponent<basePlayer>();
     }
 
 
     private void Update()
     {
+        if (!IsOwner) return;
         IsHoldingInteract = CustomInputRouter.GetButtonInteract();
         Ray ray = playerCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
         RaycastHit hit;
@@ -65,6 +67,7 @@ public class InteractionManager : NetworkBehaviour
 
     private void HandleInteraction(GameObject target)
     {
+        if (!IsOwner) return;
         // ===== MODULE =====
         BaseModule module = target.GetComponent<BaseModule>();
         if (module != null)
@@ -84,7 +87,7 @@ public class InteractionManager : NetworkBehaviour
             holdTimer += Time.deltaTime;
             if (player.role == Roles.Role.Technicien) 
                 CurrentHoldDuration = CurrentHoldDuration/2 ;
-            
+
             if (holdTimer >= CurrentHoldDuration)
             {
                 module.RepairServerRpc();
