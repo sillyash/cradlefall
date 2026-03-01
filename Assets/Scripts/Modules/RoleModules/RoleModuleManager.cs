@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Unity.Netcode;
+using Constants;
 
 public class RoleModuleManager : NetworkBehaviour
 {
@@ -42,16 +43,16 @@ public class RoleModuleManager : NetworkBehaviour
         RoleModuleBehaviour behaviour = (RoleModuleBehaviour) module.behaviour;
         switch (behaviour.role)
         {
-            case RoleModuleBehaviour.Role.DPS:
+            case Roles.Role.DPS:
                 DPSModule = module;
                 break;
-            case RoleModuleBehaviour.Role.Technicien:
+            case Roles.Role.Technicien:
                 TechnicienModule = module;
                 break;
-            case RoleModuleBehaviour.Role.Soigneur:
+            case Roles.Role.Soigneur:
                 SoigneurModule = module;
                 break;
-            case RoleModuleBehaviour.Role.Tank:
+            case Roles.Role.Tank:
                 TankModule = module;
                 break;
         }

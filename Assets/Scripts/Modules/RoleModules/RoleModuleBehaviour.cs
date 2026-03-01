@@ -1,5 +1,6 @@
 using UnityEngine;
 using Unity.Netcode;
+using Constants;
 
 [CreateAssetMenu(menuName = "Modules/Behaviours/Role")]
 public class RoleModuleBehaviour : ModuleBehavior
@@ -10,14 +11,7 @@ public class RoleModuleBehaviour : ModuleBehavior
 
     public bool isBroken = false;
 
-    public Role role;
-    public enum Role
-    {
-        DPS,
-        Technicien,
-        Soigneur,
-        Tank
-    }
+    public Roles.Role role;
 
     public override void OnStart(BaseModule module)
     {
