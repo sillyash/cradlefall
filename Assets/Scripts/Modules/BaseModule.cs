@@ -89,14 +89,14 @@ public class BaseModule : NetworkBehaviour
     {
         broken.Value = true;
         behaviour.OnBreak(this);
-        Debug.LogWarning("The module is broken");
+        Debug.LogWarning("The module is broken " + gameObject.name);
     }
 
     [Rpc(SendTo.Server, InvokePermission = RpcInvokePermission.Everyone)]
     public void RepairServerRpc()
     {
         if (!broken.Value) return;
-        Debug.Log("Module repaired !");
+        Debug.Log("Module repaired ! " + gameObject.name);
         broken.Value = false;
         health.Value = stats.health;
         behaviour.OnRepair(this);
