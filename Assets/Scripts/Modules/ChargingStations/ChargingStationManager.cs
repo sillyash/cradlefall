@@ -22,12 +22,6 @@ public class ChargingStationManager : NetworkBehaviour
     public void TurnOffAllStations()
     {
         if (!IsServer) return;
-        TurnOffAllStationsClientRpc();
-    }
-
-    [ClientRpc]
-    private void TurnOffAllStationsClientRpc()
-    {
         GameObject[] stations = GameObject.FindGameObjectsWithTag("Charging-Station");
 
         foreach (GameObject station in stations)
@@ -40,12 +34,6 @@ public class ChargingStationManager : NetworkBehaviour
     public void TurnOnAllStations()
     {
         if (!IsServer) return;
-        TurnOnAllStationsClientRpc();
-    }
-
-    [ClientRpc]
-    private void TurnOnAllStationsClientRpc()
-    {
         GameObject[] stations = GameObject.FindGameObjectsWithTag("Charging-Station");
 
         foreach (GameObject station in stations)
