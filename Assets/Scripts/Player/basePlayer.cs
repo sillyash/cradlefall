@@ -4,11 +4,14 @@ using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
+using Constants;
 
 public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
 {
     public static float TARGET_DISTANCE = 5;
     public static float MIN_RAY_DISTANCE = 3;
+
+    public Roles.Role role;
 
     [SerializeField] private GameObject weaponPrefab;
 
