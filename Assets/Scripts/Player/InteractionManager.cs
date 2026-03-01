@@ -1,6 +1,6 @@
 using UnityEngine;
 using Unity.Netcode;
-
+using Constants;
 public class InteractionManager : NetworkBehaviour
 {
     public static InteractionManager Instance { get; private set; }
@@ -76,7 +76,7 @@ public class InteractionManager : NetworkBehaviour
             }
             CurrentHoldDuration = module.stats.repairTime;
             holdTimer += Time.deltaTime;
-            if (player.CompareTag("Technichien")) 
+            if (player.role == Roles.Role.Technicien) 
                 CurrentHoldDuration = CurrentHoldDuration/2 ;
             
             if (holdTimer >= CurrentHoldDuration)
