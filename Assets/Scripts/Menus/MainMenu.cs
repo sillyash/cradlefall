@@ -24,8 +24,7 @@ public class MainMenu : MonoBehaviour {
 
     public void OnOptionsButtonClicked()
     {
-        Debug.Log("Loading Options Menu...");
-        // TODO: Load Options Menu
+        SceneManager.LoadScene("SettingsMenu");
     }
 
     public void onCreditsButtonClicked()
