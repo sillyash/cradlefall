@@ -6,20 +6,23 @@ public class NightVision : VisionDevice
 {
     public Volume nightVolume;
 
-    public override void Start()
+    public override void OnNetworkSpawn()
     {
+        if (!IsOwner) return;
         nightVolume.weight = 0f;
-        base.Start();
+        base.OnNetworkSpawn();
         BatteryUsage = 2;
     }
 
     public override void OnActivate()
     {
-        nightVolume.weight = IsActive ? 1f : 0f;
+        if (!IsOwner) return;
+        nightVolume.weight = IsActive.Value ? 1f : 0f;
     }
 
     public override void OnDeactivate()
     {
+        if (!IsOwner) return;
         nightVolume.weight = 0f;
     }
 }

@@ -14,6 +14,7 @@ public class GameManager : NetworkBehaviour
     [SerializeField] private GameObject LightManager;
     [SerializeField] private GameObject LobbyManager;
     [SerializeField] private GameObject RoleModuleManager;
+    [SerializeField] private GameObject ChargingStationManager;
 
     public NetworkVariable<GameState> currentState = new(
         GameState.Playing,
@@ -92,10 +93,13 @@ public class GameManager : NetworkBehaviour
         obj.GetComponent<NetworkObject>().Spawn();
 
         var lightManager = Instantiate(LightManager);
-        lightManager.GetComponent<NetworkObject>().Spawn();        
-        
+        lightManager.GetComponent<NetworkObject>().Spawn();
+
         var roleModuleManager = Instantiate(RoleModuleManager);
         roleModuleManager.GetComponent<NetworkObject>().Spawn();
+
+        var chargingStationsManager = Instantiate(ChargingStationManager);
+        chargingStationsManager.GetComponent<NetworkObject>().Spawn();
 
         StartCoroutine(SpawnPlayersAfterDelay());
     }

@@ -48,6 +48,8 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
             return;
         }
 
+        battery = GetComponent<PlayerBattery>();
+
         if (IsServer)
         {
             var weaponObj = Instantiate(weaponPrefab, TPSWeaponAnchorPoint);
@@ -60,7 +62,6 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
         if (IsOwner)
         {
             Debug.Log($"[Player] Owner instanciate {OwnerClientId}");
-            battery = GetComponent<PlayerBattery>();
             var weaponObjOwner = Instantiate(weaponPrefab, FPSWeaponAnchorPoint);
             weapon = weaponObjOwner.GetComponent<BaseWeapon>();
             weaponObjOwner.transform.SetParent(FPSWeaponAnchorPoint);
