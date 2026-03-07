@@ -1,15 +1,16 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public class PauseMenu : MonoBehaviour
 {
-    [SerializeField] private GameObject pauseMenuPrefab;
-    private GameObject pauseMenuInstance;
+    public static bool isPaused { get; private set; } = false;
+    
+    [SerializeField] private GameObject pauseMenu;
 
     void Awake()
     {
-        this.pauseMenuInstance = Instantiate(pauseMenuPrefab);
-        this.pauseMenuInstance.SetActive(false);
+        this.pauseMenu.SetActive(false);
     }
 
     void Update()
@@ -17,7 +18,7 @@ public class PauseMenu : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             Debug.Log("Tab key pressed. Toggling pause menu.");
-            if (this.pauseMenuInstance.activeSelf)
+            if (this.pauseMenu.activeSelf)
             {
                 Debug.Log("Pause menu is active. Resuming game.");
                 OnResumeButtonClicked();
@@ -25,19 +26,33 @@ public class PauseMenu : MonoBehaviour
             else
             {
                 Debug.Log("Pause menu is not active. Pausing game.");
-                this.pauseMenuInstance.SetActive(true);
+                this.pauseMenu.SetActive(true);
+                isPaused = true;
                 Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
             }
         }
     }
 
     public void OnResumeButtonClicked()
     {
-        this.pauseMenuInstance.SetActive(false);
+        this.pauseMenu.SetActive(false);
+        isPaused = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
+    public void OnSettingsButtonClicked()
+    {
+        // TODO: Implement settings menu
+        Debug.Log("Settings button clicked. This feature is not implemented yet.");
     }
 
     public void OnQuitToMainMenuButtonClicked()
     {
+        isPaused = false;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         GameManager.instance.ReturnToMainMenu();
     }
 }
