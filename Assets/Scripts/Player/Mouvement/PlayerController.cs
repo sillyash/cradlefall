@@ -32,6 +32,7 @@ public class PlayerController : PlayerMovement
     void Update()
     {
         if (!IsOwner) return;
+        if (PauseMenu.isPaused) return;
 
         HandleMovement();
         HandleJump();

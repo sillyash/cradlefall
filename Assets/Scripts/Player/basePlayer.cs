@@ -103,6 +103,7 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
     void Update()
     {
         if (!IsOwner) return;
+        if (PauseMenu.isPaused) return;
 
         raycast();
         weapon.transform.LookAt(targetPoint);
