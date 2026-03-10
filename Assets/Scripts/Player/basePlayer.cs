@@ -102,14 +102,20 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
         if (!IsOwner) return;
 
         raycast();
-        weapon.transform.LookAt(targetPoint);
+
+        
 
         weaponInput();
     }
 
-    void UpdateHandPosition()
+    void setWeaponRotation()
     {
-        
+        weapon.transform.LookAt(targetPoint);
+        float yRotation = weapon.transform.localEulerAngles.y;
+
+        yRotation = Mathf.Clamp(yRotation, -90f, 0f); // Clamp it to max rotation
+    
+        //weapon.transform.localEulerAngles.y = yRotation;
     }
 
     void weaponInput()
