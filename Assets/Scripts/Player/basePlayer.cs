@@ -26,7 +26,6 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
 
     [SerializeField] private HealthBarScript healthBar;
     [SerializeField] public Camera mainCamera;
-    [SerializeField] private Transform TPSWeaponAnchorPoint;
     [SerializeField] private Transform FPSWeaponAnchorPoint;
     [SerializeField] private GameObject playerCanvas;
 
@@ -50,7 +49,7 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
 
         if (IsServer)
         {
-            var weaponObj = Instantiate(weaponPrefab, TPSWeaponAnchorPoint);
+            var weaponObj = Instantiate(weaponPrefab, FPSWeaponAnchorPoint);
             var weaponNetObj = weaponObj.GetComponent<NetworkObject>();
 
             weaponNetObj.SpawnWithOwnership(OwnerClientId);
