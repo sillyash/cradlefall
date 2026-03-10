@@ -104,21 +104,22 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
 
         raycast();
 
-        weapon.transform.rotation = Quaternion.LookRotation(targetPoint - weapon.transform.position);
+        setWeaponRotation(90f);
 
         weaponInput();
     }
 
-    void setWeaponRotation()
+    void setWeaponRotation(float maxRotation)
     {
-        Quaternion.LookRotation(targetPoint, Vector3.forward);
-        // weapon.transform.LookAt(targetPoint);
-        
-        float yRotation = weapon.transform.localEulerAngles.y;
+        weapon.transform.rotation = Quaternion.LookRotation(targetPoint - weapon.transform.position);
 
-        yRotation = Mathf.Clamp(yRotation, -90f, 0f); // Clamp it to max rotation
-    
-        weapon.transform.rotation = Quaternion.LookRotation(targetPoint, Vector3.up);
+        Vector3 localAngle = weapon.transform.localEulerAngles;
+
+        Debug.Log(localAngle.y);
+
+        localAngle.y = Mathf.Clamp(localAngle.y, 270f, 360f);
+
+        weapon.transform.localEulerAngles = localAngle;
     }
 
     void weaponInput()
