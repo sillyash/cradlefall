@@ -4,6 +4,7 @@ using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
+using static UnityEngine.GraphicsBuffer;
 
 public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
 {
@@ -103,19 +104,21 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
 
         raycast();
 
-        
+        weapon.transform.rotation = Quaternion.LookRotation(targetPoint - weapon.transform.position);
 
         weaponInput();
     }
 
     void setWeaponRotation()
     {
-        weapon.transform.LookAt(targetPoint);
+        Quaternion.LookRotation(targetPoint, Vector3.forward);
+        // weapon.transform.LookAt(targetPoint);
+        
         float yRotation = weapon.transform.localEulerAngles.y;
 
         yRotation = Mathf.Clamp(yRotation, -90f, 0f); // Clamp it to max rotation
     
-        //weapon.transform.localEulerAngles.y = yRotation;
+        weapon.transform.rotation = Quaternion.LookRotation(targetPoint, Vector3.up);
     }
 
     void weaponInput()
