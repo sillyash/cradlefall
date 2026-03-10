@@ -10,11 +10,14 @@ public class IPPanelHandler : MonoBehaviour
     [SerializeField] private GameObject panel;
     [SerializeField] private GameObject errorPanel;
     [SerializeField] private GameObject closeButton;
-    [SerializeField] private TMP_InputField inputField;
+    private TMP_InputField inputField;
     private SubmitEvent submitEvent;
 
     void Start()
     {
+        // Retrieve input field
+        inputField = panel.GetComponent<TMP_InputField>();
+
         // Hide error panel
         errorPanel.SetActive(false);
 
@@ -24,6 +27,20 @@ public class IPPanelHandler : MonoBehaviour
         inputField.onEndEdit = submitEvent;
     }
 
+    private void DisplayPanel()
+    {
+        panel.SetActive(true);
+        closeButton.SetActive(true);
+        errorPanel.SetActive(false);
+    }
+
+    private void HidePanel()
+    {
+        panel.SetActive(false);
+        closeButton.SetActive(false);
+        errorPanel.SetActive(false);
+    }
+
     private void SubmitIP(string arg0)
     {
         Debug.Log("[IP Panel] Submitted IP : " + arg0);
@@ -31,6 +48,7 @@ public class IPPanelHandler : MonoBehaviour
         {
             Debug.Log("[IP Panel] IP is valid.");
             SetHostIP(arg0);
+            HidePanel();
             return;
         }
         else 
