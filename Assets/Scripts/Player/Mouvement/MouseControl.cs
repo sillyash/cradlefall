@@ -32,6 +32,7 @@ public class MouseControl : NetworkBehaviour
         chest.localRotation = chestRotation;
 
         if (!IsOwner) return;
+        if (PauseMenu.isPaused) return;
 
         HandleMouseLook();
     }

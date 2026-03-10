@@ -174,15 +174,6 @@ public class GameManager : NetworkBehaviour
     }
 
     /// <summary>
-    /// Go to multiplayer screen from main menu
-    /// </summary>
-    public void GoToMultiScreen()
-    {
-        ChangeScene(Scenes.MultiScreen);
-        Cursor.lockState = CursorLockMode.None;
-    }
-
-    /// <summary>
     /// Go to Lobby
     /// </summary>
     public void GoToLobby()
