@@ -50,7 +50,10 @@ VisualEffect:
   m_ResourceVersion: 1
   m_PropertySheet:
     m_Float:
-      m_Array: []
+      m_Array:
+      - m_Value: 0.2
+        m_Name: size
+        m_Overridden: 1
     m_Vector2f:
       m_Array: []
     m_Vector3f:
@@ -343,6 +346,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RaycastProjectile
       objectReference: {fileID: 0}
+    - target: {fileID: 6373370412417250450, guid: f1fbc6e08dfc79b4baac54479805ef17, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7079945560405015623, guid: f1fbc6e08dfc79b4baac54479805ef17, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.1
@@ -395,7 +402,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6373370412417250450, guid: f1fbc6e08dfc79b4baac54479805ef17, type: 3}
+    - {fileID: 6057628042706972405, guid: f1fbc6e08dfc79b4baac54479805ef17, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 7079945560405015623, guid: f1fbc6e08dfc79b4baac54479805ef17, type: 3}
