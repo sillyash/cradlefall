@@ -133,16 +133,16 @@ Material:
     - _ZWrite: 1
     - _emissionFac: 10
     - _rimLight: 1
-    - _rimTreshold: 0.22
-    - _shadowFac: 6
-    - _shadowTreshold: 0.81
+    - _rimTreshold: 0.66
+    - _shadowFac: 4.09
+    - _shadowTreshold: 0.93
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _emissionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _mainColor: {r: 0.1764706, g: 0.41176474, b: 0.5803922, a: 1}
-    - _rimColor: {r: 0.627451, g: 0.96470594, b: 0.9960785, a: 1}
+    - _mainColor: {r: 0.26099998, g: 0.6903631, b: 1, a: 1}
+    - _rimColor: {r: 0.07172942, g: 0.18842354, b: 0.273, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
