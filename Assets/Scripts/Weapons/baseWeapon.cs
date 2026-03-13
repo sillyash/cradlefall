@@ -3,6 +3,8 @@ using System.Collections;
 
 public class BaseWeapon : MonoBehaviour
 {
+    [SerializeField] private AudioClip fireSound;
+    [SerializeField] [Range(0f, 1f)] private float fireSoundVolume = 1f;
     [SerializeField] public WeaponBehavior behavior;
     [SerializeField] public WeaponStats stats;
     [SerializeField] public ProjectileBase projectile;
@@ -49,6 +51,10 @@ public class BaseWeapon : MonoBehaviour
             if (muzzleFlash != null) // Only for weapons with muzzle flash
             {
                 muzzleFlash.PlayMuzzleFlash();
+            }
+            if (fireSound != null && SoundFXManager.instance != null)
+            {
+                SoundFXManager.instance.PlaySoundFXClip(fireSound, transform, fireSoundVolume);
             }
             isReadyToShoot = false;
             StartCoroutine(FireCooldown());

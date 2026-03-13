@@ -78,7 +78,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   stats: {fileID: 0}
-  m_Target: {fileID: 0}
   isAttacking: 0
   targetMask:
     serializedVersion: 2
