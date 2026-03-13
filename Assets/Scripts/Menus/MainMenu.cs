@@ -7,6 +7,16 @@ using NUnit.Framework.Internal;
 
 public class MainMenu : MonoBehaviour {
 
+    [SerializeField] private AudioSource menuMusicSource;
+
+    void Start()
+    {
+        if (menuMusicSource != null)
+        {
+            menuMusicSource.Play();
+        }
+    }
+
     public void OnHostButtonClicked ()
     {
         GameManager.instance.HostGame();

@@ -5,6 +5,8 @@ public class BaseWeapon : MonoBehaviour
 {
     [SerializeField] private AudioClip fireSound;
     [SerializeField] [Range(0f, 1f)] private float fireSoundVolume = 1f;
+    [SerializeField] private AudioClip reloadSound;
+    [SerializeField] [Range(0f, 1f)] private float reloadSoundVolume = 1f;
     [SerializeField] public WeaponBehavior behavior;
     [SerializeField] public WeaponStats stats;
     [SerializeField] public ProjectileBase projectile;
@@ -77,6 +79,10 @@ public class BaseWeapon : MonoBehaviour
         isReloading = true;
         StartCoroutine(ReloadCooldown());
         OnReloadStart?.Invoke();
+        if (reloadSound != null && SoundFXManager.instance != null)
+        {
+            SoundFXManager.instance.PlaySoundFXClip(reloadSound, transform, reloadSoundVolume);
+        }
     }
 
 
