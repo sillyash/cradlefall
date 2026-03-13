@@ -82,7 +82,7 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   stats: {fileID: 11400000, guid: ae076dbd5ac44ba46b036391b8ae7a94, type: 2}
   hitSound: {fileID: 8300000, guid: e73774536edbc0a488c884fb14b93e83, type: 3}
-  hitSoundVolume: 0.8
+  hitSoundVolume: 1
   deathSound: {fileID: 8300000, guid: 83006cc0db065414bbefe83b2a555134, type: 3}
   deathSoundVolume: 1
   footstepAudioSource: {fileID: -7614740043504507261}
