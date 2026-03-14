@@ -5,7 +5,11 @@ using System.Collections.Generic;
 using System;
 using NUnit.Framework.Internal;
 
-public class MainMenu : MonoBehaviour {
+public class MainMenu : MonoBehaviour 
+{
+    
+    [Header("Sound FX Manager")]
+    [SerializeField] private SoundFXManager soundFXManager;
 
     [SerializeField] private AudioSource menuMusicSource;
     [SerializeField] private AudioClip buttonClickSound;
@@ -23,9 +27,9 @@ public class MainMenu : MonoBehaviour {
 
     private void PlayButtonSound()
     {
-        if (buttonClickSound != null && SoundFXManager.instance != null)
+        if (buttonClickSound != null && soundFXManager != null)
         {
-            SoundFXManager.instance.PlaySoundFXClip(buttonClickSound, transform, buttonClickVolume, true);
+            soundFXManager.PlaySoundFXClip(buttonClickSound, transform, buttonClickVolume, true);
         }
     }
 
@@ -62,9 +66,9 @@ public class MainMenu : MonoBehaviour {
 
     public void OnButtonHover()
     {
-        if (buttonHoverSound != null && SoundFXManager.instance != null)
+        if (buttonHoverSound != null && soundFXManager != null)
         {
-            SoundFXManager.instance.PlaySoundFXClip(buttonHoverSound, transform, buttonHoverVolume);
+            soundFXManager.PlaySoundFXClip(buttonHoverSound, transform, buttonHoverVolume);
         }
     }
 }

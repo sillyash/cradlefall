@@ -3,6 +3,9 @@ using System.Collections;
 
 public class BaseWeapon : MonoBehaviour
 {
+
+    [Header("Sound FX Manager")]
+    [SerializeField] private SoundFXManager soundFXManager;
     [SerializeField] private AudioClip fireSound;
     [SerializeField] [Range(0f, 1f)] private float fireSoundVolume = 1f;
     [SerializeField] private AudioClip reloadSound;
@@ -54,9 +57,9 @@ public class BaseWeapon : MonoBehaviour
             {
                 muzzleFlash.PlayMuzzleFlash();
             }
-            if (fireSound != null && SoundFXManager.instance != null)
+            if (fireSound != null && soundFXManager != null)
             {
-                SoundFXManager.instance.PlaySoundFXClip(fireSound, transform, fireSoundVolume);
+                soundFXManager.PlaySoundFXClip(fireSound, transform, fireSoundVolume);
             }
             isReadyToShoot = false;
             StartCoroutine(FireCooldown());
@@ -79,9 +82,9 @@ public class BaseWeapon : MonoBehaviour
         isReloading = true;
         StartCoroutine(ReloadCooldown());
         OnReloadStart?.Invoke();
-        if (reloadSound != null && SoundFXManager.instance != null)
+        if (reloadSound != null && soundFXManager != null)
         {
-            SoundFXManager.instance.PlaySoundFXClip(reloadSound, transform, reloadSoundVolume);
+            soundFXManager.PlaySoundFXClip(reloadSound, transform, reloadSoundVolume);
         }
     }
 

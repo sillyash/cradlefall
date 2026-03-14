@@ -2,6 +2,10 @@ using UnityEngine;
 
 public class PlayerController : PlayerMovement
 {
+    
+    [Header("Sound FX Manager")]
+    [SerializeField] private SoundFXManager soundFXManager;
+
     [SerializeField] private Camera mainCamera;
 
     private CharacterController characterController;
@@ -56,8 +60,8 @@ public class PlayerController : PlayerMovement
         bool isMoving = Mathf.Abs(axisX) > 0.1f || Mathf.Abs(axisY) > 0.1f;
         if (isSprinting && !wasSprinting && isMoving)
         {
-            if (sprintSound != null && SoundFXManager.instance != null)
-                SoundFXManager.instance.PlaySoundFXClip(sprintSound, transform, 1f);
+            if (sprintSound != null && soundFXManager != null)
+                soundFXManager.PlaySoundFXClip(sprintSound, transform, 1f);
         }
         wasSprinting = isSprinting;
 
@@ -82,9 +86,9 @@ public class PlayerController : PlayerMovement
         if (characterController.isGrounded && CustomInputRouter.GetButtonJump())
         {
             velocity.y = Mathf.Sqrt(movementSettings.jumpHeight * -2f * PlayerMovementSettings.GRAVITY);
-            if (jumpSound != null && SoundFXManager.instance != null)
+            if (jumpSound != null && soundFXManager != null)
             {
-                SoundFXManager.instance.PlaySoundFXClip(jumpSound, transform, 1f);
+                soundFXManager.PlaySoundFXClip(jumpSound, transform, 1f);
             }
         }
     }
@@ -116,10 +120,10 @@ public class PlayerController : PlayerMovement
                 if (Input.GetKey(KeyCode.LeftShift))
                     interval *= 0.8f;
                 footstepTimer = interval;
-                if (footstepSounds != null && footstepSounds.Length > 0 && SoundFXManager.instance != null)
+                if (footstepSounds != null && footstepSounds.Length > 0 && soundFXManager != null)
                 {
-                    var clip = footstepSounds[Random.Range(0, footstepSounds.Length)];
-                    SoundFXManager.instance.PlaySoundFXClip(clip, transform, footstepVolume);
+                    var clip = footstepSounds[UnityEngine.Random.Range(0, footstepSounds.Length)];
+                    soundFXManager.PlaySoundFXClip(clip, transform, footstepVolume);
                 }
             }
         }
