@@ -571,6 +571,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::KeyboardController
   ShowTopMostFoldoutHeaderGroup: 1
   movementSettings: {fileID: 11400000, guid: 5eef73e5dede50d4d980ebe7f793d0a3, type: 2}
+  jumpVolume: 0.5
+  sprintVolume: 0.2
   soundFXManager: {fileID: 5108398203100439213}
   mainCamera: {fileID: 95665150144060911}
   jumpSound: {fileID: 8300000, guid: ef26157967fd5cb4d9f2209138146ca9, type: 3}

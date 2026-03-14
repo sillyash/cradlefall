@@ -146,9 +146,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soundFXManager: {fileID: 2606207664194991238}
   fireSound: {fileID: 0}
-  fireSoundVolume: 1
+  fireSoundVolume: 0.4
   reloadSound: {fileID: 0}
-  reloadSoundVolume: 1
+  reloadSoundVolume: 0.4
   behavior: {fileID: 11400000, guid: 90816120325768a40b1ee9e14750eba9, type: 2}
   stats: {fileID: 11400000, guid: 2790786f3e98e8a44b3589d9d0872fb7, type: 2}
   projectile: {fileID: -437768195626343177, guid: bd62959d4d993b14193f674b618ba62e, type: 3}

@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class PlayerController : PlayerMovement
 {
+    [Header("Volumes personnalisés")]
+    [SerializeField, Range(0f, 1f)] private float jumpVolume = 1f;
+    [SerializeField, Range(0f, 1f)] private float sprintVolume = 1f;
     
     [Header("Sound FX Manager")]
     [SerializeField] private SoundFXManager soundFXManager;
@@ -61,7 +64,7 @@ public class PlayerController : PlayerMovement
         if (isSprinting && !wasSprinting && isMoving)
         {
             if (sprintSound != null && soundFXManager != null)
-                soundFXManager.PlaySoundFXClip(sprintSound, transform, 1f);
+                soundFXManager.PlaySoundFXClip(sprintSound, transform, sprintVolume);
         }
         wasSprinting = isSprinting;
 
@@ -88,7 +91,7 @@ public class PlayerController : PlayerMovement
             velocity.y = Mathf.Sqrt(movementSettings.jumpHeight * -2f * PlayerMovementSettings.GRAVITY);
             if (jumpSound != null && soundFXManager != null)
             {
-                soundFXManager.PlaySoundFXClip(jumpSound, transform, 1f);
+                soundFXManager.PlaySoundFXClip(jumpSound, transform, jumpVolume);
             }
         }
     }
