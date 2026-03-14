@@ -24855,7 +24855,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7979013721050240725, guid: 420854de2f71646ec8bcd04a6b842d0a, type: 3}
       propertyPath: m_Name
-      value: SoundFXManager
+      value: SoundFXManager2D
       objectReference: {fileID: 0}
     - target: {fileID: 8075212528748798361, guid: 420854de2f71646ec8bcd04a6b842d0a, type: 3}
       propertyPath: m_LocalScale.x
@@ -24915,6 +24915,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8075212528748798361, guid: 420854de2f71646ec8bcd04a6b842d0a, type: 3}
   m_PrefabInstance: {fileID: 723862500}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &723862502 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 207797871591677415, guid: 420854de2f71646ec8bcd04a6b842d0a, type: 3}
+  m_PrefabInstance: {fileID: 723862500}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5af106d486652b84781fab19ec2b6a1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &731711046
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -60424,6 +60435,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d3893a180dfc2c428fa22392e9e4427, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundFXManager: {fileID: 723862502}
   menuMusicSource: {fileID: 1655811982}
   buttonClickSound: {fileID: 8300000, guid: 0801ad37207a7bf4b8594db6d6fc09c0, type: 3}
   buttonClickVolume: 1

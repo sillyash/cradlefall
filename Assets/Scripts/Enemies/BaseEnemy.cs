@@ -10,15 +10,23 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class BaseEnemy : NetworkBehaviour, ICanDie, IDamageable
 {
+    [Header("Sound FX Manager")]
+    [SerializeField] private SoundFXManager soundFXManager;
     // [SerializeField] private EnemyBehavior behaviour;
     public EnemyStats stats;
 
     [Header("Audio")]
+
     [SerializeField] private AudioClip hitSound;
+
     [SerializeField] [Range(0f, 1f)] private float hitSoundVolume = 1f;
+
     [SerializeField] private AudioClip deathSound;
+    
     [SerializeField] [Range(0f, 1f)] private float deathSoundVolume = 1f;
+    
     [SerializeField] private AudioSource footstepAudioSource;
+    
     [SerializeField] private float footstepSpeedThreshold = 0.1f; // seuil pour considérer que l’ennemi marche
 
     public bool isDead { get; set; } = false;
@@ -131,9 +139,9 @@ public class BaseEnemy : NetworkBehaviour, ICanDie, IDamageable
         Health.Value -= damage;
 
         // Jouer un son de blessure (hit) si on n'est pas encore mort
-        if (Health.Value > 0 && hitSound != null && SoundFXManager.instance != null)
+        if (Health.Value > 0 && hitSound != null && soundFXManager != null)
         {
-            SoundFXManager.instance.PlaySoundFXClip(hitSound, transform, hitSoundVolume);
+            soundFXManager.PlaySoundFXClip(hitSound, transform, hitSoundVolume);
         }
     }
 
@@ -148,9 +156,9 @@ public class BaseEnemy : NetworkBehaviour, ICanDie, IDamageable
         m_Agent.isStopped = true;
         m_Animator.SetTrigger("Die");
 
-        if (deathSound != null && SoundFXManager.instance != null)
+        if (deathSound != null && soundFXManager != null)
         {
-            SoundFXManager.instance.PlaySoundFXClip(deathSound, transform, deathSoundVolume);
+            soundFXManager.PlaySoundFXClip(deathSound, transform, deathSoundVolume);
         }
     }
 

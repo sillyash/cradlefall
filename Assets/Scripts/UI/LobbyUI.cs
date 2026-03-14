@@ -11,6 +11,9 @@ using System;
 /// </summary>
 public class LobbyUI : MonoBehaviour
 {
+    [Header("Sound FX Manager")]
+    [SerializeField] private SoundFXManager soundFXManager;
+
     [Header("UI Elements")]
     [SerializeField] private Button readyButton;
     [SerializeField] private Button flecheGauche;
@@ -96,17 +99,17 @@ public class LobbyUI : MonoBehaviour
 
     private void PlayButtonSound()
     {
-        if (buttonClickSound != null && SoundFXManager.instance != null)
+        if (buttonClickSound != null && soundFXManager != null)
         {
-            SoundFXManager.instance.PlaySoundFXClip(buttonClickSound, transform, buttonClickVolume);
+            soundFXManager.PlaySoundFXClip(buttonClickSound, transform, buttonClickVolume);
         }
     }
 
     public void OnButtonHover()
     {
-        if (buttonHoverSound != null && SoundFXManager.instance != null)
+        if (buttonHoverSound != null && soundFXManager != null)
         {
-            SoundFXManager.instance.PlaySoundFXClip(buttonHoverSound, transform, buttonHoverVolume);
+            soundFXManager.PlaySoundFXClip(buttonHoverSound, transform, buttonHoverVolume);
         }
     }
 
