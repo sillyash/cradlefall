@@ -18,6 +18,8 @@ public class BaseEnemy : NetworkBehaviour, ICanDie, IDamageable
     [Header("Audio")]
 
     [SerializeField] private AudioClip hitSound;
+    [SerializeField] private AudioClip hitSound2;
+    [SerializeField] [Range(0f, 1f)] private float hitSound2Volume = 1f;
 
     [SerializeField] [Range(0f, 1f)] private float hitSoundVolume = 1f;
 
@@ -138,10 +140,13 @@ public class BaseEnemy : NetworkBehaviour, ICanDie, IDamageable
     {
         Health.Value -= damage;
 
-        // Jouer un son de blessure (hit) si on n'est pas encore mort
-        if (Health.Value > 0 && hitSound != null && soundFXManager != null)
+        // Jouer les sons de blessure (hit) 3D si on n'est pas encore mort
+        if (Health.Value > 0 && soundFXManager != null)
         {
-            soundFXManager.PlaySoundFXClip(hitSound, transform, hitSoundVolume);
+            if (hitSound != null)
+                soundFXManager.PlaySoundFXClip(hitSound, transform, hitSoundVolume);
+            if (hitSound2 != null)
+                soundFXManager.PlaySoundFXClip(hitSound2, transform, hitSound2Volume);
         }
     }
 
