@@ -50,7 +50,7 @@ public class PlayerController : PlayerMovement
         updateAnim();
         HandleFootsteps();
     }
-
+    
     protected override void HandleMovement()
     {
         float axisX = CustomInputRouter.GetAxisHorizontal();
