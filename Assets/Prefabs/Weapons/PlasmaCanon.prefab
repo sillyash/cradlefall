@@ -224,11 +224,11 @@ PrefabInstance:
       objectReference: {fileID: 8300000, guid: bf2c8b8bbc3792a47a2988d6b998322b, type: 3}
     - target: {fileID: 8464794624840630467, guid: cd95e20d816642547b148417fdebd2c0, type: 3}
       propertyPath: fireSoundVolume
-      value: 0.4
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 8464794624840630467, guid: cd95e20d816642547b148417fdebd2c0, type: 3}
       propertyPath: reloadSoundVolume
-      value: 0.4
+      value: 0.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
