@@ -13,6 +13,14 @@ public class BaseEnemy : NetworkBehaviour, ICanDie, IDamageable
     // [SerializeField] private EnemyBehavior behaviour;
     public EnemyStats stats;
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip hitSound;
+    [SerializeField] [Range(0f, 1f)] private float hitSoundVolume = 1f;
+    [SerializeField] private AudioClip deathSound;
+    [SerializeField] [Range(0f, 1f)] private float deathSoundVolume = 1f;
+    [SerializeField] private AudioSource footstepAudioSource;
+    [SerializeField] private float footstepSpeedThreshold = 0.1f; // seuil pour considérer que l’ennemi marche
+
     public bool isDead { get; set; } = false;
 
     public float maxHealth { get; set; }
@@ -92,6 +100,24 @@ public class BaseEnemy : NetworkBehaviour, ICanDie, IDamageable
                 TrackTarget();
             }
         }
+
+        HandleFootsteps();
+    }
+
+    private void HandleFootsteps()
+    {
+        if (m_Agent == null || footstepAudioSource == null) return;
+
+        bool isMoving = m_Agent.velocity.magnitude > footstepSpeedThreshold;
+
+        if (isMoving && !footstepAudioSource.isPlaying)
+        {
+            footstepAudioSource.Play();
+        }
+        else if (!isMoving && footstepAudioSource.isPlaying)
+        {
+            footstepAudioSource.Pause();
+        }
     }
 
     public void TakeDamage(float damage)
@@ -103,6 +129,12 @@ public class BaseEnemy : NetworkBehaviour, ICanDie, IDamageable
     void TakeDamageRpc(float damage)
     {
         Health.Value -= damage;
+
+        // Jouer un son de blessure (hit) si on n'est pas encore mort
+        if (Health.Value > 0 && hitSound != null && SoundFXManager.instance != null)
+        {
+            SoundFXManager.instance.PlaySoundFXClip(hitSound, transform, hitSoundVolume);
+        }
     }
 
     public void Die()
@@ -115,6 +147,11 @@ public class BaseEnemy : NetworkBehaviour, ICanDie, IDamageable
     {
         m_Agent.isStopped = true;
         m_Animator.SetTrigger("Die");
+
+        if (deathSound != null && SoundFXManager.instance != null)
+        {
+            SoundFXManager.instance.PlaySoundFXClip(deathSound, transform, deathSoundVolume);
+        }
     }
 
     public void DestroyOnNetwork()

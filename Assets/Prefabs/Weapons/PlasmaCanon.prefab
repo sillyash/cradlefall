@@ -211,9 +211,25 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: ef04e001d3d0f774aa58775568fc422a, type: 2}
     - target: {fileID: 8464794624840630467, guid: cd95e20d816642547b148417fdebd2c0, type: 3}
+      propertyPath: fireSound
+      value: 
+      objectReference: {fileID: 8300000, guid: f996cf5d620a68c489c0c89ceccda0f7, type: 3}
+    - target: {fileID: 8464794624840630467, guid: cd95e20d816642547b148417fdebd2c0, type: 3}
       propertyPath: projectile
       value: 
       objectReference: {fileID: -437768195626343177, guid: 42cba720b3ab26346b1af094661beb74, type: 3}
+    - target: {fileID: 8464794624840630467, guid: cd95e20d816642547b148417fdebd2c0, type: 3}
+      propertyPath: reloadSound
+      value: 
+      objectReference: {fileID: 8300000, guid: bf2c8b8bbc3792a47a2988d6b998322b, type: 3}
+    - target: {fileID: 8464794624840630467, guid: cd95e20d816642547b148417fdebd2c0, type: 3}
+      propertyPath: fireSoundVolume
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8464794624840630467, guid: cd95e20d816642547b148417fdebd2c0, type: 3}
+      propertyPath: reloadSoundVolume
+      value: 0.8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 7646505252217869321, guid: cd95e20d816642547b148417fdebd2c0, type: 3}
