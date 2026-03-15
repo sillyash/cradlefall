@@ -4,6 +4,7 @@ using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
+using static UnityEngine.GraphicsBuffer;
 using Constants;
 
 public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
@@ -47,7 +48,6 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
 
     [SerializeField] private HealthBarScript healthBar;
     [SerializeField] public Camera mainCamera;
-    [SerializeField] private Transform TPSWeaponAnchorPoint;
     [SerializeField] private Transform FPSWeaponAnchorPoint;
     [SerializeField] private GameObject playerCanvas;
 
@@ -71,7 +71,7 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
 
         if (IsServer)
         {
-            var weaponObj = Instantiate(weaponPrefab, TPSWeaponAnchorPoint);
+            var weaponObj = Instantiate(weaponPrefab, FPSWeaponAnchorPoint);
             var weaponNetObj = weaponObj.GetComponent<NetworkObject>();
 
             weaponNetObj.SpawnWithOwnership(OwnerClientId);
@@ -133,14 +133,24 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
         }
 
         raycast();
-        weapon.transform.LookAt(targetPoint);
+
+        setWeaponRotation(45f, 10f);
 
         weaponInput();
     }
 
-    void UpdateHandPosition()
+    void setWeaponRotation(float maxY, float maxX)
     {
-        
+        weapon.transform.LookAt(targetPoint);
+
+        Vector3 localAngle = weapon.transform.localEulerAngles;
+
+        Debug.Log(localAngle.y);
+
+        localAngle.y = Mathf.Clamp(localAngle.y, 360f - maxY, 360f);
+        localAngle.x = Mathf.Clamp(localAngle.x, 360f - maxX, 360f);
+
+        weapon.transform.localEulerAngles = localAngle;
     }
 
     void weaponInput()
