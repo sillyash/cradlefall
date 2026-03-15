@@ -85,7 +85,7 @@ public class InteractionManager : NetworkBehaviour
             }
             CurrentHoldDuration = module.stats.repairTime;
             holdTimer += Time.deltaTime;
-            if (player.role == Roles.Role.Technicien) 
+            if ( player.role == Roles.Role.Technicien && !RoleModuleManager.instance.TechnicienModule.broken.Value) 
                 CurrentHoldDuration = CurrentHoldDuration/2 ;
 
             if (holdTimer >= CurrentHoldDuration)
