@@ -6,9 +6,6 @@ public class AmbienceMusicSetter : MonoBehaviour
     [Header("Volume musique d'ambiance pour cette scène")]
     [Range(0f,1f)]
     [SerializeField] private float ambienceVolume = 1f;
-    [Header("Son/Musique non-loopée superposée au lancement")]
-    [SerializeField] private AudioSource oneShotSource;
-    [SerializeField] private AudioClip oneShotClip;
 
     void Start()
     {
@@ -22,12 +19,6 @@ public class AmbienceMusicSetter : MonoBehaviour
                 musicSource.volume = ambienceVolume;
             }
         }
-        // Joue le son/musique non-loopé si assigné
-        if (oneShotSource != null && oneShotClip != null)
-        {
-            oneShotSource.clip = oneShotClip;
-            oneShotSource.loop = false;
-            oneShotSource.Play();
-        }
+        // ...existing code...
     }
 }

@@ -151,11 +151,13 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   soundFXManager: {fileID: 7607008661944621664}
   repairedSound: {fileID: 8300000, guid: 1697d474593da4b4c9c28452abe2cb0e, type: 3}
-  repairedSoundVolume: 1
+  repairedSoundVolume: 0.7
   repairSound: {fileID: 8300000, guid: 0d6578573bc78cc47b0b30bc773849c7, type: 3}
-  repairSoundVolume: 1
+  repairSoundVolume: 0.5
   damagedSound: {fileID: 8300000, guid: 086a982fff507ed44b239f2d2d5a5de4, type: 3}
   damagedSoundVolume: 1
+  damagedSound2: {fileID: 8300000, guid: c9efc12e77612a64a8c2866967049026, type: 3}
+  damagedSound2Volume: 0.8
   activationSound: {fileID: 8300000, guid: 863e964fba9f3c04facb2584fa97fc76, type: 3}
   activationSoundVolume: 1
   behaviour: {fileID: 0}

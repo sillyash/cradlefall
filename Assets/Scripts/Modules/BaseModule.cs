@@ -12,6 +12,8 @@ public class BaseModule : NetworkBehaviour
     [SerializeField] [Range(0f, 1f)] private float repairSoundVolume = 1f;
     [SerializeField] private AudioClip damagedSound;
     [SerializeField] [Range(0f, 1f)] private float damagedSoundVolume = 1f;
+    [SerializeField] private AudioClip damagedSound2;
+    [SerializeField] [Range(0f, 1f)] private float damagedSound2Volume = 1f;
     [SerializeField] private AudioClip activationSound;
     [SerializeField] [Range(0f, 1f)] private float activationSoundVolume = 1f;
 
@@ -113,9 +115,11 @@ public class BaseModule : NetworkBehaviour
         broken.Value = true;
         behaviour.OnBreak(this);
         Debug.LogWarning("The module is broken " + gameObject.name);
-        if (damagedSound != null && soundFXManager != null)
-        {
-            soundFXManager.PlaySoundFXClip(damagedSound, transform, damagedSoundVolume);
+        if (soundFXManager != null) {
+            if (damagedSound != null)
+                soundFXManager.PlaySoundFXClip(damagedSound, transform, damagedSoundVolume);
+            if (damagedSound2 != null)
+                soundFXManager.PlaySoundFXClip(damagedSound2, transform, damagedSound2Volume);
         }
     }
 
@@ -133,7 +137,7 @@ public class BaseModule : NetworkBehaviour
         }
     }
 
-    // Appeler cette méthode lors d'une activation de module
+    // Appeler cette méthode lors d'une activation de module (pas utilisée pour le moment)
     public void PlayActivationSound()
     {
         if (activationSound != null && soundFXManager != null)
