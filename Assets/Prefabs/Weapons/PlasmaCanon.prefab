@@ -217,7 +217,7 @@ PrefabInstance:
     - target: {fileID: 8464794624840630467, guid: cd95e20d816642547b148417fdebd2c0, type: 3}
       propertyPath: projectile
       value: 
-      objectReference: {fileID: -437768195626343177, guid: 42cba720b3ab26346b1af094661beb74, type: 3}
+      objectReference: {fileID: 9134135301240377418, guid: dae20e998637ad0448fab7b16b2ddb87, type: 3}
     - target: {fileID: 8464794624840630467, guid: cd95e20d816642547b148417fdebd2c0, type: 3}
       propertyPath: reloadSound
       value: 
