@@ -13,7 +13,8 @@ public class GameManager : NetworkBehaviour
     [SerializeField] private GameObject ProjectileMachine;
     [SerializeField] private GameObject LightManager;
     [SerializeField] private GameObject LobbyManager;
-    [SerializeField] private GameObject ChargingStation;
+    [SerializeField] private GameObject RoleModuleManager;
+    [SerializeField] private GameObject ChargingStationManager;
 
     public NetworkVariable<GameState> currentState = new(
         GameState.Playing,
@@ -94,7 +95,10 @@ public class GameManager : NetworkBehaviour
         var lightManager = Instantiate(LightManager);
         lightManager.GetComponent<NetworkObject>().Spawn();
 
-        var chargingStationsManager = Instantiate(ChargingStation);
+        var roleModuleManager = Instantiate(RoleModuleManager);
+        roleModuleManager.GetComponent<NetworkObject>().Spawn();
+
+        var chargingStationsManager = Instantiate(ChargingStationManager);
         chargingStationsManager.GetComponent<NetworkObject>().Spawn();
 
         StartCoroutine(SpawnPlayersAfterDelay());
@@ -166,15 +170,6 @@ public class GameManager : NetworkBehaviour
     public void ReturnToMainMenu()
     {
         ChangeScene(Scenes.MainMenu);
-        Cursor.lockState = CursorLockMode.None;
-    }
-
-    /// <summary>
-    /// Go to multiplayer screen from main menu
-    /// </summary>
-    public void GoToMultiScreen()
-    {
-        ChangeScene(Scenes.MultiScreen);
         Cursor.lockState = CursorLockMode.None;
     }
 
