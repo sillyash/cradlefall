@@ -19,3 +19,6 @@ MonoBehaviour:
   attackCooldown: 0
   detectionRange: 15
   cost: 10
+  attackSound: {fileID: 8300000, guid: 83006cc0db065414bbefe83b2a555134, type: 3}
+  deathSound: {fileID: 8300000, guid: 83006cc0db065414bbefe83b2a555134, type: 3}
+  soundVolume: 1
