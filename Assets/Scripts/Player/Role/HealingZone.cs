@@ -11,7 +11,7 @@ public class HealingZone : NetworkBehaviour
 
         if (other.TryGetComponent(out basePlayer player))
         {
-            if (player.role != Constants.Roles.Role.Soigneur)
+            if (!RoleModuleManager.instance.SoigneurModule.broken.Value && player.role != Constants.Roles.Role.Soigneur)
             {
                 player.Heal(healPerSeconde * Time.deltaTime);
             }
