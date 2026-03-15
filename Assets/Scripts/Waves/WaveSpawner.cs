@@ -4,6 +4,11 @@ using Unity.Netcode;
 
 public class WaveSpawner : NetworkBehaviour
 {
+
+    [Header("Musique d'intro pour chaque vague")]
+    [SerializeField] private AudioClip introMusicClip;
+    [SerializeField, Range(0f,1f)] private float introMusicVolume = 1f;
+    [SerializeField] private AudioSource introMusicSource;
     [SerializeField] private float countdown;
     public WaveBehavior[] waves;
     public event System.Action WaveFinished; // Pour affichage HUD
@@ -61,6 +66,21 @@ public class WaveSpawner : NetworkBehaviour
 
         if (countdownTimer.Value <= 0f)
         {
+            // Joue la musique d'intro en superposition, sans couper l'ambiance
+            if (introMusicClip != null)
+            {
+                if (introMusicSource == null)
+                {
+                    introMusicSource = gameObject.AddComponent<AudioSource>();
+                    introMusicSource.playOnAwake = false;
+                    introMusicSource.loop = false;
+                    introMusicSource.spatialBlend = 0f;
+                }
+                introMusicSource.clip = introMusicClip;
+                introMusicSource.volume = introMusicVolume;
+                introMusicSource.Play();
+            }
+
             WaveStarted?.Invoke();
             isSpawning = true;
             StartCoroutine(SpawnCurrentWave());

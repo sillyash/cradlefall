@@ -162,6 +162,10 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 1292353050
       objectReference: {fileID: 0}
+    - target: {fileID: 6258253186095171832, guid: cd95e20d816642547b148417fdebd2c0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 10.43
+      objectReference: {fileID: 0}
     - target: {fileID: 6743035374156675202, guid: cd95e20d816642547b148417fdebd2c0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -207,11 +211,28 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: ef04e001d3d0f774aa58775568fc422a, type: 2}
     - target: {fileID: 8464794624840630467, guid: cd95e20d816642547b148417fdebd2c0, type: 3}
+      propertyPath: fireSound
+      value: 
+      objectReference: {fileID: 8300000, guid: f996cf5d620a68c489c0c89ceccda0f7, type: 3}
+    - target: {fileID: 8464794624840630467, guid: cd95e20d816642547b148417fdebd2c0, type: 3}
       propertyPath: projectile
       value: 
       objectReference: {fileID: 9134135301240377418, guid: dae20e998637ad0448fab7b16b2ddb87, type: 3}
+    - target: {fileID: 8464794624840630467, guid: cd95e20d816642547b148417fdebd2c0, type: 3}
+      propertyPath: reloadSound
+      value: 
+      objectReference: {fileID: 8300000, guid: bf2c8b8bbc3792a47a2988d6b998322b, type: 3}
+    - target: {fileID: 8464794624840630467, guid: cd95e20d816642547b148417fdebd2c0, type: 3}
+      propertyPath: fireSoundVolume
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8464794624840630467, guid: cd95e20d816642547b148417fdebd2c0, type: 3}
+      propertyPath: reloadSoundVolume
+      value: 0.3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 7646505252217869321, guid: cd95e20d816642547b148417fdebd2c0, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 6743035374156675202, guid: cd95e20d816642547b148417fdebd2c0, type: 3}
       insertIndex: 0
