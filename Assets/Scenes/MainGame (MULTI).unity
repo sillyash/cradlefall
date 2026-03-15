@@ -16872,7 +16872,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   introMusicClip: {fileID: 8300000, guid: dded2a53b35401a4b91e86a38cb5ed1d, type: 3}
-  introMusicVolume: 0.5
+  introMusicVolume: 0.4
   introMusicSource: {fileID: 0}
   countdown: 5
   waves:
