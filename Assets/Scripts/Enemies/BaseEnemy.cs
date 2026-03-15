@@ -18,7 +18,7 @@ public class BaseEnemy : NetworkBehaviour, ICanDie, IDamageable
     public float maxHealth { get; set; }
 
     private GameObject m_Target;
-    private NavMeshAgent m_Agent;
+    public NavMeshAgent m_Agent;
     private Animator m_Animator;
 
     public bool isAttacking = false;
@@ -56,17 +56,21 @@ public class BaseEnemy : NetworkBehaviour, ICanDie, IDamageable
         maxHealth = stats.health;
         m_Agent.stoppingDistance = stats.attackRange;
         m_Agent.speed = stats.moveSpeed;
+
+        SecretFeature.OnCheatCode += startDancingRpc;
+
         if (IsServer)
         {
             Health.Value = stats.health;
         }
-
+       
         NetworkObject.DestroyWithScene = true;
     }
 
     void Update()
     {
         if (!IsServer) return;
+
         if (!isDead)
         {
             if (m_Agent.velocity.magnitude >= 0.1f)
@@ -261,5 +265,30 @@ public class BaseEnemy : NetworkBehaviour, ICanDie, IDamageable
     public Boolean isServer()
     {
         return IsServer;
+    }
+
+
+
+    //------------------------- ULTRA SECRET --------------------------
+
+    bool IsDancing()
+    {
+        return m_Animator.GetCurrentAnimatorStateInfo(0).IsName("secretState");
+    }
+
+
+    [Rpc(SendTo.Everyone)]
+    void startDancingRpc(Quaternion rotation)
+    {
+        // TODO: rotate to face player
+        isDead = true;
+
+        m_Agent.isStopped = true;
+        //m_Agent.updateRotation = false;
+
+        
+        m_Animator.applyRootMotion = true;
+        m_Animator.SetTrigger("Dance");
+        //transform.rotation = rotation;
     }
 }
