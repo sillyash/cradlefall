@@ -88,6 +88,7 @@ public class PlayerController : PlayerMovement
 
     protected override void ApplyFinalMovement()
     {
+        speed = (RoleModuleManager.instance.DPSModule.broken.Value) ? speed / 2 : speed;
         characterController.Move((move * speed + velocity) * Time.deltaTime);
     }
 }
