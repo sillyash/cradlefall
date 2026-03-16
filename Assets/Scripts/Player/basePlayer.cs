@@ -4,10 +4,14 @@ using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
+using static UnityEngine.GraphicsBuffer;
 using Constants;
 
 public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
 {
+    
+    [Header("Sound FX Manager")]
+    [SerializeField] private SoundFXManager soundFXManager;
     public static float TARGET_DISTANCE = 5;
     public static float MIN_RAY_DISTANCE = 3;
 
@@ -26,9 +30,24 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
     public float health { get; set; }
     public float maxHealth { get; set; }
 
+    [Header("Sons vie")]
+    [SerializeField] private AudioClip[] damageSounds;
+    [SerializeField, Range(0f, 1f)] private float damageSoundVolume = 1f;
+    [SerializeField] private AudioClip healSound;
+    [SerializeField] private AudioClip lowHealthSound;
+    [SerializeField, Range(0.01f, 1f)] private float lowHealthThreshold = 0.25f;
+    [SerializeField] private float lowHealthRepeatDelay = 5f;
+    [SerializeField] private float damageSoundCooldown = 0.1f;
+    [SerializeField] private float healSoundCooldown = 0.25f;
+
+    private float lastHealth = 0f;
+    private float lastDamageSoundTime = -100f;
+    private float lastHealSoundTime = -100f;
+    private float lastLowHealthSoundTime = -100f;
+    private bool lowHealthActive = false;
+
     [SerializeField] private HealthBarScript healthBar;
     [SerializeField] public Camera mainCamera;
-    [SerializeField] private Transform TPSWeaponAnchorPoint;
     [SerializeField] private Transform FPSWeaponAnchorPoint;
     [SerializeField] private GameObject playerCanvas;
 
@@ -52,7 +71,7 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
 
         if (IsServer)
         {
-            var weaponObj = Instantiate(weaponPrefab, TPSWeaponAnchorPoint);
+            var weaponObj = Instantiate(weaponPrefab, FPSWeaponAnchorPoint);
             var weaponNetObj = weaponObj.GetComponent<NetworkObject>();
 
             weaponNetObj.SpawnWithOwnership(OwnerClientId);
@@ -76,6 +95,8 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
 
             health = stats.health;
             maxHealth = stats.health;
+            lastHealth = health;
+            lowHealthActive = health <= maxHealth * lowHealthThreshold;
             NetworkObject.DestroyWithScene = false;
         }
         else
@@ -105,15 +126,29 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
         if (!IsOwner) return;
         if (PauseMenu.isPaused) return;
 
+        if (!Mathf.Approximately(health, lastHealth))
+        {
+            HandleHealthChanged(lastHealth, health);
+            lastHealth = health;
+        }
+
         raycast();
-        weapon.transform.LookAt(targetPoint);
+
+        setWeaponRotation(45f, 10f);
 
         weaponInput();
     }
 
-    void UpdateHandPosition()
+    void setWeaponRotation(float maxY, float maxX)
     {
-        
+        weapon.transform.LookAt(targetPoint);
+
+        Vector3 localAngle = weapon.transform.localEulerAngles;
+
+        localAngle.y = Mathf.Clamp(localAngle.y, 360f - maxY, 360f);
+        localAngle.x = Mathf.Clamp(localAngle.x, 360f - maxX, 360f);
+
+        weapon.transform.localEulerAngles = localAngle;
     }
 
     void weaponInput()
@@ -185,11 +220,69 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
     {
         return !(hit.collider.TryGetComponent(out IDamageable hitObject) && hit.distance < MIN_RAY_DISTANCE);
     }
+
+    private void HandleHealthChanged(float oldHealth, float newHealth)
+    {
+        if (!IsOwner || Mathf.Approximately(oldHealth, newHealth) || soundFXManager == null) return;
+
+        float now = Time.time;
+
+        bool wasLow = maxHealth > 0 && oldHealth <= maxHealth * lowHealthThreshold;
+        bool isLow = maxHealth > 0 && newHealth <= maxHealth * lowHealthThreshold;
+
+        if (newHealth < oldHealth && damageSounds != null && damageSounds.Length > 0 && now - lastDamageSoundTime >= damageSoundCooldown)
+        {
+            var clip = damageSounds[UnityEngine.Random.Range(0, damageSounds.Length)];
+            if (clip != null)
+            {
+                soundFXManager.PlaySoundFXClip(clip, transform, damageSoundVolume);
+                lastDamageSoundTime = now;
+            }
+        }
+
+        if (newHealth > oldHealth && healSound != null && now - lastHealSoundTime >= healSoundCooldown)
+        {
+            soundFXManager.PlaySoundFXClip(healSound, transform, 1f);
+            lastHealSoundTime = now;
+        }
+
+        if (isLow)
+        {
+            if (!lowHealthActive || now - lastLowHealthSoundTime >= lowHealthRepeatDelay)
+            {
+                if (lowHealthSound != null)
+                {
+                    soundFXManager.PlaySoundFXClip(lowHealthSound, transform, 1f);
+                }
+                lowHealthActive = true;
+                lastLowHealthSoundTime = now;
+            }
+        }
+        else
+        {
+            lowHealthActive = false;
+        }
+    }
+
+    public void Heal(float amount)
+    {
+        if (!IsOwner || isDead || amount <= 0f) return;
+
+        float oldHealth = health;
+        health = Mathf.Min(maxHealth, health + amount);
+        HandleHealthChanged(oldHealth, health);
+    }
+
     public void TakeDamage(float damage)
     {
         if (!IsOwner) return;
-        health -= damage;
-        if (health < 0)
+
+        float oldHealth = health;
+        health = Mathf.Max(0f, health - damage);
+
+        HandleHealthChanged(oldHealth, health);
+
+        if (health <= 0f)
         {
             isDead = true;
             Die();

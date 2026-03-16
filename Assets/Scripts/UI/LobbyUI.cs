@@ -11,6 +11,9 @@ using System;
 /// </summary>
 public class LobbyUI : MonoBehaviour
 {
+    [Header("Sound FX Manager")]
+    [SerializeField] private SoundFXManager soundFXManager;
+
     [Header("UI Elements")]
     [SerializeField] private Button readyButton;
     [SerializeField] private Button flecheGauche;
@@ -19,6 +22,12 @@ public class LobbyUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI statusText;
     [SerializeField] private TextMeshProUGUI playerCountText;
     [SerializeField] private TextMeshProUGUI RoleText;
+
+    [Header("Audio")]
+    [SerializeField] private AudioClip buttonClickSound;
+    [SerializeField] [Range(0f,1f)] private float buttonClickVolume = 1f;
+    [SerializeField] private AudioClip buttonHoverSound;
+    [SerializeField] [Range(0f,1f)] private float buttonHoverVolume = 1f;
 
     private int roleIndex = 0;
     private List<string> roles;
@@ -88,8 +97,25 @@ public class LobbyUI : MonoBehaviour
         UpdateUI();
     }
 
+    private void PlayButtonSound()
+    {
+        if (buttonClickSound != null && soundFXManager != null)
+        {
+            soundFXManager.PlaySoundFXClip(buttonClickSound, transform, buttonClickVolume);
+        }
+    }
+
+    public void OnButtonHover()
+    {
+        if (buttonHoverSound != null && soundFXManager != null)
+        {
+            soundFXManager.PlaySoundFXClip(buttonHoverSound, transform, buttonHoverVolume);
+        }
+    }
+
     private void OnReadyButtonClicked()
     {
+        PlayButtonSound();
         if (LobbyManager.Instance == null) return;
 
         LobbyManager.Instance.SetLocalReady(roleIndex);
@@ -97,6 +123,7 @@ public class LobbyUI : MonoBehaviour
 
     private void OnFlecheGaucheClicked()
     {
+        PlayButtonSound();
         if (LobbyManager.Instance.IsReady(NetworkManager.Singleton.LocalClientId)) return;
         roleIndex = (roleIndex - 1 + roles.Count) % roles.Count;
         RoleText.text = roles[roleIndex];
@@ -104,6 +131,7 @@ public class LobbyUI : MonoBehaviour
 
     private void OnFlecheDroiteClicked()
     {
+        PlayButtonSound();
         if (LobbyManager.Instance.IsReady(NetworkManager.Singleton.LocalClientId)) return;
         roleIndex = (roleIndex + 1) % roles.Count;
         RoleText.text = roles[roleIndex];
@@ -111,7 +139,6 @@ public class LobbyUI : MonoBehaviour
 
     private void UpdateUI()
     {
-        Debug.Log("UPDATE");
         if (LobbyManager.Instance == null)
         {
             if (statusText != null)
