@@ -12,7 +12,7 @@ public class LobbyManager : NetworkBehaviour
 
 	[SerializeField] private int minPlayersToStart = 1;
 
-	private NetworkList<ulong> readyClients = new NetworkList<ulong>();
+    public NetworkList<ulong> readyClients = new NetworkList<ulong>();
 
     public void Awake()
     {
@@ -23,14 +23,15 @@ public class LobbyManager : NetworkBehaviour
         }
         else
         {
-            // Destroy(gameObject);
+            Destroy(gameObject);
         }
     }
 
     public override void OnNetworkSpawn()
 	{
         if (!IsServer) return;
-	}
+        readyClients.Clear();
+    }
 
 	public bool IsReady(ulong clientId)
 	{
@@ -41,55 +42,32 @@ public class LobbyManager : NetworkBehaviour
 	public bool AllReady => PlayerManager.Instance?.NbOfActiveClients.Value >= minPlayersToStart
 						&& readyClients.Count == PlayerManager.Instance?.NbOfActiveClients.Value;
 
-	public void SetLocalReady(bool ready, int roleIdex)
+	public void SetLocalReady(int roleIndex)
 	{
-        if (IsClient)
-        {
-            PlayerManager.Instance.SetRoleForClient(roleIdex, OwnerClientId);
-		    SetReadyServerRpc(ready);
-        } else
-        {
-            if (ready)
-            {
-                if (!readyClients.Contains(OwnerClientId))
-                {
-                    readyClients.Add(OwnerClientId);
-                }
-            }
-            else
-            {
-                readyClients.Remove(OwnerClientId);
-            }
-
-            if (AllReady)
-            {
-                GameManager.instance?.PlayGame();
-            }
-        }
-	}
+        if (!IsClient) return;
+        SetReadyServerRpc(roleIndex);
+    }
 
     [Rpc(SendTo.Server, InvokePermission = RpcInvokePermission.Everyone)]
-    private void SetReadyServerRpc(bool ready, RpcParams rpcParams = default)
+    private void SetReadyServerRpc(int roleIndex, RpcParams rpcParams = default)
     {
-        if (!IsServer) return;
+        ulong clientId = rpcParams.Receive.SenderClientId;
+        PlayerManager.Instance.SetRoleForClient(roleIndex, clientId);
 
-		ulong clientId = rpcParams.Receive.SenderClientId;
+        if (!IsReady(clientId))
+        {
+            readyClients.Add(clientId);
+        }
+        else
+        {
+            readyClients.Remove(clientId);
+        }
 
-		if (ready)
-		{
-			if (!readyClients.Contains(clientId))
-			{
-				readyClients.Add(clientId);
-			}
-		}
-		else
-		{
-			readyClients.Remove(clientId);
-		}
-
-		if (AllReady)
-		{
+        foreach ( ulong client in readyClients )
+        {
+            Debug.Log(client);
+        }
+        if (AllReady)
             GameManager.instance?.PlayGame();
-		}
-	}
+    }
 }

@@ -4,12 +4,16 @@ using UnityEngine.UI;
 using TMPro;
 using System.Collections.Generic;
 using Constants;
+using System;
 
 /// <summary>
 /// UI controller for the lobby scene
 /// </summary>
 public class LobbyUI : MonoBehaviour
 {
+    [Header("Sound FX Manager")]
+    [SerializeField] private SoundFXManager soundFXManager;
+
     [Header("UI Elements")]
     [SerializeField] private Button readyButton;
     [SerializeField] private Button flecheGauche;
@@ -19,11 +23,17 @@ public class LobbyUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI playerCountText;
     [SerializeField] private TextMeshProUGUI RoleText;
 
-    private bool isLocalPlayerReady = false;
+    [Header("Audio")]
+    [SerializeField] private AudioClip buttonClickSound;
+    [SerializeField] [Range(0f,1f)] private float buttonClickVolume = 1f;
+    [SerializeField] private AudioClip buttonHoverSound;
+    [SerializeField] [Range(0f,1f)] private float buttonHoverVolume = 1f;
+
     private int roleIndex = 0;
     private List<string> roles;
+    private int nbOfReadyClient;
 
-    private void Awake()
+    public void Awake()
     {
         if (readyButton != null)
         {
@@ -40,48 +50,96 @@ public class LobbyUI : MonoBehaviour
 
         roles = Roles.roles;
         RoleText.text = roles[roleIndex];
-        Debug.Log(roles[roleIndex]);
 
+        if (LobbyManager.Instance != null)
+        {
+            LobbyManager.Instance.readyClients.OnListChanged += OnReadyListChanged;
+        }        
+        if (PlayerManager.Instance != null)
+        {
+            PlayerManager.Instance.NbOfActiveClients.OnValueChanged += OnPlayerCountChange;
+        }
+    }
+
+    private void Update()
+    {
+        // This is a fallback for client if update event is late
+        if (LobbyManager.Instance == null || !LobbyManager.Instance.IsSpawned)
+            return;
+
+        int newValue = LobbyManager.Instance.readyClients.Count;
+        if (nbOfReadyClient != newValue)
+            UpdateUI();
+
+        nbOfReadyClient = newValue;
+    }
+
+    public void OnDestroy()
+    {
+        if (LobbyManager.Instance != null)
+        {
+            LobbyManager.Instance.readyClients.OnListChanged -= OnReadyListChanged;
+        }
+
+        if (PlayerManager.Instance != null)
+        {
+            PlayerManager.Instance.NbOfActiveClients.OnValueChanged -= OnPlayerCountChange;
+        }
+    }
+
+    private void OnReadyListChanged(NetworkListEvent<ulong> changeEvent)
+    {
         UpdateUI();
     }
 
-    public void Update()
+    private void OnPlayerCountChange(int previousValue, int newValue)
     {
-        // Update UI every frame to reflect lobby state
-        if (LobbyManager.Instance != null)
+        UpdateUI();
+    }
+
+    private void PlayButtonSound()
+    {
+        if (buttonClickSound != null && soundFXManager != null)
         {
-            UpdateUI();
+            soundFXManager.PlaySoundFXClip(buttonClickSound, transform, buttonClickVolume);
+        }
+    }
+
+    public void OnButtonHover()
+    {
+        if (buttonHoverSound != null && soundFXManager != null)
+        {
+            soundFXManager.PlaySoundFXClip(buttonHoverSound, transform, buttonHoverVolume);
         }
     }
 
     private void OnReadyButtonClicked()
     {
+        PlayButtonSound();
         if (LobbyManager.Instance == null) return;
 
-        isLocalPlayerReady = !isLocalPlayerReady;
-        LobbyManager.Instance.SetLocalReady(isLocalPlayerReady, roleIndex);
-
-        UpdateUI();
+        LobbyManager.Instance.SetLocalReady(roleIndex);
     }
 
     private void OnFlecheGaucheClicked()
     {
-        roleIndex--;
-        if (roleIndex < 0) roleIndex = roles.Count - 1;
+        PlayButtonSound();
+        if (LobbyManager.Instance.IsReady(NetworkManager.Singleton.LocalClientId)) return;
+        roleIndex = (roleIndex - 1 + roles.Count) % roles.Count;
         RoleText.text = roles[roleIndex];
-        UpdateUI();
     }
 
     private void OnFlecheDroiteClicked()
     {
-        roleIndex++;
-        if (roleIndex >= roles.Count) roleIndex = 0;
+        PlayButtonSound();
+        if (LobbyManager.Instance.IsReady(NetworkManager.Singleton.LocalClientId)) return;
+        roleIndex = (roleIndex + 1) % roles.Count;
         RoleText.text = roles[roleIndex];
-        UpdateUI();
     }
 
     private void UpdateUI()
     {
+        Debug.Log("UPDATE");
         if (LobbyManager.Instance == null)
         {
             if (statusText != null)
@@ -92,7 +150,7 @@ public class LobbyUI : MonoBehaviour
         // Update ready button
         if (readyButton != null && readyButtonText != null)
         {
-            readyButtonText.text = isLocalPlayerReady ? "Not Ready" : "Ready";
+            readyButtonText.text = (LobbyManager.Instance.IsReady(NetworkManager.Singleton.LocalClientId)) ? "Not Ready" : "Ready";
             readyButton.interactable = NetworkManager.Singleton != null && NetworkManager.Singleton.IsClient;
         }
 
@@ -113,14 +171,6 @@ public class LobbyUI : MonoBehaviour
             {
                 statusText.text = $"Waiting for players to ready up...";
             }
-        }
-    }
-
-    private void OnDestroy()
-    {
-        if (readyButton != null)
-        {
-            readyButton.onClick.RemoveListener(OnReadyButtonClicked);
         }
     }
 }

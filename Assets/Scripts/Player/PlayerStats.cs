@@ -5,4 +5,5 @@ public class PlayerStats : ScriptableObject
 {
     public float health;
     public float InteractionRange;
+    public float maxBattery;
 }

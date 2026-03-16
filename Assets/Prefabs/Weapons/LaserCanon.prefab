@@ -469,6 +469,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 5.4
       objectReference: {fileID: 0}
+    - target: {fileID: 6258253186095171832, guid: cd95e20d816642547b148417fdebd2c0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 6258253186095171832, guid: cd95e20d816642547b148417fdebd2c0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 7.82
+      objectReference: {fileID: 0}
     - target: {fileID: 6743035374156675202, guid: cd95e20d816642547b148417fdebd2c0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -514,11 +522,28 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 2da0e9c85f3b34448976ded88a280e8c, type: 2}
     - target: {fileID: 8464794624840630467, guid: cd95e20d816642547b148417fdebd2c0, type: 3}
+      propertyPath: fireSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 241ace1bf8e5dc444a592de390e16a33, type: 3}
+    - target: {fileID: 8464794624840630467, guid: cd95e20d816642547b148417fdebd2c0, type: 3}
       propertyPath: projectile
       value: 
       objectReference: {fileID: 3811676059042208083, guid: 9dbdb175b761565428f2fe912e7b4e19, type: 3}
+    - target: {fileID: 8464794624840630467, guid: cd95e20d816642547b148417fdebd2c0, type: 3}
+      propertyPath: reloadSound
+      value: 
+      objectReference: {fileID: 8300000, guid: f2eaeba4061392d49bd86c9a181dfb12, type: 3}
+    - target: {fileID: 8464794624840630467, guid: cd95e20d816642547b148417fdebd2c0, type: 3}
+      propertyPath: fireSoundVolume
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8464794624840630467, guid: cd95e20d816642547b148417fdebd2c0, type: 3}
+      propertyPath: reloadSoundVolume
+      value: 0.4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 7646505252217869321, guid: cd95e20d816642547b148417fdebd2c0, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 6743035374156675202, guid: cd95e20d816642547b148417fdebd2c0, type: 3}
       insertIndex: 0

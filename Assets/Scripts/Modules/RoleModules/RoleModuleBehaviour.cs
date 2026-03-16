@@ -1,0 +1,32 @@
+using UnityEngine;
+using Unity.Netcode;
+using Constants;
+
+[CreateAssetMenu(menuName = "Modules/Behaviours/Role")]
+public class RoleModuleBehaviour : ModuleBehavior
+{
+    BaseModule module;
+    public event System.Action<BaseModule> OnBreakEvent;
+    public event System.Action<BaseModule> OnRepairEvent;
+
+    public bool isBroken = false;
+
+    public Roles.Role role;
+
+    public override void OnStart(BaseModule module)
+    {
+        RoleModuleManager.instance.SubToModule(module);
+    }
+
+    public override void OnBreak(BaseModule module)
+    {
+        isBroken = true;
+        OnBreakEvent?.Invoke(module);
+    }
+
+    public override void OnRepair(BaseModule module)
+    {
+        isBroken = false;
+        OnRepairEvent?.Invoke(module);
+    }
+}
