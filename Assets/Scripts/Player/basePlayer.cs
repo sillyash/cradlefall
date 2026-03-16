@@ -145,8 +145,6 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
 
         Vector3 localAngle = weapon.transform.localEulerAngles;
 
-        Debug.Log(localAngle.y);
-
         localAngle.y = Mathf.Clamp(localAngle.y, 360f - maxY, 360f);
         localAngle.x = Mathf.Clamp(localAngle.x, 360f - maxX, 360f);
 

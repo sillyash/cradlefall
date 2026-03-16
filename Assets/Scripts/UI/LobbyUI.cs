@@ -139,7 +139,6 @@ public class LobbyUI : MonoBehaviour
 
     private void UpdateUI()
     {
-        Debug.Log("UPDATE");
         if (LobbyManager.Instance == null)
         {
             if (statusText != null)
