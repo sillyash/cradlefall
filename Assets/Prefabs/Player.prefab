@@ -616,6 +616,7 @@ MonoBehaviour:
   damageSoundCooldown: 0.1
   healSoundCooldown: 0.25
   healthBar: {fileID: 5396288261416054644}
+  damageUI: {fileID: 803167269282243736}
   mainCamera: {fileID: 95665150144060911}
   FPSWeaponAnchorPoint: {fileID: 316491725339577519}
   playerCanvas: {fileID: 2466486089039789121}
@@ -862,6 +863,7 @@ GameObject:
   - component: {fileID: 3260261283463861880}
   - component: {fileID: 3151593533805316743}
   - component: {fileID: 6428159115362256032}
+  - component: {fileID: 803167269282243736}
   m_Layer: 8
   m_Name: damageFX
   m_TagString: Untagged
@@ -909,7 +911,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.21692765, b: 0, a: 1}
+  m_Color: {r: 1, g: 0.21692765, b: 0, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -926,6 +928,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &803167269282243736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6912434317261835634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 137c43b1580b5b24aaff198926720dd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageSprite: {fileID: 6428159115362256032}
 --- !u!1 &7911606507211445311
 GameObject:
   m_ObjectHideFlags: 0
