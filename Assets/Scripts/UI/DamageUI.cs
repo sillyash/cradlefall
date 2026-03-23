@@ -1,3 +1,4 @@
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -5,6 +6,7 @@ public class DamageUI : MonoBehaviour
 {
     [SerializeField] private Image damageSprite;
 
+    public float minTarget { get; set; } = 0f;
     public float alphaTarget { get; set; }  = 0f;
     
     private Color color;
@@ -18,7 +20,7 @@ public class DamageUI : MonoBehaviour
 
         if(alphaTarget != 0 && color.a >= alphaTarget - RESET_TOLERANCE)
         {
-            alphaTarget = 0f;
+            alphaTarget = minTarget;
         }
 
         damageSprite.color = color;

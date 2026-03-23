@@ -255,6 +255,7 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
                 if (lowHealthSound != null)
                 {
                     soundFXManager.PlaySoundFXClip(lowHealthSound, transform, 1f);
+                    damageUI.minTarget = 0.1f;
                 }
                 lowHealthActive = true;
                 lastLowHealthSoundTime = now;
