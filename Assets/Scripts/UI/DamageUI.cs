@@ -16,7 +16,7 @@ public class DamageUI : MonoBehaviour
         color = damageSprite.color;
         color.a = Mathf.Lerp(damageSprite.color.a, alphaTarget, 0.1f);
 
-        if(color.a >= 1f - RESET_TOLERANCE)
+        if(alphaTarget != 0 && color.a >= alphaTarget - RESET_TOLERANCE)
         {
             alphaTarget = 0f;
         }

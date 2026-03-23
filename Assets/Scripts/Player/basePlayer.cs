@@ -237,7 +237,7 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
             if (clip != null)
             {
                 soundFXManager.PlaySoundFXClip(clip, transform, damageSoundVolume);
-                damageUI.alphaTarget = 1f;
+                damageUI.alphaTarget = 1f - newHealth/maxHealth;
                 lastDamageSoundTime = now;
             }
         }
