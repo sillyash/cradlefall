@@ -1,7 +1,8 @@
 using UnityEngine;
 using System.Collections;
+using Unity.Netcode;
 
-public class BaseWeapon : MonoBehaviour
+public class BaseWeapon : NetworkBehaviour
 {
 
     [Header("Sound FX Manager")]
@@ -29,6 +30,25 @@ public class BaseWeapon : MonoBehaviour
     public event System.Action OnReloadStart;
     public event System.Action OnReloadEnd;
 
+    public NetworkVariable<bool> networkFire = new(
+        false,
+        NetworkVariableReadPermission.Everyone,
+        NetworkVariableWritePermission.Owner
+    );
+
+
+    public override void OnNetworkSpawn()
+    {
+        if (!IsOwner) return;
+       
+        networkFire.OnValueChanged += (oldValue, newValue) =>
+        {
+            if (newValue)
+            {
+                PlayFireFX();
+            }
+        };
+    }
 
     void Start()
     {
@@ -53,23 +73,31 @@ public class BaseWeapon : MonoBehaviour
             ammoCount--;
             OnAmmoChanged?.Invoke();
             OnFire?.Invoke(this);
-            if (muzzleFlash != null) // Only for weapons with muzzle flash
-            {
-                muzzleFlash.PlayMuzzleFlash();
-            }
-            if (fireSound != null && soundFXManager != null)
-            {
-                soundFXManager.PlaySoundFXClip(fireSound, transform, fireSoundVolume);
-            }
+            networkFire.Value = true;
+            Debug.Log(networkFire.Value);
             isReadyToShoot = false;
             StartCoroutine(FireCooldown());
         }  
+    }
+
+    public void PlayFireFX()
+    {
+        if (muzzleFlash != null) // Only for weapons with muzzle flash
+        {
+            muzzleFlash.PlayMuzzleFlash();
+        }
+        if (fireSound != null && soundFXManager != null)
+        {
+            soundFXManager.PlaySoundFXClip(fireSound, transform, fireSoundVolume);
+        }
     }
 
     IEnumerator FireCooldown()
     {
         yield return new WaitForSeconds(stats.shootingCooldown);
         isReadyToShoot = true;
+        networkFire.Value = false;
+        Debug.Log(networkFire.Value);
     }
 
     public void Reload()
