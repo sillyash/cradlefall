@@ -47,6 +47,7 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
     private bool lowHealthActive = false;
 
     [SerializeField] private HealthBarScript healthBar;
+    [SerializeField] private DamageUI damageUI;
     [SerializeField] public Camera mainCamera;
     [SerializeField] private Transform FPSWeaponAnchorPoint;
     [SerializeField] private GameObject playerCanvas;
@@ -236,6 +237,7 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
             if (clip != null)
             {
                 soundFXManager.PlaySoundFXClip(clip, transform, damageSoundVolume);
+                damageUI.alphaTarget = 1f - newHealth/maxHealth;
                 lastDamageSoundTime = now;
             }
         }
@@ -253,6 +255,7 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
                 if (lowHealthSound != null)
                 {
                     soundFXManager.PlaySoundFXClip(lowHealthSound, transform, 1f);
+                    damageUI.minTarget = 0.1f;
                 }
                 lowHealthActive = true;
                 lastLowHealthSoundTime = now;
@@ -272,6 +275,7 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
         health = Mathf.Min(maxHealth, health + amount);
         HandleHealthChanged(oldHealth, health);
     }
+
 
     public void TakeDamage(float damage)
     {
