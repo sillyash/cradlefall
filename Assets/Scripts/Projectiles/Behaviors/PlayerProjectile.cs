@@ -9,24 +9,13 @@ using UnityEngine.VFX;
 public class PlayerProjectile : ProjectileBehavior
 {
 
-    public override void HandleCollision(Collider target, float damage, Vector3 hitLocation, Vector3 hitNormal, VisualEffectAsset hitFXAsset)
+    public override void HandleCollision(Collider target, float damage)
     {
         BaseEnemy enemy = target.GetComponent<BaseEnemy>();
 
         if (enemy != null)
         {
             enemy.TakeDamage(damage);
-
-            GameObject rootFX = new GameObject();
-
-            VisualEffect hitFX = rootFX.AddComponent<VisualEffect>();
-
-
-            rootFX.transform.position = hitLocation;
-
-            hitFX.visualEffectAsset = hitFXAsset;
-            hitFX.SetVector3("spillDirection", hitNormal);
-            hitFX.SetInt("bloodAmount", (int)damage);
         }
     }
 }

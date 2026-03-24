@@ -7,7 +7,7 @@ public class EnemyProjectile : ProjectileBehavior
 {
     // TODO : Rework 
     
-    public override void HandleCollision(Collider target, float damage, Vector3 hitLocation, Vector3 hitNormal, VisualEffectAsset hitFXAsset)
+    public override void HandleCollision(Collider target, float damage)
     {
         basePlayer player = target.GetComponent<basePlayer>();
 
@@ -21,7 +21,7 @@ public class EnemyProjectile : ProjectileBehavior
 
             if (module != null)
             {
-                // module.Break(); TODO: to handle 
+                // module.Break(); TODO: to handle
             }
         }
     }

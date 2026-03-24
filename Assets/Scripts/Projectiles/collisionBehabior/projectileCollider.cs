@@ -13,7 +13,7 @@ public class ProjectileCollider : ProjectileBase
 
                 Vector3 normal = -transform.forward.normalized;
 
-                behavior.HandleCollision(other, stats.damage, hit, normal, hitFXAsset);
+                behavior.HandleCollision(other, stats.damage);
             }
 
             Destroy(gameObject);
