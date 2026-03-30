@@ -7,6 +7,8 @@ using UnityEngine.Animations.Rigging;
 using static UnityEngine.GraphicsBuffer;
 using Constants;
 
+using Random = UnityEngine.Random;
+
 public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
 {
     
@@ -45,6 +47,7 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
     private float lastHealSoundTime = -100f;
     private float lastLowHealthSoundTime = -100f;
     private bool lowHealthActive = false;
+    private Vector3 camLocalPos;
 
     [SerializeField] private HealthBarScript healthBar;
     [SerializeField] private DamageUI damageUI;
@@ -81,10 +84,12 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
 
         if (IsOwner)
         {
+
             Debug.Log($"[Player] Owner instanciate {OwnerClientId}");
             var weaponObjOwner = Instantiate(weaponPrefab, FPSWeaponAnchorPoint);
             weapon = weaponObjOwner.GetComponent<BaseWeapon>();
             weaponObjOwner.transform.SetParent(FPSWeaponAnchorPoint);
+            camLocalPos = mainCamera.transform.localPosition;
 
             if (weapon.TryGetComponent<NetworkObject>(out var netObj))
             {
@@ -127,6 +132,8 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
         if (!IsOwner) return;
         if (PauseMenu.isPaused) return;
 
+        screenShake(1f, 2f);
+
         if (!Mathf.Approximately(health, lastHealth))
         {
             HandleHealthChanged(lastHealth, health);
@@ -138,6 +145,12 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
         setWeaponRotation(45f, 10f);
 
         weaponInput();
+    }
+
+    void screenShake(float speed, float amplitude)
+    {
+        Random.insideUnitSphere
+        mainCamera.transform.localPosition = camLocalPos +  * amplitude;
     }
 
     void setWeaponRotation(float maxY, float maxX)
