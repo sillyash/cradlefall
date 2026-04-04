@@ -5,8 +5,33 @@ using UnityEngine.EventSystems;
 public class PauseMenu : MonoBehaviour
 {
     public static bool isPaused { get; private set; } = false;
-    
+
+    [Header("Sound FX Manager")]
+    [SerializeField] private SoundFXManager soundFXManager;
+
+    [Header("Audio")]
+    [SerializeField] private AudioClip buttonClickSound;
+    [SerializeField] [Range(0f, 1f)] private float buttonClickVolume = 1f;
+    [SerializeField] private AudioClip buttonHoverSound;
+    [SerializeField] [Range(0f, 1f)] private float buttonHoverVolume = 1f;
+
     [SerializeField] private GameObject pauseMenu;
+
+    private void PlayButtonSound(bool persistOnSceneChange = false)
+    {
+        if (buttonClickSound != null && soundFXManager != null)
+        {
+            soundFXManager.PlaySoundFXClip(buttonClickSound, transform, buttonClickVolume, persistOnSceneChange);
+        }
+    }
+
+    public void OnButtonHover()
+    {
+        if (buttonHoverSound != null && soundFXManager != null)
+        {
+            soundFXManager.PlaySoundFXClip(buttonHoverSound, transform, buttonHoverVolume);
+        }
+    }
 
     void Awake()
     {
@@ -69,16 +94,19 @@ public class PauseMenu : MonoBehaviour
 
     public void OnResumeButtonClicked()
     {
+        PlayButtonSound();
         ResumeGame();
     }
 
     public void OnSettingsButtonClicked()
     {
+        PlayButtonSound();
         GetSettingsPanel().SetActive(true);
     }
 
     public void OnQuitToMainMenuButtonClicked()
     {
+        PlayButtonSound(true);
         isPaused = false;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;

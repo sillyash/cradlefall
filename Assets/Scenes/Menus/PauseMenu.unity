@@ -519,6 +519,10 @@ PrefabInstance:
     - target: {fileID: 1253746856539117128, guid: 1dbfe413a195d5c8d99498bff01365bb, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 1541574846827098208, guid: 1dbfe413a195d5c8d99498bff01365bb, type: 3}
+    - target: {fileID: 1253746856539117128, guid: 1dbfe413a195d5c8d99498bff01365bb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnQuitToMainMenuButtonClicked
       objectReference: {fileID: 0}
     - target: {fileID: 1475391365745368987, guid: 1dbfe413a195d5c8d99498bff01365bb, type: 3}
       propertyPath: m_AnchorMax.y
@@ -560,6 +564,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -521.56396
       objectReference: {fileID: 0}
+    - target: {fileID: 1541574846827098208, guid: 1dbfe413a195d5c8d99498bff01365bb, type: 3}
+      propertyPath: soundFXManager
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1541574846827098208, guid: 1dbfe413a195d5c8d99498bff01365bb, type: 3}
+      propertyPath: buttonClickSound
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1541574846827098208, guid: 1dbfe413a195d5c8d99498bff01365bb, type: 3}
+      propertyPath: buttonHoverSound
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1589551097153489388, guid: 1dbfe413a195d5c8d99498bff01365bb, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -585,8 +601,32 @@ PrefabInstance:
       value: -221.564
       objectReference: {fileID: 0}
     - target: {fileID: 2101603273140173852, guid: 1dbfe413a195d5c8d99498bff01365bb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2101603273140173852, guid: 1dbfe413a195d5c8d99498bff01365bb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2101603273140173852, guid: 1dbfe413a195d5c8d99498bff01365bb, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 1541574846827098208, guid: 1dbfe413a195d5c8d99498bff01365bb, type: 3}
+    - target: {fileID: 2101603273140173852, guid: 1dbfe413a195d5c8d99498bff01365bb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2101603273140173852, guid: 1dbfe413a195d5c8d99498bff01365bb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2101603273140173852, guid: 1dbfe413a195d5c8d99498bff01365bb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnResumeButtonClicked
+      objectReference: {fileID: 0}
+    - target: {fileID: 2101603273140173852, guid: 1dbfe413a195d5c8d99498bff01365bb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: PauseMenu, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2154944530060376998, guid: 1dbfe413a195d5c8d99498bff01365bb, type: 3}
       propertyPath: m_AnchorMax.x
@@ -651,6 +691,18 @@ PrefabInstance:
     - target: {fileID: 3170931119495025547, guid: 1dbfe413a195d5c8d99498bff01365bb, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4010328361602251285, guid: 1dbfe413a195d5c8d99498bff01365bb, type: 3}
+      propertyPath: soundFXManager
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4010328361602251285, guid: 1dbfe413a195d5c8d99498bff01365bb, type: 3}
+      propertyPath: buttonClickSound
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4010328361602251285, guid: 1dbfe413a195d5c8d99498bff01365bb, type: 3}
+      propertyPath: buttonHoverSound
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4054960148614381108, guid: 1dbfe413a195d5c8d99498bff01365bb, type: 3}
       propertyPath: m_Enabled
@@ -835,6 +887,10 @@ PrefabInstance:
     - target: {fileID: 7683732411293642114, guid: 1dbfe413a195d5c8d99498bff01365bb, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 1541574846827098208, guid: 1dbfe413a195d5c8d99498bff01365bb, type: 3}
+    - target: {fileID: 7683732411293642114, guid: 1dbfe413a195d5c8d99498bff01365bb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnSettingsButtonClicked
       objectReference: {fileID: 0}
     - target: {fileID: 8318458850111907536, guid: 1dbfe413a195d5c8d99498bff01365bb, type: 3}
       propertyPath: m_AnchorMax.x
