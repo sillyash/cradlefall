@@ -3,11 +3,13 @@ using UnityEngine.UI;
 
 public class CrossScript : MonoBehaviour
 {
-    [SerializeField] private Image crosshairDefault;
     [SerializeField] private Image crosshairTarget;
     [SerializeField] private Camera playerCamera;
     [SerializeField] private string enemyTag = "MainEnemy"; 
     [SerializeField] private float rayDistance = 100f;
+
+    [SerializeField] private Color defaultColor = Color.white;
+    [SerializeField] private Color enemyColor = Color.red;
 
     private void Update()
     {
@@ -19,14 +21,13 @@ public class CrossScript : MonoBehaviour
         {
             if (hit.collider.CompareTag(enemyTag))
             {
-                crosshairDefault.enabled = false;
-                crosshairTarget.enabled = true;
+      
+                crosshairTarget.color = enemyColor;
                 return;
             }
         }
 
-        // Si rien ou pas un ennemi
-        crosshairDefault.enabled = true;
-        crosshairTarget.enabled = false;
+     
+       crosshairTarget.color = defaultColor;
     }
 }
