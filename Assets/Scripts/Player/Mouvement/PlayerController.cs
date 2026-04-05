@@ -51,14 +51,14 @@ public class PlayerController : PlayerMovement
         ApplyFinalMovement();
         updateAnim();
         applySpeedFX();
-        applyLateralCameraFX(1);
+        applyLateralCameraFX(0.5f);
         HandleFootsteps();
     }
 
     void FixedUpdate()
     {
         applySpeedFX();
-        applyLateralCameraFX(1);
+        applyLateralCameraFX(0f);
     }
     
     protected override void HandleMovement()
