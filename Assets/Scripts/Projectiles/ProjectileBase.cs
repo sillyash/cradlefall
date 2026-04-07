@@ -38,7 +38,7 @@ public abstract class ProjectileBase : MonoBehaviour
         startTime = Time.time;
     }
 
-    protected void Update()
+    protected void FixedUpdate()
     {
         if (Time.time - startTime > stats.lifespan)
         {
