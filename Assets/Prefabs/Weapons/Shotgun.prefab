@@ -414,7 +414,7 @@ PrefabInstance:
     - target: {fileID: 8464794624840630467, guid: cd95e20d816642547b148417fdebd2c0, type: 3}
       propertyPath: projectile
       value: 
-      objectReference: {fileID: 3811676059042208083, guid: 9dbdb175b761565428f2fe912e7b4e19, type: 3}
+      objectReference: {fileID: 7836770074819715420, guid: 3c65cc38e41c83847b4e0e24fbca57fd, type: 3}
     - target: {fileID: 8464794624840630467, guid: cd95e20d816642547b148417fdebd2c0, type: 3}
       propertyPath: reloadSound
       value: 
