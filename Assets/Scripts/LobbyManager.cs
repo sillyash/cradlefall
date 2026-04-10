@@ -63,10 +63,6 @@ public class LobbyManager : NetworkBehaviour
             readyClients.Remove(clientId);
         }
 
-        foreach ( ulong client in readyClients )
-        {
-            Debug.Log(client);
-        }
         if (AllReady)
             GameManager.instance?.PlayGame();
     }

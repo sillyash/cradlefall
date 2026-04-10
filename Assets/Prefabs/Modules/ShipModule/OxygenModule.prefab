@@ -15,15 +15,15 @@ PrefabInstance:
     - target: {fileID: 788813406485877546, guid: b28ade62450434b4baa4b884128bbc86, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 6eae0b3888572494d985294c4c87ffab, type: 2}
+      objectReference: {fileID: 2100000, guid: 6614a6562348bf443870a1efe8bcd572, type: 2}
     - target: {fileID: 788813406485877546, guid: b28ade62450434b4baa4b884128bbc86, type: 3}
       propertyPath: 'm_Materials.Array.data[1]'
       value: 
-      objectReference: {fileID: 2100000, guid: 0832df2d840eec9428636bcf9d1e95b1, type: 2}
+      objectReference: {fileID: 2100000, guid: 114b5d477d715d34c9279801a3ae657b, type: 2}
     - target: {fileID: 788813406485877546, guid: b28ade62450434b4baa4b884128bbc86, type: 3}
       propertyPath: 'm_Materials.Array.data[2]'
       value: 
-      objectReference: {fileID: 2100000, guid: bbbcd3f2b502d724a940551e46903880, type: 2}
+      objectReference: {fileID: 2100000, guid: 2d7b615e7d58aa44d8ae9d6cb88fe537, type: 2}
     - target: {fileID: 788813406485877546, guid: b28ade62450434b4baa4b884128bbc86, type: 3}
       propertyPath: 'm_Materials.Array.data[3]'
       value: 
@@ -36,6 +36,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[5]'
       value: 
       objectReference: {fileID: 2100000, guid: 2c61f007d983b98418cc0c1fbf2015f4, type: 2}
+    - target: {fileID: 2827475510613977447, guid: b28ade62450434b4baa4b884128bbc86, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2550586818
+      objectReference: {fileID: 0}
     - target: {fileID: 4177113870566407933, guid: b28ade62450434b4baa4b884128bbc86, type: 3}
       propertyPath: m_Name
       value: OxygenModule
