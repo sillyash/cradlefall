@@ -24,7 +24,18 @@ public class IPPanelHandler : MonoBehaviour
         // Add event on submit
         submitEvent = new SubmitEvent();
         submitEvent.AddListener(SubmitIP);
-        inputField.onEndEdit = submitEvent;
+    }
+
+    private void ResolveReferences()
+    {
+        if (inputField == null && panel != null)
+            inputField = panel.GetComponentInChildren<TMP_InputField>(true);
+
+        if (panel == null && inputField != null)
+            panel = inputField.gameObject;
+
+        if (panel == null)
+            panel = gameObject;
     }
 
     public void DisplayPanel()
