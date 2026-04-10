@@ -83,7 +83,7 @@ MonoBehaviour:
   soundFXManager: {fileID: 7647002138884025734}
   stats: {fileID: 11400000, guid: ae076dbd5ac44ba46b036391b8ae7a94, type: 2}
   hitSound: {fileID: 8300000, guid: 6d58dbfad3ecd6147884d9fdde709221, type: 3}
-  hitSound2: {fileID: 0}
+  hitSound2: {fileID: 8300000, guid: 69962d31707a0d24e9081b6880388d42, type: 3}
   hitSound2Volume: 1
   hitSoundVolume: 1
   deathSound: {fileID: 8300000, guid: 1509b4546de956a4c8abe27de751acae, type: 3}
@@ -267,8 +267,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 8240317097806271992, guid: 7fde10c182f82d8e5bc1e4d3fcfddcef, type: 2}
-  m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: 583f9bb41e2bc34449d23f0f422dcb79, type: 3}
+  m_audioClip: {fileID: 8300000, guid: c24798977fdec454985a235607b32321, type: 3}
+  m_Resource: {fileID: 8300000, guid: c24798977fdec454985a235607b32321, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
