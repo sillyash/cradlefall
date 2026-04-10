@@ -3,27 +3,31 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
-using static TMPro.TMP_InputField;
 
 public class IPPanelHandler : MonoBehaviour
 {
     [SerializeField] private GameObject panel;
     [SerializeField] private GameObject errorPanel;
     [SerializeField] private GameObject closeButton;
-    private TMP_InputField inputField;
-    private SubmitEvent submitEvent;
+    [SerializeField] private TMP_InputField inputField;
 
     void Start()
     {
-        // Retrieve input field
-        inputField = panel.GetComponent<TMP_InputField>();
+        ResolveReferences();
 
-        // Hide error panel
-        errorPanel.SetActive(false);
+        if (inputField == null)
+        {
+            Debug.LogError("[IP Panel] Missing TMP_InputField reference. Assign it in inspector or place it on/under panel.");
+            enabled = false;
+            return;
+        }
+
+        // Hide the panel until the player clicks Join.
+        HidePanel();
 
         // Add event on submit
-        submitEvent = new SubmitEvent();
-        submitEvent.AddListener(SubmitIP);
+        inputField.onEndEdit.RemoveListener(SubmitIP);
+        inputField.onEndEdit.AddListener(SubmitIP);
     }
 
     private void ResolveReferences()
@@ -69,6 +73,7 @@ public class IPPanelHandler : MonoBehaviour
         {
             Debug.Log("[IP Panel] IP is valid.");
             SetHostIP(arg0);
+            GameManager.instance.StartClient();
             HidePanel();
             return;
         }
@@ -82,6 +87,12 @@ public class IPPanelHandler : MonoBehaviour
 
     private void SetHostIP(string ip)
     {
+        if (GameManager.instance == null)
+        {
+            Debug.LogError("[IP Panel] GameManager.instance is null. Cannot set host IP.");
+            return;
+        }
+
         GameManager.instance.SetHostIP(ip);
     }
 
