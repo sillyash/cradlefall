@@ -27,18 +27,28 @@ public class IPPanelHandler : MonoBehaviour
         inputField.onEndEdit = submitEvent;
     }
 
-    private void DisplayPanel()
+    public void DisplayPanel()
     {
-        panel.SetActive(true);
-        closeButton.SetActive(true);
-        errorPanel.SetActive(false);
+        if (panel != null)
+            panel.SetActive(true);
+
+        if (closeButton != null)
+            closeButton.SetActive(true);
+
+        if (errorPanel != null)
+            errorPanel.SetActive(false);
     }
 
     private void HidePanel()
     {
-        panel.SetActive(false);
-        closeButton.SetActive(false);
-        errorPanel.SetActive(false);
+        if (panel != null)
+            panel.SetActive(false);
+
+        if (closeButton != null)
+            closeButton.SetActive(false);
+
+        if (errorPanel != null)
+            errorPanel.SetActive(false);
     }
 
     private void SubmitIP(string arg0)
@@ -66,9 +76,16 @@ public class IPPanelHandler : MonoBehaviour
 
     private void DisplayPanelError(string message)
     {
+        if (errorPanel == null)
+            return;
+
         errorPanel.SetActive(true);
         TMP_Text panelText = errorPanel.GetComponent<TMP_Text>();
-        panelText.text = message;
+        if (panelText == null)
+            panelText = errorPanel.GetComponentInChildren<TMP_Text>(true);
+
+        if (panelText != null)
+            panelText.text = message;
     }
 
     static bool IsValidIP(string s)
