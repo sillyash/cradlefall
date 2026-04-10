@@ -3,10 +3,12 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class IPPanelHandler : MonoBehaviour
 {
     [SerializeField] private GameObject panel;
+    [SerializeField] private RectTransform panelContent;
     [SerializeField] private GameObject errorPanel;
     [SerializeField] private GameObject closeButton;
     [SerializeField] private TMP_InputField inputField;
@@ -25,9 +27,9 @@ public class IPPanelHandler : MonoBehaviour
         // Hide the panel until the player clicks Join.
         HidePanel();
 
-        // Add event on submit
-        inputField.onEndEdit.RemoveListener(SubmitIP);
-        inputField.onEndEdit.AddListener(SubmitIP);
+        // Clear stale error state whenever the user edits the input.
+        inputField.onValueChanged.RemoveListener(OnInputValueChanged);
+        inputField.onValueChanged.AddListener(OnInputValueChanged);
     }
 
     private void ResolveReferences()
@@ -35,11 +37,30 @@ public class IPPanelHandler : MonoBehaviour
         if (inputField == null && panel != null)
             inputField = panel.GetComponentInChildren<TMP_InputField>(true);
 
+        if (panelContent == null && panel != null)
+            panelContent = panel.GetComponent<RectTransform>();
+
         if (panel == null && inputField != null)
             panel = inputField.gameObject;
 
         if (panel == null)
             panel = gameObject;
+    }
+
+    private void Update()
+    {
+        if (panel == null || !panel.activeSelf)
+            return;
+
+        if (!Input.GetMouseButtonDown(0))
+            return;
+
+        if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject() &&
+            panelContent != null && RectTransformUtility.RectangleContainsScreenPoint(panelContent, Input.mousePosition, null))
+            return;
+
+        if (panelContent != null && !RectTransformUtility.RectangleContainsScreenPoint(panelContent, Input.mousePosition, null))
+            ClosePanel();
     }
 
     public void DisplayPanel()
@@ -52,6 +73,9 @@ public class IPPanelHandler : MonoBehaviour
 
         if (errorPanel != null)
             errorPanel.SetActive(false);
+
+        if (inputField != null)
+            inputField.ActivateInputField();
     }
 
     private void HidePanel()
@@ -66,13 +90,39 @@ public class IPPanelHandler : MonoBehaviour
             errorPanel.SetActive(false);
     }
 
-    private void SubmitIP(string arg0)
+    public void SubmitCurrentIP()
     {
-        Debug.Log("[IP Panel] Submitted IP : " + arg0);
-        if (IsValidIP(arg0))
+        string ip = inputField != null ? inputField.text : string.Empty;
+        TrySubmitIP(ip);
+    }
+
+    public void ClosePanel()
+    {
+        HidePanel();
+    }
+
+    private void OnInputValueChanged(string _)
+    {
+        if (errorPanel != null)
+            errorPanel.SetActive(false);
+    }
+
+    private void TrySubmitIP(string ip)
+    {
+        string trimmedIp = ip.Trim();
+        Debug.Log("[IP Panel] Submitted IP : " + trimmedIp);
+
+        if (IsValidIP(trimmedIp))
         {
             Debug.Log("[IP Panel] IP is valid.");
-            SetHostIP(arg0);
+            SetHostIP(trimmedIp);
+
+            if (GameManager.instance == null)
+            {
+                Debug.LogError("[IP Panel] GameManager.instance is null. Cannot start client.");
+                return;
+            }
+
             GameManager.instance.StartClient();
             HidePanel();
             return;
@@ -112,6 +162,9 @@ public class IPPanelHandler : MonoBehaviour
 
     static bool IsValidIP(string s)
     {
+        if (string.IsNullOrWhiteSpace(s))
+            return false;
+
         int n = s.Length;
 
         if (n < 7)
