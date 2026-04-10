@@ -12,6 +12,7 @@ public class IPPanelHandler : MonoBehaviour
     [SerializeField] private RectTransform panelContent;
     [SerializeField] private GameObject errorPanel;
     [SerializeField] private GameObject closeButton;
+    [SerializeField] private GameObject submitButton;
     [SerializeField] private TMP_InputField inputField;
 
     void Start()
@@ -75,6 +76,16 @@ public class IPPanelHandler : MonoBehaviour
                 closeButtonComponent.onClick.AddListener(ClosePanel);
             }
         }
+
+        if (submitButton != null)
+        {
+            Button submitButtonComponent = submitButton.GetComponent<Button>();
+            if (submitButtonComponent != null)
+            {
+                submitButtonComponent.onClick.RemoveListener(SubmitCurrentIP);
+                submitButtonComponent.onClick.AddListener(SubmitCurrentIP);
+            }
+        }
     }
 
     private void Update()
@@ -85,6 +96,12 @@ public class IPPanelHandler : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             ClosePanel();
+            return;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
+        {
+            SubmitCurrentIP();
             return;
         }
 
