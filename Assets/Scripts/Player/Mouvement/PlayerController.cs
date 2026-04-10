@@ -48,6 +48,7 @@ public class PlayerController : PlayerMovement
         ApplyGravity();
         ApplyFinalMovement();
         updateAnim();
+        applySpeedFX();
         HandleFootsteps();
     }
     
@@ -96,6 +97,17 @@ public class PlayerController : PlayerMovement
         }
     }
 
+    public void applySpeedFX()
+    {
+        float targetFOV = 80;
+        
+        if (speed > movementSettings.walkingSpeed)
+        {
+            targetFOV = 90;
+        }
+
+        mainCamera.fieldOfView = Mathf.Lerp(mainCamera.fieldOfView, targetFOV, 0.1f);
+    }
     protected override void ApplyGravity()
     {
         if (characterController.isGrounded && velocity.y < 0)
