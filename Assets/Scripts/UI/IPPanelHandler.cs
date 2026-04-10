@@ -4,6 +4,7 @@ using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class IPPanelHandler : MonoBehaviour
 {
@@ -37,6 +38,25 @@ public class IPPanelHandler : MonoBehaviour
         if (inputField == null && panel != null)
             inputField = panel.GetComponentInChildren<TMP_InputField>(true);
 
+        if (panelContent == null && inputField != null)
+        {
+            RectTransform current = inputField.GetComponent<RectTransform>();
+            while (current != null && panel != null)
+            {
+                RectTransform parent = current.parent as RectTransform;
+                if (parent == null)
+                    break;
+
+                if (parent.gameObject == panel)
+                {
+                    panelContent = current;
+                    break;
+                }
+
+                current = parent;
+            }
+        }
+
         if (panelContent == null && panel != null)
             panelContent = panel.GetComponent<RectTransform>();
 
@@ -45,6 +65,16 @@ public class IPPanelHandler : MonoBehaviour
 
         if (panel == null)
             panel = gameObject;
+
+        if (closeButton != null)
+        {
+            Button closeButtonComponent = closeButton.GetComponent<Button>();
+            if (closeButtonComponent != null)
+            {
+                closeButtonComponent.onClick.RemoveListener(ClosePanel);
+                closeButtonComponent.onClick.AddListener(ClosePanel);
+            }
+        }
     }
 
     private void Update()
@@ -52,11 +82,16 @@ public class IPPanelHandler : MonoBehaviour
         if (panel == null || !panel.activeSelf)
             return;
 
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            ClosePanel();
+            return;
+        }
+
         if (!Input.GetMouseButtonDown(0))
             return;
 
-        if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject() &&
-            panelContent != null && RectTransformUtility.RectangleContainsScreenPoint(panelContent, Input.mousePosition, null))
+        if (panelContent != null && RectTransformUtility.RectangleContainsScreenPoint(panelContent, Input.mousePosition, null))
             return;
 
         if (panelContent != null && !RectTransformUtility.RectangleContainsScreenPoint(panelContent, Input.mousePosition, null))
