@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f832648483e57f14bbe49e875fb100c3, type: 3}
   m_Name: ShotgunFire
   m_EditorClassIdentifier: 
-  projectile_per_shot: 5
+  projectile_per_shot: 10
