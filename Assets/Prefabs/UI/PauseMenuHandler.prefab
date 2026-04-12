@@ -760,6 +760,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 4316067154383565753}
     m_Modifications:
     - target: {fileID: 5076234316150300297, guid: 420854de2f71646ec8bcd04a6b842d0a, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 8240317097806271992, guid: 7fde10c182f82d8e5bc1e4d3fcfddcef, type: 2}
+    - target: {fileID: 5076234316150300297, guid: 420854de2f71646ec8bcd04a6b842d0a, type: 3}
       propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
       value: 0
       objectReference: {fileID: 0}

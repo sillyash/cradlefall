@@ -576,6 +576,14 @@ PrefabInstance:
       propertyPath: buttonHoverSound
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 1541574846827098208, guid: 1dbfe413a195d5c8d99498bff01365bb, type: 3}
+      propertyPath: buttonClickVolume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1541574846827098208, guid: 1dbfe413a195d5c8d99498bff01365bb, type: 3}
+      propertyPath: buttonHoverVolume
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1589551097153489388, guid: 1dbfe413a195d5c8d99498bff01365bb, type: 3}
       propertyPath: m_IsActive
       value: 1

@@ -16880,9 +16880,9 @@ MonoBehaviour:
   countdown: 5
   waves:
   - {fileID: 1379043496}
-  - {fileID: 758269223}
-  - {fileID: 761284140}
-  - {fileID: 750010440}
+  - {fileID: 1379043496}
+  - {fileID: 1379043496}
+  - {fileID: 1379043496}
   waveIndex:
     m_InternalValue: 0
   countdownTimer:
