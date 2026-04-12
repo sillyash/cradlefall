@@ -4,9 +4,12 @@ using System.Collections;
 [CreateAssetMenu(menuName = "Modules/Behaviours/Timer")]
 public class TimerModuleBehavior : ModuleBehavior
 {
-    BaseModule module;
-
+    private BaseModule module;
     private bool isTimerRunning = false;
+    private float t;
+
+    public float remainingTime => t;
+    public bool timerRunning => isTimerRunning;
 
     public override void OnBreak(BaseModule module)
     {
@@ -25,23 +28,19 @@ public class TimerModuleBehavior : ModuleBehavior
     {
         if (module.stats is TimerModuleStats timerStats)
         {
-            float t = timerStats.timerDuration;
-
+            t = timerStats.timerDuration; 
             isTimerRunning = true;
-
             while (t > 0 && isTimerRunning)
             {
                 t -= Time.deltaTime;
-                // timerText.text = Mathf.Ceil(t).ToString();  Pour implémenter le texte a l'écran
                 yield return null;
             }
-
             if (isTimerRunning)
             {
                 isTimerRunning = false;
                 Debug.Log("GAME OVER");
                 GameManager.instance.GameOver();
-            } 
+            }
             else
             {
                 yield break;
