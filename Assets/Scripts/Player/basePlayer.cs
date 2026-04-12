@@ -276,7 +276,6 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
         HandleHealthChanged(oldHealth, health);
     }
 
-
     public void TakeDamage(float damage)
     {
         if (!IsOwner) return;
@@ -325,14 +324,6 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
     public ulong getClientId()
     {
         return OwnerClientId;
-    }
-
-    public void Heal(float amount)
-    {
-        if (!IsServer) return;
-        float wantedLevel = health + amount;
-        float ammount = Mathf.Min(wantedLevel, stats.health);
-        health = ammount;
     }
 
     public BaseWeapon CurrentWeapon => weapon; // Pour affichage HUD
