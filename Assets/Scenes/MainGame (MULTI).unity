@@ -16880,9 +16880,6 @@ MonoBehaviour:
   countdown: 5
   waves:
   - {fileID: 1379043496}
-  - {fileID: 758269223}
-  - {fileID: 761284140}
-  - {fileID: 750010440}
   waveIndex:
     m_InternalValue: 0
   countdownTimer:
@@ -32156,6 +32153,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ambienceClip: {fileID: 8300000, guid: aabe9ead3a3cfaa489b5f660692753c3, type: 3}
   ambienceVolume: 0.07
+  loopMusic: 1
 --- !u!82 &1904753538
 AudioSource:
   m_ObjectHideFlags: 0

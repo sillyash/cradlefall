@@ -27,7 +27,6 @@ public class MusicManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         if (musicSource != null && !musicSource.isPlaying)
         {
-            musicSource.loop = true;
             musicSource.Play();
         }
     }
