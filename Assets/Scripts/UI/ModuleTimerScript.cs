@@ -78,8 +78,8 @@ public class ModuleTimerScript : MonoBehaviour
         if (maxTime == 0f && targetModule.stats is TimerModuleStats s)
             maxTime = s.timerDuration;
 
-        bool isBroken = timerBehavior.timerRunning;
-        float t = timerBehavior.remainingTime;
+        bool isBroken = targetModule.broken.Value;
+        float t = targetModule.remainingTime.Value; ;
 
         // ===== SAFE / DANGER STATE =====
         if (safeIcon != null)

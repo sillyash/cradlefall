@@ -33,11 +33,13 @@ public class TimerModuleBehavior : ModuleBehavior
             while (t > 0 && isTimerRunning)
             {
                 t -= Time.deltaTime;
+                module.remainingTime.Value = t; // Synchro réseau (network variable)
                 yield return null;
             }
             if (isTimerRunning)
             {
                 isTimerRunning = false;
+                module.remainingTime.Value = 0f;
                 Debug.Log("GAME OVER");
                 GameManager.instance.GameOver();
             }
