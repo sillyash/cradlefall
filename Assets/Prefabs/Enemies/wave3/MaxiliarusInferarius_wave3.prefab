@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1807214838060715323, guid: f2fe0a912c8f76645ac1ae4d70e672e0, type: 3}
       propertyPath: m_Name
-      value: MaxiliarusInferarius_wave3
+      value: MaxiliarusInferarius_wave4
       objectReference: {fileID: 0}
     - target: {fileID: 2390459538410421341, guid: f2fe0a912c8f76645ac1ae4d70e672e0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -54,7 +54,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4594640659369111444, guid: f2fe0a912c8f76645ac1ae4d70e672e0, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 2179570893
+      value: 2959565618
       objectReference: {fileID: 0}
     - target: {fileID: 6342807563158801525, guid: f2fe0a912c8f76645ac1ae4d70e672e0, type: 3}
       propertyPath: stats
