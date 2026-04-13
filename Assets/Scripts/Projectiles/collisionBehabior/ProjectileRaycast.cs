@@ -1,4 +1,7 @@
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.VFX;
+using static UnityEngine.GraphicsBuffer;
 
 public class ProjectileRaycast : ProjectileBase
 {
@@ -26,11 +29,27 @@ public class ProjectileRaycast : ProjectileBase
         if (Physics.SphereCast(transform.position, radius, -transform.forward, out RaycastHit hit, distance))
         {
             if (!hit.collider.TryGetComponent(out ProjectileBase hitObject))
-            {
-                if (!gameObject.CompareTag("VisualOnly"))
+            { 
+                BaseEnemy enemy = hit.collider.GetComponent<BaseEnemy>();
+
+                if (enemy != null)
                 {
-                    behavior.HandleCollision(hit.collider, stats.damage);
+                    if (!gameObject.CompareTag("VisualOnly"))
+                    {
+                        behavior.HandleCollision(hit.collider, stats.damage);
+                    }
+
+                    GameObject rootFX = new GameObject();
+
+                    VisualEffect hitFX = rootFX.AddComponent<VisualEffect>();
+
+                    rootFX.transform.position = hit.point;
+
+                    hitFX.visualEffectAsset = hitFXAsset;
+                    hitFX.SetVector3("spillDirection", hit.normal);
+                    hitFX.SetInt("bloodAmount", (int)stats.damage);
                 }
+
                 Destroy(gameObject);
             }
         }
