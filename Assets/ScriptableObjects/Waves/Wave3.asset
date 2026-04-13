@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Wave3
   m_EditorClassIdentifier: 
   availableEnemies:
-  - {fileID: 1293473754200674575, guid: 253b7a0e6bbe1024bb265687a60e654f, type: 3}
+  - {fileID: 5747389848404741083, guid: 252409390421f464693012013e843399, type: 3}
   spendablePoints: 150
   minSpawnInterval: 0.5
   maxSpawnInterval: 3
