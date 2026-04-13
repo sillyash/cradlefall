@@ -1,10 +1,13 @@
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public abstract class ProjectileBase : MonoBehaviour
 {
     public static float CURVE_AMP = 100;
     public static float CURVE_LENGTH_DIV = 2;
 
+    [SerializeField] protected VisualEffectAsset hitFXAsset;
     [SerializeField] protected ProjectileBehavior behavior;
     [SerializeField] protected ProjectileStats stats;
 
