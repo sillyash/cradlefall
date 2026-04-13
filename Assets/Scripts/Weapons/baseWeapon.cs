@@ -25,6 +25,7 @@ public class BaseWeapon : NetworkBehaviour
     // Variables partager a l'HUD munitions
     public int AmmoCount => ammoCount;
     public int MagSize => stats.magSize;
+    public float ReloadTime => stats.reloadTime;
     public event System.Action<BaseWeapon> OnFire;
     public event System.Action OnAmmoChanged;
     public event System.Action OnReloadStart;

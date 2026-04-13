@@ -3,11 +3,13 @@ using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
 using System;
+using System.Linq;
 using NUnit.Framework.Internal;
 
 public class MainMenu : MonoBehaviour 
 {
-    
+    [SerializeField] private IPPanelHandler ipPanelHandler;
+
     [Header("Sound FX Manager")]
     [SerializeField] private SoundFXManager soundFXManager;
 
@@ -33,6 +35,26 @@ public class MainMenu : MonoBehaviour
         }
     }
 
+    private void Awake()
+    {
+        ResolveIPPanelHandler();
+    }
+
+    private void ResolveIPPanelHandler()
+    {
+        if (ipPanelHandler != null)
+            return;
+
+        ipPanelHandler = FindObjectOfType<IPPanelHandler>();
+        if (ipPanelHandler != null)
+            return;
+
+        // Fallback: also search inactive objects that are part of a loaded scene.
+        ipPanelHandler = Resources
+            .FindObjectsOfTypeAll<IPPanelHandler>()
+            .FirstOrDefault(handler => handler.gameObject.scene.IsValid());
+    }
+
     public void OnHostButtonClicked ()
     {
         PlayButtonSound();
@@ -42,7 +64,15 @@ public class MainMenu : MonoBehaviour
     public void OnJoinButtonClicked()
     {
         PlayButtonSound();
-        GameManager.instance.StartClient();
+        ResolveIPPanelHandler();
+
+        if (ipPanelHandler == null)
+        {
+            Debug.LogError("[MainMenu] IPPanelHandler not found in scene.");
+            return;
+        }
+
+        ipPanelHandler.DisplayPanel();
     }
 
     public void OnQuitButtonClicked()
