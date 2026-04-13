@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Weapons/Behaviours/test")]
+[CreateAssetMenu(menuName = "Weapon/Behavior/standard")]
 public class TestBehavior : WeaponBehavior
 {
     public override void OnFire(ProjectileBase projectile, Transform transform, float spread)
