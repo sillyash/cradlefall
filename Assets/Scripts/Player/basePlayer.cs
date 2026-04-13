@@ -7,6 +7,8 @@ using UnityEngine.Animations.Rigging;
 using static UnityEngine.GraphicsBuffer;
 using Constants;
 
+using Random = UnityEngine.Random;
+
 public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
 {
     
@@ -46,6 +48,10 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
     private float lastLowHealthSoundTime = -100f;
     private bool lowHealthActive = false;
 
+    //Screen shake
+    private Vector3 camLocalPos;
+    private float shakeStartTime = -10f; //Set to negative value to disable it by default 
+
     [SerializeField] private HealthBarScript healthBar;
     [SerializeField] private DamageUI damageUI;
     [SerializeField] public Camera mainCamera;
@@ -81,10 +87,12 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
 
         if (IsOwner)
         {
+
             Debug.Log($"[Player] Owner instanciate {OwnerClientId}");
             var weaponObjOwner = Instantiate(weaponPrefab, FPSWeaponAnchorPoint);
             weapon = weaponObjOwner.GetComponent<BaseWeapon>();
             weaponObjOwner.transform.SetParent(FPSWeaponAnchorPoint);
+            camLocalPos = mainCamera.transform.localPosition;
 
             if (weapon.TryGetComponent<NetworkObject>(out var netObj))
             {
@@ -138,6 +146,18 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
         setWeaponRotation(45f, 10f);
 
         weaponInput();
+
+        screenShake(0.5f, 0.2f);
+    }
+
+    void screenShake(float duration, float amplitude)
+    {
+        if (Time.fixedTime - shakeStartTime < duration)
+        {
+            Vector3 shake = Random.insideUnitSphere;
+            shake.z = 0;
+            mainCamera.transform.localPosition = camLocalPos + shake * amplitude;
+        }
     }
 
     void setWeaponRotation(float maxY, float maxX)
@@ -226,7 +246,7 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
     {
         if (!IsOwner || Mathf.Approximately(oldHealth, newHealth) || soundFXManager == null) return;
 
-        float now = Time.time;
+        float now = Time.fixedTime;
 
         bool wasLow = maxHealth > 0 && oldHealth <= maxHealth * lowHealthThreshold;
         bool isLow = maxHealth > 0 && newHealth <= maxHealth * lowHealthThreshold;
@@ -238,6 +258,7 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
             {
                 soundFXManager.PlaySoundFXClip(clip, transform, damageSoundVolume);
                 damageUI.alphaTarget = 1f - newHealth/maxHealth;
+                shakeStartTime = now;
                 lastDamageSoundTime = now;
             }
         }

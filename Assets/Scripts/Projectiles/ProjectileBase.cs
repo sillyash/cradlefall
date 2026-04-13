@@ -40,7 +40,12 @@ public abstract class ProjectileBase : MonoBehaviour
 
     protected void Update()
     {
-        if (Time.time - startTime > stats.lifespan)
+        
+    }
+
+    protected void FixedUpdate()
+    {
+        if (Time.fixedTime - startTime > stats.lifespan)
         {
             Destroy(gameObject);
         }
