@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54fd67bedc5dd1c44bcbc6e50dbb3fd2, type: 3}
   m_Name: TankStats
   m_EditorClassIdentifier: 
-  health: 100
+  health: 180
   InteractionRange: 3
   maxBattery: 50
