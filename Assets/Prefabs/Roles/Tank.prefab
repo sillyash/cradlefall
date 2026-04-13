@@ -27,7 +27,7 @@ PrefabInstance:
     - target: {fileID: 2115452035298164465, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
       propertyPath: weaponPrefab
       value: 
-      objectReference: {fileID: 6906893552160893867, guid: a16e6e5ac2ae29b439bddc0f7893b702, type: 3}
+      objectReference: {fileID: 6906893552160893867, guid: 08c1a4a83b2a6a3419abbdd69fadd4a8, type: 3}
     - target: {fileID: 2135502494728603591, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
