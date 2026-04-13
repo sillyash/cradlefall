@@ -297,7 +297,6 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
         HandleHealthChanged(oldHealth, health);
     }
 
-
     public void TakeDamage(float damage)
     {
         if (!IsOwner) return;
