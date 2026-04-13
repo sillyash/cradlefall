@@ -19,7 +19,15 @@ PrefabInstance:
     - target: {fileID: 2061913146175803509, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
       propertyPath: stats
       value: 
-      objectReference: {fileID: 11400000, guid: 41ccfa7cd379515499abb2582c3819d4, type: 2}
+      objectReference: {fileID: 11400000, guid: d6318b9ce356ea043a13f1abcbaf56df, type: 2}
+    - target: {fileID: 2115452035298164465, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
+      propertyPath: role
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2115452035298164465, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
+      propertyPath: stats
+      value: 
+      objectReference: {fileID: 11400000, guid: d6318b9ce356ea043a13f1abcbaf56df, type: 2}
     - target: {fileID: 2115452035298164465, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
       propertyPath: healthBar
       value: 
@@ -136,6 +144,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8225159773639805063, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
+      propertyPath: movementSettings
+      value: 
+      objectReference: {fileID: 11400000, guid: f9d53133a75e2b24cb1f58f851adf657, type: 2}
     - target: {fileID: 8444947561549270069, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
