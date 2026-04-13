@@ -75,6 +75,7 @@ public class BaseWeapon : NetworkBehaviour
             OnAmmoChanged?.Invoke();
             OnFire?.Invoke(this);
             networkFire.Value = true;
+            PlayFireFX();
             Debug.Log(networkFire.Value);
             isReadyToShoot = false;
             StartCoroutine(FireCooldown());
