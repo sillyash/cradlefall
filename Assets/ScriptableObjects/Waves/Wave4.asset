@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Wave4
   m_EditorClassIdentifier: 
   availableEnemies:
-  - {fileID: 1293473754200674575, guid: 253b7a0e6bbe1024bb265687a60e654f, type: 3}
+  - {fileID: 5747389848404741083, guid: d79c42d3f0709d44cbc1c7a9bc4b18ea, type: 3}
   spendablePoints: 250
   minSpawnInterval: 0.5
   maxSpawnInterval: 2
