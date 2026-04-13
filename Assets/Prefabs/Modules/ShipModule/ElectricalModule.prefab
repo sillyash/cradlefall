@@ -9,6 +9,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 788813406485877546, guid: b28ade62450434b4baa4b884128bbc86, type: 3}
+      propertyPath: m_ProbeAnchor
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 788813406485877546, guid: b28ade62450434b4baa4b884128bbc86, type: 3}
       propertyPath: m_Materials.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -24,6 +28,18 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[2]'
       value: 
       objectReference: {fileID: 2100000, guid: f85c02004392946488b4c643e44ae254, type: 2}
+    - target: {fileID: 1973511228350375454, guid: b28ade62450434b4baa4b884128bbc86, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1973511228350375454, guid: b28ade62450434b4baa4b884128bbc86, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.66
+      objectReference: {fileID: 0}
+    - target: {fileID: 1973511228350375454, guid: b28ade62450434b4baa4b884128bbc86, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.59
+      objectReference: {fileID: 0}
     - target: {fileID: 2827475510613977447, guid: b28ade62450434b4baa4b884128bbc86, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 3768700762
@@ -40,6 +56,18 @@ PrefabInstance:
       propertyPath: behaviour
       value: 
       objectReference: {fileID: 11400000, guid: 8ac36494018684741bc39b8fffccaed3, type: 2}
+    - target: {fileID: 4759485951922616957, guid: b28ade62450434b4baa4b884128bbc86, type: 3}
+      propertyPath: m_Size.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4759485951922616957, guid: b28ade62450434b4baa4b884128bbc86, type: 3}
+      propertyPath: m_Center.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4759485951922616957, guid: b28ade62450434b4baa4b884128bbc86, type: 3}
+      propertyPath: m_Center.z
+      value: -0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5117137823248683121, guid: b28ade62450434b4baa4b884128bbc86, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
