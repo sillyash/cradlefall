@@ -61,6 +61,9 @@ public class PlayerManager : NetworkBehaviour
             case Roles.HEAL:
                 activePlayersPrefabs[ownerClientId] = playerPrefabs[2];
                 break;
+            case Roles.TANK:
+                activePlayersPrefabs[ownerClientId] = playerPrefabs[3];
+                break;
         }
     }
 
