@@ -53,18 +53,39 @@ public class PlayerManager : NetworkBehaviour
         switch (Roles.RolesMap[roleIdex])
         {
             case Roles.DPS:
-                activePlayersPrefabs[ownerClientId] = playerPrefabs[0];
+                SetPlayerPrefabForClient(ownerClientId, 0);
                 break;
             case Roles.TECH:
-                activePlayersPrefabs[ownerClientId] = playerPrefabs[1];
+                SetPlayerPrefabForClient(ownerClientId, 1);
                 break;
             case Roles.HEAL:
-                activePlayersPrefabs[ownerClientId] = playerPrefabs[2];
+                SetPlayerPrefabForClient(ownerClientId, 2);
                 break;
             case Roles.TANK:
-                activePlayersPrefabs[ownerClientId] = playerPrefabs[3];
+                SetPlayerPrefabForClient(ownerClientId, 3);
+                break;
+            default:
+                Debug.LogWarning($"[PlayerManager] Invalid role index {roleIdex} for client {ownerClientId}");
                 break;
         }
+    }
+
+    private void SetPlayerPrefabForClient(ulong clientId, int prefabIndex)
+    {
+        if (prefabIndex < 0 || prefabIndex >= playerPrefabs.Count)
+        {
+            Debug.LogWarning($"[PlayerManager] Invalid prefab index {prefabIndex} for client {clientId}");
+            return;
+        }
+
+        if (activePlayersPrefabs.ContainsKey(clientId))
+        {
+            Debug.LogWarning($"[PlayerManager] Player prefab for client {clientId} is already set!");
+            return;
+        }
+
+        Debug.Log($"[PlayerManager] Setting player prefab for client {clientId} to {playerPrefabs[prefabIndex].name}");
+        activePlayersPrefabs[clientId] = playerPrefabs[prefabIndex];
     }
 
     /// <summary>
