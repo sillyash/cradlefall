@@ -1,3 +1,5 @@
+using System;
+using Unity.Mathematics.Geometry;
 using UnityEngine;
 
 public class PlayerController : PlayerMovement
@@ -49,7 +51,14 @@ public class PlayerController : PlayerMovement
         ApplyFinalMovement();
         updateAnim();
         applySpeedFX();
+        applyLateralCameraFX(0.5f);
         HandleFootsteps();
+    }
+
+    void FixedUpdate()
+    {
+        applySpeedFX();
+        applyLateralCameraFX(0f);
     }
     
     protected override void HandleMovement()
@@ -95,6 +104,18 @@ public class PlayerController : PlayerMovement
                 soundFXManager.PlaySoundFXClip(jumpSound, transform, jumpVolume);
             }
         }
+    }
+
+    public void applyLateralCameraFX(float magnitude)
+    {
+        Vector3 target = mainCamera.transform.localPosition;
+        target.x = Vector3.Dot(move, mainCamera.transform.right) * speed/10 * magnitude;
+
+        target.x = Mathf.Lerp(mainCamera.transform.localPosition.x, target.x, 0.1f);
+
+        mainCamera.transform.localPosition = target;
+
+        Debug.Log(target);
     }
 
     public void applySpeedFX()

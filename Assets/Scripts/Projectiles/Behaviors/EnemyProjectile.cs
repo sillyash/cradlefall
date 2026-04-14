@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.VFX;
 
 [CreateAssetMenu(menuName = "Projectiles/Behaviours/Enemy")]
 public class EnemyProjectile : ProjectileBehavior
@@ -20,7 +21,7 @@ public class EnemyProjectile : ProjectileBehavior
 
             if (module != null)
             {
-                // module.Break(); TODO: to handle 
+                // module.Break(); TODO: to handle
             }
         }
     }

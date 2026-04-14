@@ -6,6 +6,7 @@ public class ReloadingFBScript : MonoBehaviour
     [Header("UI")]
     [SerializeField] private UnityEngine.UI.Image reloadCircle; // L'image "donut" fillable
     [SerializeField] private basePlayer player;
+    [SerializeField] private GameObject cursor;
 
     private BaseWeapon weapon;
     private Coroutine currentCoroutine;
@@ -49,7 +50,7 @@ public class ReloadingFBScript : MonoBehaviour
 
         if (currentCoroutine != null)
             StopCoroutine(currentCoroutine);
-
+        cursor.SetActive(false);
         currentCoroutine = StartCoroutine(FillReloadCoroutine(weapon.ReloadTime));
     }
 
@@ -61,6 +62,7 @@ public class ReloadingFBScript : MonoBehaviour
             currentCoroutine = null;
         }
         reloadCircle.fillAmount = 0f;
+        cursor.SetActive(true);
     }
 
     private IEnumerator FillReloadCoroutine(float duration)
