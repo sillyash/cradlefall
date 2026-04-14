@@ -1,5 +1,9 @@
 using System;
+using Unity.VisualScripting;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
+using UnityEngine.UIElements;
+using UnityEngine.VFX;
 
 [CreateAssetMenu(menuName = "Projectiles/Behaviours/Player")]
 public class PlayerProjectile : ProjectileBehavior

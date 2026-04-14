@@ -15,15 +15,15 @@ PrefabInstance:
     - target: {fileID: 788813406485877546, guid: b28ade62450434b4baa4b884128bbc86, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 6eae0b3888572494d985294c4c87ffab, type: 2}
+      objectReference: {fileID: 2100000, guid: 114b5d477d715d34c9279801a3ae657b, type: 2}
     - target: {fileID: 788813406485877546, guid: b28ade62450434b4baa4b884128bbc86, type: 3}
       propertyPath: 'm_Materials.Array.data[1]'
       value: 
-      objectReference: {fileID: 2100000, guid: 0832df2d840eec9428636bcf9d1e95b1, type: 2}
+      objectReference: {fileID: 2100000, guid: 6614a6562348bf443870a1efe8bcd572, type: 2}
     - target: {fileID: 788813406485877546, guid: b28ade62450434b4baa4b884128bbc86, type: 3}
       propertyPath: 'm_Materials.Array.data[2]'
       value: 
-      objectReference: {fileID: 2100000, guid: bbbcd3f2b502d724a940551e46903880, type: 2}
+      objectReference: {fileID: 2100000, guid: 2d7b615e7d58aa44d8ae9d6cb88fe537, type: 2}
     - target: {fileID: 788813406485877546, guid: b28ade62450434b4baa4b884128bbc86, type: 3}
       propertyPath: 'm_Materials.Array.data[3]'
       value: 
@@ -56,6 +56,18 @@ PrefabInstance:
       propertyPath: behaviour
       value: 
       objectReference: {fileID: 11400000, guid: 3432b49d829697b4188db8b206456a4b, type: 2}
+    - target: {fileID: 4759485951922616957, guid: b28ade62450434b4baa4b884128bbc86, type: 3}
+      propertyPath: m_Size.x
+      value: 1.96
+      objectReference: {fileID: 0}
+    - target: {fileID: 4759485951922616957, guid: b28ade62450434b4baa4b884128bbc86, type: 3}
+      propertyPath: m_Size.y
+      value: 1.17
+      objectReference: {fileID: 0}
+    - target: {fileID: 4759485951922616957, guid: b28ade62450434b4baa4b884128bbc86, type: 3}
+      propertyPath: m_Center.y
+      value: 0.59
+      objectReference: {fileID: 0}
     - target: {fileID: 5117137823248683121, guid: b28ade62450434b4baa4b884128bbc86, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -99,7 +111,7 @@ PrefabInstance:
     - target: {fileID: 8377311440644008061, guid: b28ade62450434b4baa4b884128bbc86, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 3317940974460983017, guid: 292fb8096c024ed44879d74b32681cda, type: 3}
+      objectReference: {fileID: 4654620481047335858, guid: 7a9f1cc61aae624469149b5bd10ae1f1, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

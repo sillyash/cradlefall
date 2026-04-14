@@ -23,6 +23,13 @@ public class BaseModule : NetworkBehaviour
     public ModuleBehavior behaviour;
     public ModuleStats stats;
 
+    // NetworkVariable pour afficher le temps restant sur le timer module
+    public NetworkVariable<float> remainingTime = new NetworkVariable<float>(
+        0f,
+        NetworkVariableReadPermission.Everyone,
+        NetworkVariableWritePermission.Server
+    );
+
     // NetworkVariables, wrapper de variables natives, synchronis�es automatiquement par NetCode
     // On acc�de � leur valeur par variable.Value pour toutes les op�rations.
     // Peuvent �tre initialis�e � la cr�ation par le constructeur (recommand�)

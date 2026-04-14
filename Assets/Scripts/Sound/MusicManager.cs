@@ -9,6 +9,17 @@ public class MusicManager : MonoBehaviour
     {
         if (Instance != null && Instance != this)
         {
+            // If this scene has a configured music clip, hand it off to the persistent instance.
+            if (musicSource != null && musicSource.clip != null)
+            {
+                Instance.SetMusic(musicSource.clip, musicSource.loop);
+                var instanceSource = Instance.musicSource;
+                if (instanceSource != null)
+                {
+                    instanceSource.volume = musicSource.volume;
+                }
+            }
+
             Destroy(gameObject); // Empêche les doublons
             return;
         }
@@ -16,7 +27,6 @@ public class MusicManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         if (musicSource != null && !musicSource.isPlaying)
         {
-            musicSource.loop = true;
             musicSource.Play();
         }
     }
@@ -29,6 +39,14 @@ public class MusicManager : MonoBehaviour
             {
                 musicSource.clip = newClip;
                 musicSource.loop = loop;
+                musicSource.Play();
+                return;
+            }
+
+            // Same clip: still ensure playback state matches requested settings.
+            musicSource.loop = loop;
+            if (!musicSource.isPlaying)
+            {
                 musicSource.Play();
             }
         }

@@ -1,11 +1,12 @@
-using System;
-using Unity.Netcode;
-using UnityEngine;
-using UnityEngine.SceneManagement;
 using Constants;
-using System.Collections.Generic;
+using System;
 using System.Collections;
 using System.Linq;
+using Unity.Netcode;
+using Unity.Netcode.Transports.UTP;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using static UnityEngine.GraphicsBuffer;
 
 public class GameManager : NetworkBehaviour
 {
@@ -192,5 +193,14 @@ public class GameManager : NetworkBehaviour
         Debug.Log("[GameManager] StartGame");
         //ChangeState(GameState.Initialising);
         SceneManager.LoadScene("MainGame");
+    }
+
+    /// <summary>
+    /// Sets the Host IP (Ipv4 only) in the NetworkManager.
+    /// </summary>
+    /// <param name="ip"></param>
+    public void SetHostIP(string ip)
+    {
+        NetworkManager.Singleton.GetComponent<UnityTransport>().SetConnectionData(ip, (ushort)7777);
     }
 }

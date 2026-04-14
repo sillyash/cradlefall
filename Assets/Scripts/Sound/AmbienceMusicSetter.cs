@@ -6,12 +6,14 @@ public class AmbienceMusicSetter : MonoBehaviour
     [Header("Volume musique d'ambiance pour cette scène")]
     [Range(0f,1f)]
     [SerializeField] private float ambienceVolume = 1f;
+    [Header("Lecture musique")]
+    [SerializeField] private bool loopMusic = true;
 
     void Start()
     {
         if (ambienceClip != null && MusicManager.Instance != null)
         {
-            MusicManager.Instance.SetMusic(ambienceClip, true);
+            MusicManager.Instance.SetMusic(ambienceClip, loopMusic);
             // Applique le volume spécifique à cette scène
             var musicSource = MusicManager.Instance.GetComponent<AudioSource>();
             if (musicSource != null)
