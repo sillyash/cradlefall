@@ -60,6 +60,8 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
     [SerializeField] private Transform FPSWeaponAnchorPoint;
     [SerializeField] private GameObject playerCanvas;
     [SerializeField] private TMP_Text playerTagText;
+    [SerializeField] private Vector3 playerTagOffset = new Vector3(0f, 2.2f, 0f);
+    [SerializeField] private bool hideTagForOwner = true;
 
     private NetworkVariable<FixedString64Bytes> networkPlayerTag = new(
         default,
@@ -78,6 +80,7 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
 
     public override void OnNetworkSpawn()
     {
+        EnsureWorldPlayerTag();
         networkPlayerTag.OnValueChanged += OnNetworkPlayerTagChanged;
         RefreshPlayerTagVisual(networkPlayerTag.Value.ToString());
 
@@ -388,7 +391,10 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
     {
         Debug.Log($"[Player] Applying player tag visual for {OwnerClientId}: '{tag}'.");
         if (playerTagText != null)
+        {
+            playerTagText.gameObject.SetActive(!(hideTagForOwner && IsOwner));
             playerTagText.text = tag;
+        }
     }
 
     private static string SanitizeTag(string rawTag)
@@ -398,5 +404,34 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
 
         string trimmed = rawTag.Trim();
         return trimmed.Length > 16 ? trimmed.Substring(0, 16) : trimmed;
+    }
+
+    private void EnsureWorldPlayerTag()
+    {
+        if (playerTagText != null)
+            return;
+
+        GameObject tagObject = new GameObject("PlayerTag", typeof(TextMeshPro), typeof(FollowCamera));
+        Transform tagTransform = tagObject.transform;
+        tagTransform.SetParent(transform, false);
+        tagTransform.localPosition = playerTagOffset;
+        tagTransform.localRotation = Quaternion.identity;
+        tagTransform.localScale = Vector3.one * 0.1f;
+
+        TextMeshPro tmp = tagObject.GetComponent<TextMeshPro>();
+        tmp.text = string.Empty;
+        tmp.alignment = TextAlignmentOptions.Center;
+        
+        // Auto font size
+        tmp.enableAutoSizing = true;
+        tmp.fontSizeMin = 1f;
+
+        // Color
+        tmp.color = Color.white;
+        tmp.outlineWidth = 0.2f;
+        tmp.outlineColor = Color.black;
+
+        playerTagText = tmp;
+        tagObject.SetActive(true);
     }
 }
