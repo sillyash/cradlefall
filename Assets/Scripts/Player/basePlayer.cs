@@ -1,9 +1,11 @@
 using System;
 using System.Collections;
+using Unity.Collections;
 using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
+using TMPro;
 using static UnityEngine.GraphicsBuffer;
 using Constants;
 
@@ -57,8 +59,17 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
     [SerializeField] public Camera mainCamera;
     [SerializeField] private Transform FPSWeaponAnchorPoint;
     [SerializeField] private GameObject playerCanvas;
+    [SerializeField] private TMP_Text playerTagText;
+
+    private NetworkVariable<FixedString64Bytes> networkPlayerTag = new(
+        default,
+        NetworkVariableReadPermission.Everyone,
+        NetworkVariableWritePermission.Server
+    );
 
     public bool isDead { get; set; } = false;
+
+    public string PlayerTag => networkPlayerTag.Value.ToString();
 
     public PlayerStats stats;
 
@@ -67,6 +78,9 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
 
     public override void OnNetworkSpawn()
     {
+        networkPlayerTag.OnValueChanged += OnNetworkPlayerTagChanged;
+        RefreshPlayerTagVisual(networkPlayerTag.Value.ToString());
+
         if (!stats)
         {
             Debug.LogError($"[Player] Le Joueur {this.name} n'a pas SO stats");
@@ -113,6 +127,11 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
             NetworkObject.DestroyWithScene = true;
             Destroy(playerCanvas); // Do not display other player's HUD
         }
+    }
+
+    public override void OnNetworkDespawn()
+    {
+        networkPlayerTag.OnValueChanged -= OnNetworkPlayerTagChanged;
     }
 
     void setHandTarget()
@@ -348,4 +367,36 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
     }
 
     public BaseWeapon CurrentWeapon => weapon; // Pour affichage HUD
+
+    public void SetPlayerTagServer(string tag)
+    {
+        if (!IsServer)
+            return;
+
+        string sanitizedTag = SanitizeTag(tag);
+        Debug.Log($"[Player] Server setting player tag for {OwnerClientId} to '{sanitizedTag}'.");
+        networkPlayerTag.Value = new FixedString64Bytes(sanitizedTag);
+    }
+
+    private void OnNetworkPlayerTagChanged(FixedString64Bytes previousTag, FixedString64Bytes newTag)
+    {
+        Debug.Log($"[Player] Network player tag changed for {OwnerClientId}: '{previousTag}' -> '{newTag}'.");
+        RefreshPlayerTagVisual(newTag.ToString());
+    }
+
+    private void RefreshPlayerTagVisual(string tag)
+    {
+        Debug.Log($"[Player] Applying player tag visual for {OwnerClientId}: '{tag}'.");
+        if (playerTagText != null)
+            playerTagText.text = tag;
+    }
+
+    private static string SanitizeTag(string rawTag)
+    {
+        if (string.IsNullOrWhiteSpace(rawTag))
+            return "Player";
+
+        string trimmed = rawTag.Trim();
+        return trimmed.Length > 16 ? trimmed.Substring(0, 16) : trimmed;
+    }
 }
