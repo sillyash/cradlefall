@@ -55,7 +55,7 @@ public class ModuleTimerScript : MonoBehaviour
 
     void Start()
     {
-        foreach (var m in FindObjectsOfType<BaseModule>())
+        foreach (var m in FindObjectsByType<BaseModule>(FindObjectsSortMode.None))
         {
             if (m.gameObject.name == "OxygenModule")
             {

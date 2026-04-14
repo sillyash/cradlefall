@@ -45,7 +45,7 @@ public class MainMenu : MonoBehaviour
         if (ipPanelHandler != null)
             return;
 
-        ipPanelHandler = FindObjectOfType<IPPanelHandler>();
+        ipPanelHandler = FindFirstObjectByType<IPPanelHandler>();
         if (ipPanelHandler != null)
             return;
 
