@@ -114,8 +114,6 @@ public class PlayerController : PlayerMovement
         target.x = Mathf.Lerp(mainCamera.transform.localPosition.x, target.x, 0.1f);
 
         mainCamera.transform.localPosition = target;
-
-        Debug.Log(target);
     }
 
     public void applySpeedFX()
