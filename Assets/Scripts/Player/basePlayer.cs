@@ -5,6 +5,7 @@ using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
+using UnityEngine.Rendering;
 using TMPro;
 using static UnityEngine.GraphicsBuffer;
 using Constants;
@@ -80,9 +81,13 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
 
     public override void OnNetworkSpawn()
     {
-        EnsureWorldPlayerTag();
         networkPlayerTag.OnValueChanged += OnNetworkPlayerTagChanged;
-        RefreshPlayerTagVisual(networkPlayerTag.Value.ToString());
+
+        if (!IsOwner)
+        {
+            EnsureWorldPlayerTag();
+            RefreshPlayerTagVisual(networkPlayerTag.Value.ToString());
+        }
 
         if (!stats)
         {
@@ -135,6 +140,12 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
     public override void OnNetworkDespawn()
     {
         networkPlayerTag.OnValueChanged -= OnNetworkPlayerTagChanged;
+
+        if (playerTagText != null && playerTagText is TextMeshPro && !IsHudTag(playerTagText))
+        {
+            Destroy(playerTagText.gameObject);
+            playerTagText = null;
+        }
     }
 
     void setHandTarget()
@@ -383,16 +394,24 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
 
     private void OnNetworkPlayerTagChanged(FixedString64Bytes previousTag, FixedString64Bytes newTag)
     {
+        if (IsOwner)
+            return;
+
         Debug.Log($"[Player] Network player tag changed for {OwnerClientId}: '{previousTag}' -> '{newTag}'.");
         RefreshPlayerTagVisual(newTag.ToString());
     }
 
     private void RefreshPlayerTagVisual(string tag)
     {
+        if (IsOwner)
+            return;
+
         Debug.Log($"[Player] Applying player tag visual for {OwnerClientId}: '{tag}'.");
+        EnsureWorldPlayerTag();
+
         if (playerTagText != null)
         {
-            playerTagText.gameObject.SetActive(!(hideTagForOwner && IsOwner));
+            playerTagText.gameObject.SetActive(true);
             playerTagText.text = tag;
         }
     }
@@ -408,8 +427,20 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
 
     private void EnsureWorldPlayerTag()
     {
-        if (playerTagText != null)
+        if (IsOwner)
             return;
+
+        if (playerTagText != null)
+        {
+            bool isTextMeshPro3D = playerTagText is TextMeshPro;
+            bool isOnPlayerHud = IsHudTag(playerTagText);
+
+            if (isTextMeshPro3D && !isOnPlayerHud)
+            {
+                ConfigureTagRendering(playerTagText);
+                return;
+            }
+        }
 
         GameObject tagObject = new GameObject("PlayerTag", typeof(TextMeshPro), typeof(FollowCamera));
         Transform tagTransform = tagObject.transform;
@@ -431,7 +462,84 @@ public class basePlayer : NetworkBehaviour, IDamageable, ICanDie
         tmp.outlineWidth = 0.2f;
         tmp.outlineColor = Color.black;
 
+        FollowCamera follow = tagObject.GetComponent<FollowCamera>();
+        if (follow != null)
+            follow.SetLockXRotation(false);
+
+        ConfigureTagRendering(tmp);
+
         playerTagText = tmp;
         tagObject.SetActive(true);
+    }
+
+    private void ConfigureTagRendering(TMP_Text text)
+    {
+        if (text == null)
+            return;
+
+        Material sourceMaterial = text.fontSharedMaterial != null ? text.fontSharedMaterial : text.fontMaterial;
+        if (sourceMaterial != null)
+        {
+            Shader overlayShader = Shader.Find("TextMeshPro/Distance Field Overlay");
+            Material overlayMaterial;
+
+            if (overlayShader != null)
+            {
+                overlayMaterial = new Material(overlayShader);
+                overlayMaterial.CopyPropertiesFromMaterial(sourceMaterial);
+            }
+            else
+            {
+                overlayMaterial = new Material(sourceMaterial);
+            }
+
+            overlayMaterial.name = sourceMaterial.name + "_PlayerTagOverlay";
+
+            if (overlayMaterial.HasProperty("_ZTestMode"))
+                overlayMaterial.SetFloat("_ZTestMode", (float)CompareFunction.Always);
+            else if (overlayMaterial.HasProperty("_ZTest"))
+                overlayMaterial.SetFloat("_ZTest", (float)CompareFunction.Always);
+
+            if (overlayMaterial.HasProperty("_ZWrite"))
+                overlayMaterial.SetFloat("_ZWrite", 0f);
+
+            // Keep tags readable in dark scenes by forcing bright face + glow when supported.
+            if (overlayMaterial.HasProperty("_FaceColor"))
+                overlayMaterial.SetColor("_FaceColor", new Color(2f, 2f, 2f, 1f));
+
+            if (overlayMaterial.HasProperty("_GlowColor"))
+                overlayMaterial.SetColor("_GlowColor", new Color(1f, 1f, 1f, 1f));
+
+            if (overlayMaterial.HasProperty("_GlowPower"))
+                overlayMaterial.SetFloat("_GlowPower", 0.6f);
+
+            if (overlayMaterial.HasProperty("_GlowOuter"))
+                overlayMaterial.SetFloat("_GlowOuter", 0.25f);
+
+            overlayMaterial.renderQueue = (int)RenderQueue.Overlay;
+            overlayMaterial.EnableKeyword("GLOW_ON");
+            text.fontSharedMaterial = overlayMaterial;
+        }
+
+        TextMeshPro text3D = text as TextMeshPro;
+        if (text3D == null)
+            return;
+
+        text3D.isOverlay = true;
+
+        Renderer textRenderer = text3D.GetComponent<Renderer>();
+        if (textRenderer == null)
+            return;
+
+        textRenderer.shadowCastingMode = ShadowCastingMode.Off;
+        textRenderer.receiveShadows = false;
+        textRenderer.sortingOrder = short.MaxValue;
+
+        text.color = Color.white;
+    }
+
+    private bool IsHudTag(TMP_Text text)
+    {
+        return playerCanvas != null && text != null && text.transform.IsChildOf(playerCanvas.transform);
     }
 }

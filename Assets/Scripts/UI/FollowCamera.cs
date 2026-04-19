@@ -2,14 +2,34 @@ using UnityEngine;
 
 public class FollowCamera : MonoBehaviour
 {
-    [SerializeField] private bool lockXRotation = true;
+    [SerializeField] private bool lockXRotation = false;
+    [SerializeField] private Camera explicitCamera;
 
-    void Update()
+    private Transform targetCameraTransform;
+    private float nextResolveAt = 0f;
+
+    public void SetLockXRotation(bool value)
     {
-        if (Camera.main == null)
+        lockXRotation = value;
+    }
+
+    public void SetTargetCamera(Camera camera)
+    {
+        explicitCamera = camera;
+        targetCameraTransform = explicitCamera != null ? explicitCamera.transform : null;
+    }
+
+    void LateUpdate()
+    {
+        if (targetCameraTransform == null || !targetCameraTransform.gameObject.activeInHierarchy)
+        {
+            ResolveViewerCamera();
+        }
+
+        if (targetCameraTransform == null)
             return;
 
-        Vector3 toCamera = Camera.main.transform.position - transform.position;
+        Vector3 toCamera = targetCameraTransform.position - transform.position;
         if (toCamera.sqrMagnitude < 0.0001f)
             return;
 
@@ -21,5 +41,36 @@ public class FollowCamera : MonoBehaviour
         }
 
         transform.rotation = targetRotation;
+    }
+
+    private void ResolveViewerCamera()
+    {
+        if (Time.unscaledTime < nextResolveAt)
+            return;
+
+        nextResolveAt = Time.unscaledTime + 0.5f;
+
+        if (explicitCamera != null && explicitCamera.isActiveAndEnabled)
+        {
+            targetCameraTransform = explicitCamera.transform;
+            return;
+        }
+
+        basePlayer[] players = FindObjectsByType<basePlayer>(FindObjectsSortMode.None);
+        foreach (basePlayer player in players)
+        {
+            if (player == null || !player.IsOwner)
+                continue;
+
+            Camera ownerCamera = player.GetComponentInChildren<Camera>(true);
+            if (ownerCamera != null && ownerCamera.isActiveAndEnabled)
+            {
+                targetCameraTransform = ownerCamera.transform;
+                return;
+            }
+        }
+
+        if (Camera.main != null && Camera.main.isActiveAndEnabled)
+            targetCameraTransform = Camera.main.transform;
     }
 }
