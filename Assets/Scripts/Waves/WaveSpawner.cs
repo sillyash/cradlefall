@@ -132,22 +132,8 @@ public class WaveSpawner : NetworkBehaviour
         }
 
         // Wait until all spawned enemies are destroyed before finishing the wave
-        while (true)
+        while (wave.spawnedEnemies.Count > 0 || wave.enemiesToSpawn.Count > 0)
         {
-            
-            for (int i = wave.spawnedEnemies.Count - 1; i >= 0; i--)
-            {
-                if (wave.spawnedEnemies[i] == null)
-                {
-                    wave.spawnedEnemies.RemoveAt(i);
-                }
-            }
-
-            if (wave.spawnedEnemies.Count == 0 && wave.enemiesToSpawn.Count == 0)
-            {
-                break;
-            }
-
             yield return null;
         }
 
