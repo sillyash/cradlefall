@@ -102,20 +102,35 @@ public class WaveSpawner : NetworkBehaviour
         while ((enemyToSpawn = wave.GetNextEnemyToSpawn()) != null)
         {
             Transform spawnPoint = wave.GetRandomSpawnPoint();
-            GameObject instance;
-            if (spawnPoint != null)
+
+            if (spawnPoint == null)
             {
-                instance = Instantiate(enemyToSpawn, spawnPoint.position, spawnPoint.rotation);
-            }
-            else
-            {
-                instance = Instantiate(enemyToSpawn, Vector3.zero, Quaternion.identity);
+                spawnPoint.position = Vector3.zero;
+                spawnPoint.rotation = Quaternion.identity;
             }
 
-            // Track spawned instance so we can wait for it to be destroyed
-            if (instance != null)
+            GameObject instance;
+
+            if (wave.deadEnemies.Count > 0)
             {
+                int lastIndex = wave.deadEnemies.Count - 1;
+
+                //Reuse dead enemy
+                instance = wave.deadEnemies[lastIndex];
+                wave.deadEnemies.RemoveAt(lastIndex);
+
+                instance.transform.position = spawnPoint.position;
+                instance.transform.rotation = spawnPoint.rotation;
+
+                instance.GetComponent<BaseEnemy>().resetEnemy();
+            } else
+            {
+                instance = Instantiate(enemyToSpawn, spawnPoint.position, spawnPoint.rotation);
                 instance.GetComponent<NetworkObject>().Spawn();
+            }
+
+            if (instance != null)
+            { 
                 wave.spawnedEnemies.Add(instance);
             }
 

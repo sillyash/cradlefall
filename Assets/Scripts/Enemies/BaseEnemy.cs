@@ -109,9 +109,9 @@ public class BaseEnemy : NetworkBehaviour, ICanDie, IDamageable
                 }
                 TrackTarget();
             }
-        }
 
-        HandleFootsteps();
+            HandleFootsteps();
+        }
     }
 
     private void HandleFootsteps()
@@ -188,8 +188,17 @@ public class BaseEnemy : NetworkBehaviour, ICanDie, IDamageable
 
     private void DestroyForEveryone()
     {
-        NetworkObject netObj = gameObject.GetComponent<NetworkObject>();
-        netObj.Despawn(destroy: true);
+        //NetworkObject netObj = gameObject.GetComponent<NetworkObject>();
+        //netObj.Despawn(destroy: true);
+
+        gameObject.SetActive(false);
+    }
+
+    public void resetEnemy()
+    {
+        isDead = false;
+        Health.Value = stats.health;
+        gameObject.SetActive(true);
     }
 
     public GameObject AcquireClosestCapsule()

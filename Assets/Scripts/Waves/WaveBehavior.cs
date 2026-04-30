@@ -13,9 +13,13 @@ public class WaveBehavior : MonoBehaviour
     // Variables used in logic sections
     public List<GameObject> enemiesToSpawn = new List<GameObject>();
     public List<GameObject> spawnedEnemies = new List<GameObject>();
+    public List<GameObject> deadEnemies = new List<GameObject>();
+
     private int remainingPoints;
     public int enemiesLeft;
+
     private int index;
+    private BaseEnemy currentEnemy;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -32,17 +36,21 @@ public class WaveBehavior : MonoBehaviour
         {
             //Get index of an enemy for the current frame
             index = Time.frameCount % spawnedEnemies.Count;
+            currentEnemy = spawnedEnemies[index].GetComponent<BaseEnemy>();
 
-            if (spawnedEnemies[index] == null)
+            if (currentEnemy.isDead)
             {
-                Debug.Log("removing enemy");
+                // store dead enemy for reuse
+                deadEnemies.Add(spawnedEnemies[index]);
+                // remove dead enemy from main list
                 spawnedEnemies.RemoveAt(index);
+
                 enemiesLeft = Mathf.Max(0, enemiesToSpawn.Count + spawnedEnemies.Count);
             }
             else
             {
                 // run logic for this enemy
-                spawnedEnemies[index].GetComponent<BaseEnemy>().runMainLogic();
+                currentEnemy.runMainLogic();
             }
         }
     }
