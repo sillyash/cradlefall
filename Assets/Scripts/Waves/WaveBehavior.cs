@@ -14,7 +14,8 @@ public class WaveBehavior : MonoBehaviour
     public List<GameObject> enemiesToSpawn = new List<GameObject>();
     public List<GameObject> spawnedEnemies = new List<GameObject>();
     private int remainingPoints;
-    public int enemiesLeft; 
+    public int enemiesLeft;
+    private int index;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -27,13 +28,21 @@ public class WaveBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Iterate backwards and remove null entries safely
-        for (int i = spawnedEnemies.Count - 1; i >= 0; i--)
+        if (spawnedEnemies.Count > 0)
         {
-            if (spawnedEnemies[i] == null)
+            //Get index of an enemy for the current frame
+            index = Time.frameCount % spawnedEnemies.Count;
+
+            if (spawnedEnemies[index] == null)
             {
-                spawnedEnemies.RemoveAt(i);
+                Debug.Log("removing enemy");
+                spawnedEnemies.RemoveAt(index);
                 enemiesLeft = Mathf.Max(0, enemiesToSpawn.Count + spawnedEnemies.Count);
+            }
+            else
+            {
+                // run logic for this enemy
+                spawnedEnemies[index].GetComponent<BaseEnemy>().runMainLogic();
             }
         }
     }

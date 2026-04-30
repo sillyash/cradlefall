@@ -82,7 +82,7 @@ public class BaseEnemy : NetworkBehaviour, ICanDie, IDamageable
         NetworkObject.DestroyWithScene = true;
     }
 
-    void Update()
+    public void runMainLogic()
     {
         if (!IsServer) return;
         if (!isDead)
