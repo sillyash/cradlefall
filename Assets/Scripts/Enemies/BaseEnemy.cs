@@ -160,6 +160,7 @@ public class BaseEnemy : NetworkBehaviour, ICanDie, IDamageable
     {
         m_Agent.isStopped = true;
         m_Animator.enabled = false;
+        GetComponent<CapsuleCollider>().enabled = false;
 
         if (deathSound != null && soundFXManager != null)
         {
