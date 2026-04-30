@@ -159,7 +159,7 @@ public class BaseEnemy : NetworkBehaviour, ICanDie, IDamageable
     private void DieRpc()
     {
         m_Agent.isStopped = true;
-        m_Animator.SetTrigger("Die");
+        m_Animator.enabled = false;
 
         if (deathSound != null && soundFXManager != null)
         {
