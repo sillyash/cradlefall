@@ -520,7 +520,7 @@ PrefabInstance:
     - target: {fileID: 8464794624840630467, guid: cd95e20d816642547b148417fdebd2c0, type: 3}
       propertyPath: fireSound
       value: 
-      objectReference: {fileID: 8300000, guid: 3c263d04b4cec9c45b9e322f9bce7905, type: 3}
+      objectReference: {fileID: 8300000, guid: f19450f64af49374480e781c36a0aeb9, type: 3}
     - target: {fileID: 8464794624840630467, guid: cd95e20d816642547b148417fdebd2c0, type: 3}
       propertyPath: projectile
       value: 
