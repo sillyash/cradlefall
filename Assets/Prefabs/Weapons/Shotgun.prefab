@@ -520,7 +520,7 @@ PrefabInstance:
     - target: {fileID: 8464794624840630467, guid: cd95e20d816642547b148417fdebd2c0, type: 3}
       propertyPath: fireSound
       value: 
-      objectReference: {fileID: 8300000, guid: 241ace1bf8e5dc444a592de390e16a33, type: 3}
+      objectReference: {fileID: 8300000, guid: 3c263d04b4cec9c45b9e322f9bce7905, type: 3}
     - target: {fileID: 8464794624840630467, guid: cd95e20d816642547b148417fdebd2c0, type: 3}
       propertyPath: projectile
       value: 
@@ -528,7 +528,7 @@ PrefabInstance:
     - target: {fileID: 8464794624840630467, guid: cd95e20d816642547b148417fdebd2c0, type: 3}
       propertyPath: reloadSound
       value: 
-      objectReference: {fileID: 8300000, guid: f2eaeba4061392d49bd86c9a181dfb12, type: 3}
+      objectReference: {fileID: 8300000, guid: 953bb8ba4e14e8e41b5b2d019feb5ad8, type: 3}
     - target: {fileID: 8464794624840630467, guid: cd95e20d816642547b148417fdebd2c0, type: 3}
       propertyPath: fireSoundVolume
       value: 0.4
