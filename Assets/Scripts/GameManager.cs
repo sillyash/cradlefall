@@ -1,11 +1,12 @@
-using System;
-using Unity.Netcode;
-using UnityEngine;
-using UnityEngine.SceneManagement;
 using Constants;
-using System.Collections.Generic;
+using System;
 using System.Collections;
 using System.Linq;
+using Unity.Netcode;
+using Unity.Netcode.Transports.UTP;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using static UnityEngine.GraphicsBuffer;
 
 public class GameManager : NetworkBehaviour
 {
@@ -13,7 +14,8 @@ public class GameManager : NetworkBehaviour
     [SerializeField] private GameObject ProjectileMachine;
     [SerializeField] private GameObject LightManager;
     [SerializeField] private GameObject LobbyManager;
-    [SerializeField] private GameObject ChargingStation;
+    [SerializeField] private GameObject RoleModuleManager;
+    [SerializeField] private GameObject ChargingStationManager;
 
     public NetworkVariable<GameState> currentState = new(
         GameState.Playing,
@@ -94,7 +96,10 @@ public class GameManager : NetworkBehaviour
         var lightManager = Instantiate(LightManager);
         lightManager.GetComponent<NetworkObject>().Spawn();
 
-        var chargingStationsManager = Instantiate(ChargingStation);
+        var roleModuleManager = Instantiate(RoleModuleManager);
+        roleModuleManager.GetComponent<NetworkObject>().Spawn();
+
+        var chargingStationsManager = Instantiate(ChargingStationManager);
         chargingStationsManager.GetComponent<NetworkObject>().Spawn();
 
         StartCoroutine(SpawnPlayersAfterDelay());
@@ -170,15 +175,6 @@ public class GameManager : NetworkBehaviour
     }
 
     /// <summary>
-    /// Go to multiplayer screen from main menu
-    /// </summary>
-    public void GoToMultiScreen()
-    {
-        ChangeScene(Scenes.MultiScreen);
-        Cursor.lockState = CursorLockMode.None;
-    }
-
-    /// <summary>
     /// Go to Lobby
     /// </summary>
     public void GoToLobby()
@@ -197,5 +193,14 @@ public class GameManager : NetworkBehaviour
         Debug.Log("[GameManager] StartGame");
         //ChangeState(GameState.Initialising);
         SceneManager.LoadScene("MainGame");
+    }
+
+    /// <summary>
+    /// Sets the Host IP (Ipv4 only) in the NetworkManager.
+    /// </summary>
+    /// <param name="ip"></param>
+    public void SetHostIP(string ip)
+    {
+        NetworkManager.Singleton.GetComponent<UnityTransport>().SetConnectionData(ip, (ushort)7777);
     }
 }

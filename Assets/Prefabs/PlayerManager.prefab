@@ -71,7 +71,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  playerPrefab: {fileID: 821926761254441425, guid: 6faf5ad85b09f2d46b19998f2af9b018, type: 3}
+  playerPrefabs:
+  - {fileID: 821926761254441425, guid: 6faf5ad85b09f2d46b19998f2af9b018, type: 3}
+  - {fileID: 2657582332648282985, guid: 69d8c91efb442c546889ed522a20e753, type: 3}
+  - {fileID: 821926761254441425, guid: 94f2187c815773b40a46e33f1991e6d5, type: 3}
+  - {fileID: 821926761254441425, guid: 3817775e20caade4fa3174529d580621, type: 3}
   deathCamPrefab: {fileID: 5529215310212988558, guid: d11d94b5b7d896f49bafb200c4905488, type: 3}
   spawnPosition: {x: 0, y: 0, z: 0}
   NbOfActiveClients:

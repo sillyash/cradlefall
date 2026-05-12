@@ -1,8 +1,16 @@
 using UnityEngine;
 using System.Collections;
+using Unity.Netcode;
 
-public class BaseWeapon : MonoBehaviour
+public class BaseWeapon : NetworkBehaviour
 {
+
+    [Header("Sound FX Manager")]
+    [SerializeField] private SoundFXManager soundFXManager;
+    [SerializeField] private AudioClip fireSound;
+    [SerializeField] [Range(0f, 1f)] private float fireSoundVolume = 1f;
+    [SerializeField] private AudioClip reloadSound;
+    [SerializeField] [Range(0f, 1f)] private float reloadSoundVolume = 1f;
     [SerializeField] public WeaponBehavior behavior;
     [SerializeField] public WeaponStats stats;
     [SerializeField] public ProjectileBase projectile;
@@ -17,11 +25,31 @@ public class BaseWeapon : MonoBehaviour
     // Variables partager a l'HUD munitions
     public int AmmoCount => ammoCount;
     public int MagSize => stats.magSize;
+    public float ReloadTime => stats.reloadTime;
     public event System.Action<BaseWeapon> OnFire;
     public event System.Action OnAmmoChanged;
     public event System.Action OnReloadStart;
     public event System.Action OnReloadEnd;
 
+    public NetworkVariable<bool> networkFire = new(
+        false,
+        NetworkVariableReadPermission.Everyone,
+        NetworkVariableWritePermission.Owner
+    );
+
+
+    public override void OnNetworkSpawn()
+    {
+        if (!IsOwner) return;
+       
+        networkFire.OnValueChanged += (oldValue, newValue) =>
+        {
+            if (newValue)
+            {
+                PlayFireFX();
+            }
+        };
+    }
 
     void Start()
     {
@@ -46,19 +74,32 @@ public class BaseWeapon : MonoBehaviour
             ammoCount--;
             OnAmmoChanged?.Invoke();
             OnFire?.Invoke(this);
-            if (muzzleFlash != null) // Only for weapons with muzzle flash
-            {
-                muzzleFlash.PlayMuzzleFlash();
-            }
+            networkFire.Value = true;
+            PlayFireFX();
+            Debug.Log(networkFire.Value);
             isReadyToShoot = false;
             StartCoroutine(FireCooldown());
         }  
+    }
+
+    public void PlayFireFX()
+    {
+        if (muzzleFlash != null) // Only for weapons with muzzle flash
+        {
+            muzzleFlash.PlayMuzzleFlash();
+        }
+        if (fireSound != null && soundFXManager != null)
+        {
+            soundFXManager.PlaySoundFXClip(fireSound, transform, fireSoundVolume);
+        }
     }
 
     IEnumerator FireCooldown()
     {
         yield return new WaitForSeconds(stats.shootingCooldown);
         isReadyToShoot = true;
+        networkFire.Value = false;
+        Debug.Log(networkFire.Value);
     }
 
     public void Reload()
@@ -71,6 +112,10 @@ public class BaseWeapon : MonoBehaviour
         isReloading = true;
         StartCoroutine(ReloadCooldown());
         OnReloadStart?.Invoke();
+        if (reloadSound != null && soundFXManager != null)
+        {
+            soundFXManager.PlaySoundFXClip(reloadSound, transform, reloadSoundVolume);
+        }
     }
 
 

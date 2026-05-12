@@ -2,6 +2,7 @@ using Constants;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -18,6 +19,9 @@ public class PlayerManager : NetworkBehaviour
     public Dictionary<ulong, basePlayer> activePlayers = new();
     public Dictionary<ulong, GameObject> activePlayersPrefabs = new();
     public Dictionary<ulong, NetworkObject> activeDeathCameras = new();
+    public Dictionary<ulong, string> activePlayerTags = new();
+
+    private const int MaxPlayerTagLength = 16;
 
     public NetworkVariable<int> NbOfActiveClients = new(
         0,
@@ -53,12 +57,52 @@ public class PlayerManager : NetworkBehaviour
         switch (Roles.RolesMap[roleIdex])
         {
             case Roles.DPS:
-                activePlayersPrefabs[ownerClientId] = playerPrefabs[0];
+                SetPlayerPrefabForClient(ownerClientId, 0);
                 break;
             case Roles.TECH:
-                activePlayersPrefabs[ownerClientId] = playerPrefabs[1];
+                SetPlayerPrefabForClient(ownerClientId, 1);
+                break;
+            case Roles.HEAL:
+                SetPlayerPrefabForClient(ownerClientId, 2);
+                break;
+            case Roles.TANK:
+                SetPlayerPrefabForClient(ownerClientId, 3);
+                break;
+            default:
+                Debug.LogWarning($"[PlayerManager] Invalid role index {roleIdex} for client {ownerClientId}");
                 break;
         }
+    }
+
+    public void SetTagForClient(ulong clientId, string rawTag)
+    {
+        string tag = SanitizeTag(rawTag, clientId);
+        Debug.Log($"[PlayerManager] Applying player tag '{tag}' for client {clientId}.");
+        activePlayerTags[clientId] = tag;
+
+        if (activePlayers.TryGetValue(clientId, out basePlayer existingPlayer))
+        {
+            Debug.Log($"[PlayerManager] Updating live player object for client {clientId} with tag '{tag}'.");
+            existingPlayer.SetPlayerTagServer(tag);
+        }
+    }
+
+    private void SetPlayerPrefabForClient(ulong clientId, int prefabIndex)
+    {
+        if (prefabIndex < 0 || prefabIndex >= playerPrefabs.Count)
+        {
+            Debug.LogWarning($"[PlayerManager] Invalid prefab index {prefabIndex} for client {clientId}");
+            return;
+        }
+
+        if (activePlayersPrefabs.ContainsKey(clientId))
+        {
+            Debug.LogWarning($"[PlayerManager] Player prefab for client {clientId} is already set!");
+            return;
+        }
+
+        Debug.Log($"[PlayerManager] Setting player prefab for client {clientId} to {playerPrefabs[prefabIndex].name}");
+        activePlayersPrefabs[clientId] = playerPrefabs[prefabIndex];
     }
 
     /// <summary>
@@ -103,6 +147,15 @@ public class PlayerManager : NetworkBehaviour
 
         // Track this player
         activePlayers[clientId] = basePlayerComp;
+
+        if (!activePlayerTags.TryGetValue(clientId, out string tag))
+        {
+            tag = SanitizeTag(string.Empty, clientId);
+            activePlayerTags[clientId] = tag;
+        }
+
+        Debug.Log($"[PlayerManager] Applying stored player tag '{tag}' to newly spawned player for client {clientId}.");
+        basePlayerComp.SetPlayerTagServer(tag);
     }
 
     // Despawn a player when they die or disconnect
@@ -189,6 +242,7 @@ public class PlayerManager : NetworkBehaviour
         {
             // Server despawns this player
             DespawnPlayerForClient(clientId);
+            activePlayerTags.Remove(clientId);
         }
     }
 
@@ -241,5 +295,21 @@ public class PlayerManager : NetworkBehaviour
     public IEnumerable<ulong> GetAllClients()
     {
         return activePlayers.Keys;
+    }
+
+    private static string SanitizeTag(string rawTag, ulong clientId)
+    {
+        string source = string.IsNullOrWhiteSpace(rawTag) ? $"Player{clientId}" : rawTag.Trim();
+        StringBuilder builder = new StringBuilder(source.Length);
+
+        for (int i = 0; i < source.Length && builder.Length < MaxPlayerTagLength; i++)
+        {
+            char c = source[i];
+            if (char.IsLetterOrDigit(c) || c == '_' || c == '-' || c == ' ')
+                builder.Append(c);
+        }
+
+        string sanitized = builder.ToString().Trim();
+        return string.IsNullOrWhiteSpace(sanitized) ? $"Player{clientId}" : sanitized;
     }
 }

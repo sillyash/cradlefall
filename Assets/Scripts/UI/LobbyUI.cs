@@ -11,6 +11,9 @@ using System;
 /// </summary>
 public class LobbyUI : MonoBehaviour
 {
+    [Header("Sound FX Manager")]
+    [SerializeField] private SoundFXManager soundFXManager;
+
     [Header("UI Elements")]
     [SerializeField] private Button readyButton;
     [SerializeField] private Button flecheGauche;
@@ -19,6 +22,13 @@ public class LobbyUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI statusText;
     [SerializeField] private TextMeshProUGUI playerCountText;
     [SerializeField] private TextMeshProUGUI RoleText;
+    [SerializeField] private PlayerTagInputHandler playerTagInput;
+
+    [Header("Audio")]
+    [SerializeField] private AudioClip buttonClickSound;
+    [SerializeField] [Range(0f,1f)] private float buttonClickVolume = 1f;
+    [SerializeField] private AudioClip buttonHoverSound;
+    [SerializeField] [Range(0f,1f)] private float buttonHoverVolume = 1f;
 
     private int roleIndex = 0;
     private List<string> roles;
@@ -41,6 +51,7 @@ public class LobbyUI : MonoBehaviour
 
         roles = Roles.roles;
         RoleText.text = roles[roleIndex];
+        ResolvePlayerTagInput();
 
         if (LobbyManager.Instance != null)
         {
@@ -88,15 +99,37 @@ public class LobbyUI : MonoBehaviour
         UpdateUI();
     }
 
+    private void PlayButtonSound()
+    {
+        if (buttonClickSound != null && soundFXManager != null)
+        {
+            soundFXManager.PlaySoundFXClip(buttonClickSound, transform, buttonClickVolume);
+        }
+    }
+
+    public void OnButtonHover()
+    {
+        if (buttonHoverSound != null && soundFXManager != null)
+        {
+            soundFXManager.PlaySoundFXClip(buttonHoverSound, transform, buttonHoverVolume);
+        }
+    }
+
     private void OnReadyButtonClicked()
     {
+        PlayButtonSound();
         if (LobbyManager.Instance == null) return;
 
-        LobbyManager.Instance.SetLocalReady(roleIndex);
+        string playerTag = playerTagInput != null
+            ? playerTagInput.GetPlayerTagOrFallback(NetworkManager.Singleton != null ? NetworkManager.Singleton.LocalClientId : 0UL)
+            : string.Empty;
+
+        LobbyManager.Instance.SetLocalReady(roleIndex, playerTag);
     }
 
     private void OnFlecheGaucheClicked()
     {
+        PlayButtonSound();
         if (LobbyManager.Instance.IsReady(NetworkManager.Singleton.LocalClientId)) return;
         roleIndex = (roleIndex - 1 + roles.Count) % roles.Count;
         RoleText.text = roles[roleIndex];
@@ -104,6 +137,7 @@ public class LobbyUI : MonoBehaviour
 
     private void OnFlecheDroiteClicked()
     {
+        PlayButtonSound();
         if (LobbyManager.Instance.IsReady(NetworkManager.Singleton.LocalClientId)) return;
         roleIndex = (roleIndex + 1) % roles.Count;
         RoleText.text = roles[roleIndex];
@@ -111,7 +145,6 @@ public class LobbyUI : MonoBehaviour
 
     private void UpdateUI()
     {
-        Debug.Log("UPDATE");
         if (LobbyManager.Instance == null)
         {
             if (statusText != null)
@@ -122,8 +155,12 @@ public class LobbyUI : MonoBehaviour
         // Update ready button
         if (readyButton != null && readyButtonText != null)
         {
-            readyButtonText.text = (LobbyManager.Instance.IsReady(NetworkManager.Singleton.LocalClientId)) ? "Not Ready" : "Ready";
+            bool localReady = LobbyManager.Instance.IsReady(NetworkManager.Singleton.LocalClientId);
+            readyButtonText.text = localReady ? "Not Ready" : "Ready";
             readyButton.interactable = NetworkManager.Singleton != null && NetworkManager.Singleton.IsClient;
+
+            if (playerTagInput != null)
+                playerTagInput.SetInteractable(!localReady);
         }
 
         // Update player count
@@ -144,5 +181,31 @@ public class LobbyUI : MonoBehaviour
                 statusText.text = $"Waiting for players to ready up...";
             }
         }
+    }
+
+    private void ResolvePlayerTagInput()
+    {
+        if (playerTagInput != null)
+            return;
+
+        playerTagInput = FindFirstObjectByType<PlayerTagInputHandler>(FindObjectsInactive.Include);
+        if (playerTagInput != null)
+            return;
+
+        if (RoleText == null)
+            return;
+
+        RectTransform roleRow = RoleText.transform.parent as RectTransform;
+        if (roleRow == null)
+            return;
+
+        GameObject playerTagObject = new GameObject("PlayerTagInput", typeof(RectTransform), typeof(PlayerTagInputHandler));
+        RectTransform playerTagTransform = playerTagObject.GetComponent<RectTransform>();
+        playerTagTransform.SetParent(roleRow, false);
+        playerTagTransform.sizeDelta = new Vector2(260f, 50f);
+        playerTagTransform.localScale = Vector3.one;
+        playerTagTransform.SetSiblingIndex(RoleText.transform.GetSiblingIndex() + 1);
+
+        playerTagInput = playerTagObject.GetComponent<PlayerTagInputHandler>();
     }
 }

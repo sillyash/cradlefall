@@ -1,8 +1,11 @@
-using UnityEngine;
 using System.Collections;
+using UnityEngine;
+using UnityEngine.UIElements;
+using UnityEngine.VFX;
 
 public class MuzzleFlash : MonoBehaviour
 {
+    public VisualEffect particle;
     public Light muzzleLight;
     public float flashDuration = 0.05f;
 
@@ -14,6 +17,7 @@ public class MuzzleFlash : MonoBehaviour
     public void PlayMuzzleFlash()
     {
         StartCoroutine(Flash());
+        particle.Play();
     }
 
     private IEnumerator Flash()
