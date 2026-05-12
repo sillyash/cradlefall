@@ -20,6 +20,8 @@ public class PlayerController : PlayerMovement
     private Animator animator;
 
     [SerializeField] private AudioClip jumpSound;
+    [SerializeField, Range(0f, 1f)] private float landingVolume = 1f;
+    [SerializeField] private AudioClip landingSound;
     [SerializeField] private AudioClip sprintSound;
     [SerializeField] private AudioClip[] footstepSounds;
     [SerializeField] private float footstepInterval = 0.35f; // base si besoin
@@ -27,6 +29,8 @@ public class PlayerController : PlayerMovement
 
     private float footstepTimer;
     private bool wasSprinting;
+    private bool wasGrounded = true;
+    private bool justLanded;
 
     public override void OnNetworkSpawn()
     {
@@ -34,6 +38,7 @@ public class PlayerController : PlayerMovement
         KeyMappingSettings.LoadPreset();
         characterController = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
+        wasGrounded = characterController.isGrounded;
         if (!movementSettings)
         {
             Debug.LogError("Le script CharacterController du prefab Joueur n�a pas de ScriptableObject de mouvement assign�.");
@@ -49,6 +54,7 @@ public class PlayerController : PlayerMovement
         HandleJump();
         ApplyGravity();
         ApplyFinalMovement();
+        HandleLanding();
         updateAnim();
         applySpeedFX();
         applyLateralCameraFX(0.5f);
@@ -106,6 +112,23 @@ public class PlayerController : PlayerMovement
         }
     }
 
+    private void HandleLanding()
+    {
+        bool isGrounded = characterController.isGrounded;
+
+        if (!wasGrounded && isGrounded)
+        {
+            justLanded = true;
+
+            if (landingSound != null && soundFXManager != null)
+            {
+                soundFXManager.PlaySoundFXClip(landingSound, transform, landingVolume);
+            }
+        }
+
+        wasGrounded = isGrounded;
+    }
+
     public void applyLateralCameraFX(float magnitude)
     {
         Vector3 target = mainCamera.transform.localPosition;
@@ -143,6 +166,13 @@ public class PlayerController : PlayerMovement
 
     private void HandleFootsteps()
     {
+        if (justLanded)
+        {
+            footstepTimer = footstepInterval;
+            justLanded = false;
+            return;
+        }
+
         bool isWalking = characterController.isGrounded && move.magnitude > 0.1f;
         if (isWalking)
         {
