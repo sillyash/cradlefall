@@ -996,6 +996,8 @@ MonoBehaviour:
   soundFXManager: {fileID: 5108398203100439213}
   mainCamera: {fileID: 95665150144060911}
   jumpSound: {fileID: 8300000, guid: ef26157967fd5cb4d9f2209138146ca9, type: 3}
+  landingVolume: 1
+  landingSound: {fileID: 0}
   sprintSound: {fileID: 8300000, guid: 08fcd0940afcc2e46bccdebd2bc8f84c, type: 3}
   footstepSounds:
   - {fileID: 8300000, guid: 941d1e019d813ad4ebab1aa072d2828c, type: 3}
@@ -1040,6 +1042,9 @@ MonoBehaviour:
   mainCamera: {fileID: 95665150144060911}
   FPSWeaponAnchorPoint: {fileID: 316491725339577519}
   playerCanvas: {fileID: 2466486089039789121}
+  playerTagText: {fileID: 0}
+  playerTagOffset: {x: 0, y: 2.2, z: 0}
+  hideTagForOwner: 1
   stats: {fileID: 11400000, guid: 41ccfa7cd379515499abb2582c3819d4, type: 2}
 --- !u!114 &6504421229519761709
 MonoBehaviour:
@@ -1152,22 +1157,6 @@ MonoBehaviour:
       Synchronize: 1
       ParameterType: 4
   AnimatorParametersExpanded: 0
---- !u!114 &-5099417475786487224
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4263663073151763242}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cedb2e020221ab54eae7ffd785af9708, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowTopMostFoldoutHeaderGroup: 1
-  IsActive:
-    m_InternalValue: 0
-  nightVolume: {fileID: 825988467645621928}
 --- !u!114 &2061913146175803509
 MonoBehaviour:
   m_ObjectHideFlags: 0
