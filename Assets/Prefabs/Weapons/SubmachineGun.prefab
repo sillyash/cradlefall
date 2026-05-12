@@ -536,7 +536,7 @@ PrefabInstance:
     - target: {fileID: 8464794624840630467, guid: cd95e20d816642547b148417fdebd2c0, type: 3}
       propertyPath: fireSound
       value: 
-      objectReference: {fileID: 8300000, guid: 241ace1bf8e5dc444a592de390e16a33, type: 3}
+      objectReference: {fileID: 8300000, guid: 1625128cd6b3fd04d87862a5d0ce6aa5, type: 3}
     - target: {fileID: 8464794624840630467, guid: cd95e20d816642547b148417fdebd2c0, type: 3}
       propertyPath: projectile
       value: 
@@ -544,7 +544,7 @@ PrefabInstance:
     - target: {fileID: 8464794624840630467, guid: cd95e20d816642547b148417fdebd2c0, type: 3}
       propertyPath: reloadSound
       value: 
-      objectReference: {fileID: 8300000, guid: f2eaeba4061392d49bd86c9a181dfb12, type: 3}
+      objectReference: {fileID: 8300000, guid: 65d4cdbb16b4a7047a446acf072007f9, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
