@@ -2150,6 +2150,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4307091207581197198}
+  - component: {fileID: 6692440361146347389}
   m_Layer: 8
   m_Name: RolesDisplay
   m_TagString: Untagged
@@ -2185,6 +2186,22 @@ RectTransform:
   m_AnchoredPosition: {x: 7, y: -418}
   m_SizeDelta: {x: 248.0487, y: 120.3}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &6692440361146347389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3396977004992663600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aaea39710f5c20e4a835c95aa1ac2ad7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dpsImage: {fileID: 5500178432292033070}
+  techImage: {fileID: 5158527729569085941}
+  healImage: {fileID: 5157441014664233579}
+  tankImage: {fileID: 3945298702769746633}
 --- !u!1 &3441189048940984283
 GameObject:
   m_ObjectHideFlags: 0
@@ -2795,8 +2812,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.5, y: -2.6057}
-  m_SizeDelta: {x: 57.7, y: 59.9886}
+  m_AnchoredPosition: {x: -3, y: -0.9}
+  m_SizeDelta: {x: 61.912, y: 62.735}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7209370886758284272
 CanvasRenderer:
@@ -3861,7 +3878,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -2.2, y: 1.6}
+  m_AnchoredPosition: {x: -2.2, y: 3}
   m_SizeDelta: {x: 58.683, y: 58.2819}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5897868140915249044
@@ -6974,7 +6991,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000030279, y: 4.1205}
+  m_AnchoredPosition: {x: -1.4, y: 5.3}
   m_SizeDelta: {x: 73.5249, y: 54.559}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8573416587315878590
