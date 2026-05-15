@@ -46,10 +46,23 @@ public class PlayerManager : NetworkBehaviour
     {
         if (IsServer)
         {
-            // Track client connections
+            NbOfActiveClients.Value = 0;
             NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnected;
             NetworkManager.Singleton.OnClientDisconnectCallback += OnClientDisconnected;
         }
+    }
+
+    public override void OnNetworkDespawn()
+    {
+        if (IsServer)
+        {
+            NetworkManager.Singleton.OnClientConnectedCallback -= OnClientConnected;
+            NetworkManager.Singleton.OnClientDisconnectCallback -= OnClientDisconnected;
+        }
+        activePlayers.Clear();
+        activePlayersPrefabs.Clear();
+        activeDeathCameras.Clear();
+        activePlayerTags.Clear();
     }
 
     public void SetRoleForClient(int roleIdex, ulong ownerClientId)

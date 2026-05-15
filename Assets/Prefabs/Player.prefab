@@ -95,7 +95,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 65422506517265125}
-  m_Enabled: 0
+  m_Enabled: 1
 --- !u!114 &212863366956092494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2734,8 +2734,8 @@ MonoBehaviour:
   soundFXManager: {fileID: 5108398203100439213}
   mainCamera: {fileID: 95665150144060911}
   jumpSound: {fileID: 8300000, guid: ef26157967fd5cb4d9f2209138146ca9, type: 3}
-  landingVolume: 1
-  landingSound: {fileID: 0}
+  landingVolume: 0.4
+  landingSound: {fileID: 8300000, guid: 09afd6a503176054bb1ea56056c955aa, type: 3}
   sprintSound: {fileID: 8300000, guid: 08fcd0940afcc2e46bccdebd2bc8f84c, type: 3}
   footstepSounds:
   - {fileID: 8300000, guid: 941d1e019d813ad4ebab1aa072d2828c, type: 3}
@@ -2780,6 +2780,9 @@ MonoBehaviour:
   mainCamera: {fileID: 95665150144060911}
   FPSWeaponAnchorPoint: {fileID: 316491725339577519}
   playerCanvas: {fileID: 2466486089039789121}
+  playerTagText: {fileID: 0}
+  playerTagOffset: {x: 0, y: 2.2, z: 0}
+  hideTagForOwner: 1
   playerTagText: {fileID: 0}
   playerTagOffset: {x: 0, y: 2.2, z: 0}
   hideTagForOwner: 1
