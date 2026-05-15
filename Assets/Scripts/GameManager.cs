@@ -69,6 +69,11 @@ public class GameManager : NetworkBehaviour
         }
     }
 
+    public override void OnNetworkSpawn()
+    {
+        _returningToMainMenu = false;
+    }
+
     public void HostGame()
     {
         NetworkManager.Singleton.OnServerStarted += OnServerStarted;
@@ -174,11 +179,37 @@ public class GameManager : NetworkBehaviour
     }
 
     /// <summary>
-    /// Return to main menu from any scene
+    /// Return to main menu from any scene, redirecting all connected clients.
     /// </summary>
     public void ReturnToMainMenu()
     {
-        ChangeScene(Scenes.MainMenu);
+        if (NetworkManager.Singleton != null && NetworkManager.Singleton.IsListening)
+        {
+            RequestReturnToMainMenuRpc();
+        }
+        else
+        {
+            SceneManager.LoadScene(Scenes.MainMenu, LoadSceneMode.Single);
+            Cursor.lockState = CursorLockMode.None;
+        }
+    }
+
+    // Any client can request; server deduplicates and broadcasts.
+    private bool _returningToMainMenu = false;
+
+    [Rpc(SendTo.Server, InvokePermission = RpcInvokePermission.Everyone)]
+    private void RequestReturnToMainMenuRpc()
+    {
+        if (_returningToMainMenu) return;
+        _returningToMainMenu = true;
+        BroadcastReturnToMainMenuRpc();
+    }
+
+    [Rpc(SendTo.ClientsAndHost)]
+    private void BroadcastReturnToMainMenuRpc()
+    {
+        NetworkManager.Singleton.Shutdown();
+        SceneManager.LoadScene(Scenes.MainMenu, LoadSceneMode.Single);
         Cursor.lockState = CursorLockMode.None;
     }
 
