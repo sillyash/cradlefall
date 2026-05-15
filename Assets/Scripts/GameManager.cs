@@ -161,6 +161,14 @@ public class GameManager : NetworkBehaviour
     [Rpc(SendTo.Server, InvokePermission = RpcInvokePermission.Everyone)]
     public void VictoryRpc()
     {
+        if (NetworkManager.Singleton.IsServer && PlayerManager.Instance != null)
+        {
+            foreach (var player in PlayerManager.Instance.GetAllPlayers().ToList())
+            {
+                PlayerManager.Instance.DespawnPlayerForClient(player.getClientId());
+            }
+        }
+
         ChangeScene(Scenes.VictoryMenu);
         Cursor.lockState = CursorLockMode.None;
     }
