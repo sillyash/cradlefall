@@ -52,6 +52,19 @@ public class PlayerManager : NetworkBehaviour
         }
     }
 
+    public override void OnNetworkDespawn()
+    {
+        if (IsServer)
+        {
+            NetworkManager.Singleton.OnClientConnectedCallback -= OnClientConnected;
+            NetworkManager.Singleton.OnClientDisconnectCallback -= OnClientDisconnected;
+        }
+        activePlayers.Clear();
+        activePlayersPrefabs.Clear();
+        activeDeathCameras.Clear();
+        activePlayerTags.Clear();
+    }
+
     public void SetRoleForClient(int roleIdex, ulong ownerClientId)
     {
         switch (Roles.RolesMap[roleIdex])
