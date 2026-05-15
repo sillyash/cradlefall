@@ -46,7 +46,7 @@ public class PlayerManager : NetworkBehaviour
     {
         if (IsServer)
         {
-            // Track client connections
+            NbOfActiveClients.Value = 0;
             NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnected;
             NetworkManager.Singleton.OnClientDisconnectCallback += OnClientDisconnected;
         }
