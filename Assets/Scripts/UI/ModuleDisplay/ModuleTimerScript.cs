@@ -4,6 +4,10 @@ using UnityEngine.UI;
 
 public class ModuleTimerScript : MonoBehaviour
 {
+    [Header("Module Settings")]
+    [SerializeField] private string moduleName = "OxygenModule";
+    [SerializeField] private bool showTimer = true;
+
     [Header("UI References")]
     [SerializeField] private TMP_Text timerText;
     [SerializeField] private Image timerImage;
@@ -57,14 +61,14 @@ public class ModuleTimerScript : MonoBehaviour
     {
         foreach (var m in FindObjectsByType<BaseModule>(FindObjectsSortMode.None))
         {
-            if (m.gameObject.name == "OxygenModule")
+            if (m.gameObject.name == moduleName)
             {
                 targetModule = m;
                 break;
             }
         }
 
-        if (targetModule != null && targetModule.stats is TimerModuleStats s)
+        if (showTimer && targetModule != null && targetModule.stats is TimerModuleStats s)
             maxTime = s.timerDuration;
     }
 
@@ -72,14 +76,18 @@ public class ModuleTimerScript : MonoBehaviour
     {
         if (targetModule == null) { SetSafeState(); return; }
 
-        var timerBehavior = targetModule.behaviour as TimerModuleBehavior;
-        if (timerBehavior == null) { SetSafeState(); return; }
+        // Les modules sans timer n'ont pas forcément un TimerModuleBehavior
+        if (showTimer)
+        {
+            var timerBehavior = targetModule.behaviour as TimerModuleBehavior;
+            if (timerBehavior == null) { SetSafeState(); return; }
 
-        if (maxTime == 0f && targetModule.stats is TimerModuleStats s)
-            maxTime = s.timerDuration;
+            if (maxTime == 0f && targetModule.stats is TimerModuleStats s)
+                maxTime = s.timerDuration;
+        }
 
         bool isBroken = targetModule.broken.Value;
-        float t = targetModule.remainingTime.Value; ;
+        float t = showTimer ? targetModule.remainingTime.Value : 0f;
 
         // ===== SAFE / DANGER STATE =====
         if (safeIcon != null)
@@ -87,6 +95,24 @@ public class ModuleTimerScript : MonoBehaviour
 
         if (dangerIcon != null)
             dangerIcon.gameObject.SetActive(isBroken);
+
+        // ===== DANGER ICON ANIMATION =====
+        if (dangerIcon != null && isBroken)
+        {
+            float pulse = 1f + Mathf.Sin(Time.time * dangerPulseSpeed) * dangerPulseIntensity;
+            dangerIcon.rectTransform.localScale = Vector3.Lerp(
+                dangerIcon.rectTransform.localScale,
+                originalDangerScale * pulse,
+                Time.deltaTime * 5f
+            );
+        }
+        else if (dangerIcon != null)
+        {
+            dangerIcon.rectTransform.localScale = originalDangerScale;
+        }
+
+        // ===== LOGIQUE TIMER (optionnelle) =====
+        if (!showTimer) return;
 
         // ===== TIMER TEXT =====
         if (timerText != null)
@@ -106,21 +132,6 @@ public class ModuleTimerScript : MonoBehaviour
         {
             timerImage.fillAmount = t / maxTime;
             timerImage.rectTransform.localScale = originalTimerScale;
-        }
-
-        // ===== DANGER ICON ANIMATION =====
-        if (dangerIcon != null && isBroken)
-        {
-            float pulse = 1f + Mathf.Sin(Time.time * dangerPulseSpeed) * dangerPulseIntensity;
-            dangerIcon.rectTransform.localScale = Vector3.Lerp(
-                dangerIcon.rectTransform.localScale,
-                originalDangerScale * pulse,
-                Time.deltaTime * 5f
-            );
-        }
-        else if (dangerIcon != null)
-        {
-            dangerIcon.rectTransform.localScale = originalDangerScale;
         }
 
         // ===== CRITICAL TEXT EFFECT =====
