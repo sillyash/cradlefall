@@ -141,14 +141,18 @@ public class BaseEnemy : NetworkBehaviour, ICanDie, IDamageable
     {
         Health.Value -= damage;
 
-        // Jouer les sons de blessure (hit) 3D si on n'est pas encore mort
-        if (Health.Value > 0 && soundFXManager != null)
-        {
-            if (hitSound != null)
-                soundFXManager.PlaySoundFXClip(hitSound, transform, hitSoundVolume);
-            if (hitSound2 != null)
-                soundFXManager.PlaySoundFXClip(hitSound2, transform, hitSound2Volume);
-        }
+        if (Health.Value > 0)
+            PlayHitSoundsRpc();
+    }
+
+    [Rpc(SendTo.Everyone)]
+    void PlayHitSoundsRpc()
+    {
+        if (soundFXManager == null) return;
+        if (hitSound != null)
+            soundFXManager.PlaySoundFXClip(hitSound, transform, hitSoundVolume);
+        if (hitSound2 != null)
+            soundFXManager.PlaySoundFXClip(hitSound2, transform, hitSound2Volume);
     }
 
     public void Die()

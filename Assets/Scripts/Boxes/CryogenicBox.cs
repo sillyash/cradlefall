@@ -8,6 +8,9 @@ public class CryogenicBox : NetworkBehaviour, IDamageable
     public NetworkVariable<float> Health = new NetworkVariable<float>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
     public NetworkVariable<bool> Broken = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
 
+    public static event System.Action<CryogenicBox> OnBoxSpawned;     // Pour HUD
+    public static event System.Action<CryogenicBox> OnBoxDespawned;   // Pour HUD
+
     public float health
     {
         get => Health.Value;
@@ -25,6 +28,13 @@ public class CryogenicBox : NetworkBehaviour, IDamageable
         NetworkObject.DestroyWithScene = true;
         if (!IsServer) return;
         Health.Value = maxHealth;
+
+        OnBoxSpawned?.Invoke(this); // HUD notification
+    }
+
+    public override void OnNetworkDespawn()
+    {
+        OnBoxDespawned?.Invoke(this);
     }
 
     public void TakeDamage(float amount)
