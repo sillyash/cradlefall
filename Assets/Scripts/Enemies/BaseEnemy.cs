@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.Netcode;
@@ -164,8 +165,15 @@ public class BaseEnemy : NetworkBehaviour, ICanDie, IDamageable
 
         if (deathSound != null && soundFXManager != null)
         {
+            StartCoroutine(waitBeforeDestroy());
             soundFXManager.PlaySoundFXClip(deathSound, transform, deathSoundVolume);
         }
+    }
+
+    public IEnumerator waitBeforeDestroy()
+    {
+        yield return new WaitForSeconds(2f);
+        DestroyOnNetwork();
     }
 
     public void DestroyOnNetwork()
