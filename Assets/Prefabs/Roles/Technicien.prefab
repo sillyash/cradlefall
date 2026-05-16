@@ -223,5 +223,54 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4263663073151763242, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8063209664279171404}
+    - targetCorrespondingSourceObject: {fileID: 65422506517265125, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6938790124816326725}
   m_SourcePrefab: {fileID: 100100000, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
+--- !u!1 &2243459575518159526 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 65422506517265125, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
+  m_PrefabInstance: {fileID: 2290700486622550083}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6938790124816326725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2243459575518159526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IsGlobal: 1
+  priority: 1
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: e0914b167188a794fbb1e8ef413d87fc, type: 2}
+--- !u!1 &2657582332648282985 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4263663073151763242, guid: 83c0cf762c306c8488d4bde1ab16d1aa, type: 3}
+  m_PrefabInstance: {fileID: 2290700486622550083}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8063209664279171404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2657582332648282985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cedb2e020221ab54eae7ffd785af9708, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  IsActive:
+    m_InternalValue: 0
+  nightVolume: {fileID: 6938790124816326725}

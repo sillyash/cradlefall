@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 200
   damage: 20
-  lifespan: 2
+  lifespan: 4
   launchCurve:
     serializedVersion: 2
     m_Curve: []
