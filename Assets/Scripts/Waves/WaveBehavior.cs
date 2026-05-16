@@ -42,7 +42,7 @@ public class WaveBehavior : MonoBehaviour
             {
                 // store dead enemy for reuse
                 deadEnemies.Add(spawnedEnemies[index]);
-                // remove dead enemy from main list
+                // remove dead enemy from main 
                 spawnedEnemies.RemoveAt(index);
 
                 enemiesLeft = Mathf.Max(0, enemiesToSpawn.Count + spawnedEnemies.Count);

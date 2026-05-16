@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 using UnityEngine.AI;
+using static UnityEngine.GraphicsBuffer;
 
 [RequireComponent(typeof(NavMeshAgent))]
 public class BaseEnemy : NetworkBehaviour, ICanDie, IDamageable
@@ -194,11 +195,19 @@ public class BaseEnemy : NetworkBehaviour, ICanDie, IDamageable
         gameObject.SetActive(false);
     }
 
-    public void resetEnemy()
+    public void resetEnemy(Transform newTransform)
     {
-        isDead = false;
-        Health.Value = stats.health;
+        Debug.Log("reset");
         gameObject.SetActive(true);
+
+        Health.Value = stats.health;
+
+        this.transform.rotation = newTransform.rotation;
+
+        m_Agent.Warp(newTransform.position); // teleport enemy
+        m_Agent.ResetPath();
+        m_Target = null;
+        isDead = false;
     }
 
     public GameObject AcquireClosestCapsule()

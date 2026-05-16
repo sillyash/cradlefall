@@ -119,10 +119,7 @@ public class WaveSpawner : NetworkBehaviour
                 instance = wave.deadEnemies[lastIndex];
                 wave.deadEnemies.RemoveAt(lastIndex);
 
-                instance.transform.position = spawnPoint.position;
-                instance.transform.rotation = spawnPoint.rotation;
-
-                instance.GetComponent<BaseEnemy>().resetEnemy();
+                instance.GetComponent<BaseEnemy>().resetEnemy(spawnPoint);
             } else
             {
                 instance = Instantiate(enemyToSpawn, spawnPoint.position, spawnPoint.rotation);
@@ -130,7 +127,7 @@ public class WaveSpawner : NetworkBehaviour
             }
 
             if (instance != null)
-            { 
+            {
                 wave.spawnedEnemies.Add(instance);
             }
 
